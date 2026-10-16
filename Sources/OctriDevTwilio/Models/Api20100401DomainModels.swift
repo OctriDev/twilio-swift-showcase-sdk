@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Api20100401Domain domain models
+/// Api20100401Domain domain models
 /// Typed representation of the `ApiV2010AccountSipSipDomain` API schema.
 public struct ApiV2010AccountSipSipDomain: Codable {
     /// The SID of the Account that created the SipDomain resource.
@@ -81,44 +81,72 @@ public struct ApiV2010AccountSipSipDomain: Codable {
     }
 
     init() {
-        (self.accountSid, self.apiVersion, self.authType, self.dateCreated, self.dateUpdated) = (nil, nil, nil, nil, nil)
-        (self.domainName, self.friendlyName, self.sid, self.uri, self.voiceFallbackMethod) = (nil, nil, nil, nil, nil)
-        (self.voiceFallbackUrl, self.voiceMethod, self.voiceStatusCallbackMethod, self.voiceStatusCallbackUrl, self.voiceUrl) = (nil, nil, nil, nil, nil)
-        (self.subresourceUris, self.sipRegistration, self.emergencyCallingEnabled, self.secure, self.byocTrunkSid) = (nil, nil, nil, nil, nil)
-        self.emergencyCallerSid = nil
+        (accountSid, apiVersion, authType, dateCreated, dateUpdated) = (nil, nil, nil, nil, nil)
+        (domainName, friendlyName, sid, uri, voiceFallbackMethod) = (nil, nil, nil, nil, nil)
+        (voiceFallbackUrl, voiceMethod, voiceStatusCallbackMethod, voiceStatusCallbackUrl, voiceUrl) = (
+            nil,
+            nil,
+            nil,
+            nil,
+            nil
+        )
+        (subresourceUris, sipRegistration, emergencyCallingEnabled, secure, byocTrunkSid) = (nil, nil, nil, nil, nil)
+        emergencyCallerSid = nil
     }
 }
 
-extension ApiV2010AccountSipSipDomain {
-    public init(from decoder: Decoder) throws {
+public extension ApiV2010AccountSipSipDomain {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.accountSid = try container.sdkDecodeIfPresent(.accountSid)
-        self.apiVersion = try container.sdkDecodeIfPresent(.apiVersion)
-        self.authType = try container.sdkDecodeIfPresent(.authType)
-        self.dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
-        self.dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
-        self.domainName = try container.sdkDecodeIfPresent(.domainName)
-        self.friendlyName = try container.sdkDecodeIfPresent(.friendlyName)
-        self.sid = try container.sdkDecodeIfPresent(.sid)
-        self.uri = try container.sdkDecodeIfPresent(.uri)
-        self.voiceFallbackMethod = try container.sdkDecodeIfPresent(.voiceFallbackMethod)
-        self.voiceFallbackUrl = try container.sdkDecodeIfPresent(.voiceFallbackUrl)
-        self.voiceMethod = try container.sdkDecodeIfPresent(.voiceMethod)
-        self.voiceStatusCallbackMethod = try container.sdkDecodeIfPresent(.voiceStatusCallbackMethod)
-        self.voiceStatusCallbackUrl = try container.sdkDecodeIfPresent(.voiceStatusCallbackUrl)
-        self.voiceUrl = try container.sdkDecodeIfPresent(.voiceUrl)
-        self.subresourceUris = try container.sdkDecodeIfPresent(.subresourceUris)
-        self.sipRegistration = try container.sdkDecodeIfPresent(.sipRegistration)
-        self.emergencyCallingEnabled = try container.sdkDecodeIfPresent(.emergencyCallingEnabled)
-        self.secure = try container.sdkDecodeIfPresent(.secure)
-        self.byocTrunkSid = try container.sdkDecodeIfPresent(.byocTrunkSid)
-        self.emergencyCallerSid = try container.sdkDecodeIfPresent(.emergencyCallerSid)
+        accountSid = try container.sdkDecodeIfPresent(.accountSid)
+        apiVersion = try container.sdkDecodeIfPresent(.apiVersion)
+        authType = try container.sdkDecodeIfPresent(.authType)
+        dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
+        dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
+        domainName = try container.sdkDecodeIfPresent(.domainName)
+        friendlyName = try container.sdkDecodeIfPresent(.friendlyName)
+        sid = try container.sdkDecodeIfPresent(.sid)
+        uri = try container.sdkDecodeIfPresent(.uri)
+        voiceFallbackMethod = try container.sdkDecodeIfPresent(.voiceFallbackMethod)
+        voiceFallbackUrl = try container.sdkDecodeIfPresent(.voiceFallbackUrl)
+        voiceMethod = try container.sdkDecodeIfPresent(.voiceMethod)
+        voiceStatusCallbackMethod = try container.sdkDecodeIfPresent(.voiceStatusCallbackMethod)
+        voiceStatusCallbackUrl = try container.sdkDecodeIfPresent(.voiceStatusCallbackUrl)
+        voiceUrl = try container.sdkDecodeIfPresent(.voiceUrl)
+        subresourceUris = try container.sdkDecodeIfPresent(.subresourceUris)
+        sipRegistration = try container.sdkDecodeIfPresent(.sipRegistration)
+        emergencyCallingEnabled = try container.sdkDecodeIfPresent(.emergencyCallingEnabled)
+        secure = try container.sdkDecodeIfPresent(.secure)
+        byocTrunkSid = try container.sdkDecodeIfPresent(.byocTrunkSid)
+        emergencyCallerSid = try container.sdkDecodeIfPresent(.emergencyCallerSid)
         try sdkValidateConstraints()
     }
 }
 
-extension ApiV2010AccountSipSipDomain {
-    public init(accountSid: String? = nil, apiVersion: String? = nil, authType: String? = nil, dateCreated: String? = nil, dateUpdated: String? = nil, domainName: String? = nil, friendlyName: String? = nil, sid: String? = nil, uri: String? = nil, voiceFallbackMethod: ApiV2010AccountSipSipDomainVoiceFallbackMethod? = nil, voiceFallbackUrl: String? = nil, voiceMethod: ApiV2010AccountSipSipDomainVoiceMethod? = nil, voiceStatusCallbackMethod: ApiV2010AccountSipSipDomainVoiceStatusCallbackMethod? = nil, voiceStatusCallbackUrl: String? = nil, voiceUrl: String? = nil, subresourceUris: [String: JSONValue]? = nil, sipRegistration: Bool? = nil, emergencyCallingEnabled: Bool? = nil, secure: Bool? = nil, byocTrunkSid: String? = nil, emergencyCallerSid: String? = nil) throws {
+public extension ApiV2010AccountSipSipDomain {
+    init(
+        accountSid: String? = nil,
+        apiVersion: String? = nil,
+        authType: String? = nil,
+        dateCreated: String? = nil,
+        dateUpdated: String? = nil,
+        domainName: String? = nil,
+        friendlyName: String? = nil,
+        sid: String? = nil,
+        uri: String? = nil,
+        voiceFallbackMethod: ApiV2010AccountSipSipDomainVoiceFallbackMethod? = nil,
+        voiceFallbackUrl: String? = nil,
+        voiceMethod: ApiV2010AccountSipSipDomainVoiceMethod? = nil,
+        voiceStatusCallbackMethod: ApiV2010AccountSipSipDomainVoiceStatusCallbackMethod? = nil,
+        voiceStatusCallbackUrl: String? = nil,
+        voiceUrl: String? = nil,
+        subresourceUris: [String: JSONValue]? = nil,
+        sipRegistration: Bool? = nil,
+        emergencyCallingEnabled: Bool? = nil,
+        secure: Bool? = nil,
+        byocTrunkSid: String? = nil,
+        emergencyCallerSid: String? = nil
+    ) throws {
         self.init()
         (self.accountSid, self.apiVersion) = (accountSid, apiVersion)
         (self.authType, self.dateCreated) = (authType, dateCreated)
@@ -137,28 +165,28 @@ extension ApiV2010AccountSipSipDomain {
 
 extension ApiV2010AccountSipSipDomain {
     func sdkValidateConstraints() throws {
-        if let value = self.accountSid {
+        if let value = accountSid {
             try validateLength("account_sid", value, min: 34, max: 34)
             try sdkValidatePattern("account_sid", value, sdkPatternc7cb941ab84b)
         }
-        if let value = self.sid {
+        if let value = sid {
             try validateLength("sid", value, min: 34, max: 34)
             try sdkValidatePattern("sid", value, sdkPatterna7d75da61532)
         }
-        if let value = self.voiceFallbackUrl {
+        if let value = voiceFallbackUrl {
             try sdkValidateUri("voice_fallback_url", value)
         }
-        if let value = self.voiceStatusCallbackUrl {
+        if let value = voiceStatusCallbackUrl {
             try sdkValidateUri("voice_status_callback_url", value)
         }
-        if let value = self.voiceUrl {
+        if let value = voiceUrl {
             try sdkValidateUri("voice_url", value)
         }
-        if let value = self.byocTrunkSid {
+        if let value = byocTrunkSid {
             try validateLength("byoc_trunk_sid", value, min: 34, max: 34)
             try sdkValidatePattern("byoc_trunk_sid", value, sdkPattern7e201592bccc)
         }
-        if let value = self.emergencyCallerSid {
+        if let value = emergencyCallerSid {
             try validateLength("emergency_caller_sid", value, min: 34, max: 34)
             try sdkValidatePattern("emergency_caller_sid", value, sdkPattern9792ce0bb10f)
         }
@@ -166,16 +194,20 @@ extension ApiV2010AccountSipSipDomain {
 }
 
 /// The HTTP method we use to call `voice_url`. Can be: `GET` or `POST`.
-public struct ApiV2010AccountSipSipDomainVoiceMethod: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct ApiV2010AccountSipSipDomainVoiceMethod: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let get = ApiV2010AccountSipSipDomainVoiceMethod(rawValue: "GET")
     public static let post = ApiV2010AccountSipSipDomainVoiceMethod(rawValue: "POST")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -185,16 +217,20 @@ public struct ApiV2010AccountSipSipDomainVoiceMethod: RawRepresentable, Hashable
 }
 
 /// The HTTP method we use to call `voice_status_callback_url`. Either `GET` or `POST`.
-public struct ApiV2010AccountSipSipDomainVoiceStatusCallbackMethod: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct ApiV2010AccountSipSipDomainVoiceStatusCallbackMethod: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let get = ApiV2010AccountSipSipDomainVoiceStatusCallbackMethod(rawValue: "GET")
     public static let post = ApiV2010AccountSipSipDomainVoiceStatusCallbackMethod(rawValue: "POST")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -204,16 +240,20 @@ public struct ApiV2010AccountSipSipDomainVoiceStatusCallbackMethod: RawRepresent
 }
 
 /// The HTTP method we use to call `voice_fallback_url`. Can be: `GET` or `POST`.
-public struct ApiV2010AccountSipSipDomainVoiceFallbackMethod: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct ApiV2010AccountSipSipDomainVoiceFallbackMethod: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let get = ApiV2010AccountSipSipDomainVoiceFallbackMethod(rawValue: "GET")
     public static let post = ApiV2010AccountSipSipDomainVoiceFallbackMethod(rawValue: "POST")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

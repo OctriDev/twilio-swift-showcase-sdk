@@ -36,7 +36,9 @@ final class SdkBehaviorTests: XCTestCase {
     /// Space is "+" in form encoding and "%20" under RFC 3986; pair order is not
     /// part of the contract either.
     private func normalizeQuery(_ query: String?) -> String {
-        guard let query, !query.isEmpty else { return "" }
+        guard let query, !query.isEmpty else {
+            return ""
+        }
         return query
             .replacingOccurrences(of: "%20", with: "+")
             .split(separator: "&")
@@ -47,21 +49,23 @@ final class SdkBehaviorTests: XCTestCase {
 
     private func decoder(for kind: String) -> SdkResponseDecoder {
         switch kind {
-        case "text": return .text
-        case "bytes": return .bytes
-        case "empty": return .empty
-        default: return .json
+        case "text": .text
+        case "bytes": .bytes
+        case "empty": .empty
+        default: .json
         }
     }
 
     /// The `SdkHttpErrorKind` case the fixture expects; a status without one is `.other`.
     private func expectedErrorKind(_ responseSpec: [String: Any]) -> String {
-        guard let kind = responseSpec["errorKind"] as? String else { return "other" }
+        guard let kind = responseSpec["errorKind"] as? String else {
+            return "other"
+        }
         return kind.prefix(1).lowercased() + kind.dropFirst()
     }
 
-    // Compared by Foundation equality, which is structural: the description of a
-    // one-element array carries its address, so two equal values printed unequal.
+    /// Compared by Foundation equality, which is structural: the description of a
+    /// one-element array carries its address, so two equal values printed unequal.
     private func canonicalJson(_ data: Data) -> NSObject? {
         (try? JSONSerialization.jsonObject(with: data, options: [.fragmentsAllowed])) as? NSObject
     }
@@ -84,7 +88,13 @@ final class SdkBehaviorTests: XCTestCase {
         }
     }
 
-    private func assertTypedFailure(_ error: Error, status: Int, kind: String, responseSpec: [String: Any], id: String) {
+    private func assertTypedFailure(
+        _ error: Error,
+        status: Int,
+        kind: String,
+        responseSpec: [String: Any],
+        id: String
+    ) {
         switch error {
         case let error as SdkHttpError:
             XCTAssertGreaterThanOrEqual(status, 400, "\(id) unexpected SdkHttpError")
@@ -114,7 +124,9 @@ final class SdkBehaviorTests: XCTestCase {
             "\(id) url query"
         )
         var sentHeaders: [String: String] = [:]
-        for (name, value) in sent.headers { sentHeaders[name.lowercased()] = value }
+        for (name, value) in sent.headers {
+            sentHeaders[name.lowercased()] = value
+        }
         let multipart = expectation["multipartFields"] is [Any]
         for (name, value) in (expectation["headers"] as? [String: String]) ?? [:] {
             let actual = sentHeaders[name.lowercased()] ?? ""
@@ -164,9 +176,13 @@ final class SdkBehaviorTests: XCTestCase {
             let captured = SdkRequestBox()
             let fakeTransport: Middleware = { request, _ in
                 await captured.store(request)
-                if lost { throw URLError(.networkConnectionLost) }
+                if lost {
+                    throw URLError(.networkConnectionLost)
+                }
                 var headers: [String: String] = [:]
-                if let mediaType { headers["content-type"] = mediaType }
+                if let mediaType {
+                    headers["content-type"] = mediaType
+                }
                 return SdkRawResponse(
                     statusCode: status,
                     statusText: "",
@@ -200,7 +216,10 @@ final class SdkBehaviorTests: XCTestCase {
                     // A path list or object uses the default simple style: its
                     // items, or members as key,value, each encoded and comma-joined.
                     let items = (value as? [Any])?.map(scalarString)
-                        ?? (value as? [String: Any])?.sorted { $0.key < $1.key }.flatMap { [$0.key, scalarString($0.value)] }
+                        ?? (value as? [String: Any])?.sorted { $0.key < $1.key }.flatMap { [
+                            $0.key,
+                            scalarString($0.value),
+                        ] }
                         ?? [scalarString(value)]
                     path = path.replacingOccurrences(
                         of: "{\(name)}",
@@ -208,7 +227,9 @@ final class SdkBehaviorTests: XCTestCase {
                     )
                 }
                 for parameter in (requestSpec["query"] as? [[String: Any]]) ?? [] {
-                    guard let name = parameter["name"] as? String else { continue }
+                    guard let name = parameter["name"] as? String else {
+                        continue
+                    }
                     // The fixture carries the serialized form, so the suite feeds the
                     // wire values a generated method would pass rather than
                     // reimplementing style/explode.
@@ -257,7 +278,9 @@ final class SdkBehaviorTests: XCTestCase {
                 XCTAssertTrue(kind != "json" && !lost, "\(id) unexpected failure: \(error)")
             }
 
-            guard requestSpec != nil, !lost, let expectation = item["expect"] as? [String: Any] else { continue }
+            guard requestSpec != nil, !lost, let expectation = item["expect"] as? [String: Any] else {
+                continue
+            }
             guard let sent = await captured.value else {
                 XCTFail("\(id) middleware never saw a request")
                 continue
@@ -278,14 +301,18 @@ actor SdkRequestBox {
         attempts += 1
     }
 
-    var value: SdkRequest? { request }
+    var value: SdkRequest? {
+        request
+    }
 }
 
 private func scalarString(_ value: Any) -> String {
     switch value {
     case let text as String: return text
     case let number as NSNumber:
-        if CFGetTypeID(number) == CFBooleanGetTypeID() { return number.boolValue ? "true" : "false" }
+        if CFGetTypeID(number) == CFBooleanGetTypeID() {
+            return number.boolValue ? "true" : "false"
+        }
         if number.doubleValue == number.doubleValue.rounded() {
             return String(number.intValue)
         }

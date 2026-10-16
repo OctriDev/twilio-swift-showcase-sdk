@@ -7,16 +7,20 @@ import Foundation
     import FoundationNetworking
 #endif
 /// The HTTP method that we should use to call `voice_url`. Can be: `GET` or `POST` and defaults to `POST`.
-public struct UpdateIncomingPhoneNumbersRequestBodyVoiceMethod: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct UpdateIncomingPhoneNumbersRequestBodyVoiceMethod: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let get = UpdateIncomingPhoneNumbersRequestBodyVoiceMethod(rawValue: "GET")
     public static let post = UpdateIncomingPhoneNumbersRequestBodyVoiceMethod(rawValue: "POST")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -27,16 +31,20 @@ public struct UpdateIncomingPhoneNumbersRequestBodyVoiceMethod: RawRepresentable
 
 /// The HTTP method we should use when calling the `recording_status_callback` URL. Can be: `GET` or `POST` and
 /// the default is `POST`.
-public struct CreateCallsRequestBodyRecordingStatusCallbackMethod: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct CreateCallsRequestBodyRecordingStatusCallbackMethod: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let get = CreateCallsRequestBodyRecordingStatusCallbackMethod(rawValue: "GET")
     public static let post = CreateCallsRequestBodyRecordingStatusCallbackMethod(rawValue: "POST")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -47,16 +55,20 @@ public struct CreateCallsRequestBodyRecordingStatusCallbackMethod: RawRepresenta
 
 /// The HTTP method that we should use to call `sms_fallback_url`. Can be: `GET` or `POST` and defaults to
 /// `POST`.
-public struct UpdateIncomingPhoneNumbersRequestBodySmsFallbackMethod: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct UpdateIncomingPhoneNumbersRequestBodySmsFallbackMethod: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let get = UpdateIncomingPhoneNumbersRequestBodySmsFallbackMethod(rawValue: "GET")
     public static let post = UpdateIncomingPhoneNumbersRequestBodySmsFallbackMethod(rawValue: "POST")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -66,16 +78,20 @@ public struct UpdateIncomingPhoneNumbersRequestBodySmsFallbackMethod: RawReprese
 }
 
 /// The HTTP method that we should use to call `voice_url`. Can be: `GET` or `POST` and defaults to `POST`.
-public struct CreateIncomingPhoneNumbersTollFreeRequestBodyVoiceMethod: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct CreateIncomingPhoneNumbersTollFreeRequestBodyVoiceMethod: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let get = CreateIncomingPhoneNumbersTollFreeRequestBodyVoiceMethod(rawValue: "GET")
     public static let post = CreateIncomingPhoneNumbersTollFreeRequestBodyVoiceMethod(rawValue: "POST")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -89,13 +105,16 @@ public struct CreateIncomingPhoneNumbersTollFreeRequestBodyVoiceMethod: RawRepre
 public struct UpdateQueuesMembersRequestBodyMethod: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let get = UpdateQueuesMembersRequestBodyMethod(rawValue: "GET")
     public static let post = UpdateQueuesMembersRequestBodyMethod(rawValue: "POST")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -105,16 +124,20 @@ public struct UpdateQueuesMembersRequestBodyMethod: RawRepresentable, Hashable, 
 }
 
 /// The HTTP method we should use to call `status_callback`. Can be: `GET` or `POST` and defaults to `POST`.
-public struct CreateIncomingPhoneNumbersRequestBodyStatusCallbackMethod: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct CreateIncomingPhoneNumbersRequestBodyStatusCallbackMethod: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let get = CreateIncomingPhoneNumbersRequestBodyStatusCallbackMethod(rawValue: "GET")
     public static let post = CreateIncomingPhoneNumbersRequestBodyStatusCallbackMethod(rawValue: "POST")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -124,16 +147,20 @@ public struct CreateIncomingPhoneNumbersRequestBodyStatusCallbackMethod: RawRepr
 }
 
 /// The HTTP method we should use to call `callback_url`. Can be: `GET` or `POST` and the default is `POST`.
-public struct UpdateUsageTriggersRequestBodyCallbackMethod: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct UpdateUsageTriggersRequestBodyCallbackMethod: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let get = UpdateUsageTriggersRequestBodyCallbackMethod(rawValue: "GET")
     public static let post = UpdateUsageTriggersRequestBodyCallbackMethod(rawValue: "POST")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -143,16 +170,20 @@ public struct UpdateUsageTriggersRequestBodyCallbackMethod: RawRepresentable, Ha
 }
 
 /// The HTTP method we should use to call `sms_fallback_url`. Can be: `GET` or `POST`.
-public struct UpdateApplicationsRequestBodySmsFallbackMethod: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct UpdateApplicationsRequestBodySmsFallbackMethod: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let get = UpdateApplicationsRequestBodySmsFallbackMethod(rawValue: "GET")
     public static let post = UpdateApplicationsRequestBodySmsFallbackMethod(rawValue: "POST")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -162,16 +193,20 @@ public struct UpdateApplicationsRequestBodySmsFallbackMethod: RawRepresentable, 
 }
 
 /// The HTTP method that we should use to call the `sms_fallback_url`. Can be: `GET` or `POST`.
-public struct UpdateShortCodesRequestBodySmsFallbackMethod: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct UpdateShortCodesRequestBodySmsFallbackMethod: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let get = UpdateShortCodesRequestBodySmsFallbackMethod(rawValue: "GET")
     public static let post = UpdateShortCodesRequestBodySmsFallbackMethod(rawValue: "POST")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -181,16 +216,20 @@ public struct UpdateShortCodesRequestBodySmsFallbackMethod: RawRepresentable, Ha
 }
 
 /// The HTTP method we should use to call `voice_fallback_url`. Can be: `GET` or `POST`.
-public struct UpdateSipDomainsRequestBodyVoiceFallbackMethod: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct UpdateSipDomainsRequestBodyVoiceFallbackMethod: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let get = UpdateSipDomainsRequestBodyVoiceFallbackMethod(rawValue: "GET")
     public static let post = UpdateSipDomainsRequestBodyVoiceFallbackMethod(rawValue: "POST")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

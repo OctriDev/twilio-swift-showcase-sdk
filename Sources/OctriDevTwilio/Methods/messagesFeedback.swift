@@ -7,9 +7,12 @@ import Foundation
     import FoundationNetworking
 #endif
 public enum MessagesFeedbackMethods {
-    /// Creates Message Feedback to record whether the recipient performed a tracked action associated with a message. Identify the account and message, then optionally provide the reported `Outcome`. The response contains the created feedback resource.
+    /// Creates Message Feedback to record whether the recipient performed a tracked action associated with a message.
+    /// Identify the account and message, then optionally provide the reported `Outcome`. The response contains the
+    /// created feedback resource.
     ///
-    /// Create Message Feedback to confirm a tracked user action was performed by the recipient of the associated Message
+    /// Create Message Feedback to confirm a tracked user action was performed by the recipient of the associated
+    /// Message
     ///
     /// - Parameters:
     /// - accountSid: The SID of the
@@ -23,7 +26,13 @@ public enum MessagesFeedbackMethods {
     ///   with Message
     ///   Feedback](https://www.twilio.com/docs/messaging/guides/send-message-feedback
     ///   -to-twilio).
-    public static func createMessagesFeedback(config: ClientConfig, accountSid: String, messageSid: String, outcome: MessageFeedbackEnumOutcome? = nil, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountMessageMessageFeedback {
+    public static func createMessagesFeedback(
+        config: ClientConfig,
+        accountSid: String,
+        messageSid: String,
+        outcome: MessageFeedbackEnumOutcome? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountMessageMessageFeedback {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
@@ -32,6 +41,21 @@ public enum MessagesFeedbackMethods {
 
         let requestBody = CreateMessagesFeedbackRequestBody(outcome: outcome)
 
-        return try (await sdkRequest("POST", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Messages/", sdkEncodePathSegment(sdkWireString(messageSid)), "/Feedback.json"].joined(), config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "createMessagesFeedback", options: requestOptions)).data
+        return try await (sdkRequest(
+            "POST",
+            [
+                "/2010-04-01/Accounts/",
+                sdkEncodePathSegment(sdkWireString(accountSid)),
+                "/Messages/",
+                sdkEncodePathSegment(sdkWireString(messageSid)),
+                "/Feedback.json",
+            ].joined(),
+            config: config,
+            body: requestBody,
+            contentType: "application/x-www-form-urlencoded",
+            decoder: .json,
+            operationId: "createMessagesFeedback",
+            options: requestOptions
+        )).data
     }
 }

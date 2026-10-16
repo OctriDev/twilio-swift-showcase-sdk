@@ -6,19 +6,33 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension AccountsMethods {
+public extension AccountsMethods {
     /// Create a new Twilio Subaccount from the account making the request
     ///
     /// - Parameters:
     /// - friendlyName: A human readable description of the account to create,
     ///   defaults to `SubAccount Created at {YYYY-MM-DD HH:MM meridian}`
-    public static func createAccounts(config: ClientConfig, friendlyName: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ApiV2010Account {
+    static func createAccounts(
+        config: ClientConfig,
+        friendlyName: String? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010Account {
         let requestBody = CreateAccountsRequestBody(friendlyName: friendlyName)
 
-        return try (await sdkRequest("POST", "/2010-04-01/Accounts.json", config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "createAccounts", options: requestOptions)).data
+        return try await (sdkRequest(
+            "POST",
+            "/2010-04-01/Accounts.json",
+            config: config,
+            body: requestBody,
+            contentType: "application/x-www-form-urlencoded",
+            decoder: .json,
+            operationId: "createAccounts",
+            options: requestOptions
+        )).data
     }
 
-    /// Lists account resources associated with the account used to make the request. Filter by exact `FriendlyName` or by `Status`, and use `PageSize`, `Page`, and `PageToken` to control pagination.
+    /// Lists account resources associated with the account used to make the request. Filter by exact `FriendlyName` or
+    /// by `Status`, and use `PageSize`, `Page`, and `PageToken` to control pagination.
     ///
     /// Retrieves a collection of Accounts belonging to the account used to make the request
     ///
@@ -31,16 +45,24 @@ extension AccountsMethods {
     ///   50, and the maximum is 1000.
     /// - page: The page index. This value is simply for client state.
     /// - pageToken: The page token. This is provided by the API.
-    public static func listAccounts(config: ClientConfig, friendlyName: String? = nil, status: AccountEnumStatus? = nil, pageSize: Int? = nil, page: Int? = nil, pageToken: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ListAccountsResponse {
-        if let pageSize = pageSize {
+    static func listAccounts(
+        config: ClientConfig,
+        friendlyName: String? = nil,
+        status: AccountEnumStatus? = nil,
+        pageSize: Int? = nil,
+        page: Int? = nil,
+        pageToken: String? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ListAccountsResponse {
+        if let pageSize {
             try validateRange("PageSize", Double(pageSize), min: 1, max: 1000)
         }
 
-        if let page = page {
+        if let page {
             try validateRange("Page", Double(page), min: 0)
         }
 
-        return try (await sdkRequest("GET", "/2010-04-01/Accounts.json", config: config, query: [
+        return try await (sdkRequest("GET", "/2010-04-01/Accounts.json", config: config, query: [
             SdkQueryParameter("FriendlyName", value: friendlyName),
             SdkQueryParameter("Status", value: status),
             SdkQueryParameter("PageSize", value: pageSize),

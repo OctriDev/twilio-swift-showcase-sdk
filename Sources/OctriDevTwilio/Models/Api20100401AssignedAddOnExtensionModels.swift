@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Api20100401AssignedAddOnExtension domain models
+/// Api20100401AssignedAddOnExtension domain models
 /// Typed representation of the
 /// `ApiV2010AccountIncomingPhoneNumberIncomingPhoneNumberAssignedAddOnIncomingPhoneNumberAssignedAddOnExtension`
 /// API schema.
@@ -41,44 +41,54 @@ public struct ApiV2010AccountIncomingPhoneNumberIncomingPhoneNumberAssignedX1fcf
     }
 
     init() {
-        (self.sid, self.accountSid, self.resourceSid, self.assignedAddOnSid, self.friendlyName) = (nil, nil, nil, nil, nil)
-        (self.productName, self.uniqueName, self.uri, self.enabled) = (nil, nil, nil, nil)
+        (sid, accountSid, resourceSid, assignedAddOnSid, friendlyName) = (nil, nil, nil, nil, nil)
+        (productName, uniqueName, uri, enabled) = (nil, nil, nil, nil)
     }
 }
 
-extension ApiV2010AccountIncomingPhoneNumberIncomingPhoneNumberAssignedX1fcf5f2168 {
-    public init(from decoder: Decoder) throws {
+public extension ApiV2010AccountIncomingPhoneNumberIncomingPhoneNumberAssignedX1fcf5f2168 {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.sid = try container.sdkDecodeIfPresent(.sid)
-        self.accountSid = try container.sdkDecodeIfPresent(.accountSid)
-        self.resourceSid = try container.sdkDecodeIfPresent(.resourceSid)
-        self.assignedAddOnSid = try container.sdkDecodeIfPresent(.assignedAddOnSid)
-        self.friendlyName = try container.sdkDecodeIfPresent(.friendlyName)
-        self.productName = try container.sdkDecodeIfPresent(.productName)
-        self.uniqueName = try container.sdkDecodeIfPresent(.uniqueName)
-        self.uri = try container.sdkDecodeIfPresent(.uri)
-        self.enabled = try container.sdkDecodeIfPresent(.enabled)
-        if let value = self.sid {
+        sid = try container.sdkDecodeIfPresent(.sid)
+        accountSid = try container.sdkDecodeIfPresent(.accountSid)
+        resourceSid = try container.sdkDecodeIfPresent(.resourceSid)
+        assignedAddOnSid = try container.sdkDecodeIfPresent(.assignedAddOnSid)
+        friendlyName = try container.sdkDecodeIfPresent(.friendlyName)
+        productName = try container.sdkDecodeIfPresent(.productName)
+        uniqueName = try container.sdkDecodeIfPresent(.uniqueName)
+        uri = try container.sdkDecodeIfPresent(.uri)
+        enabled = try container.sdkDecodeIfPresent(.enabled)
+        if let value = sid {
             try validateLength("sid", value, min: 34, max: 34)
             try sdkValidatePattern("sid", value, sdkPattern2f6af96dacb8)
         }
-        if let value = self.accountSid {
+        if let value = accountSid {
             try validateLength("account_sid", value, min: 34, max: 34)
             try sdkValidatePattern("account_sid", value, sdkPatternc7cb941ab84b)
         }
-        if let value = self.resourceSid {
+        if let value = resourceSid {
             try validateLength("resource_sid", value, min: 34, max: 34)
             try sdkValidatePattern("resource_sid", value, sdkPattern9792ce0bb10f)
         }
-        if let value = self.assignedAddOnSid {
+        if let value = assignedAddOnSid {
             try validateLength("assigned_add_on_sid", value, min: 34, max: 34)
             try sdkValidatePattern("assigned_add_on_sid", value, sdkPatternbb2f9d1d1c1e)
         }
     }
 }
 
-extension ApiV2010AccountIncomingPhoneNumberIncomingPhoneNumberAssignedX1fcf5f2168 {
-    public init(sid: String? = nil, accountSid: String? = nil, resourceSid: String? = nil, assignedAddOnSid: String? = nil, friendlyName: String? = nil, productName: String? = nil, uniqueName: String? = nil, uri: String? = nil, enabled: Bool? = nil) throws {
+public extension ApiV2010AccountIncomingPhoneNumberIncomingPhoneNumberAssignedX1fcf5f2168 {
+    init(
+        sid: String? = nil,
+        accountSid: String? = nil,
+        resourceSid: String? = nil,
+        assignedAddOnSid: String? = nil,
+        friendlyName: String? = nil,
+        productName: String? = nil,
+        uniqueName: String? = nil,
+        uri: String? = nil,
+        enabled: Bool? = nil
+    ) throws {
         self.init()
         (self.sid, self.accountSid) = (sid, accountSid)
         (self.resourceSid, self.assignedAddOnSid) = (resourceSid, assignedAddOnSid)

@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ConferencesParticipantsMethods {
-    public struct CreateConferencesParticipantsOptions: Codable {
+public extension ConferencesParticipantsMethods {
+    struct CreateConferencesParticipantsOptions: Codable {
         public var accountSid: String
         public var conferenceSid: String
         public var from: String
@@ -79,7 +79,9 @@ extension ConferencesParticipantsMethods {
         }
     }
 
-    /// Creates a participant in a conference by placing a call from `From` to `To`. Provide both endpoints and optionally configure call behavior, conference settings, and status callbacks. The response includes the participant and associated call identifiers.
+    /// Creates a participant in a conference by placing a call from `From` to `To`. Provide both endpoints and
+    /// optionally configure call behavior, conference settings, and status callbacks. The response includes the
+    /// participant and associated call identifiers.
     ///
     /// - Parameters:
     /// - accountSid: The SID of the
@@ -299,7 +301,11 @@ extension ConferencesParticipantsMethods {
     /// - emergencyCountry: The emergency caller's country. Currently supported US
     ///   and CA only. Note: If the value exceeds 20 characters, only the first 20
     ///   characters will be used.
-    public static func createConferencesParticipants(config: ClientConfig, options: CreateConferencesParticipantsOptions, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountConferenceParticipant {
+    static func createConferencesParticipants(
+        config: ClientConfig,
+        options: CreateConferencesParticipantsOptions,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountConferenceParticipant {
         try validateLength("AccountSid", options.accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", options.accountSid, sdkPatternc7cb941ab84b)
 
@@ -343,6 +349,21 @@ extension ConferencesParticipantsMethods {
 
         let requestBody = CreateConferencesParticipantsRequestBody(options: options)
 
-        return try (await sdkRequest("POST", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(options.accountSid)), "/Conferences/", sdkEncodePathSegment(sdkWireString(options.conferenceSid)), "/Participants.json"].joined(), config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "createConferencesParticipants", options: requestOptions)).data
+        return try await (sdkRequest(
+            "POST",
+            [
+                "/2010-04-01/Accounts/",
+                sdkEncodePathSegment(sdkWireString(options.accountSid)),
+                "/Conferences/",
+                sdkEncodePathSegment(sdkWireString(options.conferenceSid)),
+                "/Participants.json",
+            ].joined(),
+            config: config,
+            body: requestBody,
+            contentType: "application/x-www-form-urlencoded",
+            decoder: .json,
+            operationId: "createConferencesParticipants",
+            options: requestOptions
+        )).data
     }
 }

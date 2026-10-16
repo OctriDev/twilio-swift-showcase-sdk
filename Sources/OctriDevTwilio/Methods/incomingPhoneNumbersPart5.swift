@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension IncomingPhoneNumbersMethods {
-    public struct CreateIncomingPhoneNumbersOptions: Codable {
+public extension IncomingPhoneNumbersMethods {
+    struct CreateIncomingPhoneNumbersOptions: Codable {
         public var accountSid: String
         public var apiVersion: String?
         public var friendlyName: String?
@@ -39,7 +39,8 @@ extension IncomingPhoneNumbersMethods {
         }
     }
 
-    /// Creates a new incoming phone number by purchasing it for an account. Configure optional SMS and voice handling settings in the form-encoded body. An application SID takes precedence over the corresponding URL settings.
+    /// Creates a new incoming phone number by purchasing it for an account. Configure optional SMS and voice handling
+    /// settings in the form-encoded body. An application SID takes precedence over the corresponding URL settings.
     ///
     /// Purchase a phone-number for the account.
     ///
@@ -110,7 +111,11 @@ extension IncomingPhoneNumbersMethods {
     ///   any three-digit, US or Canada area code. We will provision an available
     ///   phone number within this area code for you. **You must provide an
     ///   `area_code` or a `phone_number`.** (US and Canada only).
-    public static func createIncomingPhoneNumbers(config: ClientConfig, options: CreateIncomingPhoneNumbersOptions, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountIncomingPhoneNumber {
+    static func createIncomingPhoneNumbers(
+        config: ClientConfig,
+        options: CreateIncomingPhoneNumbersOptions,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountIncomingPhoneNumber {
         try validateLength("AccountSid", options.accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", options.accountSid, sdkPatternc7cb941ab84b)
 
@@ -171,6 +176,19 @@ extension IncomingPhoneNumbersMethods {
 
         let requestBody = CreateIncomingPhoneNumbersRequestBody(options: options)
 
-        return try (await sdkRequest("POST", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(options.accountSid)), "/IncomingPhoneNumbers.json"].joined(), config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "createIncomingPhoneNumbers", options: requestOptions)).data
+        return try await (sdkRequest(
+            "POST",
+            [
+                "/2010-04-01/Accounts/",
+                sdkEncodePathSegment(sdkWireString(options.accountSid)),
+                "/IncomingPhoneNumbers.json",
+            ].joined(),
+            config: config,
+            body: requestBody,
+            contentType: "application/x-www-form-urlencoded",
+            decoder: .json,
+            operationId: "createIncomingPhoneNumbers",
+            options: requestOptions
+        )).data
     }
 }

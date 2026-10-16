@@ -6,8 +6,10 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension SipCredentialListsCredentialsMethods {
-    /// Retrieves a SIP credential from a specified credential list. Provide the account, credential list, and credential identifiers to select the resource. The response includes the credential's username and resource metadata.
+public extension SipCredentialListsCredentialsMethods {
+    /// Retrieves a SIP credential from a specified credential list. Provide the account, credential list, and
+    /// credential identifiers to select the resource. The response includes the credential's username and resource
+    /// metadata.
     ///
     /// Fetch a single credential.
     ///
@@ -17,7 +19,13 @@ extension SipCredentialListsCredentialsMethods {
     /// - credentialListSid: The unique id that identifies the credential list that
     ///   contains the desired credential.
     /// - sid: The unique id that identifies the resource to fetch.
-    public static func fetchSipCredentialListsCredentials(config: ClientConfig, accountSid: String, credentialListSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountSipSipCredentialListSipCredential {
+    static func fetchSipCredentialListsCredentials(
+        config: ClientConfig,
+        accountSid: String,
+        credentialListSid: String,
+        sid: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountSipSipCredentialListSipCredential {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
@@ -27,6 +35,21 @@ extension SipCredentialListsCredentialsMethods {
         try validateLength("Sid", sid, min: 34, max: 34)
         try sdkValidatePattern("Sid", sid, sdkPattern5d3925ba9d6f)
 
-        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/SIP/CredentialLists/", sdkEncodePathSegment(sdkWireString(credentialListSid)), "/Credentials/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, decoder: .json, operationId: "fetchSipCredentialListsCredentials", options: requestOptions)).data
+        return try await (sdkRequest(
+            "GET",
+            [
+                "/2010-04-01/Accounts/",
+                sdkEncodePathSegment(sdkWireString(accountSid)),
+                "/SIP/CredentialLists/",
+                sdkEncodePathSegment(sdkWireString(credentialListSid)),
+                "/Credentials/",
+                sdkEncodePathSegment(sdkWireString(sid)),
+                ".json",
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "fetchSipCredentialListsCredentials",
+            options: requestOptions
+        )).data
     }
 }

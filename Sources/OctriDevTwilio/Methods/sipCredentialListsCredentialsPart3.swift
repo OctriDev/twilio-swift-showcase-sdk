@@ -6,8 +6,10 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension SipCredentialListsCredentialsMethods {
-    /// Creates a SIP credential in the specified credential list. Supply `Username` and `Password`; the username can be up to 32 characters, and the password must meet the documented length and complexity requirements. The response includes the credential identifier and username, but not the password.
+public extension SipCredentialListsCredentialsMethods {
+    /// Creates a SIP credential in the specified credential list. Supply `Username` and `Password`; the username can be
+    /// up to 32 characters, and the password must meet the documented length and complexity requirements. The response
+    /// includes the credential identifier and username, but not the password.
     ///
     /// Create a new credential resource.
     ///
@@ -22,7 +24,14 @@ extension SipCredentialListsCredentialsMethods {
     /// - password: The password that the username will use when authenticating SIP
     ///   requests. The password must be a minimum of 12 characters, contain at least
     ///   1 digit, and have mixed case. (eg `IWasAtSignal2018`)
-    public static func createSipCredentialListsCredentials(config: ClientConfig, accountSid: String, credentialListSid: String, username: String, password: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountSipSipCredentialListSipCredential {
+    static func createSipCredentialListsCredentials(
+        config: ClientConfig,
+        accountSid: String,
+        credentialListSid: String,
+        username: String,
+        password: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountSipSipCredentialListSipCredential {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
@@ -31,6 +40,21 @@ extension SipCredentialListsCredentialsMethods {
 
         let requestBody = CreateSipCredentialListsCredentialsRequestBody(username: username, password: password)
 
-        return try (await sdkRequest("POST", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/SIP/CredentialLists/", sdkEncodePathSegment(sdkWireString(credentialListSid)), "/Credentials.json"].joined(), config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "createSipCredentialListsCredentials", options: requestOptions)).data
+        return try await (sdkRequest(
+            "POST",
+            [
+                "/2010-04-01/Accounts/",
+                sdkEncodePathSegment(sdkWireString(accountSid)),
+                "/SIP/CredentialLists/",
+                sdkEncodePathSegment(sdkWireString(credentialListSid)),
+                "/Credentials.json",
+            ].joined(),
+            config: config,
+            body: requestBody,
+            contentType: "application/x-www-form-urlencoded",
+            decoder: .json,
+            operationId: "createSipCredentialListsCredentials",
+            options: requestOptions
+        )).data
     }
 }

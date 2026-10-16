@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Api20100401Data domain models
+/// Api20100401Data domain models
 /// Typed representation of the
 /// `ApiV2010AccountRecordingRecordingAddOnResultRecordingAddOnResultPayloadRecordingAddOnResultPayloadData` API
 /// schema.
@@ -16,22 +16,22 @@ public struct ApiV2010AccountRecordingRecordingAddOnResultRecordingAddOnResX725b
     }
 
     init() {
-        self.redirectTo = nil
+        redirectTo = nil
     }
 }
 
-extension ApiV2010AccountRecordingRecordingAddOnResultRecordingAddOnResX725ba4fcaf {
-    public init(from decoder: Decoder) throws {
+public extension ApiV2010AccountRecordingRecordingAddOnResultRecordingAddOnResX725ba4fcaf {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.redirectTo = try container.sdkDecodeIfPresent(.redirectTo)
-        if let value = self.redirectTo {
+        redirectTo = try container.sdkDecodeIfPresent(.redirectTo)
+        if let value = redirectTo {
             try sdkValidateUri("redirect_to", value)
         }
     }
 }
 
-extension ApiV2010AccountRecordingRecordingAddOnResultRecordingAddOnResX725ba4fcaf {
-    public init(redirectTo: String? = nil) throws {
+public extension ApiV2010AccountRecordingRecordingAddOnResultRecordingAddOnResX725ba4fcaf {
+    init(redirectTo: String? = nil) throws {
         self.init()
         self.redirectTo = redirectTo
         if let value = self.redirectTo {

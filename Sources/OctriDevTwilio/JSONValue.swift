@@ -3,9 +3,9 @@
 
 import Foundation
 
-// Mixed scalar unions use this internal bridge so constraints that only apply
-// to numeric JSON instances can inspect their numeric associated value without
-// weakening the public union type.
+/// Mixed scalar unions use this internal bridge so constraints that only apply
+/// to numeric JSON instances can inspect their numeric associated value without
+/// weakening the public union type.
 protocol SdkNumericValueConvertible {
     var sdkNumericValue: Double? { get }
 }
@@ -83,7 +83,7 @@ extension KeyedDecodingContainer {
     /// Decodes a required model field while letting the assignment target infer
     /// its concrete type. The compact call site keeps large generated model
     /// initializers within the same quality bounds as handwritten code.
-    func sdkDecodeRequired<T>(_ key: Key) throws -> T where T: Decodable {
+    func sdkDecodeRequired<T: Decodable>(_ key: Key) throws -> T {
         guard contains(key) else {
             throw SdkValidationError(
                 field: key.stringValue,
@@ -96,13 +96,13 @@ extension KeyedDecodingContainer {
 
     /// Decodes an optional or nullable model field with target-driven type
     /// inference, avoiding a repeated long `T.self` expression at every field.
-    func sdkDecodeIfPresent<T>(_ key: Key) throws -> T? where T: Decodable {
+    func sdkDecodeIfPresent<T: Decodable>(_ key: Key) throws -> T? {
         try decodeIfPresent(T.self, forKey: key)
     }
 
     /// Decodes a required field that may be null: GitHub's `language` is null
     /// for a repository without code, but never left out.
-    func sdkDecodeNullable<T>(_ key: Key) throws -> T? where T: Decodable {
+    func sdkDecodeNullable<T: Decodable>(_ key: Key) throws -> T? {
         guard contains(key) else {
             throw SdkValidationError(
                 field: key.stringValue,
@@ -154,10 +154,17 @@ extension SdkLate: Decodable where Value: Decodable {
 /// Any key of an open model's object, declared or not.
 struct SdkExtraKey: CodingKey {
     let stringValue: String
-    var intValue: Int? { nil }
+    var intValue: Int? {
+        nil
+    }
 
-    init(stringValue: String) { self.stringValue = stringValue }
-    init?(intValue _: Int) { nil }
+    init(stringValue: String) {
+        self.stringValue = stringValue
+    }
+
+    init?(intValue _: Int) {
+        nil
+    }
 }
 
 extension Decoder {

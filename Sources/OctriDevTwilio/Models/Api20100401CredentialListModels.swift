@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Api20100401CredentialList domain models
+/// Api20100401CredentialList domain models
 /// Typed representation of the `ApiV2010AccountSipSipCredentialList` API schema.
 public struct ApiV2010AccountSipSipCredentialList: Codable {
     /// The unique id of the Account that owns this resource.
@@ -32,34 +32,42 @@ public struct ApiV2010AccountSipSipCredentialList: Codable {
     }
 
     init() {
-        (self.accountSid, self.dateCreated, self.dateUpdated, self.friendlyName, self.sid) = (nil, nil, nil, nil, nil)
-        (self.subresourceUris, self.uri) = (nil, nil)
+        (accountSid, dateCreated, dateUpdated, friendlyName, sid) = (nil, nil, nil, nil, nil)
+        (subresourceUris, uri) = (nil, nil)
     }
 }
 
-extension ApiV2010AccountSipSipCredentialList {
-    public init(from decoder: Decoder) throws {
+public extension ApiV2010AccountSipSipCredentialList {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.accountSid = try container.sdkDecodeIfPresent(.accountSid)
-        self.dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
-        self.dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
-        self.friendlyName = try container.sdkDecodeIfPresent(.friendlyName)
-        self.sid = try container.sdkDecodeIfPresent(.sid)
-        self.subresourceUris = try container.sdkDecodeIfPresent(.subresourceUris)
-        self.uri = try container.sdkDecodeIfPresent(.uri)
-        if let value = self.accountSid {
+        accountSid = try container.sdkDecodeIfPresent(.accountSid)
+        dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
+        dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
+        friendlyName = try container.sdkDecodeIfPresent(.friendlyName)
+        sid = try container.sdkDecodeIfPresent(.sid)
+        subresourceUris = try container.sdkDecodeIfPresent(.subresourceUris)
+        uri = try container.sdkDecodeIfPresent(.uri)
+        if let value = accountSid {
             try validateLength("account_sid", value, min: 34, max: 34)
             try sdkValidatePattern("account_sid", value, sdkPatternc7cb941ab84b)
         }
-        if let value = self.sid {
+        if let value = sid {
             try validateLength("sid", value, min: 34, max: 34)
             try sdkValidatePattern("sid", value, sdkPattern189973589bff)
         }
     }
 }
 
-extension ApiV2010AccountSipSipCredentialList {
-    public init(accountSid: String? = nil, dateCreated: String? = nil, dateUpdated: String? = nil, friendlyName: String? = nil, sid: String? = nil, subresourceUris: [String: JSONValue]? = nil, uri: String? = nil) throws {
+public extension ApiV2010AccountSipSipCredentialList {
+    init(
+        accountSid: String? = nil,
+        dateCreated: String? = nil,
+        dateUpdated: String? = nil,
+        friendlyName: String? = nil,
+        sid: String? = nil,
+        subresourceUris: [String: JSONValue]? = nil,
+        uri: String? = nil
+    ) throws {
         self.init()
         (self.accountSid, self.dateCreated) = (accountSid, dateCreated)
         (self.dateUpdated, self.friendlyName) = (dateUpdated, friendlyName)

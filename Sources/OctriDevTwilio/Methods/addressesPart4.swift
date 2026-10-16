@@ -6,8 +6,9 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension AddressesMethods {
-    /// Deletes a specific address resource associated with an account. Supply the account SID and address SID to identify the address to remove.
+public extension AddressesMethods {
+    /// Deletes a specific address resource associated with an account. Supply the account SID and address SID to
+    /// identify the address to remove.
     ///
     /// - Parameters:
     /// - accountSid: The SID of the
@@ -15,17 +16,36 @@ extension AddressesMethods {
     ///   for the Address resource to delete.
     /// - sid: The Twilio-provided string that uniquely identifies the Address
     ///   resource to delete.
-    public static func deleteAddresses(config: ClientConfig, accountSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+    static func deleteAddresses(
+        config: ClientConfig,
+        accountSid: String,
+        sid: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
         try validateLength("Sid", sid, min: 34, max: 34)
         try sdkValidatePattern("Sid", sid, sdkPattern843918c2faa5)
 
-        return try (await sdkRequest("DELETE", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Addresses/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, decoder: .empty, operationId: "deleteAddresses", options: requestOptions)).data
+        return try await (sdkRequest(
+            "DELETE",
+            [
+                "/2010-04-01/Accounts/",
+                sdkEncodePathSegment(sdkWireString(accountSid)),
+                "/Addresses/",
+                sdkEncodePathSegment(sdkWireString(sid)),
+                ".json",
+            ].joined(),
+            config: config,
+            decoder: .empty,
+            operationId: "deleteAddresses",
+            options: requestOptions
+        )).data
     }
 
-    /// Retrieves a specific address resource associated with an account. Supply the account SID and address SID to identify the resource.
+    /// Retrieves a specific address resource associated with an account. Supply the account SID and address SID to
+    /// identify the resource.
     ///
     /// - Parameters:
     /// - accountSid: The SID of the
@@ -33,13 +53,31 @@ extension AddressesMethods {
     ///   for the Address resource to fetch.
     /// - sid: The Twilio-provided string that uniquely identifies the Address
     ///   resource to fetch.
-    public static func fetchAddresses(config: ClientConfig, accountSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountAddress {
+    static func fetchAddresses(
+        config: ClientConfig,
+        accountSid: String,
+        sid: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountAddress {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
         try validateLength("Sid", sid, min: 34, max: 34)
         try sdkValidatePattern("Sid", sid, sdkPattern843918c2faa5)
 
-        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Addresses/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, decoder: .json, operationId: "fetchAddresses", options: requestOptions)).data
+        return try await (sdkRequest(
+            "GET",
+            [
+                "/2010-04-01/Accounts/",
+                sdkEncodePathSegment(sdkWireString(accountSid)),
+                "/Addresses/",
+                sdkEncodePathSegment(sdkWireString(sid)),
+                ".json",
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "fetchAddresses",
+            options: requestOptions
+        )).data
     }
 }
