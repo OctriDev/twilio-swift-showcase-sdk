@@ -6,13 +6,10 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension CallsRecordingsMethods {
-    /// Updates the status or pause behavior of a recording associated with a call. Supply the required `Status` field
-    /// to pause, stop, or resume the recording, and use `Twilio.CURRENT` as the recording identifier to target the
-    /// current active recording.
+extension CallsRecordingsMethods {
+    /// Updates the status or pause behavior of a recording associated with a call. Supply the required `Status` field to pause, stop, or resume the recording, and use `Twilio.CURRENT` as the recording identifier to target the current active recording.
     ///
-    /// Changes the status of the recording to paused, stopped, or in-progress. Note: Pass `Twilio.CURRENT` instead of
-    /// recording sid to reference current active recording.
+    /// Changes the status of the recording to paused, stopped, or in-progress. Note: Pass `Twilio.CURRENT` instead of recording sid to reference current active recording.
     ///
     /// - Parameters:
     /// - accountSid: The SID of the
@@ -32,15 +29,7 @@ public extension CallsRecordingsMethods {
     ///   pause period, while `silence` will replace the actual audio of the call with
     ///   silence during the pause period. This parameter only applies when setting
     ///   `status` is set to `paused`.
-    static func updateCallsRecordings(
-        config: ClientConfig,
-        accountSid: String,
-        callSid: String,
-        sid: String,
-        status: CallRecordingEnumStatus,
-        pauseBehavior: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountCallCallRecording {
+    public static func updateCallsRecordings(config: ClientConfig, accountSid: String, callSid: String, sid: String, status: CallRecordingEnumStatus, pauseBehavior: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountCallCallRecording {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
@@ -49,23 +38,6 @@ public extension CallsRecordingsMethods {
 
         let requestBody = UpdateCallsRecordingsRequestBody(status: status, pauseBehavior: pauseBehavior)
 
-        return try await (sdkRequest(
-            "POST",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(accountSid)),
-                "/Calls/",
-                sdkEncodePathSegment(sdkWireString(callSid)),
-                "/Recordings/",
-                sdkEncodePathSegment(sdkWireString(sid)),
-                ".json",
-            ].joined(),
-            config: config,
-            body: requestBody,
-            contentType: "application/x-www-form-urlencoded",
-            decoder: .json,
-            operationId: "updateCallsRecordings",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("POST", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Calls/", sdkEncodePathSegment(sdkWireString(callSid)), "/Recordings/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "updateCallsRecordings", options: requestOptions)).data
     }
 }

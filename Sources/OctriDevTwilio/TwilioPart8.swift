@@ -9,111 +9,39 @@ public class SipCredentialListsCredentialsNamespace {
         self.config = config
     }
 
-    /// Lists the credentials in a specified SIP credential list. Use `PageSize`, `Page`, and `PageToken` to control
-    /// pagination through the results.
+/// Lists the credentials in a specified SIP credential list. Use `PageSize`, `Page`, and `PageToken` to control pagination through the results.
     ///
     /// Retrieve a list of credentials.
-    public func list(
-        accountSid: String,
-        credentialListSid: String,
-        pageSize: Int? = nil,
-        page: Int? = nil,
-        pageToken: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ListSipCredentialListsCredentialsResponse {
-        try await SipCredentialListsCredentialsMethods.listSipCredentialListsCredentials(
-            config: config,
-            accountSid: accountSid,
-            credentialListSid: credentialListSid,
-            pageSize: pageSize,
-            page: page,
-            pageToken: pageToken,
-            requestOptions: requestOptions
-        )
+    public func list(accountSid: String, credentialListSid: String, pageSize: Int? = nil, page: Int? = nil, pageToken: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ListSipCredentialListsCredentialsResponse {
+        return try await SipCredentialListsCredentialsMethods.listSipCredentialListsCredentials(config: config, accountSid: accountSid, credentialListSid: credentialListSid, pageSize: pageSize, page: page, pageToken: pageToken, requestOptions: requestOptions)
     }
 
-    /// Creates a SIP credential in the specified credential list. Supply `Username` and `Password`; the username can be
-    /// up to 32 characters, and the password must meet the documented length and complexity requirements. The response
-    /// includes the credential identifier and username, but not the password.
+/// Creates a SIP credential in the specified credential list. Supply `Username` and `Password`; the username can be up to 32 characters, and the password must meet the documented length and complexity requirements. The response includes the credential identifier and username, but not the password.
     ///
     /// Create a new credential resource.
-    public func create(
-        accountSid: String,
-        credentialListSid: String,
-        username: String,
-        password: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountSipSipCredentialListSipCredential {
-        try await SipCredentialListsCredentialsMethods.createSipCredentialListsCredentials(
-            config: config,
-            accountSid: accountSid,
-            credentialListSid: credentialListSid,
-            username: username,
-            password: password,
-            requestOptions: requestOptions
-        )
+    public func create(accountSid: String, credentialListSid: String, username: String, password: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountSipSipCredentialListSipCredential {
+        return try await SipCredentialListsCredentialsMethods.createSipCredentialListsCredentials(config: config, accountSid: accountSid, credentialListSid: credentialListSid, username: username, password: password, requestOptions: requestOptions)
     }
 
-    /// Retrieves a SIP credential from a specified credential list. Provide the account, credential list, and
-    /// credential identifiers to select the resource. The response includes the credential's username and resource
-    /// metadata.
+/// Retrieves a SIP credential from a specified credential list. Provide the account, credential list, and credential identifiers to select the resource. The response includes the credential's username and resource metadata.
     ///
     /// Fetch a single credential.
-    public func fetch(
-        accountSid: String,
-        credentialListSid: String,
-        sid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountSipSipCredentialListSipCredential {
-        try await SipCredentialListsCredentialsMethods.fetchSipCredentialListsCredentials(
-            config: config,
-            accountSid: accountSid,
-            credentialListSid: credentialListSid,
-            sid: sid,
-            requestOptions: requestOptions
-        )
+    public func fetch(accountSid: String, credentialListSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountSipSipCredentialListSipCredential {
+        return try await SipCredentialListsCredentialsMethods.fetchSipCredentialListsCredentials(config: config, accountSid: accountSid, credentialListSid: credentialListSid, sid: sid, requestOptions: requestOptions)
     }
 
-    /// Updates the password for a credential in a specified credential list. Provide the account, credential list, and
-    /// credential identifiers, then send the new password in the request body. The password must be at least 12
-    /// characters and contain at least one digit and mixed case.
+/// Updates the password for a credential in a specified credential list. Provide the account, credential list, and credential identifiers, then send the new password in the request body. The password must be at least 12 characters and contain at least one digit and mixed case.
     ///
     /// Update a credential resource.
-    public func update(
-        accountSid: String,
-        credentialListSid: String,
-        sid: String,
-        password: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountSipSipCredentialListSipCredential {
-        try await SipCredentialListsCredentialsMethods.updateSipCredentialListsCredentials(
-            config: config,
-            accountSid: accountSid,
-            credentialListSid: credentialListSid,
-            sid: sid,
-            password: password,
-            requestOptions: requestOptions
-        )
+    public func update(accountSid: String, credentialListSid: String, sid: String, password: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountSipSipCredentialListSipCredential {
+        return try await SipCredentialListsCredentialsMethods.updateSipCredentialListsCredentials(config: config, accountSid: accountSid, credentialListSid: credentialListSid, sid: sid, password: password, requestOptions: requestOptions)
     }
 
-    /// Deletes a credential from a specified credential list. Provide the account, credential list, and credential
-    /// identifiers to select the resource to remove. The response confirms deletion and contains no resource
-    /// representation.
+/// Deletes a credential from a specified credential list. Provide the account, credential list, and credential identifiers to select the resource to remove. The response confirms deletion and contains no resource representation.
     ///
     /// Delete a credential resource.
-    public func delete(
-        accountSid: String,
-        credentialListSid: String,
-        sid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await SipCredentialListsCredentialsMethods.deleteSipCredentialListsCredentials(
-            config: config,
-            accountSid: accountSid,
-            credentialListSid: credentialListSid,
-            sid: sid,
-            requestOptions: requestOptions
-        )
+    public func delete(accountSid: String, credentialListSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await SipCredentialListsCredentialsMethods.deleteSipCredentialListsCredentials(config: config, accountSid: accountSid, credentialListSid: credentialListSid, sid: sid, requestOptions: requestOptions)
     }
 }
 
@@ -125,100 +53,39 @@ public class SipCredentialListsNamespace {
         credentials = SipCredentialListsCredentialsNamespace(config: config)
     }
 
-    /// Lists SIP credential lists for the specified account. Use `PageSize` to control the number of resources on a
-    /// page and `PageToken` to request a page identified by a token from the API. The response includes page metadata
-    /// and a `credential_lists` array.
+/// Lists SIP credential lists for the specified account. Use `PageSize` to control the number of resources on a page and `PageToken` to request a page identified by a token from the API. The response includes page metadata and a `credential_lists` array.
     ///
     /// Get All Credential Lists
-    public func list(
-        accountSid: String,
-        pageSize: Int? = nil,
-        page: Int? = nil,
-        pageToken: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ListSipCredentialListsResponse {
-        try await SipCredentialListsMethods.listSipCredentialLists(
-            config: config,
-            accountSid: accountSid,
-            pageSize: pageSize,
-            page: page,
-            pageToken: pageToken,
-            requestOptions: requestOptions
-        )
+    public func list(accountSid: String, pageSize: Int? = nil, page: Int? = nil, pageToken: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ListSipCredentialListsResponse {
+        return try await SipCredentialListsMethods.listSipCredentialLists(config: config, accountSid: accountSid, pageSize: pageSize, page: page, pageToken: pageToken, requestOptions: requestOptions)
     }
 
-    /// Creates a SIP credential list for the specified account. Provide a `FriendlyName` to describe the list; the
-    /// schema requires this field and the documented description limits it to 64 characters. The response includes the
-    /// created list's identifier and resource metadata.
+/// Creates a SIP credential list for the specified account. Provide a `FriendlyName` to describe the list; the schema requires this field and the documented description limits it to 64 characters. The response includes the created list's identifier and resource metadata.
     ///
     /// Create a Credential List
-    public func create(
-        accountSid: String,
-        friendlyName: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountSipSipCredentialList {
-        try await SipCredentialListsMethods.createSipCredentialLists(
-            config: config,
-            accountSid: accountSid,
-            friendlyName: friendlyName,
-            requestOptions: requestOptions
-        )
+    public func create(accountSid: String, friendlyName: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountSipSipCredentialList {
+        return try await SipCredentialListsMethods.createSipCredentialLists(config: config, accountSid: accountSid, friendlyName: friendlyName, requestOptions: requestOptions)
     }
 
-    /// Retrieves a SIP credential list for the specified account. Provide the account identifier and credential list
-    /// identifier to select the resource. The response includes the list's friendly name, subresource URIs, and other
-    /// resource metadata.
+/// Retrieves a SIP credential list for the specified account. Provide the account identifier and credential list identifier to select the resource. The response includes the list's friendly name, subresource URIs, and other resource metadata.
     ///
     /// Get a Credential List
-    public func fetch(
-        accountSid: String,
-        sid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountSipSipCredentialList {
-        try await SipCredentialListsMethods.fetchSipCredentialLists(
-            config: config,
-            accountSid: accountSid,
-            sid: sid,
-            requestOptions: requestOptions
-        )
+    public func fetch(accountSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountSipSipCredentialList {
+        return try await SipCredentialListsMethods.fetchSipCredentialLists(config: config, accountSid: accountSid, sid: sid, requestOptions: requestOptions)
     }
 
-    /// Updates the friendly name of a SIP credential list for the specified account. Supply `FriendlyName` in the
-    /// request body; the schema requires this field and the documented description limits it to 64 characters. The
-    /// response contains the updated list and its resource metadata.
+/// Updates the friendly name of a SIP credential list for the specified account. Supply `FriendlyName` in the request body; the schema requires this field and the documented description limits it to 64 characters. The response contains the updated list and its resource metadata.
     ///
     /// Update a Credential List
-    public func update(
-        accountSid: String,
-        sid: String,
-        friendlyName: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountSipSipCredentialList {
-        try await SipCredentialListsMethods.updateSipCredentialLists(
-            config: config,
-            accountSid: accountSid,
-            sid: sid,
-            friendlyName: friendlyName,
-            requestOptions: requestOptions
-        )
+    public func update(accountSid: String, sid: String, friendlyName: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountSipSipCredentialList {
+        return try await SipCredentialListsMethods.updateSipCredentialLists(config: config, accountSid: accountSid, sid: sid, friendlyName: friendlyName, requestOptions: requestOptions)
     }
 
-    /// Deletes a SIP credential list for the specified account. Provide the account identifier and credential list
-    /// identifier to select the resource to remove. The response confirms deletion and contains no resource
-    /// representation.
+/// Deletes a SIP credential list for the specified account. Provide the account identifier and credential list identifier to select the resource to remove. The response confirms deletion and contains no resource representation.
     ///
     /// Delete a Credential List
-    public func delete(
-        accountSid: String,
-        sid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await SipCredentialListsMethods.deleteSipCredentialLists(
-            config: config,
-            accountSid: accountSid,
-            sid: sid,
-            requestOptions: requestOptions
-        )
+    public func delete(accountSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await SipCredentialListsMethods.deleteSipCredentialLists(config: config, accountSid: accountSid, sid: sid, requestOptions: requestOptions)
     }
 }
 
@@ -228,116 +95,39 @@ public class SipIpAccessControlListsIpAddressesNamespace {
         self.config = config
     }
 
-    /// Lists the IP addresses associated with an IP access control list. Use the account and list identifiers to select
-    /// the list, and the pagination parameters to navigate its associated addresses. The response includes address
-    /// resources and pagination metadata.
+/// Lists the IP addresses associated with an IP access control list. Use the account and list identifiers to select the list, and the pagination parameters to navigate its associated addresses. The response includes address resources and pagination metadata.
     ///
     /// Read multiple IpAddress resources.
-    public func list(
-        accountSid: String,
-        ipAccessControlListSid: String,
-        pageSize: Int? = nil,
-        page: Int? = nil,
-        pageToken: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ListSipIpAccessControlListsIpAddressesResponse {
-        try await SipIpAccessControlListsIpAddressesMethods.listSipIpAccessControlListsIpAddresses(
-            config: config,
-            accountSid: accountSid,
-            ipAccessControlListSid: ipAccessControlListSid,
-            pageSize: pageSize,
-            page: page,
-            pageToken: pageToken,
-            requestOptions: requestOptions
-        )
+    public func list(accountSid: String, ipAccessControlListSid: String, pageSize: Int? = nil, page: Int? = nil, pageToken: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ListSipIpAccessControlListsIpAddressesResponse {
+        return try await SipIpAccessControlListsIpAddressesMethods.listSipIpAccessControlListsIpAddresses(config: config, accountSid: accountSid, ipAccessControlListSid: ipAccessControlListSid, pageSize: pageSize, page: page, pageToken: pageToken, requestOptions: requestOptions)
     }
 
-    /// Creates an IP address resource in an IP access control list. Provide `FriendlyName` and an IPv4 address in
-    /// `IpAddress`; optionally set `CidrPrefixLength` to specify the address prefix. The prefix defaults to the full
-    /// address when omitted.
+/// Creates an IP address resource in an IP access control list. Provide `FriendlyName` and an IPv4 address in `IpAddress`; optionally set `CidrPrefixLength` to specify the address prefix. The prefix defaults to the full address when omitted.
     ///
     /// Create a new IpAddress resource.
-    public func create(
-        accountSid: String,
-        ipAccessControlListSid: String,
-        friendlyName: String,
-        ipAddress: String,
-        cidrPrefixLength: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountSipSipIpAccessControlListSipIpAddress {
-        try await SipIpAccessControlListsIpAddressesMethods.createSipIpAccessControlListsIpAddresses(
-            config: config,
-            accountSid: accountSid,
-            ipAccessControlListSid: ipAccessControlListSid,
-            friendlyName: friendlyName,
-            ipAddress: ipAddress,
-            cidrPrefixLength: cidrPrefixLength,
-            requestOptions: requestOptions
-        )
+    public func create(accountSid: String, ipAccessControlListSid: String, friendlyName: String, ipAddress: String, cidrPrefixLength: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountSipSipIpAccessControlListSipIpAddress {
+        return try await SipIpAccessControlListsIpAddressesMethods.createSipIpAccessControlListsIpAddresses(config: config, accountSid: accountSid, ipAccessControlListSid: ipAccessControlListSid, friendlyName: friendlyName, ipAddress: ipAddress, cidrPrefixLength: cidrPrefixLength, requestOptions: requestOptions)
     }
 
-    /// Retrieves a specific IP address resource from an IP access control list. Use `AccountSid`,
-    /// `IpAccessControlListSid`, and `Sid` to identify the account, list, and address. Each identifier must match its
-    /// resource-specific 34-character format.
+/// Retrieves a specific IP address resource from an IP access control list. Use `AccountSid`, `IpAccessControlListSid`, and `Sid` to identify the account, list, and address. Each identifier must match its resource-specific 34-character format.
     ///
     /// Read one IpAddress resource.
-    public func fetch(
-        accountSid: String,
-        ipAccessControlListSid: String,
-        sid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountSipSipIpAccessControlListSipIpAddress {
-        try await SipIpAccessControlListsIpAddressesMethods.fetchSipIpAccessControlListsIpAddresses(
-            config: config,
-            accountSid: accountSid,
-            ipAccessControlListSid: ipAccessControlListSid,
-            sid: sid,
-            requestOptions: requestOptions
-        )
+    public func fetch(accountSid: String, ipAccessControlListSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountSipSipIpAccessControlListSipIpAddress {
+        return try await SipIpAccessControlListsIpAddressesMethods.fetchSipIpAccessControlListsIpAddresses(config: config, accountSid: accountSid, ipAccessControlListSid: ipAccessControlListSid, sid: sid, requestOptions: requestOptions)
     }
 
-    /// Updates an IPv4 address entry in a SIP IP access control list. Use the body fields to change the address, its
-    /// descriptive name, or its CIDR prefix length.
+/// Updates an IPv4 address entry in a SIP IP access control list. Use the body fields to change the address, its descriptive name, or its CIDR prefix length.
     ///
     /// Update an IpAddress resource.
-    public func update(
-        accountSid: String,
-        ipAccessControlListSid: String,
-        sid: String,
-        ipAddress: String? = nil,
-        friendlyName: String? = nil,
-        cidrPrefixLength: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountSipSipIpAccessControlListSipIpAddress {
-        try await SipIpAccessControlListsIpAddressesMethods.updateSipIpAccessControlListsIpAddresses(
-            config: config,
-            accountSid: accountSid,
-            ipAccessControlListSid: ipAccessControlListSid,
-            sid: sid,
-            ipAddress: ipAddress,
-            friendlyName: friendlyName,
-            cidrPrefixLength: cidrPrefixLength,
-            requestOptions: requestOptions
-        )
+    public func update(accountSid: String, ipAccessControlListSid: String, sid: String, ipAddress: String? = nil, friendlyName: String? = nil, cidrPrefixLength: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountSipSipIpAccessControlListSipIpAddress {
+        return try await SipIpAccessControlListsIpAddressesMethods.updateSipIpAccessControlListsIpAddresses(config: config, accountSid: accountSid, ipAccessControlListSid: ipAccessControlListSid, sid: sid, ipAddress: ipAddress, friendlyName: friendlyName, cidrPrefixLength: cidrPrefixLength, requestOptions: requestOptions)
     }
 
-    /// Deletes an IP address entry from a SIP IP access control list. Identify the account, list, and address resource
-    /// using their SIDs.
+/// Deletes an IP address entry from a SIP IP access control list. Identify the account, list, and address resource using their SIDs.
     ///
     /// Delete an IpAddress resource.
-    public func delete(
-        accountSid: String,
-        ipAccessControlListSid: String,
-        sid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await SipIpAccessControlListsIpAddressesMethods.deleteSipIpAccessControlListsIpAddresses(
-            config: config,
-            accountSid: accountSid,
-            ipAccessControlListSid: ipAccessControlListSid,
-            sid: sid,
-            requestOptions: requestOptions
-        )
+    public func delete(accountSid: String, ipAccessControlListSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await SipIpAccessControlListsIpAddressesMethods.deleteSipIpAccessControlListsIpAddresses(config: config, accountSid: accountSid, ipAccessControlListSid: ipAccessControlListSid, sid: sid, requestOptions: requestOptions)
     }
 }
 
@@ -349,93 +139,37 @@ public class SipIpAccessControlListsNamespace {
         ipAddresses = SipIpAccessControlListsIpAddressesNamespace(config: config)
     }
 
-    /// Lists IP access control lists belonging to an account. Use the page parameters to control which results you
-    /// retrieve and how many lists appear in each page.
+/// Lists IP access control lists belonging to an account. Use the page parameters to control which results you retrieve and how many lists appear in each page.
     ///
     /// Retrieve a list of IpAccessControlLists that belong to the account used to make the request
-    public func list(
-        accountSid: String,
-        pageSize: Int? = nil,
-        page: Int? = nil,
-        pageToken: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ListSipIpAccessControlListsResponse {
-        try await SipIpAccessControlListsMethods.listSipIpAccessControlLists(
-            config: config,
-            accountSid: accountSid,
-            pageSize: pageSize,
-            page: page,
-            pageToken: pageToken,
-            requestOptions: requestOptions
-        )
+    public func list(accountSid: String, pageSize: Int? = nil, page: Int? = nil, pageToken: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ListSipIpAccessControlListsResponse {
+        return try await SipIpAccessControlListsMethods.listSipIpAccessControlLists(config: config, accountSid: accountSid, pageSize: pageSize, page: page, pageToken: pageToken, requestOptions: requestOptions)
     }
 
-    /// Creates an IP access control list for an account. Provide a `FriendlyName` to identify the list; the response
-    /// includes its generated SID and resource URI.
+/// Creates an IP access control list for an account. Provide a `FriendlyName` to identify the list; the response includes its generated SID and resource URI.
     ///
     /// Create a new IpAccessControlList resource
-    public func create(
-        accountSid: String,
-        friendlyName: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountSipSipIpAccessControlList {
-        try await SipIpAccessControlListsMethods.createSipIpAccessControlLists(
-            config: config,
-            accountSid: accountSid,
-            friendlyName: friendlyName,
-            requestOptions: requestOptions
-        )
+    public func create(accountSid: String, friendlyName: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountSipSipIpAccessControlList {
+        return try await SipIpAccessControlListsMethods.createSipIpAccessControlLists(config: config, accountSid: accountSid, friendlyName: friendlyName, requestOptions: requestOptions)
     }
 
-    /// Retrieves a specific IP access control list for an account. Use `AccountSid` and `Sid` to identify the account
-    /// and list; both values must use their resource-specific 34-character identifier format.
+/// Retrieves a specific IP access control list for an account. Use `AccountSid` and `Sid` to identify the account and list; both values must use their resource-specific 34-character identifier format.
     ///
     /// Fetch a specific instance of an IpAccessControlList
-    public func fetch(
-        accountSid: String,
-        sid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountSipSipIpAccessControlList {
-        try await SipIpAccessControlListsMethods.fetchSipIpAccessControlLists(
-            config: config,
-            accountSid: accountSid,
-            sid: sid,
-            requestOptions: requestOptions
-        )
+    public func fetch(accountSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountSipSipIpAccessControlList {
+        return try await SipIpAccessControlListsMethods.fetchSipIpAccessControlLists(config: config, accountSid: accountSid, sid: sid, requestOptions: requestOptions)
     }
 
-    /// Updates the name of an IP access control list associated with an account. Submit `FriendlyName` to set the
-    /// human-readable name, which can be up to 255 characters. Use the account and list identifiers to select the
-    /// resource to update.
+/// Updates the name of an IP access control list associated with an account. Submit `FriendlyName` to set the human-readable name, which can be up to 255 characters. Use the account and list identifiers to select the resource to update.
     ///
     /// Rename an IpAccessControlList
-    public func update(
-        accountSid: String,
-        sid: String,
-        friendlyName: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountSipSipIpAccessControlList {
-        try await SipIpAccessControlListsMethods.updateSipIpAccessControlLists(
-            config: config,
-            accountSid: accountSid,
-            sid: sid,
-            friendlyName: friendlyName,
-            requestOptions: requestOptions
-        )
+    public func update(accountSid: String, sid: String, friendlyName: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountSipSipIpAccessControlList {
+        return try await SipIpAccessControlListsMethods.updateSipIpAccessControlLists(config: config, accountSid: accountSid, sid: sid, friendlyName: friendlyName, requestOptions: requestOptions)
     }
 
-    /// Delete an IpAccessControlList from the requested account
-    public func delete(
-        accountSid: String,
-        sid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await SipIpAccessControlListsMethods.deleteSipIpAccessControlLists(
-            config: config,
-            accountSid: accountSid,
-            sid: sid,
-            requestOptions: requestOptions
-        )
+/// Delete an IpAccessControlList from the requested account
+    public func delete(accountSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await SipIpAccessControlListsMethods.deleteSipIpAccessControlLists(config: config, accountSid: accountSid, sid: sid, requestOptions: requestOptions)
     }
 }
 
@@ -456,20 +190,10 @@ public class TokensNamespace {
         self.config = config
     }
 
-    /// Creates a token containing temporary credentials and ICE server details for an account. Set `Ttl` to control how
-    /// long the generated credentials remain valid; it defaults to 86400 seconds when omitted.
+/// Creates a token containing temporary credentials and ICE server details for an account. Set `Ttl` to control how long the generated credentials remain valid; it defaults to 86400 seconds when omitted.
     ///
     /// Create a new token for ICE servers
-    public func create(
-        accountSid: String,
-        ttl: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountToken {
-        try await TokensMethods.createTokens(
-            config: config,
-            accountSid: accountSid,
-            ttl: ttl,
-            requestOptions: requestOptions
-        )
+    public func create(accountSid: String, ttl: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountToken {
+        return try await TokensMethods.createTokens(config: config, accountSid: accountSid, ttl: ttl, requestOptions: requestOptions)
     }
 }

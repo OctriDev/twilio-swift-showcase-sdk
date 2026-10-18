@@ -6,9 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension MessagesMediaMethods {
-    /// Deletes a specific media resource associated with a message. Supply the account SID, message SID, and media SID
-    /// for the resource you want to remove.
+extension MessagesMediaMethods {
+    /// Deletes a specific media resource associated with a message. Supply the account SID, message SID, and media SID for the resource you want to remove.
     ///
     /// Delete the Media resource.
     ///
@@ -19,13 +18,7 @@ public extension MessagesMediaMethods {
     /// - messageSid: The SID of the Message resource that is associated with the
     ///   Media resource.
     /// - sid: The unique identifier of the to-be-deleted Media resource.
-    static func deleteMessagesMedia(
-        config: ClientConfig,
-        accountSid: String,
-        messageSid: String,
-        sid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
+    public static func deleteMessagesMedia(config: ClientConfig, accountSid: String, messageSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
@@ -35,21 +28,6 @@ public extension MessagesMediaMethods {
         try validateLength("Sid", sid, min: 34, max: 34)
         try sdkValidatePattern("Sid", sid, sdkPattern95ed076eca3b)
 
-        return try await (sdkRequest(
-            "DELETE",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(accountSid)),
-                "/Messages/",
-                sdkEncodePathSegment(sdkWireString(messageSid)),
-                "/Media/",
-                sdkEncodePathSegment(sdkWireString(sid)),
-                ".json",
-            ].joined(),
-            config: config,
-            decoder: .empty,
-            operationId: "deleteMessagesMedia",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("DELETE", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Messages/", sdkEncodePathSegment(sdkWireString(messageSid)), "/Media/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, decoder: .empty, operationId: "deleteMessagesMedia", options: requestOptions)).data
     }
 }

@@ -6,9 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension OutgoingCallerIdsMethods {
-    /// Deletes an outgoing caller ID resource from an account. Use `AccountSid` and `Sid` to identify the account and
-    /// the caller ID to remove. The caller ID SID must use the `PN` format.
+extension OutgoingCallerIdsMethods {
+    /// Deletes an outgoing caller ID resource from an account. Use `AccountSid` and `Sid` to identify the account and the caller ID to remove. The caller ID SID must use the `PN` format.
     ///
     /// Delete the caller-id specified from the account
     ///
@@ -18,31 +17,13 @@ public extension OutgoingCallerIdsMethods {
     ///   OutgoingCallerId resources to delete.
     /// - sid: The Twilio-provided string that uniquely identifies the
     ///   OutgoingCallerId resource to delete.
-    static func deleteOutgoingCallerIds(
-        config: ClientConfig,
-        accountSid: String,
-        sid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
+    public static func deleteOutgoingCallerIds(config: ClientConfig, accountSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
         try validateLength("Sid", sid, min: 34, max: 34)
         try sdkValidatePattern("Sid", sid, sdkPattern9792ce0bb10f)
 
-        return try await (sdkRequest(
-            "DELETE",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(accountSid)),
-                "/OutgoingCallerIds/",
-                sdkEncodePathSegment(sdkWireString(sid)),
-                ".json",
-            ].joined(),
-            config: config,
-            decoder: .empty,
-            operationId: "deleteOutgoingCallerIds",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("DELETE", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/OutgoingCallerIds/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, decoder: .empty, operationId: "deleteOutgoingCallerIds", options: requestOptions)).data
     }
 }

@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Api20100401CallTranscription domain models
+// Api20100401CallTranscription domain models
 /// Typed representation of the `ApiV2010AccountCallRealtimeTranscription` API schema.
 public struct ApiV2010AccountCallRealtimeTranscription: Codable {
     /// The SID of the Transcription resource.
@@ -33,46 +33,38 @@ public struct ApiV2010AccountCallRealtimeTranscription: Codable {
     }
 
     init() {
-        (sid, accountSid, callSid, name, status) = (nil, nil, nil, nil, nil)
-        (dateUpdated, uri) = (nil, nil)
+        (self.sid, self.accountSid, self.callSid, self.name, self.status) = (nil, nil, nil, nil, nil)
+        (self.dateUpdated, self.uri) = (nil, nil)
     }
 }
 
-public extension ApiV2010AccountCallRealtimeTranscription {
-    init(from decoder: Decoder) throws {
+extension ApiV2010AccountCallRealtimeTranscription {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        sid = try container.sdkDecodeIfPresent(.sid)
-        accountSid = try container.sdkDecodeIfPresent(.accountSid)
-        callSid = try container.sdkDecodeIfPresent(.callSid)
-        name = try container.sdkDecodeIfPresent(.name)
-        status = try container.sdkDecodeIfPresent(.status)
-        dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
-        uri = try container.sdkDecodeIfPresent(.uri)
-        if let value = sid {
+        self.sid = try container.sdkDecodeIfPresent(.sid)
+        self.accountSid = try container.sdkDecodeIfPresent(.accountSid)
+        self.callSid = try container.sdkDecodeIfPresent(.callSid)
+        self.name = try container.sdkDecodeIfPresent(.name)
+        self.status = try container.sdkDecodeIfPresent(.status)
+        self.dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
+        self.uri = try container.sdkDecodeIfPresent(.uri)
+        if let value = self.sid {
             try validateLength("sid", value, min: 34, max: 34)
             try sdkValidatePattern("sid", value, sdkPattern989972a6d694)
         }
-        if let value = accountSid {
+        if let value = self.accountSid {
             try validateLength("account_sid", value, min: 34, max: 34)
             try sdkValidatePattern("account_sid", value, sdkPatternc7cb941ab84b)
         }
-        if let value = callSid {
+        if let value = self.callSid {
             try validateLength("call_sid", value, min: 34, max: 34)
             try sdkValidatePattern("call_sid", value, sdkPattern25b2d94fcc27)
         }
     }
 }
 
-public extension ApiV2010AccountCallRealtimeTranscription {
-    init(
-        sid: String? = nil,
-        accountSid: String? = nil,
-        callSid: String? = nil,
-        name: String? = nil,
-        status: RealtimeTranscriptionEnumStatus? = nil,
-        dateUpdated: String? = nil,
-        uri: String? = nil
-    ) throws {
+extension ApiV2010AccountCallRealtimeTranscription {
+    public init(sid: String? = nil, accountSid: String? = nil, callSid: String? = nil, name: String? = nil, status: RealtimeTranscriptionEnumStatus? = nil, dateUpdated: String? = nil, uri: String? = nil) throws {
         self.init()
         (self.sid, self.accountSid) = (sid, accountSid)
         (self.callSid, self.name) = (callSid, name)
@@ -97,16 +89,13 @@ public extension ApiV2010AccountCallRealtimeTranscription {
 public struct RealtimeTranscriptionEnumStatus: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let inProgress = RealtimeTranscriptionEnumStatus(rawValue: "in-progress")
     public static let stopped = RealtimeTranscriptionEnumStatus(rawValue: "stopped")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -119,17 +108,14 @@ public struct RealtimeTranscriptionEnumStatus: RawRepresentable, Hashable, Codab
 public struct RealtimeTranscriptionEnumTrack: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let inboundTrack = RealtimeTranscriptionEnumTrack(rawValue: "inbound_track")
     public static let outboundTrack = RealtimeTranscriptionEnumTrack(rawValue: "outbound_track")
     public static let bothTracks = RealtimeTranscriptionEnumTrack(rawValue: "both_tracks")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -142,15 +128,12 @@ public struct RealtimeTranscriptionEnumTrack: RawRepresentable, Hashable, Codabl
 public struct RealtimeTranscriptionEnumUpdateStatus: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let stopped = RealtimeTranscriptionEnumUpdateStatus(rawValue: "stopped")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

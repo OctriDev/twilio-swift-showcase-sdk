@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension CallsMethods {
-    struct CreateCallsOptions: Codable {
+extension CallsMethods {
+    public struct CreateCallsOptions: Codable {
         public var accountSid: String
         public var to: String
         public var from: String
@@ -201,11 +201,7 @@ public extension CallsMethods {
     ///   `twiml` parameter will be ignored. Max 4000 characters.
     /// - applicationSid: The SID of the Application resource that will handle the
     ///   call, if the call will be handled by an application.
-    static func createCalls(
-        config: ClientConfig,
-        options: CreateCallsOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountCall {
+    public static func createCalls(config: ClientConfig, options: CreateCallsOptions, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountCall {
         try validateLength("AccountSid", options.accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", options.accountSid, sdkPatternc7cb941ab84b)
 
@@ -241,15 +237,6 @@ public extension CallsMethods {
 
         let requestBody = CreateCallsRequestBody(options: options)
 
-        return try await (sdkRequest(
-            "POST",
-            ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(options.accountSid)), "/Calls.json"].joined(),
-            config: config,
-            body: requestBody,
-            contentType: "application/x-www-form-urlencoded",
-            decoder: .json,
-            operationId: "createCalls",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("POST", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(options.accountSid)), "/Calls.json"].joined(), config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "createCalls", options: requestOptions)).data
     }
 }

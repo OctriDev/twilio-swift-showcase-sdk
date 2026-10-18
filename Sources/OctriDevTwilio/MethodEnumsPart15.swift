@@ -28,45 +28,45 @@ struct CreateCallsPaymentsRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(idempotencyKey, forKey: SdkCodingKey("IdempotencyKey"))
-        try keyedContainer.encode(statusCallback, forKey: SdkCodingKey("StatusCallback"))
-        try keyedContainer.encodeIfPresent(bankAccountType, forKey: SdkCodingKey("BankAccountType"))
-        try keyedContainer.encodeIfPresent(chargeAmount, forKey: SdkCodingKey("ChargeAmount"))
-        try keyedContainer.encodeIfPresent(currency, forKey: SdkCodingKey("Currency"))
-        try keyedContainer.encodeIfPresent(description, forKey: SdkCodingKey("Description"))
-        try keyedContainer.encodeIfPresent(input, forKey: SdkCodingKey("Input"))
-        try keyedContainer.encodeIfPresent(minPostalCodeLength, forKey: SdkCodingKey("MinPostalCodeLength"))
-        try keyedContainer.encodeIfPresent(parameter, forKey: SdkCodingKey("Parameter"))
-        try keyedContainer.encodeIfPresent(paymentConnector, forKey: SdkCodingKey("PaymentConnector"))
-        try keyedContainer.encodeIfPresent(paymentMethod, forKey: SdkCodingKey("PaymentMethod"))
-        try keyedContainer.encodeIfPresent(postalCode, forKey: SdkCodingKey("PostalCode"))
-        try keyedContainer.encodeIfPresent(securityCode, forKey: SdkCodingKey("SecurityCode"))
-        try keyedContainer.encodeIfPresent(timeout, forKey: SdkCodingKey("Timeout"))
-        try keyedContainer.encodeIfPresent(tokenType, forKey: SdkCodingKey("TokenType"))
-        try keyedContainer.encodeIfPresent(validCardTypes, forKey: SdkCodingKey("ValidCardTypes"))
-        try keyedContainer.encodeIfPresent(requireMatchingInputs, forKey: SdkCodingKey("RequireMatchingInputs"))
-        try keyedContainer.encodeIfPresent(confirmation, forKey: SdkCodingKey("Confirmation"))
+        try keyedContainer.encode(self.idempotencyKey, forKey: SdkCodingKey("IdempotencyKey"))
+        try keyedContainer.encode(self.statusCallback, forKey: SdkCodingKey("StatusCallback"))
+        try keyedContainer.encodeIfPresent(self.bankAccountType, forKey: SdkCodingKey("BankAccountType"))
+        try keyedContainer.encodeIfPresent(self.chargeAmount, forKey: SdkCodingKey("ChargeAmount"))
+        try keyedContainer.encodeIfPresent(self.currency, forKey: SdkCodingKey("Currency"))
+        try keyedContainer.encodeIfPresent(self.description, forKey: SdkCodingKey("Description"))
+        try keyedContainer.encodeIfPresent(self.input, forKey: SdkCodingKey("Input"))
+        try keyedContainer.encodeIfPresent(self.minPostalCodeLength, forKey: SdkCodingKey("MinPostalCodeLength"))
+        try keyedContainer.encodeIfPresent(self.parameter, forKey: SdkCodingKey("Parameter"))
+        try keyedContainer.encodeIfPresent(self.paymentConnector, forKey: SdkCodingKey("PaymentConnector"))
+        try keyedContainer.encodeIfPresent(self.paymentMethod, forKey: SdkCodingKey("PaymentMethod"))
+        try keyedContainer.encodeIfPresent(self.postalCode, forKey: SdkCodingKey("PostalCode"))
+        try keyedContainer.encodeIfPresent(self.securityCode, forKey: SdkCodingKey("SecurityCode"))
+        try keyedContainer.encodeIfPresent(self.timeout, forKey: SdkCodingKey("Timeout"))
+        try keyedContainer.encodeIfPresent(self.tokenType, forKey: SdkCodingKey("TokenType"))
+        try keyedContainer.encodeIfPresent(self.validCardTypes, forKey: SdkCodingKey("ValidCardTypes"))
+        try keyedContainer.encodeIfPresent(self.requireMatchingInputs, forKey: SdkCodingKey("RequireMatchingInputs"))
+        try keyedContainer.encodeIfPresent(self.confirmation, forKey: SdkCodingKey("Confirmation"))
     }
 
     init(options: CallsPaymentsMethods.CreateCallsPaymentsOptions) {
-        idempotencyKey = options.idempotencyKey
-        statusCallback = options.statusCallback
-        bankAccountType = options.bankAccountType
-        chargeAmount = options.chargeAmount
-        currency = options.currency
-        description = options.description
-        input = options.input
-        minPostalCodeLength = options.minPostalCodeLength
-        parameter = options.parameter
-        paymentConnector = options.paymentConnector
-        paymentMethod = options.paymentMethod
-        postalCode = options.postalCode
-        securityCode = options.securityCode
-        timeout = options.timeout
-        tokenType = options.tokenType
-        validCardTypes = options.validCardTypes
-        requireMatchingInputs = options.requireMatchingInputs
-        confirmation = options.confirmation
+        self.idempotencyKey = options.idempotencyKey
+        self.statusCallback = options.statusCallback
+        self.bankAccountType = options.bankAccountType
+        self.chargeAmount = options.chargeAmount
+        self.currency = options.currency
+        self.description = options.description
+        self.input = options.input
+        self.minPostalCodeLength = options.minPostalCodeLength
+        self.parameter = options.parameter
+        self.paymentConnector = options.paymentConnector
+        self.paymentMethod = options.paymentMethod
+        self.postalCode = options.postalCode
+        self.securityCode = options.securityCode
+        self.timeout = options.timeout
+        self.tokenType = options.tokenType
+        self.validCardTypes = options.validCardTypes
+        self.requireMatchingInputs = options.requireMatchingInputs
+        self.confirmation = options.confirmation
     }
 }
 
@@ -78,10 +78,10 @@ struct UpdateCallsPaymentsRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(idempotencyKey, forKey: SdkCodingKey("IdempotencyKey"))
-        try keyedContainer.encode(statusCallback, forKey: SdkCodingKey("StatusCallback"))
-        try keyedContainer.encodeIfPresent(capture, forKey: SdkCodingKey("Capture"))
-        try keyedContainer.encodeIfPresent(status, forKey: SdkCodingKey("Status"))
+        try keyedContainer.encode(self.idempotencyKey, forKey: SdkCodingKey("IdempotencyKey"))
+        try keyedContainer.encode(self.statusCallback, forKey: SdkCodingKey("StatusCallback"))
+        try keyedContainer.encodeIfPresent(self.capture, forKey: SdkCodingKey("Capture"))
+        try keyedContainer.encodeIfPresent(self.status, forKey: SdkCodingKey("Status"))
     }
 }
 
@@ -91,8 +91,8 @@ struct UpdateQueuesRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encodeIfPresent(friendlyName, forKey: SdkCodingKey("FriendlyName"))
-        try keyedContainer.encodeIfPresent(maxSize, forKey: SdkCodingKey("MaxSize"))
+        try keyedContainer.encodeIfPresent(self.friendlyName, forKey: SdkCodingKey("FriendlyName"))
+        try keyedContainer.encodeIfPresent(self.maxSize, forKey: SdkCodingKey("MaxSize"))
     }
 }
 
@@ -102,8 +102,8 @@ struct CreateQueuesRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(friendlyName, forKey: SdkCodingKey("FriendlyName"))
-        try keyedContainer.encodeIfPresent(maxSize, forKey: SdkCodingKey("MaxSize"))
+        try keyedContainer.encode(self.friendlyName, forKey: SdkCodingKey("FriendlyName"))
+        try keyedContainer.encodeIfPresent(self.maxSize, forKey: SdkCodingKey("MaxSize"))
     }
 }
 
@@ -129,51 +129,45 @@ struct CreateCallsTranscriptionsRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encodeIfPresent(name, forKey: SdkCodingKey("Name"))
-        try keyedContainer.encodeIfPresent(track, forKey: SdkCodingKey("Track"))
-        try keyedContainer.encodeIfPresent(statusCallbackUrl, forKey: SdkCodingKey("StatusCallbackUrl"))
-        try keyedContainer.encodeIfPresent(statusCallbackMethod, forKey: SdkCodingKey("StatusCallbackMethod"))
-        try keyedContainer.encodeIfPresent(inboundTrackLabel, forKey: SdkCodingKey("InboundTrackLabel"))
-        try keyedContainer.encodeIfPresent(outboundTrackLabel, forKey: SdkCodingKey("OutboundTrackLabel"))
-        try keyedContainer.encodeIfPresent(partialResults, forKey: SdkCodingKey("PartialResults"))
-        try keyedContainer.encodeIfPresent(languageCode, forKey: SdkCodingKey("LanguageCode"))
-        try keyedContainer.encodeIfPresent(transcriptionEngine, forKey: SdkCodingKey("TranscriptionEngine"))
-        try keyedContainer.encodeIfPresent(profanityFilter, forKey: SdkCodingKey("ProfanityFilter"))
-        try keyedContainer.encodeIfPresent(speechModel, forKey: SdkCodingKey("SpeechModel"))
-        try keyedContainer.encodeIfPresent(hints, forKey: SdkCodingKey("Hints"))
-        try keyedContainer.encodeIfPresent(
-            enableAutomaticPunctuation,
-            forKey: SdkCodingKey("EnableAutomaticPunctuation")
-        )
-        try keyedContainer.encodeIfPresent(intelligenceService, forKey: SdkCodingKey("IntelligenceService"))
-        try keyedContainer.encodeIfPresent(conversationConfiguration, forKey: SdkCodingKey("ConversationConfiguration"))
-        try keyedContainer.encodeIfPresent(conversationId, forKey: SdkCodingKey("ConversationId"))
-        try keyedContainer.encodeIfPresent(
-            transcriptionConfigurationId,
-            forKey: SdkCodingKey("TranscriptionConfigurationId")
-        )
-        try keyedContainer.encodeIfPresent(enableProviderData, forKey: SdkCodingKey("EnableProviderData"))
+        try keyedContainer.encodeIfPresent(self.name, forKey: SdkCodingKey("Name"))
+        try keyedContainer.encodeIfPresent(self.track, forKey: SdkCodingKey("Track"))
+        try keyedContainer.encodeIfPresent(self.statusCallbackUrl, forKey: SdkCodingKey("StatusCallbackUrl"))
+        try keyedContainer.encodeIfPresent(self.statusCallbackMethod, forKey: SdkCodingKey("StatusCallbackMethod"))
+        try keyedContainer.encodeIfPresent(self.inboundTrackLabel, forKey: SdkCodingKey("InboundTrackLabel"))
+        try keyedContainer.encodeIfPresent(self.outboundTrackLabel, forKey: SdkCodingKey("OutboundTrackLabel"))
+        try keyedContainer.encodeIfPresent(self.partialResults, forKey: SdkCodingKey("PartialResults"))
+        try keyedContainer.encodeIfPresent(self.languageCode, forKey: SdkCodingKey("LanguageCode"))
+        try keyedContainer.encodeIfPresent(self.transcriptionEngine, forKey: SdkCodingKey("TranscriptionEngine"))
+        try keyedContainer.encodeIfPresent(self.profanityFilter, forKey: SdkCodingKey("ProfanityFilter"))
+        try keyedContainer.encodeIfPresent(self.speechModel, forKey: SdkCodingKey("SpeechModel"))
+        try keyedContainer.encodeIfPresent(self.hints, forKey: SdkCodingKey("Hints"))
+        try keyedContainer.encodeIfPresent(self.enableAutomaticPunctuation, forKey: SdkCodingKey("EnableAutomaticPunctuation"))
+        try keyedContainer.encodeIfPresent(self.intelligenceService, forKey: SdkCodingKey("IntelligenceService"))
+        try keyedContainer.encodeIfPresent(self.conversationConfiguration, forKey: SdkCodingKey("ConversationConfiguration"))
+        try keyedContainer.encodeIfPresent(self.conversationId, forKey: SdkCodingKey("ConversationId"))
+        try keyedContainer.encodeIfPresent(self.transcriptionConfigurationId, forKey: SdkCodingKey("TranscriptionConfigurationId"))
+        try keyedContainer.encodeIfPresent(self.enableProviderData, forKey: SdkCodingKey("EnableProviderData"))
     }
 
     init(options: CallsTranscriptionsMethods.CreateCallsTranscriptionsOptions) {
-        name = options.name
-        track = options.track
-        statusCallbackUrl = options.statusCallbackUrl
-        statusCallbackMethod = options.statusCallbackMethod
-        inboundTrackLabel = options.inboundTrackLabel
-        outboundTrackLabel = options.outboundTrackLabel
-        partialResults = options.partialResults
-        languageCode = options.languageCode
-        transcriptionEngine = options.transcriptionEngine
-        profanityFilter = options.profanityFilter
-        speechModel = options.speechModel
-        hints = options.hints
-        enableAutomaticPunctuation = options.enableAutomaticPunctuation
-        intelligenceService = options.intelligenceService
-        conversationConfiguration = options.conversationConfiguration
-        conversationId = options.conversationId
-        transcriptionConfigurationId = options.transcriptionConfigurationId
-        enableProviderData = options.enableProviderData
+        self.name = options.name
+        self.track = options.track
+        self.statusCallbackUrl = options.statusCallbackUrl
+        self.statusCallbackMethod = options.statusCallbackMethod
+        self.inboundTrackLabel = options.inboundTrackLabel
+        self.outboundTrackLabel = options.outboundTrackLabel
+        self.partialResults = options.partialResults
+        self.languageCode = options.languageCode
+        self.transcriptionEngine = options.transcriptionEngine
+        self.profanityFilter = options.profanityFilter
+        self.speechModel = options.speechModel
+        self.hints = options.hints
+        self.enableAutomaticPunctuation = options.enableAutomaticPunctuation
+        self.intelligenceService = options.intelligenceService
+        self.conversationConfiguration = options.conversationConfiguration
+        self.conversationId = options.conversationId
+        self.transcriptionConfigurationId = options.transcriptionConfigurationId
+        self.enableProviderData = options.enableProviderData
     }
 }
 
@@ -182,7 +176,7 @@ struct UpdateCallsTranscriptionsRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(status, forKey: SdkCodingKey("Status"))
+        try keyedContainer.encode(self.status, forKey: SdkCodingKey("Status"))
     }
 }
 
@@ -196,21 +190,21 @@ struct UpdateShortCodesRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encodeIfPresent(friendlyName, forKey: SdkCodingKey("FriendlyName"))
-        try keyedContainer.encodeIfPresent(apiVersion, forKey: SdkCodingKey("ApiVersion"))
-        try keyedContainer.encodeIfPresent(smsUrl, forKey: SdkCodingKey("SmsUrl"))
-        try keyedContainer.encodeIfPresent(smsMethod, forKey: SdkCodingKey("SmsMethod"))
-        try keyedContainer.encodeIfPresent(smsFallbackUrl, forKey: SdkCodingKey("SmsFallbackUrl"))
-        try keyedContainer.encodeIfPresent(smsFallbackMethod, forKey: SdkCodingKey("SmsFallbackMethod"))
+        try keyedContainer.encodeIfPresent(self.friendlyName, forKey: SdkCodingKey("FriendlyName"))
+        try keyedContainer.encodeIfPresent(self.apiVersion, forKey: SdkCodingKey("ApiVersion"))
+        try keyedContainer.encodeIfPresent(self.smsUrl, forKey: SdkCodingKey("SmsUrl"))
+        try keyedContainer.encodeIfPresent(self.smsMethod, forKey: SdkCodingKey("SmsMethod"))
+        try keyedContainer.encodeIfPresent(self.smsFallbackUrl, forKey: SdkCodingKey("SmsFallbackUrl"))
+        try keyedContainer.encodeIfPresent(self.smsFallbackMethod, forKey: SdkCodingKey("SmsFallbackMethod"))
     }
 
     init(options: ShortCodesMethods.UpdateShortCodesOptions) {
-        friendlyName = options.friendlyName
-        apiVersion = options.apiVersion
-        smsUrl = options.smsUrl
-        smsMethod = options.smsMethod
-        smsFallbackUrl = options.smsFallbackUrl
-        smsFallbackMethod = options.smsFallbackMethod
+        self.friendlyName = options.friendlyName
+        self.apiVersion = options.apiVersion
+        self.smsUrl = options.smsUrl
+        self.smsMethod = options.smsMethod
+        self.smsFallbackUrl = options.smsFallbackUrl
+        self.smsFallbackMethod = options.smsFallbackMethod
     }
 }
 
@@ -219,6 +213,6 @@ struct CreateSipDomainsAuthCallsCredentialListMappingsRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(credentialListSid, forKey: SdkCodingKey("CredentialListSid"))
+        try keyedContainer.encode(self.credentialListSid, forKey: SdkCodingKey("CredentialListSid"))
     }
 }

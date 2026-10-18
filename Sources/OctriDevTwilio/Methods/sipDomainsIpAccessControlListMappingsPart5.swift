@@ -6,9 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension SipDomainsIpAccessControlListMappingsMethods {
-    /// Lists IP access control list mappings for a SIP domain. Use the pagination parameters to control the page size
-    /// and track the requested page. The response includes mapping resources and pagination metadata.
+extension SipDomainsIpAccessControlListMappingsMethods {
+    /// Lists IP access control list mappings for a SIP domain. Use the pagination parameters to control the page size and track the requested page. The response includes mapping resources and pagination metadata.
     ///
     /// Retrieve a list of IpAccessControlListMapping resources.
     ///
@@ -20,47 +19,25 @@ public extension SipDomainsIpAccessControlListMappingsMethods {
     ///   50, and the maximum is 1000.
     /// - page: The page index. This value is simply for client state.
     /// - pageToken: The page token. This is provided by the API.
-    static func listSipDomainsIpAccessControlListMappings(
-        config: ClientConfig,
-        accountSid: String,
-        domainSid: String,
-        pageSize: Int? = nil,
-        page: Int? = nil,
-        pageToken: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ListSipDomainsIpAccessControlListMappingsResponse {
+    public static func listSipDomainsIpAccessControlListMappings(config: ClientConfig, accountSid: String, domainSid: String, pageSize: Int? = nil, page: Int? = nil, pageToken: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ListSipDomainsIpAccessControlListMappingsResponse {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
         try validateLength("DomainSid", domainSid, min: 34, max: 34)
         try sdkValidatePattern("DomainSid", domainSid, sdkPatterna7d75da61532)
 
-        if let pageSize {
+        if let pageSize = pageSize {
             try validateRange("PageSize", Double(pageSize), min: 1, max: 1000)
         }
 
-        if let page {
+        if let page = page {
             try validateRange("Page", Double(page), min: 0)
         }
 
-        return try await (sdkRequest(
-            "GET",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(accountSid)),
-                "/SIP/Domains/",
-                sdkEncodePathSegment(sdkWireString(domainSid)),
-                "/IpAccessControlListMappings.json",
-            ].joined(),
-            config: config,
-            query: [
-                SdkQueryParameter("PageSize", value: pageSize),
-                SdkQueryParameter("Page", value: page),
-                SdkQueryParameter("PageToken", value: pageToken),
-            ],
-            decoder: .json,
-            operationId: "listSipDomainsIpAccessControlListMappings",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/SIP/Domains/", sdkEncodePathSegment(sdkWireString(domainSid)), "/IpAccessControlListMappings.json"].joined(), config: config, query: [
+            SdkQueryParameter("PageSize", value: pageSize),
+            SdkQueryParameter("Page", value: page),
+            SdkQueryParameter("PageToken", value: pageToken),
+        ], decoder: .json, operationId: "listSipDomainsIpAccessControlListMappings", options: requestOptions)).data
     }
 }

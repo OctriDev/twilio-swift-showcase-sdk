@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension IncomingPhoneNumbersMethods {
-    struct ListIncomingPhoneNumbersOptions: Codable {
+extension IncomingPhoneNumbersMethods {
+    public struct ListIncomingPhoneNumbersOptions: Codable {
         public var accountSid: String
         public var beta: Bool?
         public var friendlyName: String?
@@ -22,8 +22,7 @@ public extension IncomingPhoneNumbersMethods {
         }
     }
 
-    /// Lists incoming phone numbers belonging to an account. Filter the results by beta status, friendly name, phone
-    /// number, or origin, and use the page parameters to navigate the list.
+    /// Lists incoming phone numbers belonging to an account. Filter the results by beta status, friendly name, phone number, or origin, and use the page parameters to navigate the list.
     ///
     /// Retrieve a list of incoming-phone-numbers belonging to the account used to make the request.
     ///
@@ -44,11 +43,7 @@ public extension IncomingPhoneNumbersMethods {
     ///   50, and the maximum is 1000.
     /// - page: The page index. This value is simply for client state.
     /// - pageToken: The page token. This is provided by the API.
-    static func listIncomingPhoneNumbers(
-        config: ClientConfig,
-        options: ListIncomingPhoneNumbersOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ListIncomingPhoneNumbersResponse {
+    public static func listIncomingPhoneNumbers(config: ClientConfig, options: ListIncomingPhoneNumbersOptions, requestOptions: RequestOptions? = nil) async throws -> ListIncomingPhoneNumbersResponse {
         try validateLength("AccountSid", options.accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", options.accountSid, sdkPatternc7cb941ab84b)
 
@@ -60,26 +55,14 @@ public extension IncomingPhoneNumbersMethods {
             try validateRange("Page", Double(page), min: 0)
         }
 
-        return try await (sdkRequest(
-            "GET",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(options.accountSid)),
-                "/IncomingPhoneNumbers.json",
-            ].joined(),
-            config: config,
-            query: [
-                SdkQueryParameter("Beta", value: options.beta),
-                SdkQueryParameter("FriendlyName", value: options.friendlyName),
-                SdkQueryParameter("PhoneNumber", value: options.phoneNumber),
-                SdkQueryParameter("Origin", value: options.origin),
-                SdkQueryParameter("PageSize", value: options.pageSize),
-                SdkQueryParameter("Page", value: options.page),
-                SdkQueryParameter("PageToken", value: options.pageToken),
-            ],
-            decoder: .json,
-            operationId: "listIncomingPhoneNumbers",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(options.accountSid)), "/IncomingPhoneNumbers.json"].joined(), config: config, query: [
+            SdkQueryParameter("Beta", value: options.beta),
+            SdkQueryParameter("FriendlyName", value: options.friendlyName),
+            SdkQueryParameter("PhoneNumber", value: options.phoneNumber),
+            SdkQueryParameter("Origin", value: options.origin),
+            SdkQueryParameter("PageSize", value: options.pageSize),
+            SdkQueryParameter("Page", value: options.page),
+            SdkQueryParameter("PageToken", value: options.pageToken),
+        ], decoder: .json, operationId: "listIncomingPhoneNumbers", options: requestOptions)).data
     }
 }

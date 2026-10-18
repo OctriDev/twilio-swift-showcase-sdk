@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension IncomingPhoneNumbersMethods {
-    struct UpdateIncomingPhoneNumbersOptions: Codable {
+extension IncomingPhoneNumbersMethods {
+    public struct UpdateIncomingPhoneNumbersOptions: Codable {
         public var accountSid: String
         public var sid: String
         public var accountSid2: String?
@@ -40,9 +40,7 @@ public extension IncomingPhoneNumbersMethods {
         }
     }
 
-    /// Updates the configuration of an incoming phone number. Supply only the settings you want to change, such as the
-    /// SMS or voice handlers and their callback methods. An application SID takes precedence over the corresponding URL
-    /// settings.
+    /// Updates the configuration of an incoming phone number. Supply only the settings you want to change, such as the SMS or voice handlers and their callback methods. An application SID takes precedence over the corresponding URL settings.
     ///
     /// Update an incoming-phone-number instance.
     ///
@@ -115,34 +113,15 @@ public extension IncomingPhoneNumbersMethods {
     ///   phone number. Some regions require addresses to meet local regulations.
     /// - bundleSid: The SID of the Bundle resource that you associate with the
     ///   phone number. Some regions require a Bundle to meet local Regulations.
-    static func updateIncomingPhoneNumbers(
-        config: ClientConfig,
-        options: UpdateIncomingPhoneNumbersOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountIncomingPhoneNumber {
+    public static func updateIncomingPhoneNumbers(config: ClientConfig, options: UpdateIncomingPhoneNumbersOptions, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountIncomingPhoneNumber {
         try validateUpdateIncomingPhoneNumbersOptions(options)
 
         let requestBody = UpdateIncomingPhoneNumbersRequestBody(options: options)
 
-        return try await (sdkRequest(
-            "POST",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(options.accountSid)),
-                "/IncomingPhoneNumbers/",
-                sdkEncodePathSegment(sdkWireString(options.sid)),
-                ".json",
-            ].joined(),
-            config: config,
-            body: requestBody,
-            contentType: "application/x-www-form-urlencoded",
-            decoder: .json,
-            operationId: "updateIncomingPhoneNumbers",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("POST", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(options.accountSid)), "/IncomingPhoneNumbers/", sdkEncodePathSegment(sdkWireString(options.sid)), ".json"].joined(), config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "updateIncomingPhoneNumbers", options: requestOptions)).data
     }
 
-    internal static func validateUpdateIncomingPhoneNumbersOptions(_ options: UpdateIncomingPhoneNumbersOptions) throws {
+    static func validateUpdateIncomingPhoneNumbersOptions(_ options: UpdateIncomingPhoneNumbersOptions) throws {
         try validateLength("AccountSid", options.accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", options.accountSid, sdkPatternc7cb941ab84b)
 

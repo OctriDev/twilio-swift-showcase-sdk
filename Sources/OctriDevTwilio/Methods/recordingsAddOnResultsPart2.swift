@@ -6,9 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension RecordingsAddOnResultsMethods {
-    /// Retrieves an AddOnResult belonging to a recording. Use the account, recording, and result SIDs to identify the
-    /// resource and inspect its status, timestamps, and related resource URIs.
+extension RecordingsAddOnResultsMethods {
+    /// Retrieves an AddOnResult belonging to a recording. Use the account, recording, and result SIDs to identify the resource and inspect its status, timestamps, and related resource URIs.
     ///
     /// Fetch an instance of an AddOnResult
     ///
@@ -20,13 +19,7 @@ public extension RecordingsAddOnResultsMethods {
     ///   belongs.
     /// - sid: The Twilio-provided string that uniquely identifies the Recording
     ///   AddOnResult resource to fetch.
-    static func fetchRecordingsAddOnResults(
-        config: ClientConfig,
-        accountSid: String,
-        referenceSid: String,
-        sid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountRecordingRecordingAddOnResult {
+    public static func fetchRecordingsAddOnResults(config: ClientConfig, accountSid: String, referenceSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountRecordingRecordingAddOnResult {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
@@ -36,21 +29,6 @@ public extension RecordingsAddOnResultsMethods {
         try validateLength("Sid", sid, min: 34, max: 34)
         try sdkValidatePattern("Sid", sid, sdkPatterne89fe25d0ced)
 
-        return try await (sdkRequest(
-            "GET",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(accountSid)),
-                "/Recordings/",
-                sdkEncodePathSegment(sdkWireString(referenceSid)),
-                "/AddOnResults/",
-                sdkEncodePathSegment(sdkWireString(sid)),
-                ".json",
-            ].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "fetchRecordingsAddOnResults",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Recordings/", sdkEncodePathSegment(sdkWireString(referenceSid)), "/AddOnResults/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, decoder: .json, operationId: "fetchRecordingsAddOnResults", options: requestOptions)).data
     }
 }

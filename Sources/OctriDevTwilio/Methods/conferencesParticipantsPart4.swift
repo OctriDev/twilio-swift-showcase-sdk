@@ -6,10 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ConferencesParticipantsMethods {
-    /// Removes a participant from a conference. Use `AccountSid`, `ConferenceSid`, and `CallSid` to identify the
-    /// account, conference, and participant. You can identify the participant by call SID or label; percent-encode
-    /// characters in a label that are not URL-safe.
+extension ConferencesParticipantsMethods {
+    /// Removes a participant from a conference. Use `AccountSid`, `ConferenceSid`, and `CallSid` to identify the account, conference, and participant. You can identify the participant by call SID or label; percent-encode characters in a label that are not URL-safe.
     ///
     /// Kick a participant from a given conference
     ///
@@ -22,34 +20,13 @@ public extension ConferencesParticipantsMethods {
     ///   SID or label of the participant to delete. Non URL safe characters in a
     ///   label must be percent encoded, for example, a space character is represented
     ///   as %20.
-    static func deleteConferencesParticipants(
-        config: ClientConfig,
-        accountSid: String,
-        conferenceSid: String,
-        callSid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
+    public static func deleteConferencesParticipants(config: ClientConfig, accountSid: String, conferenceSid: String, callSid: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
         try validateLength("ConferenceSid", conferenceSid, min: 34, max: 34)
         try sdkValidatePattern("ConferenceSid", conferenceSid, sdkPatternb5f37fc1f4d4)
 
-        return try await (sdkRequest(
-            "DELETE",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(accountSid)),
-                "/Conferences/",
-                sdkEncodePathSegment(sdkWireString(conferenceSid)),
-                "/Participants/",
-                sdkEncodePathSegment(sdkWireString(callSid)),
-                ".json",
-            ].joined(),
-            config: config,
-            decoder: .empty,
-            operationId: "deleteConferencesParticipants",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("DELETE", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Conferences/", sdkEncodePathSegment(sdkWireString(conferenceSid)), "/Participants/", sdkEncodePathSegment(sdkWireString(callSid)), ".json"].joined(), config: config, decoder: .empty, operationId: "deleteConferencesParticipants", options: requestOptions)).data
     }
 }

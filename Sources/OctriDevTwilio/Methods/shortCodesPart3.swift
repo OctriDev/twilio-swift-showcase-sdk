@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ShortCodesMethods {
-    struct UpdateShortCodesOptions: Codable {
+extension ShortCodesMethods {
+    public struct UpdateShortCodesOptions: Codable {
         public var accountSid: String
         public var sid: String
         public var friendlyName: String?
@@ -23,9 +23,7 @@ public extension ShortCodesMethods {
         }
     }
 
-    /// Updates a short code's configuration for handling incoming SMS messages. Supply any fields you want to change;
-    /// `SmsMethod` and `SmsFallbackMethod` accept GET or POST, and `ApiVersion` accepts either of the documented API
-    /// versions.
+    /// Updates a short code's configuration for handling incoming SMS messages. Supply any fields you want to change; `SmsMethod` and `SmsFallbackMethod` accept GET or POST, and `ApiVersion` accepts either of the documented API versions.
     ///
     /// Update a short code with the following parameters
     ///
@@ -48,11 +46,7 @@ public extension ShortCodesMethods {
     ///   retrieving or executing the TwiML from `sms_url`.
     /// - smsFallbackMethod: The HTTP method that we should use to call the
     ///   `sms_fallback_url`. Can be: `GET` or `POST`.
-    static func updateShortCodes(
-        config: ClientConfig,
-        options: UpdateShortCodesOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountShortCode {
+    public static func updateShortCodes(config: ClientConfig, options: UpdateShortCodesOptions, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountShortCode {
         try validateLength("AccountSid", options.accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", options.accountSid, sdkPatternc7cb941ab84b)
 
@@ -69,21 +63,6 @@ public extension ShortCodesMethods {
 
         let requestBody = UpdateShortCodesRequestBody(options: options)
 
-        return try await (sdkRequest(
-            "POST",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(options.accountSid)),
-                "/SMS/ShortCodes/",
-                sdkEncodePathSegment(sdkWireString(options.sid)),
-                ".json",
-            ].joined(),
-            config: config,
-            body: requestBody,
-            contentType: "application/x-www-form-urlencoded",
-            decoder: .json,
-            operationId: "updateShortCodes",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("POST", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(options.accountSid)), "/SMS/ShortCodes/", sdkEncodePathSegment(sdkWireString(options.sid)), ".json"].joined(), config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "updateShortCodes", options: requestOptions)).data
     }
 }

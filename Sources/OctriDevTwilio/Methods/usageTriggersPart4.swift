@@ -6,9 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension UsageTriggersMethods {
-    /// Deletes a specific usage trigger from an account. Use the account and trigger SIDs to identify the resource to
-    /// remove. The deletion response has no content.
+extension UsageTriggersMethods {
+    /// Deletes a specific usage trigger from an account. Use the account and trigger SIDs to identify the resource to remove. The deletion response has no content.
     ///
     /// - Parameters:
     /// - accountSid: The SID of the
@@ -16,31 +15,13 @@ public extension UsageTriggersMethods {
     ///   UsageTrigger resources to delete.
     /// - sid: The Twilio-provided string that uniquely identifies the UsageTrigger
     ///   resource to delete.
-    static func deleteUsageTriggers(
-        config: ClientConfig,
-        accountSid: String,
-        sid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
+    public static func deleteUsageTriggers(config: ClientConfig, accountSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
         try validateLength("Sid", sid, min: 34, max: 34)
         try sdkValidatePattern("Sid", sid, sdkPattern0c13ca06d199)
 
-        return try await (sdkRequest(
-            "DELETE",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(accountSid)),
-                "/Usage/Triggers/",
-                sdkEncodePathSegment(sdkWireString(sid)),
-                ".json",
-            ].joined(),
-            config: config,
-            decoder: .empty,
-            operationId: "deleteUsageTriggers",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("DELETE", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Usage/Triggers/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, decoder: .empty, operationId: "deleteUsageTriggers", options: requestOptions)).data
     }
 }

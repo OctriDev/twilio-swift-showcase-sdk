@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension CallsRecordingsMethods {
-    struct CreateCallsRecordingsOptions: Codable {
+extension CallsRecordingsMethods {
+    public struct CreateCallsRecordingsOptions: Codable {
         public var accountSid: String
         public var callSid: String
         public var recordingStatusCallbackEvent: [String]?
@@ -24,9 +24,7 @@ public extension CallsRecordingsMethods {
         }
     }
 
-    /// Creates a recording for a specific call. Configure callback events, recording channels, and audio tracks with
-    /// the form fields; omitted options use their documented defaults. A successful response includes the recording
-    /// resource and its current status.
+    /// Creates a recording for a specific call. Configure callback events, recording channels, and audio tracks with the form fields; omitted options use their documented defaults. A successful response includes the recording resource and its current status.
     ///
     /// Create a recording for the call
     ///
@@ -65,11 +63,7 @@ public extension CallsRecordingsMethods {
     ///   Twilio.
     /// - recordingConfigurationId: The identifier of the configuration to be used
     ///   when creating and processing the recording
-    static func createCallsRecordings(
-        config: ClientConfig,
-        options: CreateCallsRecordingsOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountCallCallRecording {
+    public static func createCallsRecordings(config: ClientConfig, options: CreateCallsRecordingsOptions, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountCallCallRecording {
         try validateLength("AccountSid", options.accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", options.accountSid, sdkPatternc7cb941ab84b)
 
@@ -82,21 +76,6 @@ public extension CallsRecordingsMethods {
 
         let requestBody = CreateCallsRecordingsRequestBody(options: options)
 
-        return try await (sdkRequest(
-            "POST",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(options.accountSid)),
-                "/Calls/",
-                sdkEncodePathSegment(sdkWireString(options.callSid)),
-                "/Recordings.json",
-            ].joined(),
-            config: config,
-            body: requestBody,
-            contentType: "application/x-www-form-urlencoded",
-            decoder: .json,
-            operationId: "createCallsRecordings",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("POST", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(options.accountSid)), "/Calls/", sdkEncodePathSegment(sdkWireString(options.callSid)), "/Recordings.json"].joined(), config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "createCallsRecordings", options: requestOptions)).data
     }
 }

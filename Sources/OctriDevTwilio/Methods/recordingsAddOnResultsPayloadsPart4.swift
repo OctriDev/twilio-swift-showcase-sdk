@@ -6,9 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension RecordingsAddOnResultsPayloadsMethods {
-    /// Lists payloads belonging to an AddOnResult for a recording. Use `PageSize` and `PageToken` to control which
-    /// payloads are returned and to navigate the paginated response.
+extension RecordingsAddOnResultsPayloadsMethods {
+    /// Lists payloads belonging to an AddOnResult for a recording. Use `PageSize` and `PageToken` to control which payloads are returned and to navigate the paginated response.
     ///
     /// Retrieve a list of payloads belonging to the AddOnResult
     ///
@@ -24,16 +23,7 @@ public extension RecordingsAddOnResultsPayloadsMethods {
     ///   50, and the maximum is 1000.
     /// - page: The page index. This value is simply for client state.
     /// - pageToken: The page token. This is provided by the API.
-    static func listRecordingsAddOnResultsPayloads(
-        config: ClientConfig,
-        accountSid: String,
-        referenceSid: String,
-        addOnResultSid: String,
-        pageSize: Int? = nil,
-        page: Int? = nil,
-        pageToken: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ListRecordingsAddOnResultsPayloadsResponse {
+    public static func listRecordingsAddOnResultsPayloads(config: ClientConfig, accountSid: String, referenceSid: String, addOnResultSid: String, pageSize: Int? = nil, page: Int? = nil, pageToken: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ListRecordingsAddOnResultsPayloadsResponse {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
@@ -43,34 +33,18 @@ public extension RecordingsAddOnResultsPayloadsMethods {
         try validateLength("AddOnResultSid", addOnResultSid, min: 34, max: 34)
         try sdkValidatePattern("AddOnResultSid", addOnResultSid, sdkPatterne89fe25d0ced)
 
-        if let pageSize {
+        if let pageSize = pageSize {
             try validateRange("PageSize", Double(pageSize), min: 1, max: 1000)
         }
 
-        if let page {
+        if let page = page {
             try validateRange("Page", Double(page), min: 0)
         }
 
-        return try await (sdkRequest(
-            "GET",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(accountSid)),
-                "/Recordings/",
-                sdkEncodePathSegment(sdkWireString(referenceSid)),
-                "/AddOnResults/",
-                sdkEncodePathSegment(sdkWireString(addOnResultSid)),
-                "/Payloads.json",
-            ].joined(),
-            config: config,
-            query: [
-                SdkQueryParameter("PageSize", value: pageSize),
-                SdkQueryParameter("Page", value: page),
-                SdkQueryParameter("PageToken", value: pageToken),
-            ],
-            decoder: .json,
-            operationId: "listRecordingsAddOnResultsPayloads",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Recordings/", sdkEncodePathSegment(sdkWireString(referenceSid)), "/AddOnResults/", sdkEncodePathSegment(sdkWireString(addOnResultSid)), "/Payloads.json"].joined(), config: config, query: [
+            SdkQueryParameter("PageSize", value: pageSize),
+            SdkQueryParameter("Page", value: page),
+            SdkQueryParameter("PageToken", value: pageToken),
+        ], decoder: .json, operationId: "listRecordingsAddOnResultsPayloads", options: requestOptions)).data
     }
 }

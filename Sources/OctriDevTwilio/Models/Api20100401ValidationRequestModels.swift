@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Api20100401ValidationRequest domain models
+// Api20100401ValidationRequest domain models
 /// Typed representation of the `ApiV2010AccountValidationRequest` API schema.
 public struct ApiV2010AccountValidationRequest: Codable {
     /// The SID of the Account responsible for the Caller ID.
@@ -27,37 +27,31 @@ public struct ApiV2010AccountValidationRequest: Codable {
     }
 
     init() {
-        (accountSid, callSid, friendlyName, phoneNumber, validationCode) = (nil, nil, nil, nil, nil)
+        (self.accountSid, self.callSid, self.friendlyName, self.phoneNumber, self.validationCode) = (nil, nil, nil, nil, nil)
     }
 }
 
-public extension ApiV2010AccountValidationRequest {
-    init(from decoder: Decoder) throws {
+extension ApiV2010AccountValidationRequest {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        accountSid = try container.sdkDecodeIfPresent(.accountSid)
-        callSid = try container.sdkDecodeIfPresent(.callSid)
-        friendlyName = try container.sdkDecodeIfPresent(.friendlyName)
-        phoneNumber = try container.sdkDecodeIfPresent(.phoneNumber)
-        validationCode = try container.sdkDecodeIfPresent(.validationCode)
-        if let value = accountSid {
+        self.accountSid = try container.sdkDecodeIfPresent(.accountSid)
+        self.callSid = try container.sdkDecodeIfPresent(.callSid)
+        self.friendlyName = try container.sdkDecodeIfPresent(.friendlyName)
+        self.phoneNumber = try container.sdkDecodeIfPresent(.phoneNumber)
+        self.validationCode = try container.sdkDecodeIfPresent(.validationCode)
+        if let value = self.accountSid {
             try validateLength("account_sid", value, min: 34, max: 34)
             try sdkValidatePattern("account_sid", value, sdkPatternc7cb941ab84b)
         }
-        if let value = callSid {
+        if let value = self.callSid {
             try validateLength("call_sid", value, min: 34, max: 34)
             try sdkValidatePattern("call_sid", value, sdkPattern25b2d94fcc27)
         }
     }
 }
 
-public extension ApiV2010AccountValidationRequest {
-    init(
-        accountSid: String? = nil,
-        callSid: String? = nil,
-        friendlyName: String? = nil,
-        phoneNumber: String? = nil,
-        validationCode: String? = nil
-    ) throws {
+extension ApiV2010AccountValidationRequest {
+    public init(accountSid: String? = nil, callSid: String? = nil, friendlyName: String? = nil, phoneNumber: String? = nil, validationCode: String? = nil) throws {
         self.init()
         (self.accountSid, self.callSid) = (accountSid, callSid)
         (self.friendlyName, self.phoneNumber) = (friendlyName, phoneNumber)

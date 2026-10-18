@@ -7,254 +7,254 @@ import Foundation
     import FoundationNetworking
 #endif
 
-func basicOperationSecurityPart13(_ operationId: String) -> [[String]]? {
+internal func basicOperationSecurityPart13(_ operationId: String) -> [[String]]? {
     switch operationId {
     case "listRecordingsAddOnResults":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listRecordingsAddOnResultsPayloads":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listRecordingsTranscriptions":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listShortCodes":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listSigningKeys":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listSipCredentialLists":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listSipCredentialListsCredentials":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listSipDomains":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listSipDomainsAuthCallsCredentialListMappings":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listSipDomainsAuthCallsIpAccessControlListMappings":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listSipDomainsAuthRegistrationsCredentialListMappings":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listSipDomainsCredentialListMappings":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     default:
-        nil
+        return nil
     }
 }
 
-func basicOperationSecurityPart14(_ operationId: String) -> [[String]]? {
+internal func basicOperationSecurityPart14(_ operationId: String) -> [[String]]? {
     switch operationId {
     case "listSipDomainsIpAccessControlListMappings":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listSipIpAccessControlLists":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listSipIpAccessControlListsIpAddresses":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listTranscriptions":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listUsageRecords":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listUsageRecordsAllTime":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listUsageRecordsDaily":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listUsageRecordsLastMonth":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listUsageRecordsMonthly":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listUsageRecordsThisMonth":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listUsageRecordsToday":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listUsageRecordsYearly":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     default:
-        nil
+        return nil
     }
 }
 
-func basicOperationSecurityPart15(_ operationId: String) -> [[String]]? {
+internal func basicOperationSecurityPart15(_ operationId: String) -> [[String]]? {
     switch operationId {
     case "listUsageRecordsYesterday":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listUsageTriggers":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "updateAccounts":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "updateAddresses":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "updateApplications":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "updateCalls":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "updateCallsPayments":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "updateCallsRecordings":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "updateCallsSiprec":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "updateCallsStreams":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "updateCallsTranscriptions":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "updateConferences":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     default:
-        nil
+        return nil
     }
 }
 
-func basicOperationSecurityPart16(_ operationId: String) -> [[String]]? {
+internal func basicOperationSecurityPart16(_ operationId: String) -> [[String]]? {
     switch operationId {
     case "updateConferencesParticipants":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "updateConferencesRecordings":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "updateConnectApps":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "updateIncomingPhoneNumbers":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "updateKeys":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "updateMessages":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "updateOutgoingCallerIds":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "updateQueues":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "updateQueuesMembers":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "updateShortCodes":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "updateSigningKeys":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "updateSipCredentialLists":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     default:
-        nil
+        return nil
     }
 }
 
-func basicOperationSecurityPart17(_ operationId: String) -> [[String]]? {
+internal func basicOperationSecurityPart17(_ operationId: String) -> [[String]]? {
     switch operationId {
     case "updateSipCredentialListsCredentials":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "updateSipDomains":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "updateSipIpAccessControlLists":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "updateSipIpAccessControlListsIpAddresses":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "updateUsageTriggers":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     default:
-        nil
+        return nil
     }
 }
 
-func basicOperationSecurity(_ operationId: String) -> [[String]]? {
+internal func basicOperationSecurity(_ operationId: String) -> [[String]]? {
     let lookups: [(String) -> [[String]]?] = [
         basicOperationSecurityPart1,
         basicOperationSecurityPart2,
@@ -275,29 +275,27 @@ func basicOperationSecurity(_ operationId: String) -> [[String]]? {
         basicOperationSecurityPart17,
     ]
     for lookup in lookups {
-        if let security = lookup(operationId) {
-            return security
-        }
+        if let security = lookup(operationId) { return security }
     }
     return nil
 }
 
-func isBasicScheme(_ name: String) -> Bool {
+internal func isBasicScheme(_ name: String) -> Bool {
     switch name {
     case "accountSid_authToken":
-        true
+        return true
     default:
-        false
+        return false
     }
 }
 
 /// Whether the caller configured the credential this scheme reads.
-func hasCredential(_ auth: ClientAuthConfig, _ name: String) -> Bool {
+internal func hasCredential(_ auth: ClientAuthConfig, _ name: String) -> Bool {
     switch name {
     case "accountSid_authToken":
-        auth.accountSidAuthToken != nil
+        return auth.accountSidAuthToken != nil
     default:
-        false
+        return false
     }
 }
 
@@ -305,7 +303,7 @@ func hasCredential(_ auth: ClientAuthConfig, _ name: String) -> Bool {
 /// credentials for several schemes usually has only some of them configured,
 /// so a configured alternative wins over the first supported one; with none
 /// configured the first supported alternative still applies.
-func selectBasicRequirement(_ requirements: [[String]], _ auth: ClientAuthConfig?) -> [String]? {
+internal func selectBasicRequirement(_ requirements: [[String]], _ auth: ClientAuthConfig?) -> [String]? {
     let supported = requirements.filter { $0.allSatisfy { isBasicScheme($0) } }
     if let auth, let configured = supported.first(where: { $0.allSatisfy { hasCredential(auth, $0) } }) {
         return configured
@@ -319,12 +317,14 @@ struct AuthResolved {
 }
 
 func resolveAuth(_ config: ClientConfig, operationId: String) async throws -> AuthResolved {
+
+
     var headers: [String: String] = [:]
     let query: [(String, String?)] = []
     guard let security = basicOperationSecurity(operationId) else {
         return AuthResolved(headers: headers, query: query)
     }
-    if security.isEmpty || security.contains(where: \.isEmpty) {
+    if security.isEmpty || security.contains(where: { $0.isEmpty }) {
         return AuthResolved(headers: headers, query: query)
     }
     guard let selected = selectBasicRequirement(security, config.auth) else {
@@ -344,25 +344,13 @@ func resolveAuth(_ config: ClientConfig, operationId: String) async throws -> Au
 
     if selected.contains("accountSid_authToken") {
         guard let v = auth.accountSidAuthToken else {
-            throw SdkValidationError(
-                field: "auth.username",
-                code: "auth.basic.credentials-missing",
-                message: "HTTP Basic authentication requires a configured username and password."
-            )
+            throw SdkValidationError(field: "auth.username", code: "auth.basic.credentials-missing", message: "HTTP Basic authentication requires a configured username and password.")
         }
         guard !v.username.isEmpty else {
-            throw SdkValidationError(
-                field: "auth.username",
-                code: "auth.basic.credentials-missing",
-                message: "HTTP Basic authentication requires a configured username and password."
-            )
+            throw SdkValidationError(field: "auth.username", code: "auth.basic.credentials-missing", message: "HTTP Basic authentication requires a configured username and password.")
         }
         guard !v.username.contains(":") else {
-            throw SdkValidationError(
-                field: "auth.username",
-                code: "auth.basic.username-contains-colon",
-                message: "An HTTP Basic user-id may not contain a colon; the colon separates the user-id from the password."
-            )
+            throw SdkValidationError(field: "auth.username", code: "auth.basic.username-contains-colon", message: "An HTTP Basic user-id may not contain a colon; the colon separates the user-id from the password.")
         }
         let raw = "\(v.username):\(v.password)"
         let enc = Data(raw.utf8).base64EncodedString()
@@ -370,9 +358,10 @@ func resolveAuth(_ config: ClientConfig, operationId: String) async throws -> Au
     }
 
     return AuthResolved(headers: headers, query: query)
+
 }
 
-func flattenHeaders(_ response: HTTPURLResponse) -> [String: String] {
+internal func flattenHeaders(_ response: HTTPURLResponse) -> [String: String] {
     var result: [String: String] = [:]
     for (key, value) in response.allHeaderFields {
         if let k = key as? String {
@@ -384,38 +373,33 @@ func flattenHeaders(_ response: HTTPURLResponse) -> [String: String] {
 
 /// An explicit per-call key always wins and an empty one sends none; otherwise
 /// a key is generated for the methods the idempotency config covers.
-func resolveIdempotencyKey(_ explicitKey: String?, idem: IdempotencyConfig, method: String) -> String? {
+internal func resolveIdempotencyKey(_ explicitKey: String?, idem: IdempotencyConfig, method: String) -> String? {
     if let explicitKey {
         return explicitKey.isEmpty ? nil : explicitKey
     }
     return idem.enabled && idem.methods.contains(method) ? UUID().uuidString : nil
 }
 
-func shouldRetry(method: String, statusCode: Int, retryOn: [Int]) -> Bool {
-    guard retryOn.contains(statusCode) else {
-        return false
-    }
-    if idempotentMethods.contains(method) {
-        return true
-    }
+internal func shouldRetry(method: String, statusCode: Int, retryOn: [Int]) -> Bool {
+    guard retryOn.contains(statusCode) else { return false }
+    if idempotentMethods.contains(method) { return true }
     return alwaysRetryableStatuses.contains(statusCode)
 }
 
 /// An attempt that produced no response may already have been applied, so a
 /// non-idempotent method is repeated only with a key sent to an operation
 /// that declares the server deduplicates on it.
-func mayRepeatRequest(_ method: String, _ operationId: String, _ idempotencyKey: String?) -> Bool {
-    if idempotentMethods.contains(method) {
-        return true
-    }
+internal func mayRepeatRequest(_ method: String, _ operationId: String, _ idempotencyKey: String?) -> Bool {
+    if idempotentMethods.contains(method) { return true }
     return idempotencyKey != nil && idempotencyKeyOperations.contains(operationId)
 }
 
-func sleepBackoff(retry: RetryConfig, attempt: Int, retryAfter: String?) async throws {
+internal func sleepBackoff(retry: RetryConfig, attempt: Int, retryAfter: String?) async throws {
     var delay: TimeInterval
 
     if let retryAfter, let seconds = Double(retryAfter.trimmingCharacters(in: .whitespaces)),
-       seconds > 0 {
+        seconds > 0
+    {
         delay = min(seconds, retry.maxBackoff)
     } else {
         let exp = retry.backoff * pow(2.0, Double(attempt - 1))
@@ -449,12 +433,12 @@ public struct SdkStreamEvent: Sendable {
 /// Opens an SSE connection and returns an AsyncThrowingStream of parsed
 /// events. Bypasses the retry loop and idempotency layer — streaming
 /// connections are long-lived; reconnect is the caller's responsibility.
-public func sdkStream(
+public func sdkStream<B: Encodable>(
     _ method: String,
     _ path: String,
     config: ClientConfig? = nil,
     query: [SdkQueryParameter] = [],
-    body: (some Encodable)? = EmptyBody?.none,
+    body: B? = Optional<EmptyBody>.none,
     rawBody: Data? = nil,
     contentType: String = "application/json",
     operationId: String = "",
@@ -486,15 +470,9 @@ public func sdkStream(
     if let rawBody {
         request.httpBody = try sdkWithStreamSelector(rawBody, operationId: operationId, contentType: contentType)
     } else if let body {
-        request.httpBody = try sdkWithStreamSelector(
-            sdkEncodeBody(body, contentType: contentType),
-            operationId: operationId,
-            contentType: contentType
-        )
+        request.httpBody = try sdkWithStreamSelector(sdkEncodeBody(body, contentType: contentType), operationId: operationId, contentType: contentType)
     }
-    if request.httpBody != nil {
-        request.setValue(contentType, forHTTPHeaderField: "Content-Type")
-    }
+    if request.httpBody != nil { request.setValue(contentType, forHTTPHeaderField: "Content-Type") }
     for (key, value) in Array(extraHeaders) + Array(options?.headers ?? [:]) {
         sdkSetHeader(&request, key, value)
     }
@@ -536,9 +514,7 @@ public func sdkStream(
                 var dataLines: [String] = []
 
                 func flush() {
-                    guard !dataLines.isEmpty else {
-                        eventName = nil; return
-                    }
+                    guard !dataLines.isEmpty else { eventName = nil; return }
                     let ev = SdkStreamEvent(
                         event: eventName ?? "message",
                         data: dataLines.joined(separator: "\n"),
@@ -559,17 +535,11 @@ public func sdkStream(
                     for byte in chunk {
                         if byte == 0x0A { // \n
                             // Strip optional trailing \r (from \r\n).
-                            if lineBuf.last == 0x0D {
-                                lineBuf.removeLast()
-                            }
+                            if lineBuf.last == 0x0D { lineBuf.removeLast() }
                             let line = try decodeStreamLine(lineBuf)
                             lineBuf.removeAll(keepingCapacity: true)
-                            if line.isEmpty {
-                                flush(); continue
-                            }
-                            if line.hasPrefix(":") {
-                                continue
-                            }
+                            if line.isEmpty { flush(); continue }
+                            if line.hasPrefix(":") { continue }
                             let (field, value) = splitSseLine(line)
                             switch field {
                             case "event": eventName = value
@@ -586,11 +556,9 @@ public func sdkStream(
                 // Flush any trailing partial line + the pending event.
                 if !lineBuf.isEmpty {
                     let line = try decodeStreamLine(lineBuf)
-                    if !line.isEmpty, !line.hasPrefix(":") {
+                    if !line.isEmpty && !line.hasPrefix(":") {
                         let (field, value) = splitSseLine(line)
-                        if field == "data" {
-                            dataLines.append(value)
-                        }
+                        if field == "data" { dataLines.append(value) }
                     }
                 }
                 flush()

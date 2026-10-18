@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension AddressesMethods {
-    struct UpdateAddressesOptions: Codable {
+extension AddressesMethods {
+    public struct UpdateAddressesOptions: Codable {
         public var accountSid: String
         public var sid: String
         public var friendlyName: String?
@@ -26,8 +26,7 @@ public extension AddressesMethods {
         }
     }
 
-    /// Updates properties of a specific address resource. Submit only the address fields you want to change;
-    /// `AutoCorrectAddress` defaults to true when omitted.
+    /// Updates properties of a specific address resource. Submit only the address fields you want to change; `AutoCorrectAddress` defaults to true when omitted.
     ///
     /// - Parameters:
     /// - accountSid: The SID of the
@@ -50,11 +49,7 @@ public extension AddressesMethods {
     ///   will correct the address you provide if necessary. If `false`, we won't
     ///   alter the address you provide.
     /// - streetSecondary: The additional number and street address of the address.
-    static func updateAddresses(
-        config: ClientConfig,
-        options: UpdateAddressesOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountAddress {
+    public static func updateAddresses(config: ClientConfig, options: UpdateAddressesOptions, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountAddress {
         try validateLength("AccountSid", options.accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", options.accountSid, sdkPatternc7cb941ab84b)
 
@@ -63,21 +58,6 @@ public extension AddressesMethods {
 
         let requestBody = UpdateAddressesRequestBody(options: options)
 
-        return try await (sdkRequest(
-            "POST",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(options.accountSid)),
-                "/Addresses/",
-                sdkEncodePathSegment(sdkWireString(options.sid)),
-                ".json",
-            ].joined(),
-            config: config,
-            body: requestBody,
-            contentType: "application/x-www-form-urlencoded",
-            decoder: .json,
-            operationId: "updateAddresses",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("POST", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(options.accountSid)), "/Addresses/", sdkEncodePathSegment(sdkWireString(options.sid)), ".json"].joined(), config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "updateAddresses", options: requestOptions)).data
     }
 }

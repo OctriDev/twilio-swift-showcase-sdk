@@ -6,9 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension SipIpAccessControlListsIpAddressesMethods {
-    /// Updates an IPv4 address entry in a SIP IP access control list. Use the body fields to change the address, its
-    /// descriptive name, or its CIDR prefix length.
+extension SipIpAccessControlListsIpAddressesMethods {
+    /// Updates an IPv4 address entry in a SIP IP access control list. Use the body fields to change the address, its descriptive name, or its CIDR prefix length.
     ///
     /// Update an IpAddress resource.
     ///
@@ -28,16 +27,7 @@ public extension SipIpAccessControlListsIpAddressesMethods {
     /// - cidrPrefixLength: An integer representing the length of the CIDR prefix to
     ///   use with this IP address when accepting traffic. By default the entire IP
     ///   address is used.
-    static func updateSipIpAccessControlListsIpAddresses(
-        config: ClientConfig,
-        accountSid: String,
-        ipAccessControlListSid: String,
-        sid: String,
-        ipAddress: String? = nil,
-        friendlyName: String? = nil,
-        cidrPrefixLength: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountSipSipIpAccessControlListSipIpAddress {
+    public static func updateSipIpAccessControlListsIpAddresses(config: ClientConfig, accountSid: String, ipAccessControlListSid: String, sid: String, ipAddress: String? = nil, friendlyName: String? = nil, cidrPrefixLength: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountSipSipIpAccessControlListSipIpAddress {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
@@ -47,29 +37,8 @@ public extension SipIpAccessControlListsIpAddressesMethods {
         try validateLength("Sid", sid, min: 34, max: 34)
         try sdkValidatePattern("Sid", sid, sdkPatternabc29aa1a70d)
 
-        let requestBody = UpdateSipIpAccessControlListsIpAddressesRequestBody(
-            ipAddress: ipAddress,
-            friendlyName: friendlyName,
-            cidrPrefixLength: cidrPrefixLength
-        )
+        let requestBody = UpdateSipIpAccessControlListsIpAddressesRequestBody(ipAddress: ipAddress, friendlyName: friendlyName, cidrPrefixLength: cidrPrefixLength)
 
-        return try await (sdkRequest(
-            "POST",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(accountSid)),
-                "/SIP/IpAccessControlLists/",
-                sdkEncodePathSegment(sdkWireString(ipAccessControlListSid)),
-                "/IpAddresses/",
-                sdkEncodePathSegment(sdkWireString(sid)),
-                ".json",
-            ].joined(),
-            config: config,
-            body: requestBody,
-            contentType: "application/x-www-form-urlencoded",
-            decoder: .json,
-            operationId: "updateSipIpAccessControlListsIpAddresses",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("POST", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/SIP/IpAccessControlLists/", sdkEncodePathSegment(sdkWireString(ipAccessControlListSid)), "/IpAddresses/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "updateSipIpAccessControlListsIpAddresses", options: requestOptions)).data
     }
 }

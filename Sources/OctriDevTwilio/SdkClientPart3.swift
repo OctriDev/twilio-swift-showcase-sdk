@@ -7,607 +7,607 @@ import Foundation
     import FoundationNetworking
 #endif
 
-func basicOperationSecurityPart2(_ operationId: String) -> [[String]]? {
+internal func basicOperationSecurityPart2(_ operationId: String) -> [[String]]? {
     switch operationId {
     case "createIncomingPhoneNumbers":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "createIncomingPhoneNumbersAssignedAddOns":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "createIncomingPhoneNumbersLocal":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "createIncomingPhoneNumbersMobile":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "createIncomingPhoneNumbersTollFree":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "createKeys":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "createMessages":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "createMessagesFeedback":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "createQueues":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "createSigningKeys":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "createSipCredentialLists":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "createSipCredentialListsCredentials":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     default:
-        nil
+        return nil
     }
 }
 
-func basicOperationSecurityPart3(_ operationId: String) -> [[String]]? {
+internal func basicOperationSecurityPart3(_ operationId: String) -> [[String]]? {
     switch operationId {
     case "createSipDomains":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "createSipDomainsAuthCallsCredentialListMappings":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "createSipDomainsAuthCallsIpAccessControlListMappings":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "createSipDomainsAuthRegistrationsCredentialListMappings":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "createSipDomainsCredentialListMappings":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "createSipDomainsIpAccessControlListMappings":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "createSipIpAccessControlLists":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "createSipIpAccessControlListsIpAddresses":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "createTokens":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "createUsageTriggers":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "createValidationRequests":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "deleteAddresses":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     default:
-        nil
+        return nil
     }
 }
 
-func basicOperationSecurityPart4(_ operationId: String) -> [[String]]? {
+internal func basicOperationSecurityPart4(_ operationId: String) -> [[String]]? {
     switch operationId {
     case "deleteApplications":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "deleteCalls":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "deleteCallsRecordings":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "deleteCallsUserDefinedMessageSubscriptions":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "deleteConferencesParticipants":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "deleteConferencesRecordings":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "deleteConnectApps":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "deleteIncomingPhoneNumbers":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "deleteIncomingPhoneNumbersAssignedAddOns":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "deleteKeys":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "deleteMessages":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "deleteMessagesMedia":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     default:
-        nil
+        return nil
     }
 }
 
-func basicOperationSecurityPart5(_ operationId: String) -> [[String]]? {
+internal func basicOperationSecurityPart5(_ operationId: String) -> [[String]]? {
     switch operationId {
     case "deleteOutgoingCallerIds":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "deleteQueues":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "deleteRecordings":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "deleteRecordingsAddOnResults":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "deleteRecordingsAddOnResultsPayloads":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "deleteRecordingsTranscriptions":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "deleteSigningKeys":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "deleteSipCredentialLists":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "deleteSipCredentialListsCredentials":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "deleteSipDomains":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "deleteSipDomainsAuthCallsCredentialListMappings":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "deleteSipDomainsAuthCallsIpAccessControlListMappings":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     default:
-        nil
+        return nil
     }
 }
 
-func basicOperationSecurityPart6(_ operationId: String) -> [[String]]? {
+internal func basicOperationSecurityPart6(_ operationId: String) -> [[String]]? {
     switch operationId {
     case "deleteSipDomainsAuthRegistrationsCredentialListMappings":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "deleteSipDomainsCredentialListMappings":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "deleteSipDomainsIpAccessControlListMappings":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "deleteSipIpAccessControlLists":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "deleteSipIpAccessControlListsIpAddresses":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "deleteTranscriptions":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "deleteUsageTriggers":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "fetchAccounts":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "fetchAddresses":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "fetchApplications":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "fetchAuthorizedConnectApps":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "fetchAvailablePhoneNumbers":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     default:
-        nil
+        return nil
     }
 }
 
-func basicOperationSecurityPart7(_ operationId: String) -> [[String]]? {
+internal func basicOperationSecurityPart7(_ operationId: String) -> [[String]]? {
     switch operationId {
     case "fetchBalance":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "fetchCalls":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "fetchCallsNotifications":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "fetchCallsRecordings":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "fetchConferences":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "fetchConferencesParticipants":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "fetchConferencesRecordings":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "fetchConnectApps":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "fetchIncomingPhoneNumbers":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "fetchIncomingPhoneNumbersAssignedAddOns":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "fetchIncomingPhoneNumbersAssignedAddOnsExtensions":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "fetchKeys":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     default:
-        nil
+        return nil
     }
 }
 
-func basicOperationSecurityPart8(_ operationId: String) -> [[String]]? {
+internal func basicOperationSecurityPart8(_ operationId: String) -> [[String]]? {
     switch operationId {
     case "fetchMessages":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "fetchMessagesMedia":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "fetchNotifications":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "fetchOutgoingCallerIds":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "fetchQueues":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "fetchQueuesMembers":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "fetchRecordings":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "fetchRecordingsAddOnResults":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "fetchRecordingsAddOnResultsPayloads":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "fetchRecordingsAddOnResultsPayloadsData":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "fetchRecordingsTranscriptions":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "fetchShortCodes":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     default:
-        nil
+        return nil
     }
 }
 
-func basicOperationSecurityPart9(_ operationId: String) -> [[String]]? {
+internal func basicOperationSecurityPart9(_ operationId: String) -> [[String]]? {
     switch operationId {
     case "fetchSigningKeys":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "fetchSipCredentialLists":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "fetchSipCredentialListsCredentials":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "fetchSipDomains":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "fetchSipDomainsAuthCallsCredentialListMappings":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "fetchSipDomainsAuthCallsIpAccessControlListMappings":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "fetchSipDomainsAuthRegistrationsCredentialListMappings":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "fetchSipDomainsCredentialListMappings":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "fetchSipDomainsIpAccessControlListMappings":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "fetchSipIpAccessControlLists":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "fetchSipIpAccessControlListsIpAddresses":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "fetchTranscriptions":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     default:
-        nil
+        return nil
     }
 }
 
-func basicOperationSecurityPart10(_ operationId: String) -> [[String]]? {
+internal func basicOperationSecurityPart10(_ operationId: String) -> [[String]]? {
     switch operationId {
     case "fetchUsageTriggers":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listAccounts":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listAddresses":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listAddressesDependentPhoneNumbers":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listApplications":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listAuthorizedConnectApps":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listAvailablePhoneNumbers":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listAvailablePhoneNumbersLocal":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listAvailablePhoneNumbersMachineToMachine":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listAvailablePhoneNumbersMobile":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listAvailablePhoneNumbersNational":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listAvailablePhoneNumbersSharedCost":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     default:
-        nil
+        return nil
     }
 }
 
-func basicOperationSecurityPart11(_ operationId: String) -> [[String]]? {
+internal func basicOperationSecurityPart11(_ operationId: String) -> [[String]]? {
     switch operationId {
     case "listAvailablePhoneNumbersTollFree":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listAvailablePhoneNumbersVoip":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listCalls":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listCallsEvents":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listCallsNotifications":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listCallsRecordings":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listConferences":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listConferencesParticipants":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listConferencesRecordings":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listConnectApps":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listIncomingPhoneNumbers":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listIncomingPhoneNumbersAssignedAddOns":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     default:
-        nil
+        return nil
     }
 }
 
-func basicOperationSecurityPart12(_ operationId: String) -> [[String]]? {
+internal func basicOperationSecurityPart12(_ operationId: String) -> [[String]]? {
     switch operationId {
     case "listIncomingPhoneNumbersAssignedAddOnsExtensions":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listIncomingPhoneNumbersLocal":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listIncomingPhoneNumbersMobile":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listIncomingPhoneNumbersTollFree":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listKeys":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listMessages":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listMessagesMedia":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listNotifications":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listOutgoingCallerIds":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listQueues":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listQueuesMembers":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     case "listRecordings":
-        [
-            ["accountSid_authToken"],
+        return [
+            ["accountSid_authToken"]
         ]
     default:
-        nil
+        return nil
     }
 }

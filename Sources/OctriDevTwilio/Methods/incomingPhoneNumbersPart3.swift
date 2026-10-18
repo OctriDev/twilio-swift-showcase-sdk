@@ -6,9 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension IncomingPhoneNumbersMethods {
-    /// Retrieves an incoming phone number belonging to an account. Use the account SID and the phone number's SID to
-    /// identify the resource.
+extension IncomingPhoneNumbersMethods {
+    /// Retrieves an incoming phone number belonging to an account. Use the account SID and the phone number's SID to identify the resource.
     ///
     /// Fetch an incoming-phone-number belonging to the account used to make the request.
     ///
@@ -18,32 +17,14 @@ public extension IncomingPhoneNumbersMethods {
     ///   IncomingPhoneNumber resource to fetch.
     /// - sid: The Twilio-provided string that uniquely identifies the
     ///   IncomingPhoneNumber resource to fetch.
-    static func fetchIncomingPhoneNumbers(
-        config: ClientConfig,
-        accountSid: String,
-        sid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountIncomingPhoneNumber {
+    public static func fetchIncomingPhoneNumbers(config: ClientConfig, accountSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountIncomingPhoneNumber {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
         try validateLength("Sid", sid, min: 34, max: 34)
         try sdkValidatePattern("Sid", sid, sdkPattern9792ce0bb10f)
 
-        return try await (sdkRequest(
-            "GET",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(accountSid)),
-                "/IncomingPhoneNumbers/",
-                sdkEncodePathSegment(sdkWireString(sid)),
-                ".json",
-            ].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "fetchIncomingPhoneNumbers",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/IncomingPhoneNumbers/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, decoder: .json, operationId: "fetchIncomingPhoneNumbers", options: requestOptions)).data
     }
 
     /// Delete a phone-numbers belonging to the account used to make the request.
@@ -54,31 +35,13 @@ public extension IncomingPhoneNumbersMethods {
     ///   IncomingPhoneNumber resources to delete.
     /// - sid: The Twilio-provided string that uniquely identifies the
     ///   IncomingPhoneNumber resource to delete.
-    static func deleteIncomingPhoneNumbers(
-        config: ClientConfig,
-        accountSid: String,
-        sid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
+    public static func deleteIncomingPhoneNumbers(config: ClientConfig, accountSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
         try validateLength("Sid", sid, min: 34, max: 34)
         try sdkValidatePattern("Sid", sid, sdkPattern9792ce0bb10f)
 
-        return try await (sdkRequest(
-            "DELETE",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(accountSid)),
-                "/IncomingPhoneNumbers/",
-                sdkEncodePathSegment(sdkWireString(sid)),
-                ".json",
-            ].joined(),
-            config: config,
-            decoder: .empty,
-            operationId: "deleteIncomingPhoneNumbers",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("DELETE", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/IncomingPhoneNumbers/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, decoder: .empty, operationId: "deleteIncomingPhoneNumbers", options: requestOptions)).data
     }
 }

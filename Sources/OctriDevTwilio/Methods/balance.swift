@@ -7,30 +7,16 @@ import Foundation
     import FoundationNetworking
 #endif
 public enum BalanceMethods {
-    /// Retrieves the balance for a specified account. Use the account SID to identify the account whose balance and
-    /// currency you need. Balance changes may not appear immediately, and child accounts do not include balance
-    /// information.
+    /// Retrieves the balance for a specified account. Use the account SID to identify the account whose balance and currency you need. Balance changes may not appear immediately, and child accounts do not include balance information.
     ///
-    /// Fetch the balance for an Account based on Account Sid. Balance changes may not be reflected immediately. Child
-    /// accounts do not contain balance information
+    /// Fetch the balance for an Account based on Account Sid. Balance changes may not be reflected immediately. Child accounts do not contain balance information
     ///
     /// - Parameters:
     /// - accountSid: The unique SID identifier of the Account.
-    public static func fetchBalance(
-        config: ClientConfig,
-        accountSid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountBalance {
+    public static func fetchBalance(config: ClientConfig, accountSid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountBalance {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
-        return try await (sdkRequest(
-            "GET",
-            ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Balance.json"].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "fetchBalance",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Balance.json"].joined(), config: config, decoder: .json, operationId: "fetchBalance", options: requestOptions)).data
     }
 }
