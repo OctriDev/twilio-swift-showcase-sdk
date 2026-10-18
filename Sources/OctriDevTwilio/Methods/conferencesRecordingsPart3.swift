@@ -6,10 +6,12 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ConferencesRecordingsMethods {
-    /// Updates the status of a conference recording and, when pausing it, can control how the pause is recorded. Supply `Status` to select the recording state; use `Twilio.CURRENT` as `Sid` to target the active recording.
+public extension ConferencesRecordingsMethods {
+    /// Updates the status of a conference recording and, when pausing it, can control how the pause is recorded. Supply
+    /// `Status` to select the recording state; use `Twilio.CURRENT` as `Sid` to target the active recording.
     ///
-    /// Changes the status of the recording to paused, stopped, or in-progress. Note: To use `Twilio.CURRENT`, pass it as recording sid.
+    /// Changes the status of the recording to paused, stopped, or in-progress. Note: To use `Twilio.CURRENT`, pass it
+    /// as recording sid.
     ///
     /// - Parameters:
     /// - accountSid: The SID of the
@@ -30,7 +32,15 @@ extension ConferencesRecordingsMethods {
     ///   pause period, while `silence` will replace the actual audio of the call with
     ///   silence during the pause period. This parameter only applies when setting
     ///   `status` is set to `paused`.
-    public static func updateConferencesRecordings(config: ClientConfig, accountSid: String, conferenceSid: String, sid: String, status: ConferenceRecordingEnumStatus, pauseBehavior: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountConferenceConferenceRecording {
+    static func updateConferencesRecordings(
+        config: ClientConfig,
+        accountSid: String,
+        conferenceSid: String,
+        sid: String,
+        status: ConferenceRecordingEnumStatus,
+        pauseBehavior: String? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountConferenceConferenceRecording {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
@@ -39,6 +49,23 @@ extension ConferencesRecordingsMethods {
 
         let requestBody = UpdateConferencesRecordingsRequestBody(status: status, pauseBehavior: pauseBehavior)
 
-        return try (await sdkRequest("POST", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Conferences/", sdkEncodePathSegment(sdkWireString(conferenceSid)), "/Recordings/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "updateConferencesRecordings", options: requestOptions)).data
+        return try await (sdkRequest(
+            "POST",
+            [
+                "/2010-04-01/Accounts/",
+                sdkEncodePathSegment(sdkWireString(accountSid)),
+                "/Conferences/",
+                sdkEncodePathSegment(sdkWireString(conferenceSid)),
+                "/Recordings/",
+                sdkEncodePathSegment(sdkWireString(sid)),
+                ".json",
+            ].joined(),
+            config: config,
+            body: requestBody,
+            contentType: "application/x-www-form-urlencoded",
+            decoder: .json,
+            operationId: "updateConferencesRecordings",
+            options: requestOptions
+        )).data
     }
 }

@@ -6,8 +6,9 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension RecordingsMethods {
-    /// Retrieves a recording by its SID. Set `IncludeSoftDeleted` to include metadata for recordings that have been deleted; that metadata is retained for 40 days.
+public extension RecordingsMethods {
+    /// Retrieves a recording by its SID. Set `IncludeSoftDeleted` to include metadata for recordings that have been
+    /// deleted; that metadata is retained for 40 days.
     ///
     /// Fetch an instance of a recording
     ///
@@ -20,15 +21,35 @@ extension RecordingsMethods {
     /// - includeSoftDeleted: A boolean parameter indicating whether to retrieve
     ///   soft deleted recordings or not. Recordings metadata are kept after deletion
     ///   for a retention period of 40 days.
-    public static func fetchRecordings(config: ClientConfig, accountSid: String, sid: String, includeSoftDeleted: Bool? = nil, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountRecording {
+    static func fetchRecordings(
+        config: ClientConfig,
+        accountSid: String,
+        sid: String,
+        includeSoftDeleted: Bool? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountRecording {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
         try validateLength("Sid", sid, min: 34, max: 34)
         try sdkValidatePattern("Sid", sid, sdkPatternfad3f05341a2)
 
-        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Recordings/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, query: [
-            SdkQueryParameter("IncludeSoftDeleted", value: includeSoftDeleted),
-        ], decoder: .json, operationId: "fetchRecordings", options: requestOptions)).data
+        return try await (sdkRequest(
+            "GET",
+            [
+                "/2010-04-01/Accounts/",
+                sdkEncodePathSegment(sdkWireString(accountSid)),
+                "/Recordings/",
+                sdkEncodePathSegment(sdkWireString(sid)),
+                ".json",
+            ].joined(),
+            config: config,
+            query: [
+                SdkQueryParameter("IncludeSoftDeleted", value: includeSoftDeleted),
+            ],
+            decoder: .json,
+            operationId: "fetchRecordings",
+            options: requestOptions
+        )).data
     }
 }

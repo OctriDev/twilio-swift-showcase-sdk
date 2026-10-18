@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ConnectAppsMethods {
-    public struct UpdateConnectAppsOptions: Codable {
+public extension ConnectAppsMethods {
+    struct UpdateConnectAppsOptions: Codable {
         public var accountSid: String
         public var sid: String
         public var authorizeRedirectUrl: String?
@@ -25,7 +25,8 @@ extension ConnectAppsMethods {
         }
     }
 
-    /// Updates the configuration of a Connect App belonging to an account. Provide the fields to change, such as its redirect URLs, descriptive details, or requested permissions.
+    /// Updates the configuration of a Connect App belonging to an account. Provide the fields to change, such as its
+    /// redirect URLs, descriptive details, or requested permissions.
     ///
     /// Update a connect-app with the specified parameters
     ///
@@ -49,7 +50,11 @@ extension ConnectAppsMethods {
     ///   this Connect App.
     /// - permissions: A comma-separated list of the permissions you will request
     ///   from the users of this ConnectApp. Can include: `get-all` and `post-all`.
-    public static func updateConnectApps(config: ClientConfig, options: UpdateConnectAppsOptions, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountConnectApp {
+    static func updateConnectApps(
+        config: ClientConfig,
+        options: UpdateConnectAppsOptions,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountConnectApp {
         try validateLength("AccountSid", options.accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", options.accountSid, sdkPatternc7cb941ab84b)
 
@@ -70,6 +75,21 @@ extension ConnectAppsMethods {
 
         let requestBody = UpdateConnectAppsRequestBody(options: options)
 
-        return try (await sdkRequest("POST", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(options.accountSid)), "/ConnectApps/", sdkEncodePathSegment(sdkWireString(options.sid)), ".json"].joined(), config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "updateConnectApps", options: requestOptions)).data
+        return try await (sdkRequest(
+            "POST",
+            [
+                "/2010-04-01/Accounts/",
+                sdkEncodePathSegment(sdkWireString(options.accountSid)),
+                "/ConnectApps/",
+                sdkEncodePathSegment(sdkWireString(options.sid)),
+                ".json",
+            ].joined(),
+            config: config,
+            body: requestBody,
+            contentType: "application/x-www-form-urlencoded",
+            decoder: .json,
+            operationId: "updateConnectApps",
+            options: requestOptions
+        )).data
     }
 }

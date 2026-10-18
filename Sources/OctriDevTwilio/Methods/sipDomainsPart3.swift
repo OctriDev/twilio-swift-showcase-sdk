@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension SipDomainsMethods {
-    public struct CreateSipDomainsOptions: Codable {
+public extension SipDomainsMethods {
+    struct CreateSipDomainsOptions: Codable {
         public var accountSid: String
         public var domainName: String
         public var friendlyName: String?
@@ -29,7 +29,8 @@ extension SipDomainsMethods {
         }
     }
 
-    /// Creates a SIP domain for an account. Supply `DomainName` and optionally configure its voice URLs, SIP registration, security, and emergency calling settings.
+    /// Creates a SIP domain for an account. Supply `DomainName` and optionally configure its voice URLs, SIP
+    /// registration, security, and emergency calling settings.
     ///
     /// Create a new Domain
     ///
@@ -67,7 +68,11 @@ extension SipDomainsMethods {
     /// - emergencyCallerSid: Whether an emergency caller sid is configured for the
     ///   domain. If present, this phone number will be used as the callback for the
     ///   emergency call.
-    public static func createSipDomains(config: ClientConfig, options: CreateSipDomainsOptions, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountSipSipDomain {
+    static func createSipDomains(
+        config: ClientConfig,
+        options: CreateSipDomainsOptions,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountSipSipDomain {
         try validateLength("AccountSid", options.accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", options.accountSid, sdkPatternc7cb941ab84b)
 
@@ -95,6 +100,16 @@ extension SipDomainsMethods {
 
         let requestBody = CreateSipDomainsRequestBody(options: options)
 
-        return try (await sdkRequest("POST", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(options.accountSid)), "/SIP/Domains.json"].joined(), config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "createSipDomains", options: requestOptions)).data
+        return try await (sdkRequest(
+            "POST",
+            ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(options.accountSid)), "/SIP/Domains.json"]
+                .joined(),
+            config: config,
+            body: requestBody,
+            contentType: "application/x-www-form-urlencoded",
+            decoder: .json,
+            operationId: "createSipDomains",
+            options: requestOptions
+        )).data
     }
 }

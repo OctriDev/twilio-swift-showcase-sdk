@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Api20100401Recording domain models
+/// Api20100401Recording domain models
 /// Typed representation of the `ApiV2010AccountRecording` API schema.
 public struct ApiV2010AccountRecording: Codable {
     /// The SID of the Account that created the Recording resource.
@@ -74,59 +74,79 @@ public struct ApiV2010AccountRecording: Codable {
     }
 
     init() {
-        (self.accountSid, self.apiVersion, self.callSid, self.conferenceSid, self.dateCreated) = (nil, nil, nil, nil, nil)
-        (self.dateUpdated, self.startTime, self.duration, self.sid, self.price) = (nil, nil, nil, nil, nil)
-        (self.priceUnit, self.status, self.channels, self.source, self.errorCode) = (nil, nil, nil, nil, nil)
-        (self.uri, self.encryptionDetails, self.subresourceUris, self.mediaUrl) = (nil, nil, nil, nil)
+        (accountSid, apiVersion, callSid, conferenceSid, dateCreated) = (nil, nil, nil, nil, nil)
+        (dateUpdated, startTime, duration, sid, price) = (nil, nil, nil, nil, nil)
+        (priceUnit, status, channels, source, errorCode) = (nil, nil, nil, nil, nil)
+        (uri, encryptionDetails, subresourceUris, mediaUrl) = (nil, nil, nil, nil)
     }
 }
 
-extension ApiV2010AccountRecording {
-    public init(from decoder: Decoder) throws {
+public extension ApiV2010AccountRecording {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.accountSid = try container.sdkDecodeIfPresent(.accountSid)
-        self.apiVersion = try container.sdkDecodeIfPresent(.apiVersion)
-        self.callSid = try container.sdkDecodeIfPresent(.callSid)
-        self.conferenceSid = try container.sdkDecodeIfPresent(.conferenceSid)
-        self.dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
-        self.dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
-        self.startTime = try container.sdkDecodeIfPresent(.startTime)
-        self.duration = try container.sdkDecodeIfPresent(.duration)
-        self.sid = try container.sdkDecodeIfPresent(.sid)
-        self.price = try container.sdkDecodeIfPresent(.price)
-        self.priceUnit = try container.sdkDecodeIfPresent(.priceUnit)
-        self.status = try container.sdkDecodeIfPresent(.status)
-        self.channels = try container.sdkDecodeIfPresent(.channels)
-        self.source = try container.sdkDecodeIfPresent(.source)
-        self.errorCode = try container.sdkDecodeIfPresent(.errorCode)
-        self.uri = try container.sdkDecodeIfPresent(.uri)
-        self.encryptionDetails = try container.sdkDecodeIfPresent(.encryptionDetails)
-        self.subresourceUris = try container.sdkDecodeIfPresent(.subresourceUris)
-        self.mediaUrl = try container.sdkDecodeIfPresent(.mediaUrl)
-        if let value = self.accountSid {
+        accountSid = try container.sdkDecodeIfPresent(.accountSid)
+        apiVersion = try container.sdkDecodeIfPresent(.apiVersion)
+        callSid = try container.sdkDecodeIfPresent(.callSid)
+        conferenceSid = try container.sdkDecodeIfPresent(.conferenceSid)
+        dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
+        dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
+        startTime = try container.sdkDecodeIfPresent(.startTime)
+        duration = try container.sdkDecodeIfPresent(.duration)
+        sid = try container.sdkDecodeIfPresent(.sid)
+        price = try container.sdkDecodeIfPresent(.price)
+        priceUnit = try container.sdkDecodeIfPresent(.priceUnit)
+        status = try container.sdkDecodeIfPresent(.status)
+        channels = try container.sdkDecodeIfPresent(.channels)
+        source = try container.sdkDecodeIfPresent(.source)
+        errorCode = try container.sdkDecodeIfPresent(.errorCode)
+        uri = try container.sdkDecodeIfPresent(.uri)
+        encryptionDetails = try container.sdkDecodeIfPresent(.encryptionDetails)
+        subresourceUris = try container.sdkDecodeIfPresent(.subresourceUris)
+        mediaUrl = try container.sdkDecodeIfPresent(.mediaUrl)
+        if let value = accountSid {
             try validateLength("account_sid", value, min: 34, max: 34)
             try sdkValidatePattern("account_sid", value, sdkPatternc7cb941ab84b)
         }
-        if let value = self.callSid {
+        if let value = callSid {
             try validateLength("call_sid", value, min: 34, max: 34)
             try sdkValidatePattern("call_sid", value, sdkPattern25b2d94fcc27)
         }
-        if let value = self.conferenceSid {
+        if let value = conferenceSid {
             try validateLength("conference_sid", value, min: 34, max: 34)
             try sdkValidatePattern("conference_sid", value, sdkPatternb5f37fc1f4d4)
         }
-        if let value = self.sid {
+        if let value = sid {
             try validateLength("sid", value, min: 34, max: 34)
             try sdkValidatePattern("sid", value, sdkPatternfad3f05341a2)
         }
-        if let value = self.mediaUrl {
+        if let value = mediaUrl {
             try sdkValidateUri("media_url", value)
         }
     }
 }
 
-extension ApiV2010AccountRecording {
-    public init(accountSid: String? = nil, apiVersion: String? = nil, callSid: String? = nil, conferenceSid: String? = nil, dateCreated: String? = nil, dateUpdated: String? = nil, startTime: String? = nil, duration: String? = nil, sid: String? = nil, price: String? = nil, priceUnit: String? = nil, status: RecordingEnumStatus? = nil, channels: Int? = nil, source: RecordingEnumSource? = nil, errorCode: Int? = nil, uri: String? = nil, encryptionDetails: JSONValue? = nil, subresourceUris: [String: JSONValue]? = nil, mediaUrl: String? = nil) throws {
+public extension ApiV2010AccountRecording {
+    init(
+        accountSid: String? = nil,
+        apiVersion: String? = nil,
+        callSid: String? = nil,
+        conferenceSid: String? = nil,
+        dateCreated: String? = nil,
+        dateUpdated: String? = nil,
+        startTime: String? = nil,
+        duration: String? = nil,
+        sid: String? = nil,
+        price: String? = nil,
+        priceUnit: String? = nil,
+        status: RecordingEnumStatus? = nil,
+        channels: Int? = nil,
+        source: RecordingEnumSource? = nil,
+        errorCode: Int? = nil,
+        uri: String? = nil,
+        encryptionDetails: JSONValue? = nil,
+        subresourceUris: [String: JSONValue]? = nil,
+        mediaUrl: String? = nil
+    ) throws {
         self.init()
         (self.accountSid, self.apiVersion) = (accountSid, apiVersion)
         (self.callSid, self.conferenceSid) = (callSid, conferenceSid)
@@ -165,7 +185,10 @@ extension ApiV2010AccountRecording {
 public struct RecordingEnumSource: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let dialVerb = RecordingEnumSource(rawValue: "DialVerb")
     public static let conference = RecordingEnumSource(rawValue: "Conference")
     public static let outboundApi = RecordingEnumSource(rawValue: "OutboundAPI")
@@ -176,7 +199,7 @@ public struct RecordingEnumSource: RawRepresentable, Hashable, Codable, Sendable
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -190,7 +213,10 @@ public struct RecordingEnumSource: RawRepresentable, Hashable, Codable, Sendable
 public struct RecordingEnumStatus: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let inProgress = RecordingEnumStatus(rawValue: "in-progress")
     public static let paused = RecordingEnumStatus(rawValue: "paused")
     public static let stopped = RecordingEnumStatus(rawValue: "stopped")
@@ -201,7 +227,7 @@ public struct RecordingEnumStatus: RawRepresentable, Hashable, Codable, Sendable
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

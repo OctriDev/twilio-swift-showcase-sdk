@@ -6,8 +6,10 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension SipCredentialListsMethods {
-    /// Updates the friendly name of a SIP credential list for the specified account. Supply `FriendlyName` in the request body; the schema requires this field and the documented description limits it to 64 characters. The response contains the updated list and its resource metadata.
+public extension SipCredentialListsMethods {
+    /// Updates the friendly name of a SIP credential list for the specified account. Supply `FriendlyName` in the
+    /// request body; the schema requires this field and the documented description limits it to 64 characters. The
+    /// response contains the updated list and its resource metadata.
     ///
     /// Update a Credential List
     ///
@@ -17,7 +19,13 @@ extension SipCredentialListsMethods {
     /// - sid: The credential list Sid that uniquely identifies this resource
     /// - friendlyName: A human readable descriptive text for a CredentialList, up
     ///   to 64 characters long.
-    public static func updateSipCredentialLists(config: ClientConfig, accountSid: String, sid: String, friendlyName: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountSipSipCredentialList {
+    static func updateSipCredentialLists(
+        config: ClientConfig,
+        accountSid: String,
+        sid: String,
+        friendlyName: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountSipSipCredentialList {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
@@ -26,10 +34,27 @@ extension SipCredentialListsMethods {
 
         let requestBody = UpdateSipCredentialListsRequestBody(friendlyName: friendlyName)
 
-        return try (await sdkRequest("POST", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/SIP/CredentialLists/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "updateSipCredentialLists", options: requestOptions)).data
+        return try await (sdkRequest(
+            "POST",
+            [
+                "/2010-04-01/Accounts/",
+                sdkEncodePathSegment(sdkWireString(accountSid)),
+                "/SIP/CredentialLists/",
+                sdkEncodePathSegment(sdkWireString(sid)),
+                ".json",
+            ].joined(),
+            config: config,
+            body: requestBody,
+            contentType: "application/x-www-form-urlencoded",
+            decoder: .json,
+            operationId: "updateSipCredentialLists",
+            options: requestOptions
+        )).data
     }
 
-    /// Deletes a SIP credential list for the specified account. Provide the account identifier and credential list identifier to select the resource to remove. The response confirms deletion and contains no resource representation.
+    /// Deletes a SIP credential list for the specified account. Provide the account identifier and credential list
+    /// identifier to select the resource to remove. The response confirms deletion and contains no resource
+    /// representation.
     ///
     /// Delete a Credential List
     ///
@@ -37,13 +62,31 @@ extension SipCredentialListsMethods {
     /// - accountSid: The unique id of the Account that is responsible for this
     ///   resource.
     /// - sid: The credential list Sid that uniquely identifies this resource
-    public static func deleteSipCredentialLists(config: ClientConfig, accountSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+    static func deleteSipCredentialLists(
+        config: ClientConfig,
+        accountSid: String,
+        sid: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
         try validateLength("Sid", sid, min: 34, max: 34)
         try sdkValidatePattern("Sid", sid, sdkPattern189973589bff)
 
-        return try (await sdkRequest("DELETE", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/SIP/CredentialLists/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, decoder: .empty, operationId: "deleteSipCredentialLists", options: requestOptions)).data
+        return try await (sdkRequest(
+            "DELETE",
+            [
+                "/2010-04-01/Accounts/",
+                sdkEncodePathSegment(sdkWireString(accountSid)),
+                "/SIP/CredentialLists/",
+                sdkEncodePathSegment(sdkWireString(sid)),
+                ".json",
+            ].joined(),
+            config: config,
+            decoder: .empty,
+            operationId: "deleteSipCredentialLists",
+            options: requestOptions
+        )).data
     }
 }

@@ -6,8 +6,9 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension SipDomainsAuthRegistrationsCredentialListMappingsMethods {
-    /// Creates a credential list mapping for a SIP domain. Submit the `CredentialListSid` of the credential list to associate with the domain, using form-encoded request data.
+public extension SipDomainsAuthRegistrationsCredentialListMappingsMethods {
+    /// Creates a credential list mapping for a SIP domain. Submit the `CredentialListSid` of the credential list to
+    /// associate with the domain, using form-encoded request data.
     ///
     /// Create a new credential list mapping resource
     ///
@@ -18,7 +19,13 @@ extension SipDomainsAuthRegistrationsCredentialListMappingsMethods {
     /// - domainSid: The SID of the SIP domain that will contain the new resource.
     /// - credentialListSid: The SID of the CredentialList resource to map to the
     ///   SIP domain.
-    public static func createSipDomainsAuthRegistrationsCredentialListMappings(config: ClientConfig, accountSid: String, domainSid: String, credentialListSid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountSipSipDomainSipAuthSipAuthRegistrationsSipAuthXed44b778d6 {
+    static func createSipDomainsAuthRegistrationsCredentialListMappings(
+        config: ClientConfig,
+        accountSid: String,
+        domainSid: String,
+        credentialListSid: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountSipSipDomainSipAuthSipAuthRegistrationsSipAuthXed44b778d6 {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
@@ -28,8 +35,24 @@ extension SipDomainsAuthRegistrationsCredentialListMappingsMethods {
         try validateLength("CredentialListSid", credentialListSid, min: 34, max: 34)
         try sdkValidatePattern("CredentialListSid", credentialListSid, sdkPattern189973589bff)
 
-        let requestBody = CreateSipDomainsAuthRegistrationsCredentialListMappingsRequestBody(credentialListSid: credentialListSid)
+        let requestBody =
+            CreateSipDomainsAuthRegistrationsCredentialListMappingsRequestBody(credentialListSid: credentialListSid)
 
-        return try (await sdkRequest("POST", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/SIP/Domains/", sdkEncodePathSegment(sdkWireString(domainSid)), "/Auth/Registrations/CredentialListMappings.json"].joined(), config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "createSipDomainsAuthRegistrationsCredentialListMappings", options: requestOptions)).data
+        return try await (sdkRequest(
+            "POST",
+            [
+                "/2010-04-01/Accounts/",
+                sdkEncodePathSegment(sdkWireString(accountSid)),
+                "/SIP/Domains/",
+                sdkEncodePathSegment(sdkWireString(domainSid)),
+                "/Auth/Registrations/CredentialListMappings.json",
+            ].joined(),
+            config: config,
+            body: requestBody,
+            contentType: "application/x-www-form-urlencoded",
+            decoder: .json,
+            operationId: "createSipDomainsAuthRegistrationsCredentialListMappings",
+            options: requestOptions
+        )).data
     }
 }

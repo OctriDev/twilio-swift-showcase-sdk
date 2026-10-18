@@ -7,8 +7,9 @@ import Foundation
     import FoundationNetworking
 #endif
 
-// Canonical sipDomainsAuthCallsCredentialListMappings operation model declarations
-public typealias ListSipDomainsAuthCallsCredentialListMappingsResponseContentsList = [ApiV2010AccountSipSipDomainSipAuthSipAuthCallsSipAuthCallsCreXfe39acaf7f]
+/// Canonical sipDomainsAuthCallsCredentialListMappings operation model declarations
+public typealias ListSipDomainsAuthCallsCredentialListMappingsResponseContentsList =
+    [ApiV2010AccountSipSipDomainSipAuthSipAuthCallsSipAuthCallsCreXfe39acaf7f]
 
 public struct ListSipDomainsAuthCallsCredentialListMappingsResponse: Codable {
     public var end: Int?
@@ -34,40 +35,50 @@ public struct ListSipDomainsAuthCallsCredentialListMappingsResponse: Codable {
     }
 
     init() {
-        (self.end, self.firstPageUri, self.nextPageUri, self.page, self.pageSize) = (nil, nil, nil, nil, nil)
-        (self.previousPageUri, self.start, self.uri, self.contents) = (nil, nil, nil, nil)
+        (end, firstPageUri, nextPageUri, page, pageSize) = (nil, nil, nil, nil, nil)
+        (previousPageUri, start, uri, contents) = (nil, nil, nil, nil)
     }
 }
 
-extension ListSipDomainsAuthCallsCredentialListMappingsResponse {
-    public init(from decoder: Decoder) throws {
+public extension ListSipDomainsAuthCallsCredentialListMappingsResponse {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.end = try container.sdkDecodeIfPresent(.end)
-        self.firstPageUri = try container.sdkDecodeIfPresent(.firstPageUri)
-        self.nextPageUri = try container.sdkDecodeIfPresent(.nextPageUri)
-        self.page = try container.sdkDecodeIfPresent(.page)
-        self.pageSize = try container.sdkDecodeIfPresent(.pageSize)
-        self.previousPageUri = try container.sdkDecodeIfPresent(.previousPageUri)
-        self.start = try container.sdkDecodeIfPresent(.start)
-        self.uri = try container.sdkDecodeIfPresent(.uri)
-        self.contents = try container.sdkDecodeIfPresent(.contents)
-        if let value = self.firstPageUri {
+        end = try container.sdkDecodeIfPresent(.end)
+        firstPageUri = try container.sdkDecodeIfPresent(.firstPageUri)
+        nextPageUri = try container.sdkDecodeIfPresent(.nextPageUri)
+        page = try container.sdkDecodeIfPresent(.page)
+        pageSize = try container.sdkDecodeIfPresent(.pageSize)
+        previousPageUri = try container.sdkDecodeIfPresent(.previousPageUri)
+        start = try container.sdkDecodeIfPresent(.start)
+        uri = try container.sdkDecodeIfPresent(.uri)
+        contents = try container.sdkDecodeIfPresent(.contents)
+        if let value = firstPageUri {
             try sdkValidateUri("first_page_uri", value)
         }
-        if let value = self.nextPageUri {
+        if let value = nextPageUri {
             try sdkValidateUri("next_page_uri", value)
         }
-        if let value = self.previousPageUri {
+        if let value = previousPageUri {
             try sdkValidateUri("previous_page_uri", value)
         }
-        if let value = self.uri {
+        if let value = uri {
             try sdkValidateUri("uri", value)
         }
     }
 }
 
-extension ListSipDomainsAuthCallsCredentialListMappingsResponse {
-    public init(end: Int? = nil, firstPageUri: String? = nil, nextPageUri: String? = nil, page: Int? = nil, pageSize: Int? = nil, previousPageUri: String? = nil, start: Int? = nil, uri: String? = nil, contents: ListSipDomainsAuthCallsCredentialListMappingsResponseContentsList? = nil) throws {
+public extension ListSipDomainsAuthCallsCredentialListMappingsResponse {
+    init(
+        end: Int? = nil,
+        firstPageUri: String? = nil,
+        nextPageUri: String? = nil,
+        page: Int? = nil,
+        pageSize: Int? = nil,
+        previousPageUri: String? = nil,
+        start: Int? = nil,
+        uri: String? = nil,
+        contents: ListSipDomainsAuthCallsCredentialListMappingsResponseContentsList? = nil
+    ) throws {
         self.init()
         (self.end, self.firstPageUri) = (end, firstPageUri)
         (self.nextPageUri, self.page) = (nextPageUri, page)

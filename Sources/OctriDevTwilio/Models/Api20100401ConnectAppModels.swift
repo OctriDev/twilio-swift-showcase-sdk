@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Api20100401ConnectApp domain models
+/// Api20100401ConnectApp domain models
 /// Typed representation of the `ApiV2010AccountConnectApp` API schema.
 public struct ApiV2010AccountConnectApp: Codable {
     /// The SID of the Account that created the ConnectApp resource.
@@ -45,48 +45,66 @@ public struct ApiV2010AccountConnectApp: Codable {
     }
 
     init() {
-        (self.accountSid, self.authorizeRedirectUrl, self.companyName, self.deauthorizeCallbackMethod, self.deauthorizeCallbackUrl) = (nil, nil, nil, nil, nil)
-        (self.description, self.friendlyName, self.homepageUrl, self.permissions, self.sid) = (nil, nil, nil, nil, nil)
-        self.uri = nil
+        (accountSid, authorizeRedirectUrl, companyName, deauthorizeCallbackMethod, deauthorizeCallbackUrl) = (
+            nil,
+            nil,
+            nil,
+            nil,
+            nil
+        )
+        (description, friendlyName, homepageUrl, permissions, sid) = (nil, nil, nil, nil, nil)
+        uri = nil
     }
 }
 
-extension ApiV2010AccountConnectApp {
-    public init(from decoder: Decoder) throws {
+public extension ApiV2010AccountConnectApp {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.accountSid = try container.sdkDecodeIfPresent(.accountSid)
-        self.authorizeRedirectUrl = try container.sdkDecodeIfPresent(.authorizeRedirectUrl)
-        self.companyName = try container.sdkDecodeIfPresent(.companyName)
-        self.deauthorizeCallbackMethod = try container.sdkDecodeIfPresent(.deauthorizeCallbackMethod)
-        self.deauthorizeCallbackUrl = try container.sdkDecodeIfPresent(.deauthorizeCallbackUrl)
-        self.description = try container.sdkDecodeIfPresent(.description)
-        self.friendlyName = try container.sdkDecodeIfPresent(.friendlyName)
-        self.homepageUrl = try container.sdkDecodeIfPresent(.homepageUrl)
-        self.permissions = try container.sdkDecodeIfPresent(.permissions)
-        self.sid = try container.sdkDecodeIfPresent(.sid)
-        self.uri = try container.sdkDecodeIfPresent(.uri)
-        if let value = self.accountSid {
+        accountSid = try container.sdkDecodeIfPresent(.accountSid)
+        authorizeRedirectUrl = try container.sdkDecodeIfPresent(.authorizeRedirectUrl)
+        companyName = try container.sdkDecodeIfPresent(.companyName)
+        deauthorizeCallbackMethod = try container.sdkDecodeIfPresent(.deauthorizeCallbackMethod)
+        deauthorizeCallbackUrl = try container.sdkDecodeIfPresent(.deauthorizeCallbackUrl)
+        description = try container.sdkDecodeIfPresent(.description)
+        friendlyName = try container.sdkDecodeIfPresent(.friendlyName)
+        homepageUrl = try container.sdkDecodeIfPresent(.homepageUrl)
+        permissions = try container.sdkDecodeIfPresent(.permissions)
+        sid = try container.sdkDecodeIfPresent(.sid)
+        uri = try container.sdkDecodeIfPresent(.uri)
+        if let value = accountSid {
             try validateLength("account_sid", value, min: 34, max: 34)
             try sdkValidatePattern("account_sid", value, sdkPatternc7cb941ab84b)
         }
-        if let value = self.authorizeRedirectUrl {
+        if let value = authorizeRedirectUrl {
             try sdkValidateUri("authorize_redirect_url", value)
         }
-        if let value = self.deauthorizeCallbackUrl {
+        if let value = deauthorizeCallbackUrl {
             try sdkValidateUri("deauthorize_callback_url", value)
         }
-        if let value = self.homepageUrl {
+        if let value = homepageUrl {
             try sdkValidateUri("homepage_url", value)
         }
-        if let value = self.sid {
+        if let value = sid {
             try validateLength("sid", value, min: 34, max: 34)
             try sdkValidatePattern("sid", value, sdkPattern682cc462e4d3)
         }
     }
 }
 
-extension ApiV2010AccountConnectApp {
-    public init(accountSid: String? = nil, authorizeRedirectUrl: String? = nil, companyName: String? = nil, deauthorizeCallbackMethod: ApiV2010AccountConnectAppDeauthorizeCallbackMethod? = nil, deauthorizeCallbackUrl: String? = nil, description: String? = nil, friendlyName: String? = nil, homepageUrl: String? = nil, permissions: [ConnectAppEnumPermission]? = nil, sid: String? = nil, uri: String? = nil) throws {
+public extension ApiV2010AccountConnectApp {
+    init(
+        accountSid: String? = nil,
+        authorizeRedirectUrl: String? = nil,
+        companyName: String? = nil,
+        deauthorizeCallbackMethod: ApiV2010AccountConnectAppDeauthorizeCallbackMethod? = nil,
+        deauthorizeCallbackUrl: String? = nil,
+        description: String? = nil,
+        friendlyName: String? = nil,
+        homepageUrl: String? = nil,
+        permissions: [ConnectAppEnumPermission]? = nil,
+        sid: String? = nil,
+        uri: String? = nil
+    ) throws {
         self.init()
         (self.accountSid, self.authorizeRedirectUrl) = (accountSid, authorizeRedirectUrl)
         (self.companyName, self.deauthorizeCallbackMethod) = (companyName, deauthorizeCallbackMethod)
@@ -115,16 +133,20 @@ extension ApiV2010AccountConnectApp {
 }
 
 /// The HTTP method we use to call `deauthorize_callback_url`.
-public struct ApiV2010AccountConnectAppDeauthorizeCallbackMethod: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct ApiV2010AccountConnectAppDeauthorizeCallbackMethod: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let get = ApiV2010AccountConnectAppDeauthorizeCallbackMethod(rawValue: "GET")
     public static let post = ApiV2010AccountConnectAppDeauthorizeCallbackMethod(rawValue: "POST")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -137,13 +159,16 @@ public struct ApiV2010AccountConnectAppDeauthorizeCallbackMethod: RawRepresentab
 public struct ConnectAppEnumPermission: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let getAll = ConnectAppEnumPermission(rawValue: "get-all")
     public static let postAll = ConnectAppEnumPermission(rawValue: "post-all")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
