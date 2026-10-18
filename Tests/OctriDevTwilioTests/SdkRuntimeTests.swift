@@ -73,7 +73,7 @@ final class SdkRuntimeTests: XCTestCase {
         let config = ClientConfig(
             baseUrl: "https://basic-auth.test",
             auth: ClientAuthConfig(
-                basicAuth: BasicCredentials(username: "Aladdin", password: "open sesame")
+                accountSidAuthToken: BasicCredentials(username: "Aladdin", password: "open sesame")
             ),
             middleware: [middleware]
         )
@@ -122,7 +122,7 @@ final class SdkRuntimeTests: XCTestCase {
             let config = ClientConfig(
                 baseUrl: "https://basic-auth.test",
                 auth: ClientAuthConfig(
-                    basicAuth: BasicCredentials(username: vector.username, password: vector.password)
+                    accountSidAuthToken: BasicCredentials(username: vector.username, password: vector.password)
                 ),
                 middleware: [middleware]
             )

@@ -10,6 +10,19 @@ protocol SdkNumericValueConvertible {
     var sdkNumericValue: Double? { get }
 }
 
+/// An untagged union of models takes the branch that keeps every key of the
+/// payload before the first branch that merely decodes: Swift ignores unknown
+/// keys, so a model declaring fewer fields would drop the rest.
+func sdkKeepsEveryKey(_ value: some Encodable, of raw: JSONValue) -> Bool {
+    guard case let .object(fields) = raw,
+          let data = try? JSONEncoder().encode(value),
+          case let .object(encoded)? = try? JSONDecoder().decode(JSONValue.self, from: data)
+    else {
+        return false
+    }
+    return fields.allSatisfy { key, item in item == .null || encoded[key] != nil }
+}
+
 // MARK: - JSONValue
 
 /// A strongly-typed representation of any JSON value.

@@ -39,8 +39,13 @@ final class SdkBehaviorTests: XCTestCase {
         guard let query, !query.isEmpty else {
             return ""
         }
-        return query
-            .replacingOccurrences(of: "%20", with: "+")
+        // Characters Foundation leaves unescaped in a query (a Vercel filter's
+        // quotes) compare equal to their percent-encoded spelling.
+        var text = query.replacingOccurrences(of: "%20", with: "+")
+        for (encoded, literal) in [("%27", "'"), ("%28", "("), ("%29", ")"), ("%21", "!"), ("%2A", "*")] {
+            text = text.replacingOccurrences(of: encoded, with: literal)
+        }
+        return text
             .split(separator: "&")
             .map(String.init)
             .sorted()
@@ -117,7 +122,13 @@ final class SdkBehaviorTests: XCTestCase {
         let wantUrl = expectation["url"] as? String ?? ""
         let gotParts = sent.url.split(separator: "?", maxSplits: 1).map(String.init)
         let wantParts = wantUrl.split(separator: "?", maxSplits: 1).map(String.init)
-        XCTAssertEqual(gotParts.first, wantParts.first, "\(id) url path")
+        // Foundation encodes literal path text a URL cannot carry (DigitalOcean's
+        // /<upload_url>) that other clients leave to the wire.
+        XCTAssertEqual(
+            gotParts.first?.removingPercentEncoding,
+            wantParts.first?.removingPercentEncoding,
+            "\(id) url path"
+        )
         XCTAssertEqual(
             normalizeQuery(gotParts.count > 1 ? gotParts[1] : nil),
             normalizeQuery(wantParts.count > 1 ? wantParts[1] : nil),
