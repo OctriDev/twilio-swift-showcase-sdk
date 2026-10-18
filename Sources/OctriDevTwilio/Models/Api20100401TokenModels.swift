@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Api20100401Token domain models
+/// Api20100401Token domain models
 /// Required object value serialized in the `ice_servers[]` wire field.
 public struct ApiV2010AccountTokenIceServersItem: Codable {
     /// Optional `string` value serialized in the `credential` wire field.
@@ -23,22 +23,22 @@ public struct ApiV2010AccountTokenIceServersItem: Codable {
     }
 
     init() {
-        (self.credential, self.username, self.url, self.urls) = (nil, nil, nil, nil)
+        (credential, username, url, urls) = (nil, nil, nil, nil)
     }
 }
 
-extension ApiV2010AccountTokenIceServersItem {
-    public init(from decoder: Decoder) throws {
+public extension ApiV2010AccountTokenIceServersItem {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.credential = try container.sdkDecodeIfPresent(.credential)
-        self.username = try container.sdkDecodeIfPresent(.username)
-        self.url = try container.sdkDecodeIfPresent(.url)
-        self.urls = try container.sdkDecodeIfPresent(.urls)
+        credential = try container.sdkDecodeIfPresent(.credential)
+        username = try container.sdkDecodeIfPresent(.username)
+        url = try container.sdkDecodeIfPresent(.url)
+        urls = try container.sdkDecodeIfPresent(.urls)
     }
 }
 
-extension ApiV2010AccountTokenIceServersItem {
-    public init(credential: String? = nil, username: String? = nil, url: String? = nil, urls: String? = nil) {
+public extension ApiV2010AccountTokenIceServersItem {
+    init(credential: String? = nil, username: String? = nil, url: String? = nil, urls: String? = nil) {
         self.init()
         (self.credential, self.username) = (credential, username)
         (self.url, self.urls) = (url, urls)
@@ -73,30 +73,38 @@ public struct ApiV2010AccountToken: Codable {
     }
 
     init() {
-        (self.accountSid, self.dateCreated, self.dateUpdated, self.iceServers, self.password) = (nil, nil, nil, nil, nil)
-        (self.ttl, self.username) = (nil, nil)
+        (accountSid, dateCreated, dateUpdated, iceServers, password) = (nil, nil, nil, nil, nil)
+        (ttl, username) = (nil, nil)
     }
 }
 
-extension ApiV2010AccountToken {
-    public init(from decoder: Decoder) throws {
+public extension ApiV2010AccountToken {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.accountSid = try container.sdkDecodeIfPresent(.accountSid)
-        self.dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
-        self.dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
-        self.iceServers = try container.sdkDecodeIfPresent(.iceServers)
-        self.password = try container.sdkDecodeIfPresent(.password)
-        self.ttl = try container.sdkDecodeIfPresent(.ttl)
-        self.username = try container.sdkDecodeIfPresent(.username)
-        if let value = self.accountSid {
+        accountSid = try container.sdkDecodeIfPresent(.accountSid)
+        dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
+        dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
+        iceServers = try container.sdkDecodeIfPresent(.iceServers)
+        password = try container.sdkDecodeIfPresent(.password)
+        ttl = try container.sdkDecodeIfPresent(.ttl)
+        username = try container.sdkDecodeIfPresent(.username)
+        if let value = accountSid {
             try validateLength("account_sid", value, min: 34, max: 34)
             try sdkValidatePattern("account_sid", value, sdkPatternc7cb941ab84b)
         }
     }
 }
 
-extension ApiV2010AccountToken {
-    public init(accountSid: String? = nil, dateCreated: String? = nil, dateUpdated: String? = nil, iceServers: [ApiV2010AccountTokenIceServersItem]? = nil, password: String? = nil, ttl: String? = nil, username: String? = nil) throws {
+public extension ApiV2010AccountToken {
+    init(
+        accountSid: String? = nil,
+        dateCreated: String? = nil,
+        dateUpdated: String? = nil,
+        iceServers: [ApiV2010AccountTokenIceServersItem]? = nil,
+        password: String? = nil,
+        ttl: String? = nil,
+        username: String? = nil
+    ) throws {
         self.init()
         (self.accountSid, self.dateCreated) = (accountSid, dateCreated)
         (self.dateUpdated, self.iceServers) = (dateUpdated, iceServers)

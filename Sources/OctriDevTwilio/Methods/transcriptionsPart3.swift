@@ -6,8 +6,9 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension TranscriptionsMethods {
-    /// Lists transcription resources belonging to an account. Use the page parameters to retrieve results in pages, with `PageSize` controlling the number of resources returned per page.
+public extension TranscriptionsMethods {
+    /// Lists transcription resources belonging to an account. Use the page parameters to retrieve results in pages,
+    /// with `PageSize` controlling the number of resources returned per page.
     ///
     /// Retrieve a list of transcriptions belonging to the account used to make the request
     ///
@@ -19,22 +20,37 @@ extension TranscriptionsMethods {
     ///   50, and the maximum is 1000.
     /// - page: The page index. This value is simply for client state.
     /// - pageToken: The page token. This is provided by the API.
-    public static func listTranscriptions(config: ClientConfig, accountSid: String, pageSize: Int? = nil, page: Int? = nil, pageToken: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ListTranscriptionsResponse {
+    static func listTranscriptions(
+        config: ClientConfig,
+        accountSid: String,
+        pageSize: Int? = nil,
+        page: Int? = nil,
+        pageToken: String? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ListTranscriptionsResponse {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
-        if let pageSize = pageSize {
+        if let pageSize {
             try validateRange("PageSize", Double(pageSize), min: 1, max: 1000)
         }
 
-        if let page = page {
+        if let page {
             try validateRange("Page", Double(page), min: 0)
         }
 
-        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Transcriptions.json"].joined(), config: config, query: [
-            SdkQueryParameter("PageSize", value: pageSize),
-            SdkQueryParameter("Page", value: page),
-            SdkQueryParameter("PageToken", value: pageToken),
-        ], decoder: .json, operationId: "listTranscriptions", options: requestOptions)).data
+        return try await (sdkRequest(
+            "GET",
+            ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Transcriptions.json"].joined(),
+            config: config,
+            query: [
+                SdkQueryParameter("PageSize", value: pageSize),
+                SdkQueryParameter("Page", value: page),
+                SdkQueryParameter("PageToken", value: pageToken),
+            ],
+            decoder: .json,
+            operationId: "listTranscriptions",
+            options: requestOptions
+        )).data
     }
 }

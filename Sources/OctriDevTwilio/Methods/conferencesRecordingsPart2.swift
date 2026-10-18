@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ConferencesRecordingsMethods {
-    public struct ListConferencesRecordingsOptions: Codable {
+public extension ConferencesRecordingsMethods {
+    struct ListConferencesRecordingsOptions: Codable {
         public var accountSid: String
         public var conferenceSid: String
         public var dateCreated: String?
@@ -23,7 +23,8 @@ extension ConferencesRecordingsMethods {
         }
     }
 
-    /// Lists recordings associated with a conference. Use the date filter to narrow results and the page parameters to navigate through the conference's recordings.
+    /// Lists recordings associated with a conference. Use the date filter to narrow results and the page parameters to
+    /// navigate through the conference's recordings.
     ///
     /// Retrieve a list of recordings belonging to the call used to make the request
     ///
@@ -52,7 +53,11 @@ extension ConferencesRecordingsMethods {
     ///   50, and the maximum is 1000.
     /// - page: The page index. This value is simply for client state.
     /// - pageToken: The page token. This is provided by the API.
-    public static func listConferencesRecordings(config: ClientConfig, options: ListConferencesRecordingsOptions, requestOptions: RequestOptions? = nil) async throws -> ListConferencesRecordingsResponse {
+    static func listConferencesRecordings(
+        config: ClientConfig,
+        options: ListConferencesRecordingsOptions,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ListConferencesRecordingsResponse {
         try validateLength("AccountSid", options.accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", options.accountSid, sdkPatternc7cb941ab84b)
 
@@ -79,13 +84,27 @@ extension ConferencesRecordingsMethods {
             try validateRange("Page", Double(page), min: 0)
         }
 
-        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(options.accountSid)), "/Conferences/", sdkEncodePathSegment(sdkWireString(options.conferenceSid)), "/Recordings.json"].joined(), config: config, query: [
-            SdkQueryParameter("DateCreated", value: options.dateCreated),
-            SdkQueryParameter("DateCreated<", value: options.dateCreated2),
-            SdkQueryParameter("DateCreated>", value: options.dateCreated3),
-            SdkQueryParameter("PageSize", value: options.pageSize),
-            SdkQueryParameter("Page", value: options.page),
-            SdkQueryParameter("PageToken", value: options.pageToken),
-        ], decoder: .json, operationId: "listConferencesRecordings", options: requestOptions)).data
+        return try await (sdkRequest(
+            "GET",
+            [
+                "/2010-04-01/Accounts/",
+                sdkEncodePathSegment(sdkWireString(options.accountSid)),
+                "/Conferences/",
+                sdkEncodePathSegment(sdkWireString(options.conferenceSid)),
+                "/Recordings.json",
+            ].joined(),
+            config: config,
+            query: [
+                SdkQueryParameter("DateCreated", value: options.dateCreated),
+                SdkQueryParameter("DateCreated<", value: options.dateCreated2),
+                SdkQueryParameter("DateCreated>", value: options.dateCreated3),
+                SdkQueryParameter("PageSize", value: options.pageSize),
+                SdkQueryParameter("Page", value: options.page),
+                SdkQueryParameter("PageToken", value: options.pageToken),
+            ],
+            decoder: .json,
+            operationId: "listConferencesRecordings",
+            options: requestOptions
+        )).data
     }
 }

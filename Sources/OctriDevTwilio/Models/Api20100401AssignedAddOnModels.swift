@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Api20100401AssignedAddOn domain models
+/// Api20100401AssignedAddOn domain models
 /// Typed representation of the `ApiV2010AccountIncomingPhoneNumberIncomingPhoneNumberAssignedAddOn` API schema.
 public struct ApiV2010AccountIncomingPhoneNumberIncomingPhoneNumberAssignedAddOn: Codable {
     /// The unique string that that we created to identify the resource.
@@ -45,43 +45,55 @@ public struct ApiV2010AccountIncomingPhoneNumberIncomingPhoneNumberAssignedAddOn
     }
 
     init() {
-        (self.sid, self.accountSid, self.resourceSid, self.friendlyName, self.description) = (nil, nil, nil, nil, nil)
-        (self.configuration, self.uniqueName, self.dateCreated, self.dateUpdated, self.uri) = (nil, nil, nil, nil, nil)
-        self.subresourceUris = nil
+        (sid, accountSid, resourceSid, friendlyName, description) = (nil, nil, nil, nil, nil)
+        (configuration, uniqueName, dateCreated, dateUpdated, uri) = (nil, nil, nil, nil, nil)
+        subresourceUris = nil
     }
 }
 
-extension ApiV2010AccountIncomingPhoneNumberIncomingPhoneNumberAssignedAddOn {
-    public init(from decoder: Decoder) throws {
+public extension ApiV2010AccountIncomingPhoneNumberIncomingPhoneNumberAssignedAddOn {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.sid = try container.sdkDecodeIfPresent(.sid)
-        self.accountSid = try container.sdkDecodeIfPresent(.accountSid)
-        self.resourceSid = try container.sdkDecodeIfPresent(.resourceSid)
-        self.friendlyName = try container.sdkDecodeIfPresent(.friendlyName)
-        self.description = try container.sdkDecodeIfPresent(.description)
-        self.configuration = try container.sdkDecodeIfPresent(.configuration)
-        self.uniqueName = try container.sdkDecodeIfPresent(.uniqueName)
-        self.dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
-        self.dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
-        self.uri = try container.sdkDecodeIfPresent(.uri)
-        self.subresourceUris = try container.sdkDecodeIfPresent(.subresourceUris)
-        if let value = self.sid {
+        sid = try container.sdkDecodeIfPresent(.sid)
+        accountSid = try container.sdkDecodeIfPresent(.accountSid)
+        resourceSid = try container.sdkDecodeIfPresent(.resourceSid)
+        friendlyName = try container.sdkDecodeIfPresent(.friendlyName)
+        description = try container.sdkDecodeIfPresent(.description)
+        configuration = try container.sdkDecodeIfPresent(.configuration)
+        uniqueName = try container.sdkDecodeIfPresent(.uniqueName)
+        dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
+        dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
+        uri = try container.sdkDecodeIfPresent(.uri)
+        subresourceUris = try container.sdkDecodeIfPresent(.subresourceUris)
+        if let value = sid {
             try validateLength("sid", value, min: 34, max: 34)
             try sdkValidatePattern("sid", value, sdkPatternbb2f9d1d1c1e)
         }
-        if let value = self.accountSid {
+        if let value = accountSid {
             try validateLength("account_sid", value, min: 34, max: 34)
             try sdkValidatePattern("account_sid", value, sdkPatternc7cb941ab84b)
         }
-        if let value = self.resourceSid {
+        if let value = resourceSid {
             try validateLength("resource_sid", value, min: 34, max: 34)
             try sdkValidatePattern("resource_sid", value, sdkPattern9792ce0bb10f)
         }
     }
 }
 
-extension ApiV2010AccountIncomingPhoneNumberIncomingPhoneNumberAssignedAddOn {
-    public init(sid: String? = nil, accountSid: String? = nil, resourceSid: String? = nil, friendlyName: String? = nil, description: String? = nil, configuration: JSONValue? = nil, uniqueName: String? = nil, dateCreated: String? = nil, dateUpdated: String? = nil, uri: String? = nil, subresourceUris: [String: JSONValue]? = nil) throws {
+public extension ApiV2010AccountIncomingPhoneNumberIncomingPhoneNumberAssignedAddOn {
+    init(
+        sid: String? = nil,
+        accountSid: String? = nil,
+        resourceSid: String? = nil,
+        friendlyName: String? = nil,
+        description: String? = nil,
+        configuration: JSONValue? = nil,
+        uniqueName: String? = nil,
+        dateCreated: String? = nil,
+        dateUpdated: String? = nil,
+        uri: String? = nil,
+        subresourceUris: [String: JSONValue]? = nil
+    ) throws {
         self.init()
         (self.sid, self.accountSid) = (sid, accountSid)
         (self.resourceSid, self.friendlyName) = (resourceSid, friendlyName)

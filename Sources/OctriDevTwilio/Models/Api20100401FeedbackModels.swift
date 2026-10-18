@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Api20100401Feedback domain models
+/// Api20100401Feedback domain models
 /// Typed representation of the `ApiV2010AccountMessageMessageFeedback` API schema.
 public struct ApiV2010AccountMessageMessageFeedback: Codable {
     /// The SID of the Account associated with this MessageFeedback resource.
@@ -31,33 +31,40 @@ public struct ApiV2010AccountMessageMessageFeedback: Codable {
     }
 
     init() {
-        (self.accountSid, self.messageSid, self.outcome, self.dateCreated, self.dateUpdated) = (nil, nil, nil, nil, nil)
-        self.uri = nil
+        (accountSid, messageSid, outcome, dateCreated, dateUpdated) = (nil, nil, nil, nil, nil)
+        uri = nil
     }
 }
 
-extension ApiV2010AccountMessageMessageFeedback {
-    public init(from decoder: Decoder) throws {
+public extension ApiV2010AccountMessageMessageFeedback {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.accountSid = try container.sdkDecodeIfPresent(.accountSid)
-        self.messageSid = try container.sdkDecodeIfPresent(.messageSid)
-        self.outcome = try container.sdkDecodeIfPresent(.outcome)
-        self.dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
-        self.dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
-        self.uri = try container.sdkDecodeIfPresent(.uri)
-        if let value = self.accountSid {
+        accountSid = try container.sdkDecodeIfPresent(.accountSid)
+        messageSid = try container.sdkDecodeIfPresent(.messageSid)
+        outcome = try container.sdkDecodeIfPresent(.outcome)
+        dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
+        dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
+        uri = try container.sdkDecodeIfPresent(.uri)
+        if let value = accountSid {
             try validateLength("account_sid", value, min: 34, max: 34)
             try sdkValidatePattern("account_sid", value, sdkPatternc7cb941ab84b)
         }
-        if let value = self.messageSid {
+        if let value = messageSid {
             try validateLength("message_sid", value, min: 34, max: 34)
             try sdkValidatePattern("message_sid", value, sdkPattern65b3eddf4a12)
         }
     }
 }
 
-extension ApiV2010AccountMessageMessageFeedback {
-    public init(accountSid: String? = nil, messageSid: String? = nil, outcome: MessageFeedbackEnumOutcome? = nil, dateCreated: String? = nil, dateUpdated: String? = nil, uri: String? = nil) throws {
+public extension ApiV2010AccountMessageMessageFeedback {
+    init(
+        accountSid: String? = nil,
+        messageSid: String? = nil,
+        outcome: MessageFeedbackEnumOutcome? = nil,
+        dateCreated: String? = nil,
+        dateUpdated: String? = nil,
+        uri: String? = nil
+    ) throws {
         self.init()
         (self.accountSid, self.messageSid) = (accountSid, messageSid)
         (self.outcome, self.dateCreated) = (outcome, dateCreated)
@@ -79,13 +86,16 @@ extension ApiV2010AccountMessageMessageFeedback {
 public struct MessageFeedbackEnumOutcome: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let confirmed = MessageFeedbackEnumOutcome(rawValue: "confirmed")
     public static let unconfirmed = MessageFeedbackEnumOutcome(rawValue: "unconfirmed")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

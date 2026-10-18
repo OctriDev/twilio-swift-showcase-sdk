@@ -9,14 +9,15 @@ import Foundation
 
 /// Fails an event stream answered with plain JSON, as by a server that ignored
 /// the stream flag: its parser would yield no events at all.
-internal func sdkRefuseJsonAnswer(
+func sdkRefuseJsonAnswer(
     _ response: HTTPURLResponse,
     headers: [String: String],
     requestId: String,
     byteStream: AsyncThrowingStream<Data, Swift.Error>
 ) async throws {
     let contentType = headers["content-type"] ?? ""
-    let mediaType = contentType.split(separator: ";").first.map { $0.trimmingCharacters(in: .whitespaces).lowercased() } ?? ""
+    let mediaType = contentType.split(separator: ";").first
+        .map { $0.trimmingCharacters(in: .whitespaces).lowercased() } ?? ""
     guard mediaType == "application/json" || mediaType.hasSuffix("+json") else {
         return
     }
@@ -33,7 +34,7 @@ internal func sdkRefuseJsonAnswer(
     )
 }
 
-internal func sdkChunkStream(
+func sdkChunkStream(
     _ byteStream: AsyncThrowingStream<Data, Swift.Error>,
     chunkDomain: String
 ) -> AsyncThrowingStream<SdkStreamEvent, Swift.Error> {
@@ -55,9 +56,9 @@ internal func sdkChunkStream(
 
 /// What surrounds an NDJSON record: whitespace, and the RS a JSON text sequence
 /// record starts with.
-internal let sdkJsonRecordPadding = CharacterSet.whitespacesAndNewlines.union(CharacterSet(charactersIn: "\u{1E}"))
+let sdkJsonRecordPadding = CharacterSet.whitespacesAndNewlines.union(CharacterSet(charactersIn: "\u{1E}"))
 
-internal func sdkNdjsonStream(
+func sdkNdjsonStream(
     _ byteStream: AsyncThrowingStream<Data, Swift.Error>
 ) -> AsyncThrowingStream<SdkStreamEvent, Swift.Error> {
     AsyncThrowingStream { continuation in
@@ -90,17 +91,19 @@ internal func sdkNdjsonStream(
     }
 }
 
-internal func splitSseLine(_ line: String) -> (String, String) {
+func splitSseLine(_ line: String) -> (String, String) {
     if let colon = line.firstIndex(of: ":") {
         let field = String(line[line.startIndex ..< colon])
         var value = String(line[line.index(after: colon)...])
-        if value.hasPrefix(" ") { value.removeFirst() }
+        if value.hasPrefix(" ") {
+            value.removeFirst()
+        }
         return (field, value)
     }
     return (line, "")
 }
 
-internal func decodeStreamLine(_ bytes: [UInt8]) throws -> String {
+func decodeStreamLine(_ bytes: [UInt8]) throws -> String {
     guard let line = String(bytes: bytes, encoding: .utf8) else {
         throw SdkNetworkError(cause: NSError(
             domain: "SdkStream",

@@ -7,7 +7,7 @@ import Foundation
     import FoundationNetworking
 #endif
 
-// Canonical callsRecordings operation model declarations
+/// Canonical callsRecordings operation model declarations
 public struct ListCallsRecordingsResponse: Codable {
     public var end: Int?
     public var firstPageUri: String?
@@ -32,40 +32,50 @@ public struct ListCallsRecordingsResponse: Codable {
     }
 
     init() {
-        (self.end, self.firstPageUri, self.nextPageUri, self.page, self.pageSize) = (nil, nil, nil, nil, nil)
-        (self.previousPageUri, self.start, self.uri, self.recordings) = (nil, nil, nil, nil)
+        (end, firstPageUri, nextPageUri, page, pageSize) = (nil, nil, nil, nil, nil)
+        (previousPageUri, start, uri, recordings) = (nil, nil, nil, nil)
     }
 }
 
-extension ListCallsRecordingsResponse {
-    public init(from decoder: Decoder) throws {
+public extension ListCallsRecordingsResponse {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.end = try container.sdkDecodeIfPresent(.end)
-        self.firstPageUri = try container.sdkDecodeIfPresent(.firstPageUri)
-        self.nextPageUri = try container.sdkDecodeIfPresent(.nextPageUri)
-        self.page = try container.sdkDecodeIfPresent(.page)
-        self.pageSize = try container.sdkDecodeIfPresent(.pageSize)
-        self.previousPageUri = try container.sdkDecodeIfPresent(.previousPageUri)
-        self.start = try container.sdkDecodeIfPresent(.start)
-        self.uri = try container.sdkDecodeIfPresent(.uri)
-        self.recordings = try container.sdkDecodeIfPresent(.recordings)
-        if let value = self.firstPageUri {
+        end = try container.sdkDecodeIfPresent(.end)
+        firstPageUri = try container.sdkDecodeIfPresent(.firstPageUri)
+        nextPageUri = try container.sdkDecodeIfPresent(.nextPageUri)
+        page = try container.sdkDecodeIfPresent(.page)
+        pageSize = try container.sdkDecodeIfPresent(.pageSize)
+        previousPageUri = try container.sdkDecodeIfPresent(.previousPageUri)
+        start = try container.sdkDecodeIfPresent(.start)
+        uri = try container.sdkDecodeIfPresent(.uri)
+        recordings = try container.sdkDecodeIfPresent(.recordings)
+        if let value = firstPageUri {
             try sdkValidateUri("first_page_uri", value)
         }
-        if let value = self.nextPageUri {
+        if let value = nextPageUri {
             try sdkValidateUri("next_page_uri", value)
         }
-        if let value = self.previousPageUri {
+        if let value = previousPageUri {
             try sdkValidateUri("previous_page_uri", value)
         }
-        if let value = self.uri {
+        if let value = uri {
             try sdkValidateUri("uri", value)
         }
     }
 }
 
-extension ListCallsRecordingsResponse {
-    public init(end: Int? = nil, firstPageUri: String? = nil, nextPageUri: String? = nil, page: Int? = nil, pageSize: Int? = nil, previousPageUri: String? = nil, start: Int? = nil, uri: String? = nil, recordings: [ApiV2010AccountCallCallRecording]? = nil) throws {
+public extension ListCallsRecordingsResponse {
+    init(
+        end: Int? = nil,
+        firstPageUri: String? = nil,
+        nextPageUri: String? = nil,
+        page: Int? = nil,
+        pageSize: Int? = nil,
+        previousPageUri: String? = nil,
+        start: Int? = nil,
+        uri: String? = nil,
+        recordings: [ApiV2010AccountCallCallRecording]? = nil
+    ) throws {
         self.init()
         (self.end, self.firstPageUri) = (end, firstPageUri)
         (self.nextPageUri, self.page) = (nextPageUri, page)
@@ -105,22 +115,22 @@ public struct UpdateCallsRecordingsResponse: Codable {
     }
 
     init() {
-        (self.code, self.message, self.moreInfo, self.status) = (nil, nil, nil, nil)
+        (code, message, moreInfo, status) = (nil, nil, nil, nil)
     }
 }
 
-extension UpdateCallsRecordingsResponse {
-    public init(from decoder: Decoder) throws {
+public extension UpdateCallsRecordingsResponse {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.code = try container.sdkDecodeIfPresent(.code)
-        self.message = try container.sdkDecodeIfPresent(.message)
-        self.moreInfo = try container.sdkDecodeIfPresent(.moreInfo)
-        self.status = try container.sdkDecodeIfPresent(.status)
+        code = try container.sdkDecodeIfPresent(.code)
+        message = try container.sdkDecodeIfPresent(.message)
+        moreInfo = try container.sdkDecodeIfPresent(.moreInfo)
+        status = try container.sdkDecodeIfPresent(.status)
     }
 }
 
-extension UpdateCallsRecordingsResponse {
-    public init(code: Int? = nil, message: String? = nil, moreInfo: String? = nil, status: Int? = nil) {
+public extension UpdateCallsRecordingsResponse {
+    init(code: Int? = nil, message: String? = nil, moreInfo: String? = nil, status: Int? = nil) {
         self.init()
         (self.code, self.message) = (code, message)
         (self.moreInfo, self.status) = (moreInfo, status)

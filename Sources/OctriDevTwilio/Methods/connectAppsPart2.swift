@@ -6,8 +6,9 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ConnectAppsMethods {
-    /// Retrieves a specific Connect App belonging to an account. Supply the account and Connect App identifiers to read its configuration and requested permissions.
+public extension ConnectAppsMethods {
+    /// Retrieves a specific Connect App belonging to an account. Supply the account and Connect App identifiers to read
+    /// its configuration and requested permissions.
     ///
     /// Fetch an instance of a connect-app
     ///
@@ -17,13 +18,31 @@ extension ConnectAppsMethods {
     ///   ConnectApp resource to fetch.
     /// - sid: The Twilio-provided string that uniquely identifies the ConnectApp
     ///   resource to fetch.
-    public static func fetchConnectApps(config: ClientConfig, accountSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountConnectApp {
+    static func fetchConnectApps(
+        config: ClientConfig,
+        accountSid: String,
+        sid: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountConnectApp {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
         try validateLength("Sid", sid, min: 34, max: 34)
         try sdkValidatePattern("Sid", sid, sdkPattern682cc462e4d3)
 
-        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/ConnectApps/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, decoder: .json, operationId: "fetchConnectApps", options: requestOptions)).data
+        return try await (sdkRequest(
+            "GET",
+            [
+                "/2010-04-01/Accounts/",
+                sdkEncodePathSegment(sdkWireString(accountSid)),
+                "/ConnectApps/",
+                sdkEncodePathSegment(sdkWireString(sid)),
+                ".json",
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "fetchConnectApps",
+            options: requestOptions
+        )).data
     }
 }
