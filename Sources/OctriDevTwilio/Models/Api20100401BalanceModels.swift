@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Api20100401Balance domain models
+/// Api20100401Balance domain models
 /// Typed representation of the `ApiV2010AccountBalance` API schema.
 public struct ApiV2010AccountBalance: Codable {
     /// The unique SID identifier of the Account.
@@ -21,25 +21,25 @@ public struct ApiV2010AccountBalance: Codable {
     }
 
     init() {
-        (self.accountSid, self.balance, self.currency) = (nil, nil, nil)
+        (accountSid, balance, currency) = (nil, nil, nil)
     }
 }
 
-extension ApiV2010AccountBalance {
-    public init(from decoder: Decoder) throws {
+public extension ApiV2010AccountBalance {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.accountSid = try container.sdkDecodeIfPresent(.accountSid)
-        self.balance = try container.sdkDecodeIfPresent(.balance)
-        self.currency = try container.sdkDecodeIfPresent(.currency)
-        if let value = self.accountSid {
+        accountSid = try container.sdkDecodeIfPresent(.accountSid)
+        balance = try container.sdkDecodeIfPresent(.balance)
+        currency = try container.sdkDecodeIfPresent(.currency)
+        if let value = accountSid {
             try validateLength("account_sid", value, min: 34, max: 34)
             try sdkValidatePattern("account_sid", value, sdkPatternc7cb941ab84b)
         }
     }
 }
 
-extension ApiV2010AccountBalance {
-    public init(accountSid: String? = nil, balance: String? = nil, currency: String? = nil) throws {
+public extension ApiV2010AccountBalance {
+    init(accountSid: String? = nil, balance: String? = nil, currency: String? = nil) throws {
         self.init()
         (self.accountSid, self.balance) = (accountSid, balance)
         self.currency = currency

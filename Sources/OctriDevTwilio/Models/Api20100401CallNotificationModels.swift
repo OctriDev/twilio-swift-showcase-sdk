@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Api20100401CallNotification domain models
+/// Api20100401CallNotification domain models
 /// Typed representation of the `ApiV2010AccountCallCallNotificationInstance` API schema.
 public struct ApiV2010AccountCallCallNotificationInstance: Codable {
     /// The SID of the Account that created the Call Notification resource.
@@ -68,56 +68,74 @@ public struct ApiV2010AccountCallCallNotificationInstance: Codable {
     }
 
     init() {
-        (self.accountSid, self.apiVersion, self.callSid, self.dateCreated, self.dateUpdated) = (nil, nil, nil, nil, nil)
-        (self.errorCode, self.log, self.messageDate, self.messageText, self.moreInfo) = (nil, nil, nil, nil, nil)
-        (self.requestMethod, self.requestUrl, self.requestVariables, self.responseBody, self.responseHeaders) = (nil, nil, nil, nil, nil)
-        (self.sid, self.uri) = (nil, nil)
+        (accountSid, apiVersion, callSid, dateCreated, dateUpdated) = (nil, nil, nil, nil, nil)
+        (errorCode, log, messageDate, messageText, moreInfo) = (nil, nil, nil, nil, nil)
+        (requestMethod, requestUrl, requestVariables, responseBody, responseHeaders) = (nil, nil, nil, nil, nil)
+        (sid, uri) = (nil, nil)
     }
 }
 
-extension ApiV2010AccountCallCallNotificationInstance {
-    public init(from decoder: Decoder) throws {
+public extension ApiV2010AccountCallCallNotificationInstance {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.accountSid = try container.sdkDecodeIfPresent(.accountSid)
-        self.apiVersion = try container.sdkDecodeIfPresent(.apiVersion)
-        self.callSid = try container.sdkDecodeIfPresent(.callSid)
-        self.dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
-        self.dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
-        self.errorCode = try container.sdkDecodeIfPresent(.errorCode)
-        self.log = try container.sdkDecodeIfPresent(.log)
-        self.messageDate = try container.sdkDecodeIfPresent(.messageDate)
-        self.messageText = try container.sdkDecodeIfPresent(.messageText)
-        self.moreInfo = try container.sdkDecodeIfPresent(.moreInfo)
-        self.requestMethod = try container.sdkDecodeIfPresent(.requestMethod)
-        self.requestUrl = try container.sdkDecodeIfPresent(.requestUrl)
-        self.requestVariables = try container.sdkDecodeIfPresent(.requestVariables)
-        self.responseBody = try container.sdkDecodeIfPresent(.responseBody)
-        self.responseHeaders = try container.sdkDecodeIfPresent(.responseHeaders)
-        self.sid = try container.sdkDecodeIfPresent(.sid)
-        self.uri = try container.sdkDecodeIfPresent(.uri)
-        if let value = self.accountSid {
+        accountSid = try container.sdkDecodeIfPresent(.accountSid)
+        apiVersion = try container.sdkDecodeIfPresent(.apiVersion)
+        callSid = try container.sdkDecodeIfPresent(.callSid)
+        dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
+        dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
+        errorCode = try container.sdkDecodeIfPresent(.errorCode)
+        log = try container.sdkDecodeIfPresent(.log)
+        messageDate = try container.sdkDecodeIfPresent(.messageDate)
+        messageText = try container.sdkDecodeIfPresent(.messageText)
+        moreInfo = try container.sdkDecodeIfPresent(.moreInfo)
+        requestMethod = try container.sdkDecodeIfPresent(.requestMethod)
+        requestUrl = try container.sdkDecodeIfPresent(.requestUrl)
+        requestVariables = try container.sdkDecodeIfPresent(.requestVariables)
+        responseBody = try container.sdkDecodeIfPresent(.responseBody)
+        responseHeaders = try container.sdkDecodeIfPresent(.responseHeaders)
+        sid = try container.sdkDecodeIfPresent(.sid)
+        uri = try container.sdkDecodeIfPresent(.uri)
+        if let value = accountSid {
             try validateLength("account_sid", value, min: 34, max: 34)
             try sdkValidatePattern("account_sid", value, sdkPatternc7cb941ab84b)
         }
-        if let value = self.callSid {
+        if let value = callSid {
             try validateLength("call_sid", value, min: 34, max: 34)
             try sdkValidatePattern("call_sid", value, sdkPattern25b2d94fcc27)
         }
-        if let value = self.moreInfo {
+        if let value = moreInfo {
             try sdkValidateUri("more_info", value)
         }
-        if let value = self.requestUrl {
+        if let value = requestUrl {
             try sdkValidateUri("request_url", value)
         }
-        if let value = self.sid {
+        if let value = sid {
             try validateLength("sid", value, min: 34, max: 34)
             try sdkValidatePattern("sid", value, sdkPatternb9fb14eb1cd8)
         }
     }
 }
 
-extension ApiV2010AccountCallCallNotificationInstance {
-    public init(accountSid: String? = nil, apiVersion: String? = nil, callSid: String? = nil, dateCreated: String? = nil, dateUpdated: String? = nil, errorCode: String? = nil, log: String? = nil, messageDate: String? = nil, messageText: String? = nil, moreInfo: String? = nil, requestMethod: ApiV2010AccountCallCallNotificationInstanceRequestMethod? = nil, requestUrl: String? = nil, requestVariables: String? = nil, responseBody: String? = nil, responseHeaders: String? = nil, sid: String? = nil, uri: String? = nil) throws {
+public extension ApiV2010AccountCallCallNotificationInstance {
+    init(
+        accountSid: String? = nil,
+        apiVersion: String? = nil,
+        callSid: String? = nil,
+        dateCreated: String? = nil,
+        dateUpdated: String? = nil,
+        errorCode: String? = nil,
+        log: String? = nil,
+        messageDate: String? = nil,
+        messageText: String? = nil,
+        moreInfo: String? = nil,
+        requestMethod: ApiV2010AccountCallCallNotificationInstanceRequestMethod? = nil,
+        requestUrl: String? = nil,
+        requestVariables: String? = nil,
+        responseBody: String? = nil,
+        responseHeaders: String? = nil,
+        sid: String? = nil,
+        uri: String? = nil
+    ) throws {
         self.init()
         (self.accountSid, self.apiVersion) = (accountSid, apiVersion)
         (self.callSid, self.dateCreated) = (callSid, dateCreated)
@@ -203,52 +221,67 @@ public struct ApiV2010AccountCallCallNotification: Codable {
     }
 
     init() {
-        (self.accountSid, self.apiVersion, self.callSid, self.dateCreated, self.dateUpdated) = (nil, nil, nil, nil, nil)
-        (self.errorCode, self.log, self.messageDate, self.messageText, self.moreInfo) = (nil, nil, nil, nil, nil)
-        (self.requestMethod, self.requestUrl, self.sid, self.uri) = (nil, nil, nil, nil)
+        (accountSid, apiVersion, callSid, dateCreated, dateUpdated) = (nil, nil, nil, nil, nil)
+        (errorCode, log, messageDate, messageText, moreInfo) = (nil, nil, nil, nil, nil)
+        (requestMethod, requestUrl, sid, uri) = (nil, nil, nil, nil)
     }
 }
 
-extension ApiV2010AccountCallCallNotification {
-    public init(from decoder: Decoder) throws {
+public extension ApiV2010AccountCallCallNotification {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.accountSid = try container.sdkDecodeIfPresent(.accountSid)
-        self.apiVersion = try container.sdkDecodeIfPresent(.apiVersion)
-        self.callSid = try container.sdkDecodeIfPresent(.callSid)
-        self.dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
-        self.dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
-        self.errorCode = try container.sdkDecodeIfPresent(.errorCode)
-        self.log = try container.sdkDecodeIfPresent(.log)
-        self.messageDate = try container.sdkDecodeIfPresent(.messageDate)
-        self.messageText = try container.sdkDecodeIfPresent(.messageText)
-        self.moreInfo = try container.sdkDecodeIfPresent(.moreInfo)
-        self.requestMethod = try container.sdkDecodeIfPresent(.requestMethod)
-        self.requestUrl = try container.sdkDecodeIfPresent(.requestUrl)
-        self.sid = try container.sdkDecodeIfPresent(.sid)
-        self.uri = try container.sdkDecodeIfPresent(.uri)
-        if let value = self.accountSid {
+        accountSid = try container.sdkDecodeIfPresent(.accountSid)
+        apiVersion = try container.sdkDecodeIfPresent(.apiVersion)
+        callSid = try container.sdkDecodeIfPresent(.callSid)
+        dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
+        dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
+        errorCode = try container.sdkDecodeIfPresent(.errorCode)
+        log = try container.sdkDecodeIfPresent(.log)
+        messageDate = try container.sdkDecodeIfPresent(.messageDate)
+        messageText = try container.sdkDecodeIfPresent(.messageText)
+        moreInfo = try container.sdkDecodeIfPresent(.moreInfo)
+        requestMethod = try container.sdkDecodeIfPresent(.requestMethod)
+        requestUrl = try container.sdkDecodeIfPresent(.requestUrl)
+        sid = try container.sdkDecodeIfPresent(.sid)
+        uri = try container.sdkDecodeIfPresent(.uri)
+        if let value = accountSid {
             try validateLength("account_sid", value, min: 34, max: 34)
             try sdkValidatePattern("account_sid", value, sdkPatternc7cb941ab84b)
         }
-        if let value = self.callSid {
+        if let value = callSid {
             try validateLength("call_sid", value, min: 34, max: 34)
             try sdkValidatePattern("call_sid", value, sdkPattern25b2d94fcc27)
         }
-        if let value = self.moreInfo {
+        if let value = moreInfo {
             try sdkValidateUri("more_info", value)
         }
-        if let value = self.requestUrl {
+        if let value = requestUrl {
             try sdkValidateUri("request_url", value)
         }
-        if let value = self.sid {
+        if let value = sid {
             try validateLength("sid", value, min: 34, max: 34)
             try sdkValidatePattern("sid", value, sdkPatternb9fb14eb1cd8)
         }
     }
 }
 
-extension ApiV2010AccountCallCallNotification {
-    public init(accountSid: String? = nil, apiVersion: String? = nil, callSid: String? = nil, dateCreated: String? = nil, dateUpdated: String? = nil, errorCode: String? = nil, log: String? = nil, messageDate: String? = nil, messageText: String? = nil, moreInfo: String? = nil, requestMethod: ApiV2010AccountCallCallNotificationRequestMethod? = nil, requestUrl: String? = nil, sid: String? = nil, uri: String? = nil) throws {
+public extension ApiV2010AccountCallCallNotification {
+    init(
+        accountSid: String? = nil,
+        apiVersion: String? = nil,
+        callSid: String? = nil,
+        dateCreated: String? = nil,
+        dateUpdated: String? = nil,
+        errorCode: String? = nil,
+        log: String? = nil,
+        messageDate: String? = nil,
+        messageText: String? = nil,
+        moreInfo: String? = nil,
+        requestMethod: ApiV2010AccountCallCallNotificationRequestMethod? = nil,
+        requestUrl: String? = nil,
+        sid: String? = nil,
+        uri: String? = nil
+    ) throws {
         self.init()
         (self.accountSid, self.apiVersion) = (accountSid, apiVersion)
         (self.callSid, self.dateCreated) = (callSid, dateCreated)
@@ -281,16 +314,20 @@ extension ApiV2010AccountCallCallNotification {
 /// The HTTP method used to generate the notification. If the notification was generated during a phone call,
 /// this is the HTTP Method used to request the resource on your server. If the notification was generated by
 /// your use of our REST API, this is the HTTP method used to call the resource on our servers.
-public struct ApiV2010AccountCallCallNotificationInstanceRequestMethod: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct ApiV2010AccountCallCallNotificationInstanceRequestMethod: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let get = ApiV2010AccountCallCallNotificationInstanceRequestMethod(rawValue: "GET")
     public static let post = ApiV2010AccountCallCallNotificationInstanceRequestMethod(rawValue: "POST")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -302,16 +339,20 @@ public struct ApiV2010AccountCallCallNotificationInstanceRequestMethod: RawRepre
 /// The HTTP method used to generate the notification. If the notification was generated during a phone call,
 /// this is the HTTP Method used to request the resource on your server. If the notification was generated by
 /// your use of our REST API, this is the HTTP method used to call the resource on our servers.
-public struct ApiV2010AccountCallCallNotificationRequestMethod: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct ApiV2010AccountCallCallNotificationRequestMethod: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let get = ApiV2010AccountCallCallNotificationRequestMethod(rawValue: "GET")
     public static let post = ApiV2010AccountCallCallNotificationRequestMethod(rawValue: "POST")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

@@ -6,8 +6,10 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension MessagesMethods {
-    /// Updates a Message resource to change its body or cancel a message that has not yet been sent. Supply `Body` to replace the message text or set it to an empty string to redact the text; use `Status` to cancel the message. The response returns the updated Message resource.
+public extension MessagesMethods {
+    /// Updates a Message resource to change its body or cancel a message that has not yet been sent. Supply `Body` to
+    /// replace the message text or set it to an empty string to redact the text; use `Status` to cancel the message.
+    /// The response returns the updated Message resource.
     ///
     /// Update a Message resource (used to redact Message `body` text and to cancel not-yet-sent messages)
     ///
@@ -18,7 +20,14 @@ extension MessagesMethods {
     /// - sid: The SID of the Message resource to be updated
     /// - body: The new `body` of the Message resource. To redact the text content
     ///   of a Message, this parameter's value must be an empty string
-    public static func updateMessages(config: ClientConfig, accountSid: String, sid: String, body: String? = nil, status: MessageEnumUpdateStatus? = nil, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountMessage {
+    static func updateMessages(
+        config: ClientConfig,
+        accountSid: String,
+        sid: String,
+        body: String? = nil,
+        status: MessageEnumUpdateStatus? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountMessage {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
@@ -27,6 +36,21 @@ extension MessagesMethods {
 
         let requestBody = UpdateMessagesRequestBody(body: body, status: status)
 
-        return try (await sdkRequest("POST", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Messages/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "updateMessages", options: requestOptions)).data
+        return try await (sdkRequest(
+            "POST",
+            [
+                "/2010-04-01/Accounts/",
+                sdkEncodePathSegment(sdkWireString(accountSid)),
+                "/Messages/",
+                sdkEncodePathSegment(sdkWireString(sid)),
+                ".json",
+            ].joined(),
+            config: config,
+            body: requestBody,
+            contentType: "application/x-www-form-urlencoded",
+            decoder: .json,
+            operationId: "updateMessages",
+            options: requestOptions
+        )).data
     }
 }

@@ -7,7 +7,9 @@ import Foundation
     import FoundationNetworking
 #endif
 public enum ValidationRequestsMethods {
-    /// Creates a caller ID validation request for an account by initiating a verification call to a phone number. Supply `PhoneNumber` in E.164 format; you can also configure the call delay, extension, friendly name, and status callback. The response includes the validation code that someone must enter when the number is called.
+    /// Creates a caller ID validation request for an account by initiating a verification call to a phone number.
+    /// Supply `PhoneNumber` in E.164 format; you can also configure the call delay, extension, friendly name, and
+    /// status callback. The response includes the validation code that someone must enter when the number is called.
     ///
     /// - Parameters:
     /// - accountSid: The SID of the
@@ -28,16 +30,43 @@ public enum ValidationRequestsMethods {
     ///   application.
     /// - statusCallbackMethod: The HTTP method we should use to call
     ///   `status_callback`. Can be: `GET` or `POST`, and the default is `POST`.
-    public static func createValidationRequests(config: ClientConfig, accountSid: String, phoneNumber: String, friendlyName: String? = nil, callDelay: Int? = nil, extension: String? = nil, statusCallback: String? = nil, statusCallbackMethod: CreateValidationRequestsRequestBodyStatusCallbackMethod? = nil, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountValidationRequest {
+    public static func createValidationRequests(
+        config: ClientConfig,
+        accountSid: String,
+        phoneNumber: String,
+        friendlyName: String? = nil,
+        callDelay: Int? = nil,
+        extension: String? = nil,
+        statusCallback: String? = nil,
+        statusCallbackMethod: CreateValidationRequestsRequestBodyStatusCallbackMethod? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountValidationRequest {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
-        if let statusCallback = statusCallback {
+        if let statusCallback {
             try sdkValidateUri("StatusCallback", statusCallback)
         }
 
-        let requestBody = CreateValidationRequestsRequestBody(phoneNumber: phoneNumber, friendlyName: friendlyName, callDelay: callDelay, extension: `extension`, statusCallback: statusCallback, statusCallbackMethod: statusCallbackMethod)
+        let requestBody = CreateValidationRequestsRequestBody(
+            phoneNumber: phoneNumber,
+            friendlyName: friendlyName,
+            callDelay: callDelay,
+            extension: `extension`,
+            statusCallback: statusCallback,
+            statusCallbackMethod: statusCallbackMethod
+        )
 
-        return try (await sdkRequest("POST", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/OutgoingCallerIds.json"].joined(), config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "createValidationRequests", options: requestOptions)).data
+        return try await (sdkRequest(
+            "POST",
+            ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/OutgoingCallerIds.json"]
+                .joined(),
+            config: config,
+            body: requestBody,
+            contentType: "application/x-www-form-urlencoded",
+            decoder: .json,
+            operationId: "createValidationRequests",
+            options: requestOptions
+        )).data
     }
 }

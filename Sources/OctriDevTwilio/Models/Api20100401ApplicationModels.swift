@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Api20100401Application domain models
+/// Api20100401Application domain models
 /// Typed representation of the `ApiV2010AccountApplication` API schema.
 public struct ApiV2010AccountApplication: Codable {
     /// The SID of the Account that created the Application resource.
@@ -76,44 +76,66 @@ public struct ApiV2010AccountApplication: Codable {
     }
 
     init() {
-        (self.accountSid, self.apiVersion, self.dateCreated, self.dateUpdated, self.friendlyName) = (nil, nil, nil, nil, nil)
-        (self.messageStatusCallback, self.sid, self.smsFallbackMethod, self.smsFallbackUrl, self.smsMethod) = (nil, nil, nil, nil, nil)
-        (self.smsStatusCallback, self.smsUrl, self.statusCallback, self.statusCallbackMethod, self.uri) = (nil, nil, nil, nil, nil)
-        (self.voiceCallerIdLookup, self.voiceFallbackMethod, self.voiceFallbackUrl, self.voiceMethod, self.voiceUrl) = (nil, nil, nil, nil, nil)
-        self.publicApplicationConnectEnabled = nil
+        (accountSid, apiVersion, dateCreated, dateUpdated, friendlyName) = (nil, nil, nil, nil, nil)
+        (messageStatusCallback, sid, smsFallbackMethod, smsFallbackUrl, smsMethod) = (nil, nil, nil, nil, nil)
+        (smsStatusCallback, smsUrl, statusCallback, statusCallbackMethod, uri) = (nil, nil, nil, nil, nil)
+        (voiceCallerIdLookup, voiceFallbackMethod, voiceFallbackUrl, voiceMethod, voiceUrl) = (nil, nil, nil, nil, nil)
+        publicApplicationConnectEnabled = nil
     }
 }
 
-extension ApiV2010AccountApplication {
-    public init(from decoder: Decoder) throws {
+public extension ApiV2010AccountApplication {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.accountSid = try container.sdkDecodeIfPresent(.accountSid)
-        self.apiVersion = try container.sdkDecodeIfPresent(.apiVersion)
-        self.dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
-        self.dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
-        self.friendlyName = try container.sdkDecodeIfPresent(.friendlyName)
-        self.messageStatusCallback = try container.sdkDecodeIfPresent(.messageStatusCallback)
-        self.sid = try container.sdkDecodeIfPresent(.sid)
-        self.smsFallbackMethod = try container.sdkDecodeIfPresent(.smsFallbackMethod)
-        self.smsFallbackUrl = try container.sdkDecodeIfPresent(.smsFallbackUrl)
-        self.smsMethod = try container.sdkDecodeIfPresent(.smsMethod)
-        self.smsStatusCallback = try container.sdkDecodeIfPresent(.smsStatusCallback)
-        self.smsUrl = try container.sdkDecodeIfPresent(.smsUrl)
-        self.statusCallback = try container.sdkDecodeIfPresent(.statusCallback)
-        self.statusCallbackMethod = try container.sdkDecodeIfPresent(.statusCallbackMethod)
-        self.uri = try container.sdkDecodeIfPresent(.uri)
-        self.voiceCallerIdLookup = try container.sdkDecodeIfPresent(.voiceCallerIdLookup)
-        self.voiceFallbackMethod = try container.sdkDecodeIfPresent(.voiceFallbackMethod)
-        self.voiceFallbackUrl = try container.sdkDecodeIfPresent(.voiceFallbackUrl)
-        self.voiceMethod = try container.sdkDecodeIfPresent(.voiceMethod)
-        self.voiceUrl = try container.sdkDecodeIfPresent(.voiceUrl)
-        self.publicApplicationConnectEnabled = try container.sdkDecodeIfPresent(.publicApplicationConnectEnabled)
+        accountSid = try container.sdkDecodeIfPresent(.accountSid)
+        apiVersion = try container.sdkDecodeIfPresent(.apiVersion)
+        dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
+        dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
+        friendlyName = try container.sdkDecodeIfPresent(.friendlyName)
+        messageStatusCallback = try container.sdkDecodeIfPresent(.messageStatusCallback)
+        sid = try container.sdkDecodeIfPresent(.sid)
+        smsFallbackMethod = try container.sdkDecodeIfPresent(.smsFallbackMethod)
+        smsFallbackUrl = try container.sdkDecodeIfPresent(.smsFallbackUrl)
+        smsMethod = try container.sdkDecodeIfPresent(.smsMethod)
+        smsStatusCallback = try container.sdkDecodeIfPresent(.smsStatusCallback)
+        smsUrl = try container.sdkDecodeIfPresent(.smsUrl)
+        statusCallback = try container.sdkDecodeIfPresent(.statusCallback)
+        statusCallbackMethod = try container.sdkDecodeIfPresent(.statusCallbackMethod)
+        uri = try container.sdkDecodeIfPresent(.uri)
+        voiceCallerIdLookup = try container.sdkDecodeIfPresent(.voiceCallerIdLookup)
+        voiceFallbackMethod = try container.sdkDecodeIfPresent(.voiceFallbackMethod)
+        voiceFallbackUrl = try container.sdkDecodeIfPresent(.voiceFallbackUrl)
+        voiceMethod = try container.sdkDecodeIfPresent(.voiceMethod)
+        voiceUrl = try container.sdkDecodeIfPresent(.voiceUrl)
+        publicApplicationConnectEnabled = try container.sdkDecodeIfPresent(.publicApplicationConnectEnabled)
         try sdkValidateConstraints()
     }
 }
 
-extension ApiV2010AccountApplication {
-    public init(accountSid: String? = nil, apiVersion: String? = nil, dateCreated: String? = nil, dateUpdated: String? = nil, friendlyName: String? = nil, messageStatusCallback: String? = nil, sid: String? = nil, smsFallbackMethod: ApiV2010AccountApplicationSmsFallbackMethod? = nil, smsFallbackUrl: String? = nil, smsMethod: ApiV2010AccountApplicationSmsMethod? = nil, smsStatusCallback: String? = nil, smsUrl: String? = nil, statusCallback: String? = nil, statusCallbackMethod: ApiV2010AccountApplicationStatusCallbackMethod? = nil, uri: String? = nil, voiceCallerIdLookup: Bool? = nil, voiceFallbackMethod: ApiV2010AccountApplicationVoiceFallbackMethod? = nil, voiceFallbackUrl: String? = nil, voiceMethod: ApiV2010AccountApplicationVoiceMethod? = nil, voiceUrl: String? = nil, publicApplicationConnectEnabled: Bool? = nil) throws {
+public extension ApiV2010AccountApplication {
+    init(
+        accountSid: String? = nil,
+        apiVersion: String? = nil,
+        dateCreated: String? = nil,
+        dateUpdated: String? = nil,
+        friendlyName: String? = nil,
+        messageStatusCallback: String? = nil,
+        sid: String? = nil,
+        smsFallbackMethod: ApiV2010AccountApplicationSmsFallbackMethod? = nil,
+        smsFallbackUrl: String? = nil,
+        smsMethod: ApiV2010AccountApplicationSmsMethod? = nil,
+        smsStatusCallback: String? = nil,
+        smsUrl: String? = nil,
+        statusCallback: String? = nil,
+        statusCallbackMethod: ApiV2010AccountApplicationStatusCallbackMethod? = nil,
+        uri: String? = nil,
+        voiceCallerIdLookup: Bool? = nil,
+        voiceFallbackMethod: ApiV2010AccountApplicationVoiceFallbackMethod? = nil,
+        voiceFallbackUrl: String? = nil,
+        voiceMethod: ApiV2010AccountApplicationVoiceMethod? = nil,
+        voiceUrl: String? = nil,
+        publicApplicationConnectEnabled: Bool? = nil
+    ) throws {
         self.init()
         (self.accountSid, self.apiVersion) = (accountSid, apiVersion)
         (self.dateCreated, self.dateUpdated) = (dateCreated, dateUpdated)
@@ -132,49 +154,53 @@ extension ApiV2010AccountApplication {
 
 extension ApiV2010AccountApplication {
     func sdkValidateConstraints() throws {
-        if let value = self.accountSid {
+        if let value = accountSid {
             try validateLength("account_sid", value, min: 34, max: 34)
             try sdkValidatePattern("account_sid", value, sdkPatternc7cb941ab84b)
         }
-        if let value = self.messageStatusCallback {
+        if let value = messageStatusCallback {
             try sdkValidateUri("message_status_callback", value)
         }
-        if let value = self.sid {
+        if let value = sid {
             try validateLength("sid", value, min: 34, max: 34)
             try sdkValidatePattern("sid", value, sdkPattern22964f269354)
         }
-        if let value = self.smsFallbackUrl {
+        if let value = smsFallbackUrl {
             try sdkValidateUri("sms_fallback_url", value)
         }
-        if let value = self.smsStatusCallback {
+        if let value = smsStatusCallback {
             try sdkValidateUri("sms_status_callback", value)
         }
-        if let value = self.smsUrl {
+        if let value = smsUrl {
             try sdkValidateUri("sms_url", value)
         }
-        if let value = self.statusCallback {
+        if let value = statusCallback {
             try sdkValidateUri("status_callback", value)
         }
-        if let value = self.voiceFallbackUrl {
+        if let value = voiceFallbackUrl {
             try sdkValidateUri("voice_fallback_url", value)
         }
-        if let value = self.voiceUrl {
+        if let value = voiceUrl {
             try sdkValidateUri("voice_url", value)
         }
     }
 }
 
 /// The HTTP method we use to call `voice_fallback_url`. Can be: `GET` or `POST`.
-public struct ApiV2010AccountApplicationVoiceFallbackMethod: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct ApiV2010AccountApplicationVoiceFallbackMethod: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let get = ApiV2010AccountApplicationVoiceFallbackMethod(rawValue: "GET")
     public static let post = ApiV2010AccountApplicationVoiceFallbackMethod(rawValue: "POST")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -187,13 +213,16 @@ public struct ApiV2010AccountApplicationVoiceFallbackMethod: RawRepresentable, H
 public struct ApiV2010AccountApplicationSmsMethod: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let get = ApiV2010AccountApplicationSmsMethod(rawValue: "GET")
     public static let post = ApiV2010AccountApplicationSmsMethod(rawValue: "POST")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -206,13 +235,16 @@ public struct ApiV2010AccountApplicationSmsMethod: RawRepresentable, Hashable, C
 public struct ApiV2010AccountApplicationVoiceMethod: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let get = ApiV2010AccountApplicationVoiceMethod(rawValue: "GET")
     public static let post = ApiV2010AccountApplicationVoiceMethod(rawValue: "POST")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -222,16 +254,20 @@ public struct ApiV2010AccountApplicationVoiceMethod: RawRepresentable, Hashable,
 }
 
 /// The HTTP method we use to call `sms_fallback_url`. Can be: `GET` or `POST`.
-public struct ApiV2010AccountApplicationSmsFallbackMethod: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct ApiV2010AccountApplicationSmsFallbackMethod: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let get = ApiV2010AccountApplicationSmsFallbackMethod(rawValue: "GET")
     public static let post = ApiV2010AccountApplicationSmsFallbackMethod(rawValue: "POST")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -241,16 +277,20 @@ public struct ApiV2010AccountApplicationSmsFallbackMethod: RawRepresentable, Has
 }
 
 /// The HTTP method we use to call `status_callback`. Can be: `GET` or `POST`.
-public struct ApiV2010AccountApplicationStatusCallbackMethod: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct ApiV2010AccountApplicationStatusCallbackMethod: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let get = ApiV2010AccountApplicationStatusCallbackMethod(rawValue: "GET")
     public static let post = ApiV2010AccountApplicationStatusCallbackMethod(rawValue: "POST")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

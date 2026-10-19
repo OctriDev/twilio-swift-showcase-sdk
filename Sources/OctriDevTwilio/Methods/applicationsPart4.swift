@@ -6,7 +6,7 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ApplicationsMethods {
+public extension ApplicationsMethods {
     /// Delete the application by the specified application sid
     ///
     /// - Parameters:
@@ -15,17 +15,36 @@ extension ApplicationsMethods {
     ///   Application resources to delete.
     /// - sid: The Twilio-provided string that uniquely identifies the Application
     ///   resource to delete.
-    public static func deleteApplications(config: ClientConfig, accountSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+    static func deleteApplications(
+        config: ClientConfig,
+        accountSid: String,
+        sid: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
         try validateLength("Sid", sid, min: 34, max: 34)
         try sdkValidatePattern("Sid", sid, sdkPattern22964f269354)
 
-        return try (await sdkRequest("DELETE", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Applications/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, decoder: .empty, operationId: "deleteApplications", options: requestOptions)).data
+        return try await (sdkRequest(
+            "DELETE",
+            [
+                "/2010-04-01/Accounts/",
+                sdkEncodePathSegment(sdkWireString(accountSid)),
+                "/Applications/",
+                sdkEncodePathSegment(sdkWireString(sid)),
+                ".json",
+            ].joined(),
+            config: config,
+            decoder: .empty,
+            operationId: "deleteApplications",
+            options: requestOptions
+        )).data
     }
 
-    /// Retrieves an application from an account by its SID. Supply the account SID and application SID to identify the resource and retrieve its configuration, including voice and messaging settings.
+    /// Retrieves an application from an account by its SID. Supply the account SID and application SID to identify the
+    /// resource and retrieve its configuration, including voice and messaging settings.
     ///
     /// Fetch the application specified by the provided sid
     ///
@@ -35,13 +54,31 @@ extension ApplicationsMethods {
     ///   Application resource to fetch.
     /// - sid: The Twilio-provided string that uniquely identifies the Application
     ///   resource to fetch.
-    public static func fetchApplications(config: ClientConfig, accountSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountApplication {
+    static func fetchApplications(
+        config: ClientConfig,
+        accountSid: String,
+        sid: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountApplication {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
         try validateLength("Sid", sid, min: 34, max: 34)
         try sdkValidatePattern("Sid", sid, sdkPattern22964f269354)
 
-        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Applications/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, decoder: .json, operationId: "fetchApplications", options: requestOptions)).data
+        return try await (sdkRequest(
+            "GET",
+            [
+                "/2010-04-01/Accounts/",
+                sdkEncodePathSegment(sdkWireString(accountSid)),
+                "/Applications/",
+                sdkEncodePathSegment(sdkWireString(sid)),
+                ".json",
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "fetchApplications",
+            options: requestOptions
+        )).data
     }
 }
