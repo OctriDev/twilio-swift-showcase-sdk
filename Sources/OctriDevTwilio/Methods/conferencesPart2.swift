@@ -6,8 +6,9 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ConferencesMethods {
-    /// Retrieves a specific conference for an account. Use the conference SID to identify it and inspect its status, region, and reason for ending.
+public extension ConferencesMethods {
+    /// Retrieves a specific conference for an account. Use the conference SID to identify it and inspect its status,
+    /// region, and reason for ending.
     ///
     /// Fetch an instance of a conference
     ///
@@ -17,13 +18,31 @@ extension ConferencesMethods {
     ///   Conference resource(s) to fetch.
     /// - sid: The Twilio-provided string that uniquely identifies the Conference
     ///   resource to fetch
-    public static func fetchConferences(config: ClientConfig, accountSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountConference {
+    static func fetchConferences(
+        config: ClientConfig,
+        accountSid: String,
+        sid: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountConference {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
         try validateLength("Sid", sid, min: 34, max: 34)
         try sdkValidatePattern("Sid", sid, sdkPatternb5f37fc1f4d4)
 
-        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Conferences/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, decoder: .json, operationId: "fetchConferences", options: requestOptions)).data
+        return try await (sdkRequest(
+            "GET",
+            [
+                "/2010-04-01/Accounts/",
+                sdkEncodePathSegment(sdkWireString(accountSid)),
+                "/Conferences/",
+                sdkEncodePathSegment(sdkWireString(sid)),
+                ".json",
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "fetchConferences",
+            options: requestOptions
+        )).data
     }
 }

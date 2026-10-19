@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension CallsMethods {
-    public struct UpdateCallsOptions: Codable {
+public extension CallsMethods {
+    struct UpdateCallsOptions: Codable {
         public var accountSid: String
         public var sid: String
         public var url: String?
@@ -26,7 +26,9 @@ extension CallsMethods {
         }
     }
 
-    /// Updates a call by redirecting it to new TwiML instructions or by terminating it. Provide either a `Url` to retrieve instructions from or `Twiml` instructions directly; these fields are mutually exclusive. Use `Status` to cancel or complete the call, or configure callback and request-method settings for a redirect.
+    /// Updates a call by redirecting it to new TwiML instructions or by terminating it. Provide either a `Url` to
+    /// retrieve instructions from or `Twiml` instructions directly; these fields are mutually exclusive. Use `Status`
+    /// to cancel or complete the call, or configure callback and request-method settings for a redirect.
     ///
     /// Initiates a call redirect or terminates a call
     ///
@@ -63,7 +65,11 @@ extension CallsMethods {
     ///   Twiml from url. Twiml and url parameters are mutually exclusive
     /// - timeLimit: The maximum duration of the call in seconds. Constraints depend
     ///   on account and configuration.
-    public static func updateCalls(config: ClientConfig, options: UpdateCallsOptions, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountCall {
+    static func updateCalls(
+        config: ClientConfig,
+        options: UpdateCallsOptions,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountCall {
         try validateLength("AccountSid", options.accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", options.accountSid, sdkPatternc7cb941ab84b)
 
@@ -84,6 +90,21 @@ extension CallsMethods {
 
         let requestBody = UpdateCallsRequestBody(options: options)
 
-        return try (await sdkRequest("POST", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(options.accountSid)), "/Calls/", sdkEncodePathSegment(sdkWireString(options.sid)), ".json"].joined(), config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "updateCalls", options: requestOptions)).data
+        return try await (sdkRequest(
+            "POST",
+            [
+                "/2010-04-01/Accounts/",
+                sdkEncodePathSegment(sdkWireString(options.accountSid)),
+                "/Calls/",
+                sdkEncodePathSegment(sdkWireString(options.sid)),
+                ".json",
+            ].joined(),
+            config: config,
+            body: requestBody,
+            contentType: "application/x-www-form-urlencoded",
+            decoder: .json,
+            operationId: "updateCalls",
+            options: requestOptions
+        )).data
     }
 }

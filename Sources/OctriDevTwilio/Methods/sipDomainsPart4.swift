@@ -6,8 +6,9 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension SipDomainsMethods {
-    /// Retrieves a SIP domain from an account. Provide the account and domain identifiers to select the domain and view its configuration.
+public extension SipDomainsMethods {
+    /// Retrieves a SIP domain from an account. Provide the account and domain identifiers to select the domain and view
+    /// its configuration.
     ///
     /// Fetch an instance of a Domain
     ///
@@ -17,13 +18,31 @@ extension SipDomainsMethods {
     ///   SipDomain resource to fetch.
     /// - sid: The Twilio-provided string that uniquely identifies the SipDomain
     ///   resource to fetch.
-    public static func fetchSipDomains(config: ClientConfig, accountSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountSipSipDomain {
+    static func fetchSipDomains(
+        config: ClientConfig,
+        accountSid: String,
+        sid: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountSipSipDomain {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
         try validateLength("Sid", sid, min: 34, max: 34)
         try sdkValidatePattern("Sid", sid, sdkPatterna7d75da61532)
 
-        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/SIP/Domains/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, decoder: .json, operationId: "fetchSipDomains", options: requestOptions)).data
+        return try await (sdkRequest(
+            "GET",
+            [
+                "/2010-04-01/Accounts/",
+                sdkEncodePathSegment(sdkWireString(accountSid)),
+                "/SIP/Domains/",
+                sdkEncodePathSegment(sdkWireString(sid)),
+                ".json",
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "fetchSipDomains",
+            options: requestOptions
+        )).data
     }
 }

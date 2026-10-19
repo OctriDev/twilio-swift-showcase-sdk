@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Api20100401IncomingPhoneNumber domain models
+/// Api20100401IncomingPhoneNumber domain models
 /// Typed representation of the `ApiV2010AccountIncomingPhoneNumber` API schema.
 public struct ApiV2010AccountIncomingPhoneNumber: Codable {
     /// The SID of the Account that created this IncomingPhoneNumber resource.
@@ -130,61 +130,97 @@ public struct ApiV2010AccountIncomingPhoneNumber: Codable {
     }
 
     init() {
-        (self.accountSid, self.addressSid, self.addressRequirements, self.apiVersion, self.beta) = (nil, nil, nil, nil, nil)
-        (self.capabilities, self.dateCreated, self.dateUpdated, self.friendlyName, self.identitySid) = (nil, nil, nil, nil, nil)
-        (self.phoneNumber, self.origin, self.sid, self.smsApplicationSid, self.smsFallbackMethod) = (nil, nil, nil, nil, nil)
-        (self.smsFallbackUrl, self.smsMethod, self.smsUrl, self.statusCallback, self.statusCallbackMethod) = (nil, nil, nil, nil, nil)
-        (self.trunkSid, self.uri, self.voiceReceiveMode, self.voiceApplicationSid, self.voiceCallerIdLookup) = (nil, nil, nil, nil, nil)
-        (self.voiceFallbackMethod, self.voiceFallbackUrl, self.voiceMethod, self.voiceUrl, self.emergencyStatus) = (nil, nil, nil, nil, nil)
-        (self.emergencyAddressSid, self.emergencyAddressStatus, self.bundleSid, self.status, self.type) = (nil, nil, nil, nil, nil)
+        (accountSid, addressSid, addressRequirements, apiVersion, beta) = (nil, nil, nil, nil, nil)
+        (capabilities, dateCreated, dateUpdated, friendlyName, identitySid) = (nil, nil, nil, nil, nil)
+        (phoneNumber, origin, sid, smsApplicationSid, smsFallbackMethod) = (nil, nil, nil, nil, nil)
+        (smsFallbackUrl, smsMethod, smsUrl, statusCallback, statusCallbackMethod) = (nil, nil, nil, nil, nil)
+        (trunkSid, uri, voiceReceiveMode, voiceApplicationSid, voiceCallerIdLookup) = (nil, nil, nil, nil, nil)
+        (voiceFallbackMethod, voiceFallbackUrl, voiceMethod, voiceUrl, emergencyStatus) = (nil, nil, nil, nil, nil)
+        (emergencyAddressSid, emergencyAddressStatus, bundleSid, status, type) = (nil, nil, nil, nil, nil)
     }
 }
 
-extension ApiV2010AccountIncomingPhoneNumber {
-    public init(from decoder: Decoder) throws {
+public extension ApiV2010AccountIncomingPhoneNumber {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.accountSid = try container.sdkDecodeIfPresent(.accountSid)
-        self.addressSid = try container.sdkDecodeIfPresent(.addressSid)
-        self.addressRequirements = try container.sdkDecodeIfPresent(.addressRequirements)
-        self.apiVersion = try container.sdkDecodeIfPresent(.apiVersion)
-        self.beta = try container.sdkDecodeIfPresent(.beta)
-        self.capabilities = try container.sdkDecodeIfPresent(.capabilities)
-        self.dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
-        self.dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
-        self.friendlyName = try container.sdkDecodeIfPresent(.friendlyName)
-        self.identitySid = try container.sdkDecodeIfPresent(.identitySid)
-        self.phoneNumber = try container.sdkDecodeIfPresent(.phoneNumber)
-        self.origin = try container.sdkDecodeIfPresent(.origin)
-        self.sid = try container.sdkDecodeIfPresent(.sid)
-        self.smsApplicationSid = try container.sdkDecodeIfPresent(.smsApplicationSid)
-        self.smsFallbackMethod = try container.sdkDecodeIfPresent(.smsFallbackMethod)
-        self.smsFallbackUrl = try container.sdkDecodeIfPresent(.smsFallbackUrl)
-        self.smsMethod = try container.sdkDecodeIfPresent(.smsMethod)
-        self.smsUrl = try container.sdkDecodeIfPresent(.smsUrl)
-        self.statusCallback = try container.sdkDecodeIfPresent(.statusCallback)
-        self.statusCallbackMethod = try container.sdkDecodeIfPresent(.statusCallbackMethod)
-        self.trunkSid = try container.sdkDecodeIfPresent(.trunkSid)
-        self.uri = try container.sdkDecodeIfPresent(.uri)
-        self.voiceReceiveMode = try container.sdkDecodeIfPresent(.voiceReceiveMode)
-        self.voiceApplicationSid = try container.sdkDecodeIfPresent(.voiceApplicationSid)
-        self.voiceCallerIdLookup = try container.sdkDecodeIfPresent(.voiceCallerIdLookup)
-        self.voiceFallbackMethod = try container.sdkDecodeIfPresent(.voiceFallbackMethod)
-        self.voiceFallbackUrl = try container.sdkDecodeIfPresent(.voiceFallbackUrl)
-        self.voiceMethod = try container.sdkDecodeIfPresent(.voiceMethod)
-        self.voiceUrl = try container.sdkDecodeIfPresent(.voiceUrl)
-        self.emergencyStatus = try container.sdkDecodeIfPresent(.emergencyStatus)
-        self.emergencyAddressSid = try container.sdkDecodeIfPresent(.emergencyAddressSid)
-        self.emergencyAddressStatus = try container.sdkDecodeIfPresent(.emergencyAddressStatus)
-        self.bundleSid = try container.sdkDecodeIfPresent(.bundleSid)
-        self.status = try container.sdkDecodeIfPresent(.status)
-        self.type = try container.sdkDecodeIfPresent(.type)
+        accountSid = try container.sdkDecodeIfPresent(.accountSid)
+        addressSid = try container.sdkDecodeIfPresent(.addressSid)
+        addressRequirements = try container.sdkDecodeIfPresent(.addressRequirements)
+        apiVersion = try container.sdkDecodeIfPresent(.apiVersion)
+        beta = try container.sdkDecodeIfPresent(.beta)
+        capabilities = try container.sdkDecodeIfPresent(.capabilities)
+        dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
+        dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
+        friendlyName = try container.sdkDecodeIfPresent(.friendlyName)
+        identitySid = try container.sdkDecodeIfPresent(.identitySid)
+        phoneNumber = try container.sdkDecodeIfPresent(.phoneNumber)
+        origin = try container.sdkDecodeIfPresent(.origin)
+        sid = try container.sdkDecodeIfPresent(.sid)
+        smsApplicationSid = try container.sdkDecodeIfPresent(.smsApplicationSid)
+        smsFallbackMethod = try container.sdkDecodeIfPresent(.smsFallbackMethod)
+        smsFallbackUrl = try container.sdkDecodeIfPresent(.smsFallbackUrl)
+        smsMethod = try container.sdkDecodeIfPresent(.smsMethod)
+        smsUrl = try container.sdkDecodeIfPresent(.smsUrl)
+        statusCallback = try container.sdkDecodeIfPresent(.statusCallback)
+        statusCallbackMethod = try container.sdkDecodeIfPresent(.statusCallbackMethod)
+        trunkSid = try container.sdkDecodeIfPresent(.trunkSid)
+        uri = try container.sdkDecodeIfPresent(.uri)
+        voiceReceiveMode = try container.sdkDecodeIfPresent(.voiceReceiveMode)
+        voiceApplicationSid = try container.sdkDecodeIfPresent(.voiceApplicationSid)
+        voiceCallerIdLookup = try container.sdkDecodeIfPresent(.voiceCallerIdLookup)
+        voiceFallbackMethod = try container.sdkDecodeIfPresent(.voiceFallbackMethod)
+        voiceFallbackUrl = try container.sdkDecodeIfPresent(.voiceFallbackUrl)
+        voiceMethod = try container.sdkDecodeIfPresent(.voiceMethod)
+        voiceUrl = try container.sdkDecodeIfPresent(.voiceUrl)
+        emergencyStatus = try container.sdkDecodeIfPresent(.emergencyStatus)
+        emergencyAddressSid = try container.sdkDecodeIfPresent(.emergencyAddressSid)
+        emergencyAddressStatus = try container.sdkDecodeIfPresent(.emergencyAddressStatus)
+        bundleSid = try container.sdkDecodeIfPresent(.bundleSid)
+        status = try container.sdkDecodeIfPresent(.status)
+        type = try container.sdkDecodeIfPresent(.type)
         try sdkValidateConstraintsPart1()
         try sdkValidateConstraintsPart2()
     }
 }
 
-extension ApiV2010AccountIncomingPhoneNumber {
-    public init(accountSid: String? = nil, addressSid: String? = nil, addressRequirements: IncomingPhoneNumberEnumAddressRequirement? = nil, apiVersion: String? = nil, beta: Bool? = nil, capabilities: ApiV2010AccountIncomingPhoneNumberCapabilities? = nil, dateCreated: String? = nil, dateUpdated: String? = nil, friendlyName: String? = nil, identitySid: String? = nil, phoneNumber: String? = nil, origin: String? = nil, sid: String? = nil, smsApplicationSid: String? = nil, smsFallbackMethod: ApiV2010AccountIncomingPhoneNumberSmsFallbackMethod? = nil, smsFallbackUrl: String? = nil, smsMethod: ApiV2010AccountIncomingPhoneNumberSmsMethod? = nil, smsUrl: String? = nil, statusCallback: String? = nil, statusCallbackMethod: ApiV2010AccountIncomingPhoneNumberStatusCallbackMethod? = nil, trunkSid: String? = nil, uri: String? = nil, voiceReceiveMode: IncomingPhoneNumberEnumVoiceReceiveMode? = nil, voiceApplicationSid: String? = nil, voiceCallerIdLookup: Bool? = nil, voiceFallbackMethod: ApiV2010AccountIncomingPhoneNumberVoiceFallbackMethod? = nil, voiceFallbackUrl: String? = nil, voiceMethod: ApiV2010AccountIncomingPhoneNumberVoiceMethod? = nil, voiceUrl: String? = nil, emergencyStatus: IncomingPhoneNumberEnumEmergencyStatus? = nil, emergencyAddressSid: String? = nil, emergencyAddressStatus: IncomingPhoneNumberEnumEmergencyAddressStatus? = nil, bundleSid: String? = nil, status: String? = nil, type: String? = nil) throws {
+public extension ApiV2010AccountIncomingPhoneNumber {
+    init(
+        accountSid: String? = nil,
+        addressSid: String? = nil,
+        addressRequirements: IncomingPhoneNumberEnumAddressRequirement? = nil,
+        apiVersion: String? = nil,
+        beta: Bool? = nil,
+        capabilities: ApiV2010AccountIncomingPhoneNumberCapabilities? = nil,
+        dateCreated: String? = nil,
+        dateUpdated: String? = nil,
+        friendlyName: String? = nil,
+        identitySid: String? = nil,
+        phoneNumber: String? = nil,
+        origin: String? = nil,
+        sid: String? = nil,
+        smsApplicationSid: String? = nil,
+        smsFallbackMethod: ApiV2010AccountIncomingPhoneNumberSmsFallbackMethod? = nil,
+        smsFallbackUrl: String? = nil,
+        smsMethod: ApiV2010AccountIncomingPhoneNumberSmsMethod? = nil,
+        smsUrl: String? = nil,
+        statusCallback: String? = nil,
+        statusCallbackMethod: ApiV2010AccountIncomingPhoneNumberStatusCallbackMethod? = nil,
+        trunkSid: String? = nil,
+        uri: String? = nil,
+        voiceReceiveMode: IncomingPhoneNumberEnumVoiceReceiveMode? = nil,
+        voiceApplicationSid: String? = nil,
+        voiceCallerIdLookup: Bool? = nil,
+        voiceFallbackMethod: ApiV2010AccountIncomingPhoneNumberVoiceFallbackMethod? = nil,
+        voiceFallbackUrl: String? = nil,
+        voiceMethod: ApiV2010AccountIncomingPhoneNumberVoiceMethod? = nil,
+        voiceUrl: String? = nil,
+        emergencyStatus: IncomingPhoneNumberEnumEmergencyStatus? = nil,
+        emergencyAddressSid: String? = nil,
+        emergencyAddressStatus: IncomingPhoneNumberEnumEmergencyAddressStatus? = nil,
+        bundleSid: String? = nil,
+        status: String? = nil,
+        type: String? = nil
+    ) throws {
         self.init()
         (self.accountSid, self.addressSid) = (accountSid, addressSid)
         (self.addressRequirements, self.apiVersion) = (addressRequirements, apiVersion)
@@ -211,47 +247,47 @@ extension ApiV2010AccountIncomingPhoneNumber {
 
 extension ApiV2010AccountIncomingPhoneNumber {
     func sdkValidateConstraintsPart1() throws {
-        if let value = self.accountSid {
+        if let value = accountSid {
             try validateLength("account_sid", value, min: 34, max: 34)
             try sdkValidatePattern("account_sid", value, sdkPatternc7cb941ab84b)
         }
-        if let value = self.addressSid {
+        if let value = addressSid {
             try validateLength("address_sid", value, min: 34, max: 34)
             try sdkValidatePattern("address_sid", value, sdkPattern843918c2faa5)
         }
-        if let value = self.identitySid {
+        if let value = identitySid {
             try validateLength("identity_sid", value, min: 34, max: 34)
             try sdkValidatePattern("identity_sid", value, sdkPatternb1c5f8c2b58e)
         }
-        if let value = self.sid {
+        if let value = sid {
             try validateLength("sid", value, min: 34, max: 34)
             try sdkValidatePattern("sid", value, sdkPattern9792ce0bb10f)
         }
-        if let value = self.smsApplicationSid {
+        if let value = smsApplicationSid {
             try validateLength("sms_application_sid", value, min: 34, max: 34)
             try sdkValidatePattern("sms_application_sid", value, sdkPattern22964f269354)
         }
-        if let value = self.smsFallbackUrl {
+        if let value = smsFallbackUrl {
             try sdkValidateUri("sms_fallback_url", value)
         }
-        if let value = self.smsUrl {
+        if let value = smsUrl {
             try sdkValidateUri("sms_url", value)
         }
-        if let value = self.statusCallback {
+        if let value = statusCallback {
             try sdkValidateUri("status_callback", value)
         }
-        if let value = self.trunkSid {
+        if let value = trunkSid {
             try validateLength("trunk_sid", value, min: 34, max: 34)
             try sdkValidatePattern("trunk_sid", value, sdkPatternf2a34098ee6c)
         }
-        if let value = self.voiceApplicationSid {
+        if let value = voiceApplicationSid {
             try validateLength("voice_application_sid", value, min: 34, max: 34)
             try sdkValidatePattern("voice_application_sid", value, sdkPattern22964f269354)
         }
-        if let value = self.voiceFallbackUrl {
+        if let value = voiceFallbackUrl {
             try sdkValidateUri("voice_fallback_url", value)
         }
-        if let value = self.voiceUrl {
+        if let value = voiceUrl {
             try sdkValidateUri("voice_url", value)
         }
     }
@@ -259,11 +295,11 @@ extension ApiV2010AccountIncomingPhoneNumber {
 
 extension ApiV2010AccountIncomingPhoneNumber {
     func sdkValidateConstraintsPart2() throws {
-        if let value = self.emergencyAddressSid {
+        if let value = emergencyAddressSid {
             try validateLength("emergency_address_sid", value, min: 34, max: 34)
             try sdkValidatePattern("emergency_address_sid", value, sdkPattern843918c2faa5)
         }
-        if let value = self.bundleSid {
+        if let value = bundleSid {
             try validateLength("bundle_sid", value, min: 34, max: 34)
             try sdkValidatePattern("bundle_sid", value, sdkPattern7e55e041c64e)
         }
@@ -290,22 +326,22 @@ public struct ApiV2010AccountIncomingPhoneNumberCapabilities: Codable {
     }
 
     init() {
-        (self.mms, self.sms, self.voice, self.fax) = (nil, nil, nil, nil)
+        (mms, sms, voice, fax) = (nil, nil, nil, nil)
     }
 }
 
-extension ApiV2010AccountIncomingPhoneNumberCapabilities {
-    public init(from decoder: Decoder) throws {
+public extension ApiV2010AccountIncomingPhoneNumberCapabilities {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.mms = try container.sdkDecodeIfPresent(.mms)
-        self.sms = try container.sdkDecodeIfPresent(.sms)
-        self.voice = try container.sdkDecodeIfPresent(.voice)
-        self.fax = try container.sdkDecodeIfPresent(.fax)
+        mms = try container.sdkDecodeIfPresent(.mms)
+        sms = try container.sdkDecodeIfPresent(.sms)
+        voice = try container.sdkDecodeIfPresent(.voice)
+        fax = try container.sdkDecodeIfPresent(.fax)
     }
 }
 
-extension ApiV2010AccountIncomingPhoneNumberCapabilities {
-    public init(mms: Bool? = nil, sms: Bool? = nil, voice: Bool? = nil, fax: Bool? = nil) {
+public extension ApiV2010AccountIncomingPhoneNumberCapabilities {
+    init(mms: Bool? = nil, sms: Bool? = nil, voice: Bool? = nil, fax: Bool? = nil) {
         self.init()
         (self.mms, self.sms) = (mms, sms)
         (self.voice, self.fax) = (voice, fax)
@@ -314,16 +350,20 @@ extension ApiV2010AccountIncomingPhoneNumberCapabilities {
 
 /// The parameter displays if emergency calling is enabled for this number. Active numbers may place emergency
 /// calls by dialing valid emergency numbers for the country.
-public struct IncomingPhoneNumberEnumEmergencyStatus: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct IncomingPhoneNumberEnumEmergencyStatus: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let active = IncomingPhoneNumberEnumEmergencyStatus(rawValue: "Active")
     public static let inactive = IncomingPhoneNumberEnumEmergencyStatus(rawValue: "Inactive")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -333,16 +373,20 @@ public struct IncomingPhoneNumberEnumEmergencyStatus: RawRepresentable, Hashable
 }
 
 /// The HTTP method we use to call `status_callback`. Can be: `GET` or `POST`.
-public struct ApiV2010AccountIncomingPhoneNumberStatusCallbackMethod: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct ApiV2010AccountIncomingPhoneNumberStatusCallbackMethod: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let get = ApiV2010AccountIncomingPhoneNumberStatusCallbackMethod(rawValue: "GET")
     public static let post = ApiV2010AccountIncomingPhoneNumberStatusCallbackMethod(rawValue: "POST")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -352,16 +396,20 @@ public struct ApiV2010AccountIncomingPhoneNumberStatusCallbackMethod: RawReprese
 }
 
 /// The HTTP method we use to call `sms_fallback_url`. Can be: `GET` or `POST`.
-public struct ApiV2010AccountIncomingPhoneNumberSmsFallbackMethod: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct ApiV2010AccountIncomingPhoneNumberSmsFallbackMethod: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let get = ApiV2010AccountIncomingPhoneNumberSmsFallbackMethod(rawValue: "GET")
     public static let post = ApiV2010AccountIncomingPhoneNumberSmsFallbackMethod(rawValue: "POST")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -372,10 +420,14 @@ public struct ApiV2010AccountIncomingPhoneNumberSmsFallbackMethod: RawRepresenta
 
 /// Whether the phone number requires an Address registered with Twilio. Can be: `none`, `any`, `local`, or
 /// `foreign`.
-public struct IncomingPhoneNumberEnumAddressRequirement: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct IncomingPhoneNumberEnumAddressRequirement: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let none = IncomingPhoneNumberEnumAddressRequirement(rawValue: "none")
     public static let any = IncomingPhoneNumberEnumAddressRequirement(rawValue: "any")
     public static let local = IncomingPhoneNumberEnumAddressRequirement(rawValue: "local")
@@ -383,7 +435,7 @@ public struct IncomingPhoneNumberEnumAddressRequirement: RawRepresentable, Hasha
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -393,16 +445,20 @@ public struct IncomingPhoneNumberEnumAddressRequirement: RawRepresentable, Hasha
 }
 
 /// The HTTP method we use to call `voice_url`. Can be: `GET` or `POST`.
-public struct ApiV2010AccountIncomingPhoneNumberVoiceMethod: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct ApiV2010AccountIncomingPhoneNumberVoiceMethod: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let get = ApiV2010AccountIncomingPhoneNumberVoiceMethod(rawValue: "GET")
     public static let post = ApiV2010AccountIncomingPhoneNumberVoiceMethod(rawValue: "POST")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -412,16 +468,20 @@ public struct ApiV2010AccountIncomingPhoneNumberVoiceMethod: RawRepresentable, H
 }
 
 /// The HTTP method we use to call `sms_url`. Can be: `GET` or `POST`.
-public struct ApiV2010AccountIncomingPhoneNumberSmsMethod: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct ApiV2010AccountIncomingPhoneNumberSmsMethod: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let get = ApiV2010AccountIncomingPhoneNumberSmsMethod(rawValue: "GET")
     public static let post = ApiV2010AccountIncomingPhoneNumberSmsMethod(rawValue: "POST")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -432,20 +492,28 @@ public struct ApiV2010AccountIncomingPhoneNumberSmsMethod: RawRepresentable, Has
 
 /// The status of address registration with emergency services. A registered emergency address will be used
 /// during handling of emergency calls from this number.
-public struct IncomingPhoneNumberEnumEmergencyAddressStatus: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct IncomingPhoneNumberEnumEmergencyAddressStatus: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let registered = IncomingPhoneNumberEnumEmergencyAddressStatus(rawValue: "registered")
     public static let unregistered = IncomingPhoneNumberEnumEmergencyAddressStatus(rawValue: "unregistered")
-    public static let pendingRegistration = IncomingPhoneNumberEnumEmergencyAddressStatus(rawValue: "pending-registration")
-    public static let registrationFailure = IncomingPhoneNumberEnumEmergencyAddressStatus(rawValue: "registration-failure")
-    public static let pendingUnregistration = IncomingPhoneNumberEnumEmergencyAddressStatus(rawValue: "pending-unregistration")
-    public static let unregistrationFailure = IncomingPhoneNumberEnumEmergencyAddressStatus(rawValue: "unregistration-failure")
+    public static let pendingRegistration =
+        IncomingPhoneNumberEnumEmergencyAddressStatus(rawValue: "pending-registration")
+    public static let registrationFailure =
+        IncomingPhoneNumberEnumEmergencyAddressStatus(rawValue: "registration-failure")
+    public static let pendingUnregistration =
+        IncomingPhoneNumberEnumEmergencyAddressStatus(rawValue: "pending-unregistration")
+    public static let unregistrationFailure =
+        IncomingPhoneNumberEnumEmergencyAddressStatus(rawValue: "unregistration-failure")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

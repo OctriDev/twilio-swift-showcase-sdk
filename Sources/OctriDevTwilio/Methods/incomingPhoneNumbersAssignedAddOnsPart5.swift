@@ -6,7 +6,7 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension IncomingPhoneNumbersAssignedAddOnsMethods {
+public extension IncomingPhoneNumbersAssignedAddOnsMethods {
     /// Assign an Add-on installation to the Number specified.
     ///
     /// - Parameters:
@@ -15,7 +15,13 @@ extension IncomingPhoneNumbersAssignedAddOnsMethods {
     ///   resource.
     /// - resourceSid: The SID of the Phone Number to assign the Add-on.
     /// - installedAddOnSid: The SID that identifies the Add-on installation.
-    public static func createIncomingPhoneNumbersAssignedAddOns(config: ClientConfig, accountSid: String, resourceSid: String, installedAddOnSid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountIncomingPhoneNumberIncomingPhoneNumberAssignedAddOn {
+    static func createIncomingPhoneNumbersAssignedAddOns(
+        config: ClientConfig,
+        accountSid: String,
+        resourceSid: String,
+        installedAddOnSid: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountIncomingPhoneNumberIncomingPhoneNumberAssignedAddOn {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
@@ -27,6 +33,21 @@ extension IncomingPhoneNumbersAssignedAddOnsMethods {
 
         let requestBody = CreateIncomingPhoneNumbersAssignedAddOnsRequestBody(installedAddOnSid: installedAddOnSid)
 
-        return try (await sdkRequest("POST", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/IncomingPhoneNumbers/", sdkEncodePathSegment(sdkWireString(resourceSid)), "/AssignedAddOns.json"].joined(), config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "createIncomingPhoneNumbersAssignedAddOns", options: requestOptions)).data
+        return try await (sdkRequest(
+            "POST",
+            [
+                "/2010-04-01/Accounts/",
+                sdkEncodePathSegment(sdkWireString(accountSid)),
+                "/IncomingPhoneNumbers/",
+                sdkEncodePathSegment(sdkWireString(resourceSid)),
+                "/AssignedAddOns.json",
+            ].joined(),
+            config: config,
+            body: requestBody,
+            contentType: "application/x-www-form-urlencoded",
+            decoder: .json,
+            operationId: "createIncomingPhoneNumbersAssignedAddOns",
+            options: requestOptions
+        )).data
     }
 }

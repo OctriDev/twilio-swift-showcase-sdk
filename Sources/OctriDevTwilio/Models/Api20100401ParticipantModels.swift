@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Api20100401Participant domain models
+/// Api20100401Participant domain models
 /// Typed representation of the `ApiV2010AccountConferenceParticipant` API schema.
 public struct ApiV2010AccountConferenceParticipant: Codable {
     /// The SID of the Account that created the Participant resource.
@@ -64,51 +64,67 @@ public struct ApiV2010AccountConferenceParticipant: Codable {
     }
 
     init() {
-        (self.accountSid, self.callSid, self.label, self.callSidToCoach, self.coaching) = (nil, nil, nil, nil, nil)
-        (self.conferenceSid, self.dateCreated, self.dateUpdated, self.endConferenceOnExit, self.muted) = (nil, nil, nil, nil, nil)
-        (self.hold, self.startConferenceOnEnter, self.status, self.queueTime, self.uri) = (nil, nil, nil, nil, nil)
+        (accountSid, callSid, label, callSidToCoach, coaching) = (nil, nil, nil, nil, nil)
+        (conferenceSid, dateCreated, dateUpdated, endConferenceOnExit, muted) = (nil, nil, nil, nil, nil)
+        (hold, startConferenceOnEnter, status, queueTime, uri) = (nil, nil, nil, nil, nil)
     }
 }
 
-extension ApiV2010AccountConferenceParticipant {
-    public init(from decoder: Decoder) throws {
+public extension ApiV2010AccountConferenceParticipant {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.accountSid = try container.sdkDecodeIfPresent(.accountSid)
-        self.callSid = try container.sdkDecodeIfPresent(.callSid)
-        self.label = try container.sdkDecodeIfPresent(.label)
-        self.callSidToCoach = try container.sdkDecodeIfPresent(.callSidToCoach)
-        self.coaching = try container.sdkDecodeIfPresent(.coaching)
-        self.conferenceSid = try container.sdkDecodeIfPresent(.conferenceSid)
-        self.dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
-        self.dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
-        self.endConferenceOnExit = try container.sdkDecodeIfPresent(.endConferenceOnExit)
-        self.muted = try container.sdkDecodeIfPresent(.muted)
-        self.hold = try container.sdkDecodeIfPresent(.hold)
-        self.startConferenceOnEnter = try container.sdkDecodeIfPresent(.startConferenceOnEnter)
-        self.status = try container.sdkDecodeIfPresent(.status)
-        self.queueTime = try container.sdkDecodeIfPresent(.queueTime)
-        self.uri = try container.sdkDecodeIfPresent(.uri)
-        if let value = self.accountSid {
+        accountSid = try container.sdkDecodeIfPresent(.accountSid)
+        callSid = try container.sdkDecodeIfPresent(.callSid)
+        label = try container.sdkDecodeIfPresent(.label)
+        callSidToCoach = try container.sdkDecodeIfPresent(.callSidToCoach)
+        coaching = try container.sdkDecodeIfPresent(.coaching)
+        conferenceSid = try container.sdkDecodeIfPresent(.conferenceSid)
+        dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
+        dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
+        endConferenceOnExit = try container.sdkDecodeIfPresent(.endConferenceOnExit)
+        muted = try container.sdkDecodeIfPresent(.muted)
+        hold = try container.sdkDecodeIfPresent(.hold)
+        startConferenceOnEnter = try container.sdkDecodeIfPresent(.startConferenceOnEnter)
+        status = try container.sdkDecodeIfPresent(.status)
+        queueTime = try container.sdkDecodeIfPresent(.queueTime)
+        uri = try container.sdkDecodeIfPresent(.uri)
+        if let value = accountSid {
             try validateLength("account_sid", value, min: 34, max: 34)
             try sdkValidatePattern("account_sid", value, sdkPatternc7cb941ab84b)
         }
-        if let value = self.callSid {
+        if let value = callSid {
             try validateLength("call_sid", value, min: 34, max: 34)
             try sdkValidatePattern("call_sid", value, sdkPattern25b2d94fcc27)
         }
-        if let value = self.callSidToCoach {
+        if let value = callSidToCoach {
             try validateLength("call_sid_to_coach", value, min: 34, max: 34)
             try sdkValidatePattern("call_sid_to_coach", value, sdkPattern25b2d94fcc27)
         }
-        if let value = self.conferenceSid {
+        if let value = conferenceSid {
             try validateLength("conference_sid", value, min: 34, max: 34)
             try sdkValidatePattern("conference_sid", value, sdkPatternb5f37fc1f4d4)
         }
     }
 }
 
-extension ApiV2010AccountConferenceParticipant {
-    public init(accountSid: String? = nil, callSid: String? = nil, label: String? = nil, callSidToCoach: String? = nil, coaching: Bool? = nil, conferenceSid: String? = nil, dateCreated: String? = nil, dateUpdated: String? = nil, endConferenceOnExit: Bool? = nil, muted: Bool? = nil, hold: Bool? = nil, startConferenceOnEnter: Bool? = nil, status: ParticipantEnumStatus? = nil, queueTime: String? = nil, uri: String? = nil) throws {
+public extension ApiV2010AccountConferenceParticipant {
+    init(
+        accountSid: String? = nil,
+        callSid: String? = nil,
+        label: String? = nil,
+        callSidToCoach: String? = nil,
+        coaching: Bool? = nil,
+        conferenceSid: String? = nil,
+        dateCreated: String? = nil,
+        dateUpdated: String? = nil,
+        endConferenceOnExit: Bool? = nil,
+        muted: Bool? = nil,
+        hold: Bool? = nil,
+        startConferenceOnEnter: Bool? = nil,
+        status: ParticipantEnumStatus? = nil,
+        queueTime: String? = nil,
+        uri: String? = nil
+    ) throws {
         self.init()
         (self.accountSid, self.callSid) = (accountSid, callSid)
         (self.label, self.callSidToCoach) = (label, callSidToCoach)
@@ -142,7 +158,10 @@ extension ApiV2010AccountConferenceParticipant {
 public struct ParticipantEnumStatus: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let queued = ParticipantEnumStatus(rawValue: "queued")
     public static let connecting = ParticipantEnumStatus(rawValue: "connecting")
     public static let ringing = ParticipantEnumStatus(rawValue: "ringing")
@@ -152,7 +171,7 @@ public struct ParticipantEnumStatus: RawRepresentable, Hashable, Codable, Sendab
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

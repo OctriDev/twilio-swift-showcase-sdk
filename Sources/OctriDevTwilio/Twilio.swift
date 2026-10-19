@@ -9,30 +9,66 @@ public class AccountsNamespace {
         self.config = config
     }
 
-/// Create a new Twilio Subaccount from the account making the request
-    public func create(friendlyName: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ApiV2010Account {
-        return try await AccountsMethods.createAccounts(config: config, friendlyName: friendlyName, requestOptions: requestOptions)
+    /// Create a new Twilio Subaccount from the account making the request
+    public func create(
+        friendlyName: String? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010Account {
+        try await AccountsMethods.createAccounts(
+            config: config,
+            friendlyName: friendlyName,
+            requestOptions: requestOptions
+        )
     }
 
-/// Lists account resources associated with the account used to make the request. Filter by exact `FriendlyName` or by `Status`, and use `PageSize`, `Page`, and `PageToken` to control pagination.
+    /// Lists account resources associated with the account used to make the request. Filter by exact `FriendlyName` or
+    /// by `Status`, and use `PageSize`, `Page`, and `PageToken` to control pagination.
     ///
     /// Retrieves a collection of Accounts belonging to the account used to make the request
-    public func list(friendlyName: String? = nil, status: AccountEnumStatus? = nil, pageSize: Int? = nil, page: Int? = nil, pageToken: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ListAccountsResponse {
-        return try await AccountsMethods.listAccounts(config: config, friendlyName: friendlyName, status: status, pageSize: pageSize, page: page, pageToken: pageToken, requestOptions: requestOptions)
+    public func list(
+        friendlyName: String? = nil,
+        status: AccountEnumStatus? = nil,
+        pageSize: Int? = nil,
+        page: Int? = nil,
+        pageToken: String? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ListAccountsResponse {
+        try await AccountsMethods.listAccounts(
+            config: config,
+            friendlyName: friendlyName,
+            status: status,
+            pageSize: pageSize,
+            page: page,
+            pageToken: pageToken,
+            requestOptions: requestOptions
+        )
     }
 
-/// Retrieves a specific account by its Account SID. Supply `Sid` as a 34-character account identifier beginning with `AC` followed by 32 hexadecimal characters.
+    /// Retrieves a specific account by its Account SID. Supply `Sid` as a 34-character account identifier beginning
+    /// with `AC` followed by 32 hexadecimal characters.
     ///
     /// Fetch the account specified by the provided Account Sid
     public func fetch(sid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010Account {
-        return try await AccountsMethods.fetchAccounts(config: config, sid: sid, requestOptions: requestOptions)
+        try await AccountsMethods.fetchAccounts(config: config, sid: sid, requestOptions: requestOptions)
     }
 
-/// Updates properties of a specific account. Supply `FriendlyName`, `Status`, or both to change the account; a 409 response indicates that another request modified the account concurrently.
+    /// Updates properties of a specific account. Supply `FriendlyName`, `Status`, or both to change the account; a 409
+    /// response indicates that another request modified the account concurrently.
     ///
     /// Modify the properties of a given Account
-    public func update(sid: String, friendlyName: String? = nil, status: AccountEnumStatus? = nil, requestOptions: RequestOptions? = nil) async throws -> ApiV2010Account {
-        return try await AccountsMethods.updateAccounts(config: config, sid: sid, friendlyName: friendlyName, status: status, requestOptions: requestOptions)
+    public func update(
+        sid: String,
+        friendlyName: String? = nil,
+        status: AccountEnumStatus? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010Account {
+        try await AccountsMethods.updateAccounts(
+            config: config,
+            sid: sid,
+            friendlyName: friendlyName,
+            status: status,
+            requestOptions: requestOptions
+        )
     }
 }
 
@@ -42,9 +78,25 @@ public class AddressesDependentPhoneNumbersNamespace {
         self.config = config
     }
 
-/// Lists phone numbers that depend on a specified address in an account. Use the account and address SIDs to scope the results, and use the page parameters to navigate the list.
-    public func list(accountSid: String, addressSid: String, pageSize: Int? = nil, page: Int? = nil, pageToken: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ListAddressesDependentPhoneNumbersResponse {
-        return try await AddressesDependentPhoneNumbersMethods.listAddressesDependentPhoneNumbers(config: config, accountSid: accountSid, addressSid: addressSid, pageSize: pageSize, page: page, pageToken: pageToken, requestOptions: requestOptions)
+    /// Lists phone numbers that depend on a specified address in an account. Use the account and address SIDs to scope
+    /// the results, and use the page parameters to navigate the list.
+    public func list(
+        accountSid: String,
+        addressSid: String,
+        pageSize: Int? = nil,
+        page: Int? = nil,
+        pageToken: String? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ListAddressesDependentPhoneNumbersResponse {
+        try await AddressesDependentPhoneNumbersMethods.listAddressesDependentPhoneNumbers(
+            config: config,
+            accountSid: accountSid,
+            addressSid: addressSid,
+            pageSize: pageSize,
+            page: page,
+            pageToken: pageToken,
+            requestOptions: requestOptions
+        )
     }
 }
 
@@ -56,29 +108,62 @@ public class AddressesNamespace {
         dependentPhoneNumbers = AddressesDependentPhoneNumbersNamespace(config: config)
     }
 
-/// Creates an address resource for a specific account. Provide `CustomerName`, `Street`, `City`, `Region`, `PostalCode`, and `IsoCountry`; `AutoCorrectAddress` defaults to true when omitted. A 201 response returns the created address.
-    public func create(options: AddressesMethods.CreateAddressesOptions, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountAddress {
-        return try await AddressesMethods.createAddresses(config: config, options: options, requestOptions: requestOptions)
+    /// Creates an address resource for a specific account. Provide `CustomerName`, `Street`, `City`, `Region`,
+    /// `PostalCode`, and `IsoCountry`; `AutoCorrectAddress` defaults to true when omitted. A 201 response returns the
+    /// created address.
+    public func create(
+        options: AddressesMethods.CreateAddressesOptions,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountAddress {
+        try await AddressesMethods.createAddresses(config: config, options: options, requestOptions: requestOptions)
     }
 
-/// Lists address resources associated with a specific account. Filter the results by customer name, friendly name, emergency-calling status, or ISO country code, and use the pagination parameters to navigate the results.
-    public func list(options: AddressesMethods.ListAddressesOptions, requestOptions: RequestOptions? = nil) async throws -> ListAddressesResponse {
-        return try await AddressesMethods.listAddresses(config: config, options: options, requestOptions: requestOptions)
+    /// Lists address resources associated with a specific account. Filter the results by customer name, friendly name,
+    /// emergency-calling status, or ISO country code, and use the pagination parameters to navigate the results.
+    public func list(
+        options: AddressesMethods.ListAddressesOptions,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ListAddressesResponse {
+        try await AddressesMethods.listAddresses(config: config, options: options, requestOptions: requestOptions)
     }
 
-/// Deletes a specific address resource associated with an account. Supply the account SID and address SID to identify the address to remove.
-    public func delete(accountSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try await AddressesMethods.deleteAddresses(config: config, accountSid: accountSid, sid: sid, requestOptions: requestOptions)
+    /// Deletes a specific address resource associated with an account. Supply the account SID and address SID to
+    /// identify the address to remove.
+    public func delete(
+        accountSid: String,
+        sid: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await AddressesMethods.deleteAddresses(
+            config: config,
+            accountSid: accountSid,
+            sid: sid,
+            requestOptions: requestOptions
+        )
     }
 
-/// Retrieves a specific address resource associated with an account. Supply the account SID and address SID to identify the resource.
-    public func fetch(accountSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountAddress {
-        return try await AddressesMethods.fetchAddresses(config: config, accountSid: accountSid, sid: sid, requestOptions: requestOptions)
+    /// Retrieves a specific address resource associated with an account. Supply the account SID and address SID to
+    /// identify the resource.
+    public func fetch(
+        accountSid: String,
+        sid: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountAddress {
+        try await AddressesMethods.fetchAddresses(
+            config: config,
+            accountSid: accountSid,
+            sid: sid,
+            requestOptions: requestOptions
+        )
     }
 
-/// Updates properties of a specific address resource. Submit only the address fields you want to change; `AutoCorrectAddress` defaults to true when omitted.
-    public func update(options: AddressesMethods.UpdateAddressesOptions, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountAddress {
-        return try await AddressesMethods.updateAddresses(config: config, options: options, requestOptions: requestOptions)
+    /// Updates properties of a specific address resource. Submit only the address fields you want to change;
+    /// `AutoCorrectAddress` defaults to true when omitted.
+    public func update(
+        options: AddressesMethods.UpdateAddressesOptions,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountAddress {
+        try await AddressesMethods.updateAddresses(config: config, options: options, requestOptions: requestOptions)
     }
 }
 
@@ -88,37 +173,89 @@ public class ApplicationsNamespace {
         self.config = config
     }
 
-/// Creates a new application within an account. Configure voice and messaging URLs and callback methods with fields such as `VoiceUrl`, `SmsUrl`, and `StatusCallback`; URL fields must use URI format, and callback methods accept GET or POST. The 201 response returns the created application with its generated SID.
+    /// Creates a new application within an account. Configure voice and messaging URLs and callback methods with fields
+    /// such as `VoiceUrl`, `SmsUrl`, and `StatusCallback`; URL fields must use URI format, and callback methods accept
+    /// GET or POST. The 201 response returns the created application with its generated SID.
     ///
     /// Create a new application within your account
-    public func create(options: ApplicationsMethods.CreateApplicationsOptions, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountApplication {
-        return try await ApplicationsMethods.createApplications(config: config, options: options, requestOptions: requestOptions)
+    public func create(
+        options: ApplicationsMethods.CreateApplicationsOptions,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountApplication {
+        try await ApplicationsMethods.createApplications(
+            config: config,
+            options: options,
+            requestOptions: requestOptions
+        )
     }
 
-/// Lists application resources created by a specific account. Filter the results by `FriendlyName`, and use the pagination parameters to navigate the list.
+    /// Lists application resources created by a specific account. Filter the results by `FriendlyName`, and use the
+    /// pagination parameters to navigate the list.
     ///
     /// Retrieve a list of applications representing an application within the requesting account
-    public func list(accountSid: String, friendlyName: String? = nil, pageSize: Int? = nil, page: Int? = nil, pageToken: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ListApplicationsResponse {
-        return try await ApplicationsMethods.listApplications(config: config, accountSid: accountSid, friendlyName: friendlyName, pageSize: pageSize, page: page, pageToken: pageToken, requestOptions: requestOptions)
+    public func list(
+        accountSid: String,
+        friendlyName: String? = nil,
+        pageSize: Int? = nil,
+        page: Int? = nil,
+        pageToken: String? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ListApplicationsResponse {
+        try await ApplicationsMethods.listApplications(
+            config: config,
+            accountSid: accountSid,
+            friendlyName: friendlyName,
+            pageSize: pageSize,
+            page: page,
+            pageToken: pageToken,
+            requestOptions: requestOptions
+        )
     }
 
-/// Delete the application by the specified application sid
-    public func delete(accountSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try await ApplicationsMethods.deleteApplications(config: config, accountSid: accountSid, sid: sid, requestOptions: requestOptions)
+    /// Delete the application by the specified application sid
+    public func delete(
+        accountSid: String,
+        sid: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await ApplicationsMethods.deleteApplications(
+            config: config,
+            accountSid: accountSid,
+            sid: sid,
+            requestOptions: requestOptions
+        )
     }
 
-/// Retrieves an application from an account by its SID. Supply the account SID and application SID to identify the resource and retrieve its configuration, including voice and messaging settings.
+    /// Retrieves an application from an account by its SID. Supply the account SID and application SID to identify the
+    /// resource and retrieve its configuration, including voice and messaging settings.
     ///
     /// Fetch the application specified by the provided sid
-    public func fetch(accountSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountApplication {
-        return try await ApplicationsMethods.fetchApplications(config: config, accountSid: accountSid, sid: sid, requestOptions: requestOptions)
+    public func fetch(
+        accountSid: String,
+        sid: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountApplication {
+        try await ApplicationsMethods.fetchApplications(
+            config: config,
+            accountSid: accountSid,
+            sid: sid,
+            requestOptions: requestOptions
+        )
     }
 
-/// Updates the properties of an existing application. Supply the fields you want to change, such as `FriendlyName`, `VoiceUrl`, or `SmsUrl`; URL fields must use URI format, and HTTP method fields accept GET or POST.
+    /// Updates the properties of an existing application. Supply the fields you want to change, such as `FriendlyName`,
+    /// `VoiceUrl`, or `SmsUrl`; URL fields must use URI format, and HTTP method fields accept GET or POST.
     ///
     /// Updates the application's properties
-    public func update(options: ApplicationsMethods.UpdateApplicationsOptions, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountApplication {
-        return try await ApplicationsMethods.updateApplications(config: config, options: options, requestOptions: requestOptions)
+    public func update(
+        options: ApplicationsMethods.UpdateApplicationsOptions,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountApplication {
+        try await ApplicationsMethods.updateApplications(
+            config: config,
+            options: options,
+            requestOptions: requestOptions
+        )
     }
 }
 
@@ -128,18 +265,42 @@ public class AuthorizedConnectAppsNamespace {
         self.config = config
     }
 
-/// Retrieves an authorized Connect App for an account. Use the account SID and Connect App SID to identify the authorization and review the app details and permissions granted to it.
+    /// Retrieves an authorized Connect App for an account. Use the account SID and Connect App SID to identify the
+    /// authorization and review the app details and permissions granted to it.
     ///
     /// Fetch an instance of an authorized-connect-app
-    public func fetch(accountSid: String, connectAppSid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountAuthorizedConnectApp {
-        return try await AuthorizedConnectAppsMethods.fetchAuthorizedConnectApps(config: config, accountSid: accountSid, connectAppSid: connectAppSid, requestOptions: requestOptions)
+    public func fetch(
+        accountSid: String,
+        connectAppSid: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountAuthorizedConnectApp {
+        try await AuthorizedConnectAppsMethods.fetchAuthorizedConnectApps(
+            config: config,
+            accountSid: accountSid,
+            connectAppSid: connectAppSid,
+            requestOptions: requestOptions
+        )
     }
 
-/// Lists the Connect Apps authorized for an account. Use the pagination parameters to browse the account's authorized apps and their granted permissions.
+    /// Lists the Connect Apps authorized for an account. Use the pagination parameters to browse the account's
+    /// authorized apps and their granted permissions.
     ///
     /// Retrieve a list of authorized-connect-apps belonging to the account used to make the request
-    public func list(accountSid: String, pageSize: Int? = nil, page: Int? = nil, pageToken: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ListAuthorizedConnectAppsResponse {
-        return try await AuthorizedConnectAppsMethods.listAuthorizedConnectApps(config: config, accountSid: accountSid, pageSize: pageSize, page: page, pageToken: pageToken, requestOptions: requestOptions)
+    public func list(
+        accountSid: String,
+        pageSize: Int? = nil,
+        page: Int? = nil,
+        pageToken: String? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ListAuthorizedConnectAppsResponse {
+        try await AuthorizedConnectAppsMethods.listAuthorizedConnectApps(
+            config: config,
+            accountSid: accountSid,
+            pageSize: pageSize,
+            page: page,
+            pageToken: pageToken,
+            requestOptions: requestOptions
+        )
     }
 }
 
@@ -149,51 +310,131 @@ public class AvailablePhoneNumbersNamespace {
         self.config = config
     }
 
-/// Lists the countries for which phone numbers are available to an account. Use the returned country codes to retrieve country details or browse available numbers for a specific country.
-    public func list(accountSid: String, pageSize: Int? = nil, page: Int? = nil, pageToken: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ListAvailablePhoneNumbersResponse {
-        return try await AvailablePhoneNumbersMethods.listAvailablePhoneNumbers(config: config, accountSid: accountSid, pageSize: pageSize, page: page, pageToken: pageToken, requestOptions: requestOptions)
+    /// Lists the countries for which phone numbers are available to an account. Use the returned country codes to
+    /// retrieve country details or browse available numbers for a specific country.
+    public func list(
+        accountSid: String,
+        pageSize: Int? = nil,
+        page: Int? = nil,
+        pageToken: String? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ListAvailablePhoneNumbersResponse {
+        try await AvailablePhoneNumbersMethods.listAvailablePhoneNumbers(
+            config: config,
+            accountSid: accountSid,
+            pageSize: pageSize,
+            page: page,
+            pageToken: pageToken,
+            requestOptions: requestOptions
+        )
     }
 
-/// Retrieves available phone number information for a specific country. Supply the account SID and an ISO 3166-1 country code to get the country name, beta status, and related available-number resources.
-    public func fetch(accountSid: String, countryCode: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountAvailablePhoneNumberCountry {
-        return try await AvailablePhoneNumbersMethods.fetchAvailablePhoneNumbers(config: config, accountSid: accountSid, countryCode: countryCode, requestOptions: requestOptions)
+    /// Retrieves available phone number information for a specific country. Supply the account SID and an ISO 3166-1
+    /// country code to get the country name, beta status, and related available-number resources.
+    public func fetch(
+        accountSid: String,
+        countryCode: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountAvailablePhoneNumberCountry {
+        try await AvailablePhoneNumbersMethods.fetchAvailablePhoneNumbers(
+            config: config,
+            accountSid: accountSid,
+            countryCode: countryCode,
+            requestOptions: requestOptions
+        )
     }
 
-/// Lists available local phone numbers in a specified country. Filter results by capabilities, area code, location, or a matching number pattern, and use pagination parameters to browse the results.
-    public func listLocal(options: AvailablePhoneNumbersMethods.ListAvailablePhoneNumbersLocalOptions, requestOptions: RequestOptions? = nil) async throws -> ListAvailablePhoneNumbersLocalResponse {
-        return try await AvailablePhoneNumbersMethods.listAvailablePhoneNumbersLocal(config: config, options: options, requestOptions: requestOptions)
+    /// Lists available local phone numbers in a specified country. Filter results by capabilities, area code, location,
+    /// or a matching number pattern, and use pagination parameters to browse the results.
+    public func listLocal(
+        options: AvailablePhoneNumbersMethods.ListAvailablePhoneNumbersLocalOptions,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ListAvailablePhoneNumbersLocalResponse {
+        try await AvailablePhoneNumbersMethods.listAvailablePhoneNumbersLocal(
+            config: config,
+            options: options,
+            requestOptions: requestOptions
+        )
     }
 
-/// Lists available machine-to-machine phone numbers in a specified country. Filter results by capabilities, area code, location, or a matching number pattern, and use pagination parameters to browse the results.
-    public func listMachineToMachine(options: AvailablePhoneNumbersMethods.ListAvailablePhoneNumbersMachineToMachineOptions, requestOptions: RequestOptions? = nil) async throws -> ListAvailablePhoneNumbersMachineToMachineResponse {
-        return try await AvailablePhoneNumbersMethods.listAvailablePhoneNumbersMachineToMachine(config: config, options: options, requestOptions: requestOptions)
+    /// Lists available machine-to-machine phone numbers in a specified country. Filter results by capabilities, area
+    /// code, location, or a matching number pattern, and use pagination parameters to browse the results.
+    public func listMachineToMachine(
+        options: AvailablePhoneNumbersMethods.ListAvailablePhoneNumbersMachineToMachineOptions,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ListAvailablePhoneNumbersMachineToMachineResponse {
+        try await AvailablePhoneNumbersMethods.listAvailablePhoneNumbersMachineToMachine(
+            config: config,
+            options: options,
+            requestOptions: requestOptions
+        )
     }
 
-/// Lists available mobile phone numbers in a specified country. Filter results by capabilities, number pattern, or geographic details to find numbers that meet your requirements.
-    public func listMobile(options: AvailablePhoneNumbersMethods.ListAvailablePhoneNumbersMobileOptions, requestOptions: RequestOptions? = nil) async throws -> ListAvailablePhoneNumbersMobileResponse {
-        return try await AvailablePhoneNumbersMethods.listAvailablePhoneNumbersMobile(config: config, options: options, requestOptions: requestOptions)
+    /// Lists available mobile phone numbers in a specified country. Filter results by capabilities, number pattern, or
+    /// geographic details to find numbers that meet your requirements.
+    public func listMobile(
+        options: AvailablePhoneNumbersMethods.ListAvailablePhoneNumbersMobileOptions,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ListAvailablePhoneNumbersMobileResponse {
+        try await AvailablePhoneNumbersMethods.listAvailablePhoneNumbersMobile(
+            config: config,
+            options: options,
+            requestOptions: requestOptions
+        )
     }
 
-/// Lists available national phone numbers in a specified country. Filter results by capabilities, number pattern, or geographic details to find numbers that meet your requirements.
-    public func listNational(options: AvailablePhoneNumbersMethods.ListAvailablePhoneNumbersNationalOptions, requestOptions: RequestOptions? = nil) async throws -> ListAvailablePhoneNumbersNationalResponse {
-        return try await AvailablePhoneNumbersMethods.listAvailablePhoneNumbersNational(config: config, options: options, requestOptions: requestOptions)
+    /// Lists available national phone numbers in a specified country. Filter results by capabilities, number pattern,
+    /// or geographic details to find numbers that meet your requirements.
+    public func listNational(
+        options: AvailablePhoneNumbersMethods.ListAvailablePhoneNumbersNationalOptions,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ListAvailablePhoneNumbersNationalResponse {
+        try await AvailablePhoneNumbersMethods.listAvailablePhoneNumbersNational(
+            config: config,
+            options: options,
+            requestOptions: requestOptions
+        )
     }
 
-/// Lists available shared-cost phone numbers in a specified country. Filter results by capabilities, number pattern, or geographic details to find numbers that meet your requirements.
-    public func listSharedCost(options: AvailablePhoneNumbersMethods.ListAvailablePhoneNumbersSharedCostOptions, requestOptions: RequestOptions? = nil) async throws -> ListAvailablePhoneNumbersSharedCostResponse {
-        return try await AvailablePhoneNumbersMethods.listAvailablePhoneNumbersSharedCost(config: config, options: options, requestOptions: requestOptions)
+    /// Lists available shared-cost phone numbers in a specified country. Filter results by capabilities, number
+    /// pattern, or geographic details to find numbers that meet your requirements.
+    public func listSharedCost(
+        options: AvailablePhoneNumbersMethods.ListAvailablePhoneNumbersSharedCostOptions,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ListAvailablePhoneNumbersSharedCostResponse {
+        try await AvailablePhoneNumbersMethods.listAvailablePhoneNumbersSharedCost(
+            config: config,
+            options: options,
+            requestOptions: requestOptions
+        )
     }
 
-/// Lists available toll-free phone numbers in a specified country. Filter results by capabilities, number pattern, or geographic details to find numbers that meet your requirements.
-    public func listTollFree(options: AvailablePhoneNumbersMethods.ListAvailablePhoneNumbersTollFreeOptions, requestOptions: RequestOptions? = nil) async throws -> ListAvailablePhoneNumbersTollFreeResponse {
-        return try await AvailablePhoneNumbersMethods.listAvailablePhoneNumbersTollFree(config: config, options: options, requestOptions: requestOptions)
+    /// Lists available toll-free phone numbers in a specified country. Filter results by capabilities, number pattern,
+    /// or geographic details to find numbers that meet your requirements.
+    public func listTollFree(
+        options: AvailablePhoneNumbersMethods.ListAvailablePhoneNumbersTollFreeOptions,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ListAvailablePhoneNumbersTollFreeResponse {
+        try await AvailablePhoneNumbersMethods.listAvailablePhoneNumbersTollFree(
+            config: config,
+            options: options,
+            requestOptions: requestOptions
+        )
     }
 }
 
-extension AvailablePhoneNumbersNamespace {
-/// Lists available VoIP phone numbers in a specified country. Filter results by capabilities, number pattern, or geographic details to find numbers that meet your requirements.
-    public func listVoip(options: AvailablePhoneNumbersMethods.ListAvailablePhoneNumbersVoipOptions, requestOptions: RequestOptions? = nil) async throws -> ListAvailablePhoneNumbersVoipResponse {
-        return try await AvailablePhoneNumbersMethods.listAvailablePhoneNumbersVoip(config: config, options: options, requestOptions: requestOptions)
+public extension AvailablePhoneNumbersNamespace {
+    /// Lists available VoIP phone numbers in a specified country. Filter results by capabilities, number pattern, or
+    /// geographic details to find numbers that meet your requirements.
+    func listVoip(
+        options: AvailablePhoneNumbersMethods.ListAvailablePhoneNumbersVoipOptions,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ListAvailablePhoneNumbersVoipResponse {
+        try await AvailablePhoneNumbersMethods.listAvailablePhoneNumbersVoip(
+            config: config,
+            options: options,
+            requestOptions: requestOptions
+        )
     }
 }
 
@@ -203,10 +444,16 @@ public class BalanceNamespace {
         self.config = config
     }
 
-/// Retrieves the balance for a specified account. Use the account SID to identify the account whose balance and currency you need. Balance changes may not appear immediately, and child accounts do not include balance information.
+    /// Retrieves the balance for a specified account. Use the account SID to identify the account whose balance and
+    /// currency you need. Balance changes may not appear immediately, and child accounts do not include balance
+    /// information.
     ///
-    /// Fetch the balance for an Account based on Account Sid. Balance changes may not be reflected immediately. Child accounts do not contain balance information
-    public func fetch(accountSid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountBalance {
-        return try await BalanceMethods.fetchBalance(config: config, accountSid: accountSid, requestOptions: requestOptions)
+    /// Fetch the balance for an Account based on Account Sid. Balance changes may not be reflected immediately. Child
+    /// accounts do not contain balance information
+    public func fetch(
+        accountSid: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountBalance {
+        try await BalanceMethods.fetchBalance(config: config, accountSid: accountSid, requestOptions: requestOptions)
     }
 }

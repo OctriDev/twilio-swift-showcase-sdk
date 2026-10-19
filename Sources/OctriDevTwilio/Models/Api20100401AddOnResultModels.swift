@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Api20100401AddOnResult domain models
+/// Api20100401AddOnResult domain models
 /// Typed representation of the `ApiV2010AccountRecordingRecordingAddOnResult` API schema.
 public struct ApiV2010AccountRecordingRecordingAddOnResult: Codable {
     /// The unique string that that we created to identify the Recording AddOnResult resource.
@@ -42,49 +42,60 @@ public struct ApiV2010AccountRecordingRecordingAddOnResult: Codable {
     }
 
     init() {
-        (self.sid, self.accountSid, self.status, self.addOnSid, self.addOnConfigurationSid) = (nil, nil, nil, nil, nil)
-        (self.dateCreated, self.dateUpdated, self.dateCompleted, self.referenceSid, self.subresourceUris) = (nil, nil, nil, nil, nil)
+        (sid, accountSid, status, addOnSid, addOnConfigurationSid) = (nil, nil, nil, nil, nil)
+        (dateCreated, dateUpdated, dateCompleted, referenceSid, subresourceUris) = (nil, nil, nil, nil, nil)
     }
 }
 
-extension ApiV2010AccountRecordingRecordingAddOnResult {
-    public init(from decoder: Decoder) throws {
+public extension ApiV2010AccountRecordingRecordingAddOnResult {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.sid = try container.sdkDecodeIfPresent(.sid)
-        self.accountSid = try container.sdkDecodeIfPresent(.accountSid)
-        self.status = try container.sdkDecodeIfPresent(.status)
-        self.addOnSid = try container.sdkDecodeIfPresent(.addOnSid)
-        self.addOnConfigurationSid = try container.sdkDecodeIfPresent(.addOnConfigurationSid)
-        self.dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
-        self.dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
-        self.dateCompleted = try container.sdkDecodeIfPresent(.dateCompleted)
-        self.referenceSid = try container.sdkDecodeIfPresent(.referenceSid)
-        self.subresourceUris = try container.sdkDecodeIfPresent(.subresourceUris)
-        if let value = self.sid {
+        sid = try container.sdkDecodeIfPresent(.sid)
+        accountSid = try container.sdkDecodeIfPresent(.accountSid)
+        status = try container.sdkDecodeIfPresent(.status)
+        addOnSid = try container.sdkDecodeIfPresent(.addOnSid)
+        addOnConfigurationSid = try container.sdkDecodeIfPresent(.addOnConfigurationSid)
+        dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
+        dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
+        dateCompleted = try container.sdkDecodeIfPresent(.dateCompleted)
+        referenceSid = try container.sdkDecodeIfPresent(.referenceSid)
+        subresourceUris = try container.sdkDecodeIfPresent(.subresourceUris)
+        if let value = sid {
             try validateLength("sid", value, min: 34, max: 34)
             try sdkValidatePattern("sid", value, sdkPatterne89fe25d0ced)
         }
-        if let value = self.accountSid {
+        if let value = accountSid {
             try validateLength("account_sid", value, min: 34, max: 34)
             try sdkValidatePattern("account_sid", value, sdkPatternc7cb941ab84b)
         }
-        if let value = self.addOnSid {
+        if let value = addOnSid {
             try validateLength("add_on_sid", value, min: 34, max: 34)
             try sdkValidatePattern("add_on_sid", value, sdkPatterna87282c6565b)
         }
-        if let value = self.addOnConfigurationSid {
+        if let value = addOnConfigurationSid {
             try validateLength("add_on_configuration_sid", value, min: 34, max: 34)
             try sdkValidatePattern("add_on_configuration_sid", value, sdkPatternbb2f9d1d1c1e)
         }
-        if let value = self.referenceSid {
+        if let value = referenceSid {
             try validateLength("reference_sid", value, min: 34, max: 34)
             try sdkValidatePattern("reference_sid", value, sdkPatternfad3f05341a2)
         }
     }
 }
 
-extension ApiV2010AccountRecordingRecordingAddOnResult {
-    public init(sid: String? = nil, accountSid: String? = nil, status: RecordingAddOnResultEnumStatus? = nil, addOnSid: String? = nil, addOnConfigurationSid: String? = nil, dateCreated: String? = nil, dateUpdated: String? = nil, dateCompleted: String? = nil, referenceSid: String? = nil, subresourceUris: [String: JSONValue]? = nil) throws {
+public extension ApiV2010AccountRecordingRecordingAddOnResult {
+    init(
+        sid: String? = nil,
+        accountSid: String? = nil,
+        status: RecordingAddOnResultEnumStatus? = nil,
+        addOnSid: String? = nil,
+        addOnConfigurationSid: String? = nil,
+        dateCreated: String? = nil,
+        dateUpdated: String? = nil,
+        dateCompleted: String? = nil,
+        referenceSid: String? = nil,
+        subresourceUris: [String: JSONValue]? = nil
+    ) throws {
         self.init()
         (self.sid, self.accountSid) = (sid, accountSid)
         (self.status, self.addOnSid) = (status, addOnSid)
@@ -119,7 +130,10 @@ extension ApiV2010AccountRecordingRecordingAddOnResult {
 public struct RecordingAddOnResultEnumStatus: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let canceled = RecordingAddOnResultEnumStatus(rawValue: "canceled")
     public static let completed = RecordingAddOnResultEnumStatus(rawValue: "completed")
     public static let deleted = RecordingAddOnResultEnumStatus(rawValue: "deleted")
@@ -131,7 +145,7 @@ public struct RecordingAddOnResultEnumStatus: RawRepresentable, Hashable, Codabl
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

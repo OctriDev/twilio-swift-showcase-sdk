@@ -6,8 +6,9 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension SipDomainsAuthRegistrationsCredentialListMappingsMethods {
-    /// Retrieves a specific credential list mapping from a SIP domain. Provide the account, domain, and mapping SIDs to identify the mapping to fetch.
+public extension SipDomainsAuthRegistrationsCredentialListMappingsMethods {
+    /// Retrieves a specific credential list mapping from a SIP domain. Provide the account, domain, and mapping SIDs to
+    /// identify the mapping to fetch.
     ///
     /// Fetch a specific instance of a credential list mapping
     ///
@@ -18,7 +19,13 @@ extension SipDomainsAuthRegistrationsCredentialListMappingsMethods {
     /// - domainSid: The SID of the SIP domain that contains the resource to fetch.
     /// - sid: The Twilio-provided string that uniquely identifies the
     ///   CredentialListMapping resource to fetch.
-    public static func fetchSipDomainsAuthRegistrationsCredentialListMappings(config: ClientConfig, accountSid: String, domainSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountSipSipDomainSipAuthSipAuthRegistrationsSipAuthXed44b778d6 {
+    static func fetchSipDomainsAuthRegistrationsCredentialListMappings(
+        config: ClientConfig,
+        accountSid: String,
+        domainSid: String,
+        sid: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountSipSipDomainSipAuthSipAuthRegistrationsSipAuthXed44b778d6 {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
@@ -28,6 +35,21 @@ extension SipDomainsAuthRegistrationsCredentialListMappingsMethods {
         try validateLength("Sid", sid, min: 34, max: 34)
         try sdkValidatePattern("Sid", sid, sdkPattern189973589bff)
 
-        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/SIP/Domains/", sdkEncodePathSegment(sdkWireString(domainSid)), "/Auth/Registrations/CredentialListMappings/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, decoder: .json, operationId: "fetchSipDomainsAuthRegistrationsCredentialListMappings", options: requestOptions)).data
+        return try await (sdkRequest(
+            "GET",
+            [
+                "/2010-04-01/Accounts/",
+                sdkEncodePathSegment(sdkWireString(accountSid)),
+                "/SIP/Domains/",
+                sdkEncodePathSegment(sdkWireString(domainSid)),
+                "/Auth/Registrations/CredentialListMappings/",
+                sdkEncodePathSegment(sdkWireString(sid)),
+                ".json",
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "fetchSipDomainsAuthRegistrationsCredentialListMappings",
+            options: requestOptions
+        )).data
     }
 }

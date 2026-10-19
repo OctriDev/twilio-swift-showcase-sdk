@@ -7,7 +7,8 @@ import Foundation
     import FoundationNetworking
 #endif
 public enum AddressesDependentPhoneNumbersMethods {
-    /// Lists phone numbers that depend on a specified address in an account. Use the account and address SIDs to scope the results, and use the page parameters to navigate the list.
+    /// Lists phone numbers that depend on a specified address in an account. Use the account and address SIDs to scope
+    /// the results, and use the page parameters to navigate the list.
     ///
     /// - Parameters:
     /// - accountSid: The SID of the
@@ -19,25 +20,47 @@ public enum AddressesDependentPhoneNumbersMethods {
     ///   50, and the maximum is 1000.
     /// - page: The page index. This value is simply for client state.
     /// - pageToken: The page token. This is provided by the API.
-    public static func listAddressesDependentPhoneNumbers(config: ClientConfig, accountSid: String, addressSid: String, pageSize: Int? = nil, page: Int? = nil, pageToken: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ListAddressesDependentPhoneNumbersResponse {
+    public static func listAddressesDependentPhoneNumbers(
+        config: ClientConfig,
+        accountSid: String,
+        addressSid: String,
+        pageSize: Int? = nil,
+        page: Int? = nil,
+        pageToken: String? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ListAddressesDependentPhoneNumbersResponse {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
         try validateLength("AddressSid", addressSid, min: 34, max: 34)
         try sdkValidatePattern("AddressSid", addressSid, sdkPattern843918c2faa5)
 
-        if let pageSize = pageSize {
+        if let pageSize {
             try validateRange("PageSize", Double(pageSize), min: 1, max: 1000)
         }
 
-        if let page = page {
+        if let page {
             try validateRange("Page", Double(page), min: 0)
         }
 
-        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Addresses/", sdkEncodePathSegment(sdkWireString(addressSid)), "/DependentPhoneNumbers.json"].joined(), config: config, query: [
-            SdkQueryParameter("PageSize", value: pageSize),
-            SdkQueryParameter("Page", value: page),
-            SdkQueryParameter("PageToken", value: pageToken),
-        ], decoder: .json, operationId: "listAddressesDependentPhoneNumbers", options: requestOptions)).data
+        return try await (sdkRequest(
+            "GET",
+            [
+                "/2010-04-01/Accounts/",
+                sdkEncodePathSegment(sdkWireString(accountSid)),
+                "/Addresses/",
+                sdkEncodePathSegment(sdkWireString(addressSid)),
+                "/DependentPhoneNumbers.json",
+            ].joined(),
+            config: config,
+            query: [
+                SdkQueryParameter("PageSize", value: pageSize),
+                SdkQueryParameter("Page", value: page),
+                SdkQueryParameter("PageToken", value: pageToken),
+            ],
+            decoder: .json,
+            operationId: "listAddressesDependentPhoneNumbers",
+            options: requestOptions
+        )).data
     }
 }
