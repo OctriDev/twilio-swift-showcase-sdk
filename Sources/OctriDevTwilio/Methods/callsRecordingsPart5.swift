@@ -6,9 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension CallsRecordingsMethods {
-    /// Retrieves a specific recording associated with a call. Use the account, call, and recording SIDs to identify the
-    /// recording and inspect its status, timing, and recording details.
+extension CallsRecordingsMethods {
+    /// Retrieves a specific recording associated with a call. Use the account, call, and recording SIDs to identify the recording and inspect its status, timing, and recording details.
     ///
     /// Fetch an instance of a recording for a call
     ///
@@ -20,13 +19,7 @@ public extension CallsRecordingsMethods {
     ///   SID of the resource to fetch.
     /// - sid: The Twilio-provided string that uniquely identifies the Recording
     ///   resource to fetch.
-    static func fetchCallsRecordings(
-        config: ClientConfig,
-        accountSid: String,
-        callSid: String,
-        sid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountCallCallRecording {
+    public static func fetchCallsRecordings(config: ClientConfig, accountSid: String, callSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountCallCallRecording {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
@@ -36,21 +29,6 @@ public extension CallsRecordingsMethods {
         try validateLength("Sid", sid, min: 34, max: 34)
         try sdkValidatePattern("Sid", sid, sdkPatternfad3f05341a2)
 
-        return try await (sdkRequest(
-            "GET",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(accountSid)),
-                "/Calls/",
-                sdkEncodePathSegment(sdkWireString(callSid)),
-                "/Recordings/",
-                sdkEncodePathSegment(sdkWireString(sid)),
-                ".json",
-            ].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "fetchCallsRecordings",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Calls/", sdkEncodePathSegment(sdkWireString(callSid)), "/Recordings/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, decoder: .json, operationId: "fetchCallsRecordings", options: requestOptions)).data
     }
 }

@@ -6,10 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension UsageTriggersMethods {
-    /// Updates an existing usage trigger for an account. Supply the trigger fields you want to change, such as
-    /// `CallbackUrl`, `CallbackMethod`, or `FriendlyName`; the request body is optional. The callback URL is used when
-    /// the trigger fires.
+extension UsageTriggersMethods {
+    /// Updates an existing usage trigger for an account. Supply the trigger fields you want to change, such as `CallbackUrl`, `CallbackMethod`, or `FriendlyName`; the request body is optional. The callback URL is used when the trigger fires.
     ///
     /// Update an instance of a usage trigger
     ///
@@ -25,46 +23,19 @@ public extension UsageTriggersMethods {
     ///   trigger fires.
     /// - friendlyName: A descriptive string that you create to describe the
     ///   resource. It can be up to 64 characters long.
-    static func updateUsageTriggers(
-        config: ClientConfig,
-        accountSid: String,
-        sid: String,
-        callbackMethod: UpdateUsageTriggersRequestBodyCallbackMethod? = nil,
-        callbackUrl: String? = nil,
-        friendlyName: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountUsageUsageTrigger {
+    public static func updateUsageTriggers(config: ClientConfig, accountSid: String, sid: String, callbackMethod: UpdateUsageTriggersRequestBodyCallbackMethod? = nil, callbackUrl: String? = nil, friendlyName: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountUsageUsageTrigger {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
         try validateLength("Sid", sid, min: 34, max: 34)
         try sdkValidatePattern("Sid", sid, sdkPattern0c13ca06d199)
 
-        if let callbackUrl {
+        if let callbackUrl = callbackUrl {
             try sdkValidateUri("CallbackUrl", callbackUrl)
         }
 
-        let requestBody = UpdateUsageTriggersRequestBody(
-            callbackMethod: callbackMethod,
-            callbackUrl: callbackUrl,
-            friendlyName: friendlyName
-        )
+        let requestBody = UpdateUsageTriggersRequestBody(callbackMethod: callbackMethod, callbackUrl: callbackUrl, friendlyName: friendlyName)
 
-        return try await (sdkRequest(
-            "POST",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(accountSid)),
-                "/Usage/Triggers/",
-                sdkEncodePathSegment(sdkWireString(sid)),
-                ".json",
-            ].joined(),
-            config: config,
-            body: requestBody,
-            contentType: "application/x-www-form-urlencoded",
-            decoder: .json,
-            operationId: "updateUsageTriggers",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("POST", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Usage/Triggers/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "updateUsageTriggers", options: requestOptions)).data
     }
 }

@@ -6,9 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ConferencesMethods {
-    /// Updates a conference's status or announcement configuration. Set `Status` to `completed` to end the conference,
-    /// or provide an announcement URL and its HTTP method. The response contains the updated conference resource.
+extension ConferencesMethods {
+    /// Updates a conference's status or announcement configuration. Set `Status` to `completed` to end the conference, or provide an announcement URL and its HTTP method. The response contains the updated conference resource.
     ///
     /// - Parameters:
     /// - accountSid: The SID of the
@@ -21,43 +20,16 @@ public extension ConferencesMethods {
     ///   that contains `<Play>`, `<Say>`, `<Pause>`, or `<Redirect>` verbs.
     /// - announceMethod: The HTTP method used to call `announce_url`. Can be: `GET`
     ///   or `POST` and the default is `POST`
-    static func updateConferences(
-        config: ClientConfig,
-        accountSid: String,
-        sid: String,
-        status: ConferenceEnumUpdateStatus? = nil,
-        announceUrl: String? = nil,
-        announceMethod: UpdateConferencesRequestBodyAnnounceMethod? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountConference {
+    public static func updateConferences(config: ClientConfig, accountSid: String, sid: String, status: ConferenceEnumUpdateStatus? = nil, announceUrl: String? = nil, announceMethod: UpdateConferencesRequestBodyAnnounceMethod? = nil, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountConference {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
-        if let announceUrl {
+        if let announceUrl = announceUrl {
             try sdkValidateUri("AnnounceUrl", announceUrl)
         }
 
-        let requestBody = UpdateConferencesRequestBody(
-            status: status,
-            announceUrl: announceUrl,
-            announceMethod: announceMethod
-        )
+        let requestBody = UpdateConferencesRequestBody(status: status, announceUrl: announceUrl, announceMethod: announceMethod)
 
-        return try await (sdkRequest(
-            "POST",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(accountSid)),
-                "/Conferences/",
-                sdkEncodePathSegment(sdkWireString(sid)),
-                ".json",
-            ].joined(),
-            config: config,
-            body: requestBody,
-            contentType: "application/x-www-form-urlencoded",
-            decoder: .json,
-            operationId: "updateConferences",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("POST", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Conferences/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "updateConferences", options: requestOptions)).data
     }
 }

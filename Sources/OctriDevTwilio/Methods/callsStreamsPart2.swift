@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension CallsStreamsMethods {
-    struct CreateCallsStreamsOptions: Codable {
+extension CallsStreamsMethods {
+    public struct CreateCallsStreamsOptions: Codable {
         public var accountSid: String
         public var callSid: String
         public var url: String
@@ -221,8 +221,7 @@ public extension CallsStreamsMethods {
         }
     }
 
-    /// Creates a media Stream associated with a call. Provide the required `Url` for the WebSocket connection and
-    /// optionally configure audio tracks, a status callback, and callback parameters.
+    /// Creates a media Stream associated with a call. Provide the required `Url` for the WebSocket connection and optionally configure audio tracks, a status callback, and callback parameters.
     ///
     /// Create a Stream
     ///
@@ -443,11 +442,7 @@ public extension CallsStreamsMethods {
     /// - parameter98Value: Parameter value
     /// - parameter99Name: Parameter name
     /// - parameter99Value: Parameter value
-    static func createCallsStreams(
-        config: ClientConfig,
-        options: CreateCallsStreamsOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountCallStream {
+    public static func createCallsStreams(config: ClientConfig, options: CreateCallsStreamsOptions, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountCallStream {
         try validateLength("AccountSid", options.accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", options.accountSid, sdkPatternc7cb941ab84b)
 
@@ -462,21 +457,6 @@ public extension CallsStreamsMethods {
 
         let requestBody = CreateCallsStreamsRequestBody(options: options)
 
-        return try await (sdkRequest(
-            "POST",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(options.accountSid)),
-                "/Calls/",
-                sdkEncodePathSegment(sdkWireString(options.callSid)),
-                "/Streams.json",
-            ].joined(),
-            config: config,
-            body: requestBody,
-            contentType: "application/x-www-form-urlencoded",
-            decoder: .json,
-            operationId: "createCallsStreams",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("POST", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(options.accountSid)), "/Calls/", sdkEncodePathSegment(sdkWireString(options.callSid)), "/Streams.json"].joined(), config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "createCallsStreams", options: requestOptions)).data
     }
 }

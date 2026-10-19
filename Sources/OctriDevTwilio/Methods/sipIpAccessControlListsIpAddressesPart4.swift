@@ -6,10 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension SipIpAccessControlListsIpAddressesMethods {
-    /// Retrieves a specific IP address resource from an IP access control list. Use `AccountSid`,
-    /// `IpAccessControlListSid`, and `Sid` to identify the account, list, and address. Each identifier must match its
-    /// resource-specific 34-character format.
+extension SipIpAccessControlListsIpAddressesMethods {
+    /// Retrieves a specific IP address resource from an IP access control list. Use `AccountSid`, `IpAccessControlListSid`, and `Sid` to identify the account, list, and address. Each identifier must match its resource-specific 34-character format.
     ///
     /// Read one IpAddress resource.
     ///
@@ -21,13 +19,7 @@ public extension SipIpAccessControlListsIpAddressesMethods {
     ///   IpAddress resources to fetch.
     /// - sid: A 34 character string that uniquely identifies the IpAddress resource
     ///   to fetch.
-    static func fetchSipIpAccessControlListsIpAddresses(
-        config: ClientConfig,
-        accountSid: String,
-        ipAccessControlListSid: String,
-        sid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountSipSipIpAccessControlListSipIpAddress {
+    public static func fetchSipIpAccessControlListsIpAddresses(config: ClientConfig, accountSid: String, ipAccessControlListSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountSipSipIpAccessControlListSipIpAddress {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
@@ -37,21 +29,6 @@ public extension SipIpAccessControlListsIpAddressesMethods {
         try validateLength("Sid", sid, min: 34, max: 34)
         try sdkValidatePattern("Sid", sid, sdkPatternabc29aa1a70d)
 
-        return try await (sdkRequest(
-            "GET",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(accountSid)),
-                "/SIP/IpAccessControlLists/",
-                sdkEncodePathSegment(sdkWireString(ipAccessControlListSid)),
-                "/IpAddresses/",
-                sdkEncodePathSegment(sdkWireString(sid)),
-                ".json",
-            ].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "fetchSipIpAccessControlListsIpAddresses",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/SIP/IpAccessControlLists/", sdkEncodePathSegment(sdkWireString(ipAccessControlListSid)), "/IpAddresses/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, decoder: .json, operationId: "fetchSipIpAccessControlListsIpAddresses", options: requestOptions)).data
     }
 }

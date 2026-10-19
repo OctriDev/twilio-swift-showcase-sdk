@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Api20100401Call domain models
+// Api20100401Call domain models
 /// Typed representation of the `ApiV2010AccountCall` API schema.
 public struct ApiV2010AccountCall: Codable {
     /// The unique string that we created to identify this Call resource.
@@ -108,100 +108,73 @@ public struct ApiV2010AccountCall: Codable {
     }
 
     init() {
-        (sid, dateCreated, dateUpdated, parentCallSid, accountSid) = (nil, nil, nil, nil, nil)
-        (to, toFormatted, from, fromFormatted, phoneNumberSid) = (nil, nil, nil, nil, nil)
-        (status, startTime, endTime, duration, price) = (nil, nil, nil, nil, nil)
-        (priceUnit, direction, answeredBy, apiVersion, forwardedFrom) = (nil, nil, nil, nil, nil)
-        (groupSid, callerName, queueTime, trunkSid, uri) = (nil, nil, nil, nil, nil)
-        subresourceUris = nil
+        (self.sid, self.dateCreated, self.dateUpdated, self.parentCallSid, self.accountSid) = (nil, nil, nil, nil, nil)
+        (self.to, self.toFormatted, self.from, self.fromFormatted, self.phoneNumberSid) = (nil, nil, nil, nil, nil)
+        (self.status, self.startTime, self.endTime, self.duration, self.price) = (nil, nil, nil, nil, nil)
+        (self.priceUnit, self.direction, self.answeredBy, self.apiVersion, self.forwardedFrom) = (nil, nil, nil, nil, nil)
+        (self.groupSid, self.callerName, self.queueTime, self.trunkSid, self.uri) = (nil, nil, nil, nil, nil)
+        self.subresourceUris = nil
     }
 }
 
-public extension ApiV2010AccountCall {
-    init(from decoder: Decoder) throws {
+extension ApiV2010AccountCall {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        sid = try container.sdkDecodeIfPresent(.sid)
-        dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
-        dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
-        parentCallSid = try container.sdkDecodeIfPresent(.parentCallSid)
-        accountSid = try container.sdkDecodeIfPresent(.accountSid)
-        to = try container.sdkDecodeIfPresent(.to)
-        toFormatted = try container.sdkDecodeIfPresent(.toFormatted)
-        from = try container.sdkDecodeIfPresent(.from)
-        fromFormatted = try container.sdkDecodeIfPresent(.fromFormatted)
-        phoneNumberSid = try container.sdkDecodeIfPresent(.phoneNumberSid)
-        status = try container.sdkDecodeIfPresent(.status)
-        startTime = try container.sdkDecodeIfPresent(.startTime)
-        endTime = try container.sdkDecodeIfPresent(.endTime)
-        duration = try container.sdkDecodeIfPresent(.duration)
-        price = try container.sdkDecodeIfPresent(.price)
-        priceUnit = try container.sdkDecodeIfPresent(.priceUnit)
-        direction = try container.sdkDecodeIfPresent(.direction)
-        answeredBy = try container.sdkDecodeIfPresent(.answeredBy)
-        apiVersion = try container.sdkDecodeIfPresent(.apiVersion)
-        forwardedFrom = try container.sdkDecodeIfPresent(.forwardedFrom)
-        groupSid = try container.sdkDecodeIfPresent(.groupSid)
-        callerName = try container.sdkDecodeIfPresent(.callerName)
-        queueTime = try container.sdkDecodeIfPresent(.queueTime)
-        trunkSid = try container.sdkDecodeIfPresent(.trunkSid)
-        uri = try container.sdkDecodeIfPresent(.uri)
-        subresourceUris = try container.sdkDecodeIfPresent(.subresourceUris)
-        if let value = sid {
+        self.sid = try container.sdkDecodeIfPresent(.sid)
+        self.dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
+        self.dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
+        self.parentCallSid = try container.sdkDecodeIfPresent(.parentCallSid)
+        self.accountSid = try container.sdkDecodeIfPresent(.accountSid)
+        self.to = try container.sdkDecodeIfPresent(.to)
+        self.toFormatted = try container.sdkDecodeIfPresent(.toFormatted)
+        self.from = try container.sdkDecodeIfPresent(.from)
+        self.fromFormatted = try container.sdkDecodeIfPresent(.fromFormatted)
+        self.phoneNumberSid = try container.sdkDecodeIfPresent(.phoneNumberSid)
+        self.status = try container.sdkDecodeIfPresent(.status)
+        self.startTime = try container.sdkDecodeIfPresent(.startTime)
+        self.endTime = try container.sdkDecodeIfPresent(.endTime)
+        self.duration = try container.sdkDecodeIfPresent(.duration)
+        self.price = try container.sdkDecodeIfPresent(.price)
+        self.priceUnit = try container.sdkDecodeIfPresent(.priceUnit)
+        self.direction = try container.sdkDecodeIfPresent(.direction)
+        self.answeredBy = try container.sdkDecodeIfPresent(.answeredBy)
+        self.apiVersion = try container.sdkDecodeIfPresent(.apiVersion)
+        self.forwardedFrom = try container.sdkDecodeIfPresent(.forwardedFrom)
+        self.groupSid = try container.sdkDecodeIfPresent(.groupSid)
+        self.callerName = try container.sdkDecodeIfPresent(.callerName)
+        self.queueTime = try container.sdkDecodeIfPresent(.queueTime)
+        self.trunkSid = try container.sdkDecodeIfPresent(.trunkSid)
+        self.uri = try container.sdkDecodeIfPresent(.uri)
+        self.subresourceUris = try container.sdkDecodeIfPresent(.subresourceUris)
+        if let value = self.sid {
             try validateLength("sid", value, min: 34, max: 34)
             try sdkValidatePattern("sid", value, sdkPattern25b2d94fcc27)
         }
-        if let value = parentCallSid {
+        if let value = self.parentCallSid {
             try validateLength("parent_call_sid", value, min: 34, max: 34)
             try sdkValidatePattern("parent_call_sid", value, sdkPattern25b2d94fcc27)
         }
-        if let value = accountSid {
+        if let value = self.accountSid {
             try validateLength("account_sid", value, min: 34, max: 34)
             try sdkValidatePattern("account_sid", value, sdkPatternc7cb941ab84b)
         }
-        if let value = phoneNumberSid {
+        if let value = self.phoneNumberSid {
             try validateLength("phone_number_sid", value, min: 34, max: 34)
             try sdkValidatePattern("phone_number_sid", value, sdkPattern9792ce0bb10f)
         }
-        if let value = groupSid {
+        if let value = self.groupSid {
             try validateLength("group_sid", value, min: 34, max: 34)
             try sdkValidatePattern("group_sid", value, sdkPattern4a75d83f0847)
         }
-        if let value = trunkSid {
+        if let value = self.trunkSid {
             try validateLength("trunk_sid", value, min: 34, max: 34)
             try sdkValidatePattern("trunk_sid", value, sdkPatternf2a34098ee6c)
         }
     }
 }
 
-public extension ApiV2010AccountCall {
-    init(
-        sid: String? = nil,
-        dateCreated: String? = nil,
-        dateUpdated: String? = nil,
-        parentCallSid: String? = nil,
-        accountSid: String? = nil,
-        to: String? = nil,
-        toFormatted: String? = nil,
-        from: String? = nil,
-        fromFormatted: String? = nil,
-        phoneNumberSid: String? = nil,
-        status: CallEnumStatus? = nil,
-        startTime: String? = nil,
-        endTime: String? = nil,
-        duration: String? = nil,
-        price: String? = nil,
-        priceUnit: String? = nil,
-        direction: String? = nil,
-        answeredBy: String? = nil,
-        apiVersion: String? = nil,
-        forwardedFrom: String? = nil,
-        groupSid: String? = nil,
-        callerName: String? = nil,
-        queueTime: String? = nil,
-        trunkSid: String? = nil,
-        uri: String? = nil,
-        subresourceUris: [String: JSONValue]? = nil
-    ) throws {
+extension ApiV2010AccountCall {
+    public init(sid: String? = nil, dateCreated: String? = nil, dateUpdated: String? = nil, parentCallSid: String? = nil, accountSid: String? = nil, to: String? = nil, toFormatted: String? = nil, from: String? = nil, fromFormatted: String? = nil, phoneNumberSid: String? = nil, status: CallEnumStatus? = nil, startTime: String? = nil, endTime: String? = nil, duration: String? = nil, price: String? = nil, priceUnit: String? = nil, direction: String? = nil, answeredBy: String? = nil, apiVersion: String? = nil, forwardedFrom: String? = nil, groupSid: String? = nil, callerName: String? = nil, queueTime: String? = nil, trunkSid: String? = nil, uri: String? = nil, subresourceUris: [String: JSONValue]? = nil) throws {
         self.init()
         (self.sid, self.dateCreated) = (sid, dateCreated)
         (self.dateUpdated, self.parentCallSid) = (dateUpdated, parentCallSid)
@@ -248,10 +221,7 @@ public extension ApiV2010AccountCall {
 public struct CallEnumStatus: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let queued = CallEnumStatus(rawValue: "queued")
     public static let ringing = CallEnumStatus(rawValue: "ringing")
     public static let inProgress = CallEnumStatus(rawValue: "in-progress")
@@ -263,7 +233,7 @@ public struct CallEnumStatus: RawRepresentable, Hashable, Codable, Sendable, Sdk
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -276,16 +246,13 @@ public struct CallEnumStatus: RawRepresentable, Hashable, Codable, Sendable, Sdk
 public struct CallEnumUpdateStatus: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let canceled = CallEnumUpdateStatus(rawValue: "canceled")
     public static let completed = CallEnumUpdateStatus(rawValue: "completed")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

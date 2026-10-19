@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Api20100401SipIpAddress domain models
+// Api20100401SipIpAddress domain models
 /// Typed representation of the `ApiV2010AccountSipSipIpAccessControlListSipIpAddress` API schema.
 public struct ApiV2010AccountSipSipIpAccessControlListSipIpAddress: Codable {
     /// A 34 character string that uniquely identifies this resource.
@@ -40,50 +40,40 @@ public struct ApiV2010AccountSipSipIpAccessControlListSipIpAddress: Codable {
     }
 
     init() {
-        (sid, accountSid, friendlyName, ipAddress, cidrPrefixLength) = (nil, nil, nil, nil, nil)
-        (ipAccessControlListSid, dateCreated, dateUpdated, uri) = (nil, nil, nil, nil)
+        (self.sid, self.accountSid, self.friendlyName, self.ipAddress, self.cidrPrefixLength) = (nil, nil, nil, nil, nil)
+        (self.ipAccessControlListSid, self.dateCreated, self.dateUpdated, self.uri) = (nil, nil, nil, nil)
     }
 }
 
-public extension ApiV2010AccountSipSipIpAccessControlListSipIpAddress {
-    init(from decoder: Decoder) throws {
+extension ApiV2010AccountSipSipIpAccessControlListSipIpAddress {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        sid = try container.sdkDecodeIfPresent(.sid)
-        accountSid = try container.sdkDecodeIfPresent(.accountSid)
-        friendlyName = try container.sdkDecodeIfPresent(.friendlyName)
-        ipAddress = try container.sdkDecodeIfPresent(.ipAddress)
-        cidrPrefixLength = try container.sdkDecodeIfPresent(.cidrPrefixLength)
-        ipAccessControlListSid = try container.sdkDecodeIfPresent(.ipAccessControlListSid)
-        dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
-        dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
-        uri = try container.sdkDecodeIfPresent(.uri)
-        if let value = sid {
+        self.sid = try container.sdkDecodeIfPresent(.sid)
+        self.accountSid = try container.sdkDecodeIfPresent(.accountSid)
+        self.friendlyName = try container.sdkDecodeIfPresent(.friendlyName)
+        self.ipAddress = try container.sdkDecodeIfPresent(.ipAddress)
+        self.cidrPrefixLength = try container.sdkDecodeIfPresent(.cidrPrefixLength)
+        self.ipAccessControlListSid = try container.sdkDecodeIfPresent(.ipAccessControlListSid)
+        self.dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
+        self.dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
+        self.uri = try container.sdkDecodeIfPresent(.uri)
+        if let value = self.sid {
             try validateLength("sid", value, min: 34, max: 34)
             try sdkValidatePattern("sid", value, sdkPatternabc29aa1a70d)
         }
-        if let value = accountSid {
+        if let value = self.accountSid {
             try validateLength("account_sid", value, min: 34, max: 34)
             try sdkValidatePattern("account_sid", value, sdkPatternc7cb941ab84b)
         }
-        if let value = ipAccessControlListSid {
+        if let value = self.ipAccessControlListSid {
             try validateLength("ip_access_control_list_sid", value, min: 34, max: 34)
             try sdkValidatePattern("ip_access_control_list_sid", value, sdkPattern99d6601bdb3f)
         }
     }
 }
 
-public extension ApiV2010AccountSipSipIpAccessControlListSipIpAddress {
-    init(
-        sid: String? = nil,
-        accountSid: String? = nil,
-        friendlyName: String? = nil,
-        ipAddress: String? = nil,
-        cidrPrefixLength: Int? = nil,
-        ipAccessControlListSid: String? = nil,
-        dateCreated: String? = nil,
-        dateUpdated: String? = nil,
-        uri: String? = nil
-    ) throws {
+extension ApiV2010AccountSipSipIpAccessControlListSipIpAddress {
+    public init(sid: String? = nil, accountSid: String? = nil, friendlyName: String? = nil, ipAddress: String? = nil, cidrPrefixLength: Int? = nil, ipAccessControlListSid: String? = nil, dateCreated: String? = nil, dateUpdated: String? = nil, uri: String? = nil) throws {
         self.init()
         (self.sid, self.accountSid) = (sid, accountSid)
         (self.friendlyName, self.ipAddress) = (friendlyName, ipAddress)

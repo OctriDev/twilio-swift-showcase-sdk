@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Api20100401ShortCode domain models
+// Api20100401ShortCode domain models
 /// Typed representation of the `ApiV2010AccountShortCode` API schema.
 public struct ApiV2010AccountShortCode: Codable {
     /// The SID of the Account that created this ShortCode resource.
@@ -47,59 +47,46 @@ public struct ApiV2010AccountShortCode: Codable {
     }
 
     init() {
-        (accountSid, apiVersion, dateCreated, dateUpdated, friendlyName) = (nil, nil, nil, nil, nil)
-        (shortCode, sid, smsFallbackMethod, smsFallbackUrl, smsMethod) = (nil, nil, nil, nil, nil)
-        (smsUrl, uri) = (nil, nil)
+        (self.accountSid, self.apiVersion, self.dateCreated, self.dateUpdated, self.friendlyName) = (nil, nil, nil, nil, nil)
+        (self.shortCode, self.sid, self.smsFallbackMethod, self.smsFallbackUrl, self.smsMethod) = (nil, nil, nil, nil, nil)
+        (self.smsUrl, self.uri) = (nil, nil)
     }
 }
 
-public extension ApiV2010AccountShortCode {
-    init(from decoder: Decoder) throws {
+extension ApiV2010AccountShortCode {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        accountSid = try container.sdkDecodeIfPresent(.accountSid)
-        apiVersion = try container.sdkDecodeIfPresent(.apiVersion)
-        dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
-        dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
-        friendlyName = try container.sdkDecodeIfPresent(.friendlyName)
-        shortCode = try container.sdkDecodeIfPresent(.shortCode)
-        sid = try container.sdkDecodeIfPresent(.sid)
-        smsFallbackMethod = try container.sdkDecodeIfPresent(.smsFallbackMethod)
-        smsFallbackUrl = try container.sdkDecodeIfPresent(.smsFallbackUrl)
-        smsMethod = try container.sdkDecodeIfPresent(.smsMethod)
-        smsUrl = try container.sdkDecodeIfPresent(.smsUrl)
-        uri = try container.sdkDecodeIfPresent(.uri)
-        if let value = accountSid {
+        self.accountSid = try container.sdkDecodeIfPresent(.accountSid)
+        self.apiVersion = try container.sdkDecodeIfPresent(.apiVersion)
+        self.dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
+        self.dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
+        self.friendlyName = try container.sdkDecodeIfPresent(.friendlyName)
+        self.shortCode = try container.sdkDecodeIfPresent(.shortCode)
+        self.sid = try container.sdkDecodeIfPresent(.sid)
+        self.smsFallbackMethod = try container.sdkDecodeIfPresent(.smsFallbackMethod)
+        self.smsFallbackUrl = try container.sdkDecodeIfPresent(.smsFallbackUrl)
+        self.smsMethod = try container.sdkDecodeIfPresent(.smsMethod)
+        self.smsUrl = try container.sdkDecodeIfPresent(.smsUrl)
+        self.uri = try container.sdkDecodeIfPresent(.uri)
+        if let value = self.accountSid {
             try validateLength("account_sid", value, min: 34, max: 34)
             try sdkValidatePattern("account_sid", value, sdkPatternc7cb941ab84b)
         }
-        if let value = sid {
+        if let value = self.sid {
             try validateLength("sid", value, min: 34, max: 34)
             try sdkValidatePattern("sid", value, sdkPatternd0f630ff0f9b)
         }
-        if let value = smsFallbackUrl {
+        if let value = self.smsFallbackUrl {
             try sdkValidateUri("sms_fallback_url", value)
         }
-        if let value = smsUrl {
+        if let value = self.smsUrl {
             try sdkValidateUri("sms_url", value)
         }
     }
 }
 
-public extension ApiV2010AccountShortCode {
-    init(
-        accountSid: String? = nil,
-        apiVersion: String? = nil,
-        dateCreated: String? = nil,
-        dateUpdated: String? = nil,
-        friendlyName: String? = nil,
-        shortCode: String? = nil,
-        sid: String? = nil,
-        smsFallbackMethod: ApiV2010AccountShortCodeSmsFallbackMethod? = nil,
-        smsFallbackUrl: String? = nil,
-        smsMethod: ApiV2010AccountShortCodeSmsMethod? = nil,
-        smsUrl: String? = nil,
-        uri: String? = nil
-    ) throws {
+extension ApiV2010AccountShortCode {
+    public init(accountSid: String? = nil, apiVersion: String? = nil, dateCreated: String? = nil, dateUpdated: String? = nil, friendlyName: String? = nil, shortCode: String? = nil, sid: String? = nil, smsFallbackMethod: ApiV2010AccountShortCodeSmsFallbackMethod? = nil, smsFallbackUrl: String? = nil, smsMethod: ApiV2010AccountShortCodeSmsMethod? = nil, smsUrl: String? = nil, uri: String? = nil) throws {
         self.init()
         (self.accountSid, self.apiVersion) = (accountSid, apiVersion)
         (self.dateCreated, self.dateUpdated) = (dateCreated, dateUpdated)
@@ -128,16 +115,13 @@ public extension ApiV2010AccountShortCode {
 public struct ApiV2010AccountShortCodeSmsMethod: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let get = ApiV2010AccountShortCodeSmsMethod(rawValue: "GET")
     public static let post = ApiV2010AccountShortCodeSmsMethod(rawValue: "POST")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -147,20 +131,16 @@ public struct ApiV2010AccountShortCodeSmsMethod: RawRepresentable, Hashable, Cod
 }
 
 /// The HTTP method we use to call the `sms_fallback_url`. Can be: `GET` or `POST`.
-public struct ApiV2010AccountShortCodeSmsFallbackMethod: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct ApiV2010AccountShortCodeSmsFallbackMethod: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let get = ApiV2010AccountShortCodeSmsFallbackMethod(rawValue: "GET")
     public static let post = ApiV2010AccountShortCodeSmsFallbackMethod(rawValue: "POST")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

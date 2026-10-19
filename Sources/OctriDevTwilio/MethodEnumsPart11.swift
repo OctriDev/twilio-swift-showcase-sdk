@@ -34,57 +34,57 @@ struct CreateIncomingPhoneNumbersRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encodeIfPresent(apiVersion, forKey: SdkCodingKey("ApiVersion"))
-        try keyedContainer.encodeIfPresent(friendlyName, forKey: SdkCodingKey("FriendlyName"))
-        try keyedContainer.encodeIfPresent(smsApplicationSid, forKey: SdkCodingKey("SmsApplicationSid"))
-        try keyedContainer.encodeIfPresent(smsFallbackMethod, forKey: SdkCodingKey("SmsFallbackMethod"))
-        try keyedContainer.encodeIfPresent(smsFallbackUrl, forKey: SdkCodingKey("SmsFallbackUrl"))
-        try keyedContainer.encodeIfPresent(smsMethod, forKey: SdkCodingKey("SmsMethod"))
-        try keyedContainer.encodeIfPresent(smsUrl, forKey: SdkCodingKey("SmsUrl"))
-        try keyedContainer.encodeIfPresent(statusCallback, forKey: SdkCodingKey("StatusCallback"))
-        try keyedContainer.encodeIfPresent(statusCallbackMethod, forKey: SdkCodingKey("StatusCallbackMethod"))
-        try keyedContainer.encodeIfPresent(voiceApplicationSid, forKey: SdkCodingKey("VoiceApplicationSid"))
-        try keyedContainer.encodeIfPresent(voiceCallerIdLookup, forKey: SdkCodingKey("VoiceCallerIdLookup"))
-        try keyedContainer.encodeIfPresent(voiceFallbackMethod, forKey: SdkCodingKey("VoiceFallbackMethod"))
-        try keyedContainer.encodeIfPresent(voiceFallbackUrl, forKey: SdkCodingKey("VoiceFallbackUrl"))
-        try keyedContainer.encodeIfPresent(voiceMethod, forKey: SdkCodingKey("VoiceMethod"))
-        try keyedContainer.encodeIfPresent(voiceUrl, forKey: SdkCodingKey("VoiceUrl"))
-        try keyedContainer.encodeIfPresent(emergencyStatus, forKey: SdkCodingKey("EmergencyStatus"))
-        try keyedContainer.encodeIfPresent(emergencyAddressSid, forKey: SdkCodingKey("EmergencyAddressSid"))
-        try keyedContainer.encodeIfPresent(trunkSid, forKey: SdkCodingKey("TrunkSid"))
-        try keyedContainer.encodeIfPresent(identitySid, forKey: SdkCodingKey("IdentitySid"))
-        try keyedContainer.encodeIfPresent(addressSid, forKey: SdkCodingKey("AddressSid"))
-        try keyedContainer.encodeIfPresent(voiceReceiveMode, forKey: SdkCodingKey("VoiceReceiveMode"))
-        try keyedContainer.encodeIfPresent(bundleSid, forKey: SdkCodingKey("BundleSid"))
-        try keyedContainer.encodeIfPresent(phoneNumber, forKey: SdkCodingKey("PhoneNumber"))
-        try keyedContainer.encodeIfPresent(areaCode, forKey: SdkCodingKey("AreaCode"))
+        try keyedContainer.encodeIfPresent(self.apiVersion, forKey: SdkCodingKey("ApiVersion"))
+        try keyedContainer.encodeIfPresent(self.friendlyName, forKey: SdkCodingKey("FriendlyName"))
+        try keyedContainer.encodeIfPresent(self.smsApplicationSid, forKey: SdkCodingKey("SmsApplicationSid"))
+        try keyedContainer.encodeIfPresent(self.smsFallbackMethod, forKey: SdkCodingKey("SmsFallbackMethod"))
+        try keyedContainer.encodeIfPresent(self.smsFallbackUrl, forKey: SdkCodingKey("SmsFallbackUrl"))
+        try keyedContainer.encodeIfPresent(self.smsMethod, forKey: SdkCodingKey("SmsMethod"))
+        try keyedContainer.encodeIfPresent(self.smsUrl, forKey: SdkCodingKey("SmsUrl"))
+        try keyedContainer.encodeIfPresent(self.statusCallback, forKey: SdkCodingKey("StatusCallback"))
+        try keyedContainer.encodeIfPresent(self.statusCallbackMethod, forKey: SdkCodingKey("StatusCallbackMethod"))
+        try keyedContainer.encodeIfPresent(self.voiceApplicationSid, forKey: SdkCodingKey("VoiceApplicationSid"))
+        try keyedContainer.encodeIfPresent(self.voiceCallerIdLookup, forKey: SdkCodingKey("VoiceCallerIdLookup"))
+        try keyedContainer.encodeIfPresent(self.voiceFallbackMethod, forKey: SdkCodingKey("VoiceFallbackMethod"))
+        try keyedContainer.encodeIfPresent(self.voiceFallbackUrl, forKey: SdkCodingKey("VoiceFallbackUrl"))
+        try keyedContainer.encodeIfPresent(self.voiceMethod, forKey: SdkCodingKey("VoiceMethod"))
+        try keyedContainer.encodeIfPresent(self.voiceUrl, forKey: SdkCodingKey("VoiceUrl"))
+        try keyedContainer.encodeIfPresent(self.emergencyStatus, forKey: SdkCodingKey("EmergencyStatus"))
+        try keyedContainer.encodeIfPresent(self.emergencyAddressSid, forKey: SdkCodingKey("EmergencyAddressSid"))
+        try keyedContainer.encodeIfPresent(self.trunkSid, forKey: SdkCodingKey("TrunkSid"))
+        try keyedContainer.encodeIfPresent(self.identitySid, forKey: SdkCodingKey("IdentitySid"))
+        try keyedContainer.encodeIfPresent(self.addressSid, forKey: SdkCodingKey("AddressSid"))
+        try keyedContainer.encodeIfPresent(self.voiceReceiveMode, forKey: SdkCodingKey("VoiceReceiveMode"))
+        try keyedContainer.encodeIfPresent(self.bundleSid, forKey: SdkCodingKey("BundleSid"))
+        try keyedContainer.encodeIfPresent(self.phoneNumber, forKey: SdkCodingKey("PhoneNumber"))
+        try keyedContainer.encodeIfPresent(self.areaCode, forKey: SdkCodingKey("AreaCode"))
     }
 
     init(options: IncomingPhoneNumbersMethods.CreateIncomingPhoneNumbersOptions) {
-        apiVersion = options.apiVersion
-        friendlyName = options.friendlyName
-        smsApplicationSid = options.smsApplicationSid
-        smsFallbackMethod = options.smsFallbackMethod
-        smsFallbackUrl = options.smsFallbackUrl
-        smsMethod = options.smsMethod
-        smsUrl = options.smsUrl
-        statusCallback = options.statusCallback
-        statusCallbackMethod = options.statusCallbackMethod
-        voiceApplicationSid = options.voiceApplicationSid
-        voiceCallerIdLookup = options.voiceCallerIdLookup
-        voiceFallbackMethod = options.voiceFallbackMethod
-        voiceFallbackUrl = options.voiceFallbackUrl
-        voiceMethod = options.voiceMethod
-        voiceUrl = options.voiceUrl
-        emergencyStatus = options.emergencyStatus
-        emergencyAddressSid = options.emergencyAddressSid
-        trunkSid = options.trunkSid
-        identitySid = options.identitySid
-        addressSid = options.addressSid
-        voiceReceiveMode = options.voiceReceiveMode
-        bundleSid = options.bundleSid
-        phoneNumber = options.phoneNumber
-        areaCode = options.areaCode
+        self.apiVersion = options.apiVersion
+        self.friendlyName = options.friendlyName
+        self.smsApplicationSid = options.smsApplicationSid
+        self.smsFallbackMethod = options.smsFallbackMethod
+        self.smsFallbackUrl = options.smsFallbackUrl
+        self.smsMethod = options.smsMethod
+        self.smsUrl = options.smsUrl
+        self.statusCallback = options.statusCallback
+        self.statusCallbackMethod = options.statusCallbackMethod
+        self.voiceApplicationSid = options.voiceApplicationSid
+        self.voiceCallerIdLookup = options.voiceCallerIdLookup
+        self.voiceFallbackMethod = options.voiceFallbackMethod
+        self.voiceFallbackUrl = options.voiceFallbackUrl
+        self.voiceMethod = options.voiceMethod
+        self.voiceUrl = options.voiceUrl
+        self.emergencyStatus = options.emergencyStatus
+        self.emergencyAddressSid = options.emergencyAddressSid
+        self.trunkSid = options.trunkSid
+        self.identitySid = options.identitySid
+        self.addressSid = options.addressSid
+        self.voiceReceiveMode = options.voiceReceiveMode
+        self.bundleSid = options.bundleSid
+        self.phoneNumber = options.phoneNumber
+        self.areaCode = options.areaCode
     }
 }
 
@@ -115,54 +115,54 @@ struct CreateIncomingPhoneNumbersLocalRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(phoneNumber, forKey: SdkCodingKey("PhoneNumber"))
-        try keyedContainer.encodeIfPresent(apiVersion, forKey: SdkCodingKey("ApiVersion"))
-        try keyedContainer.encodeIfPresent(friendlyName, forKey: SdkCodingKey("FriendlyName"))
-        try keyedContainer.encodeIfPresent(smsApplicationSid, forKey: SdkCodingKey("SmsApplicationSid"))
-        try keyedContainer.encodeIfPresent(smsFallbackMethod, forKey: SdkCodingKey("SmsFallbackMethod"))
-        try keyedContainer.encodeIfPresent(smsFallbackUrl, forKey: SdkCodingKey("SmsFallbackUrl"))
-        try keyedContainer.encodeIfPresent(smsMethod, forKey: SdkCodingKey("SmsMethod"))
-        try keyedContainer.encodeIfPresent(smsUrl, forKey: SdkCodingKey("SmsUrl"))
-        try keyedContainer.encodeIfPresent(statusCallback, forKey: SdkCodingKey("StatusCallback"))
-        try keyedContainer.encodeIfPresent(statusCallbackMethod, forKey: SdkCodingKey("StatusCallbackMethod"))
-        try keyedContainer.encodeIfPresent(voiceApplicationSid, forKey: SdkCodingKey("VoiceApplicationSid"))
-        try keyedContainer.encodeIfPresent(voiceCallerIdLookup, forKey: SdkCodingKey("VoiceCallerIdLookup"))
-        try keyedContainer.encodeIfPresent(voiceFallbackMethod, forKey: SdkCodingKey("VoiceFallbackMethod"))
-        try keyedContainer.encodeIfPresent(voiceFallbackUrl, forKey: SdkCodingKey("VoiceFallbackUrl"))
-        try keyedContainer.encodeIfPresent(voiceMethod, forKey: SdkCodingKey("VoiceMethod"))
-        try keyedContainer.encodeIfPresent(voiceUrl, forKey: SdkCodingKey("VoiceUrl"))
-        try keyedContainer.encodeIfPresent(identitySid, forKey: SdkCodingKey("IdentitySid"))
-        try keyedContainer.encodeIfPresent(addressSid, forKey: SdkCodingKey("AddressSid"))
-        try keyedContainer.encodeIfPresent(emergencyStatus, forKey: SdkCodingKey("EmergencyStatus"))
-        try keyedContainer.encodeIfPresent(emergencyAddressSid, forKey: SdkCodingKey("EmergencyAddressSid"))
-        try keyedContainer.encodeIfPresent(trunkSid, forKey: SdkCodingKey("TrunkSid"))
-        try keyedContainer.encodeIfPresent(voiceReceiveMode, forKey: SdkCodingKey("VoiceReceiveMode"))
-        try keyedContainer.encodeIfPresent(bundleSid, forKey: SdkCodingKey("BundleSid"))
+        try keyedContainer.encode(self.phoneNumber, forKey: SdkCodingKey("PhoneNumber"))
+        try keyedContainer.encodeIfPresent(self.apiVersion, forKey: SdkCodingKey("ApiVersion"))
+        try keyedContainer.encodeIfPresent(self.friendlyName, forKey: SdkCodingKey("FriendlyName"))
+        try keyedContainer.encodeIfPresent(self.smsApplicationSid, forKey: SdkCodingKey("SmsApplicationSid"))
+        try keyedContainer.encodeIfPresent(self.smsFallbackMethod, forKey: SdkCodingKey("SmsFallbackMethod"))
+        try keyedContainer.encodeIfPresent(self.smsFallbackUrl, forKey: SdkCodingKey("SmsFallbackUrl"))
+        try keyedContainer.encodeIfPresent(self.smsMethod, forKey: SdkCodingKey("SmsMethod"))
+        try keyedContainer.encodeIfPresent(self.smsUrl, forKey: SdkCodingKey("SmsUrl"))
+        try keyedContainer.encodeIfPresent(self.statusCallback, forKey: SdkCodingKey("StatusCallback"))
+        try keyedContainer.encodeIfPresent(self.statusCallbackMethod, forKey: SdkCodingKey("StatusCallbackMethod"))
+        try keyedContainer.encodeIfPresent(self.voiceApplicationSid, forKey: SdkCodingKey("VoiceApplicationSid"))
+        try keyedContainer.encodeIfPresent(self.voiceCallerIdLookup, forKey: SdkCodingKey("VoiceCallerIdLookup"))
+        try keyedContainer.encodeIfPresent(self.voiceFallbackMethod, forKey: SdkCodingKey("VoiceFallbackMethod"))
+        try keyedContainer.encodeIfPresent(self.voiceFallbackUrl, forKey: SdkCodingKey("VoiceFallbackUrl"))
+        try keyedContainer.encodeIfPresent(self.voiceMethod, forKey: SdkCodingKey("VoiceMethod"))
+        try keyedContainer.encodeIfPresent(self.voiceUrl, forKey: SdkCodingKey("VoiceUrl"))
+        try keyedContainer.encodeIfPresent(self.identitySid, forKey: SdkCodingKey("IdentitySid"))
+        try keyedContainer.encodeIfPresent(self.addressSid, forKey: SdkCodingKey("AddressSid"))
+        try keyedContainer.encodeIfPresent(self.emergencyStatus, forKey: SdkCodingKey("EmergencyStatus"))
+        try keyedContainer.encodeIfPresent(self.emergencyAddressSid, forKey: SdkCodingKey("EmergencyAddressSid"))
+        try keyedContainer.encodeIfPresent(self.trunkSid, forKey: SdkCodingKey("TrunkSid"))
+        try keyedContainer.encodeIfPresent(self.voiceReceiveMode, forKey: SdkCodingKey("VoiceReceiveMode"))
+        try keyedContainer.encodeIfPresent(self.bundleSid, forKey: SdkCodingKey("BundleSid"))
     }
 
     init(options: IncomingPhoneNumbersMethods.CreateIncomingPhoneNumbersLocalOptions) {
-        phoneNumber = options.phoneNumber
-        apiVersion = options.apiVersion
-        friendlyName = options.friendlyName
-        smsApplicationSid = options.smsApplicationSid
-        smsFallbackMethod = options.smsFallbackMethod
-        smsFallbackUrl = options.smsFallbackUrl
-        smsMethod = options.smsMethod
-        smsUrl = options.smsUrl
-        statusCallback = options.statusCallback
-        statusCallbackMethod = options.statusCallbackMethod
-        voiceApplicationSid = options.voiceApplicationSid
-        voiceCallerIdLookup = options.voiceCallerIdLookup
-        voiceFallbackMethod = options.voiceFallbackMethod
-        voiceFallbackUrl = options.voiceFallbackUrl
-        voiceMethod = options.voiceMethod
-        voiceUrl = options.voiceUrl
-        identitySid = options.identitySid
-        addressSid = options.addressSid
-        emergencyStatus = options.emergencyStatus
-        emergencyAddressSid = options.emergencyAddressSid
-        trunkSid = options.trunkSid
-        voiceReceiveMode = options.voiceReceiveMode
-        bundleSid = options.bundleSid
+        self.phoneNumber = options.phoneNumber
+        self.apiVersion = options.apiVersion
+        self.friendlyName = options.friendlyName
+        self.smsApplicationSid = options.smsApplicationSid
+        self.smsFallbackMethod = options.smsFallbackMethod
+        self.smsFallbackUrl = options.smsFallbackUrl
+        self.smsMethod = options.smsMethod
+        self.smsUrl = options.smsUrl
+        self.statusCallback = options.statusCallback
+        self.statusCallbackMethod = options.statusCallbackMethod
+        self.voiceApplicationSid = options.voiceApplicationSid
+        self.voiceCallerIdLookup = options.voiceCallerIdLookup
+        self.voiceFallbackMethod = options.voiceFallbackMethod
+        self.voiceFallbackUrl = options.voiceFallbackUrl
+        self.voiceMethod = options.voiceMethod
+        self.voiceUrl = options.voiceUrl
+        self.identitySid = options.identitySid
+        self.addressSid = options.addressSid
+        self.emergencyStatus = options.emergencyStatus
+        self.emergencyAddressSid = options.emergencyAddressSid
+        self.trunkSid = options.trunkSid
+        self.voiceReceiveMode = options.voiceReceiveMode
+        self.bundleSid = options.bundleSid
     }
 }

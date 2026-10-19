@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension CallsTranscriptionsMethods {
-    struct CreateCallsTranscriptionsOptions: Codable {
+extension CallsTranscriptionsMethods {
+    public struct CreateCallsTranscriptionsOptions: Codable {
         public var accountSid: String
         public var callSid: String
         public var name: String?
@@ -35,9 +35,7 @@ public extension CallsTranscriptionsMethods {
         }
     }
 
-    /// Creates a realtime transcription for a call. Use `Track` to select which audio tracks to transcribe, and
-    /// configure callback, language, or transcription options as needed. The response includes the transcription SID,
-    /// associated call and account SIDs, and status.
+    /// Creates a realtime transcription for a call. Use `Track` to select which audio tracks to transcribe, and configure callback, language, or transcription options as needed. The response includes the transcription SID, associated call and account SIDs, and status.
     ///
     /// Create a Transcription
     ///
@@ -82,11 +80,7 @@ public extension CallsTranscriptionsMethods {
     /// - transcriptionConfigurationId: The ID of the RealTimeTranscription
     ///   Configuration for configuring all the non-default behaviors in one go.
     /// - enableProviderData: Whether the callback includes raw provider data.
-    static func createCallsTranscriptions(
-        config: ClientConfig,
-        options: CreateCallsTranscriptionsOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountCallRealtimeTranscription {
+    public static func createCallsTranscriptions(config: ClientConfig, options: CreateCallsTranscriptionsOptions, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountCallRealtimeTranscription {
         try validateLength("AccountSid", options.accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", options.accountSid, sdkPatternc7cb941ab84b)
 
@@ -99,21 +93,6 @@ public extension CallsTranscriptionsMethods {
 
         let requestBody = CreateCallsTranscriptionsRequestBody(options: options)
 
-        return try await (sdkRequest(
-            "POST",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(options.accountSid)),
-                "/Calls/",
-                sdkEncodePathSegment(sdkWireString(options.callSid)),
-                "/Transcriptions.json",
-            ].joined(),
-            config: config,
-            body: requestBody,
-            contentType: "application/x-www-form-urlencoded",
-            decoder: .json,
-            operationId: "createCallsTranscriptions",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("POST", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(options.accountSid)), "/Calls/", sdkEncodePathSegment(sdkWireString(options.callSid)), "/Transcriptions.json"].joined(), config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "createCallsTranscriptions", options: requestOptions)).data
     }
 }

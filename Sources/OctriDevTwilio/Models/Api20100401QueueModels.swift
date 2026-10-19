@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Api20100401Queue domain models
+// Api20100401Queue domain models
 /// Typed representation of the `ApiV2010AccountQueue` API schema.
 public struct ApiV2010AccountQueue: Codable {
     /// The date and time in GMT that this resource was last updated, specified in RFC 2822 format.
@@ -39,46 +39,36 @@ public struct ApiV2010AccountQueue: Codable {
     }
 
     init() {
-        (dateUpdated, currentSize, friendlyName, uri, accountSid) = (nil, nil, nil, nil, nil)
-        (averageWaitTime, sid, dateCreated, maxSize) = (nil, nil, nil, nil)
+        (self.dateUpdated, self.currentSize, self.friendlyName, self.uri, self.accountSid) = (nil, nil, nil, nil, nil)
+        (self.averageWaitTime, self.sid, self.dateCreated, self.maxSize) = (nil, nil, nil, nil)
     }
 }
 
-public extension ApiV2010AccountQueue {
-    init(from decoder: Decoder) throws {
+extension ApiV2010AccountQueue {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
-        currentSize = try container.sdkDecodeIfPresent(.currentSize)
-        friendlyName = try container.sdkDecodeIfPresent(.friendlyName)
-        uri = try container.sdkDecodeIfPresent(.uri)
-        accountSid = try container.sdkDecodeIfPresent(.accountSid)
-        averageWaitTime = try container.sdkDecodeIfPresent(.averageWaitTime)
-        sid = try container.sdkDecodeIfPresent(.sid)
-        dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
-        maxSize = try container.sdkDecodeIfPresent(.maxSize)
-        if let value = accountSid {
+        self.dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
+        self.currentSize = try container.sdkDecodeIfPresent(.currentSize)
+        self.friendlyName = try container.sdkDecodeIfPresent(.friendlyName)
+        self.uri = try container.sdkDecodeIfPresent(.uri)
+        self.accountSid = try container.sdkDecodeIfPresent(.accountSid)
+        self.averageWaitTime = try container.sdkDecodeIfPresent(.averageWaitTime)
+        self.sid = try container.sdkDecodeIfPresent(.sid)
+        self.dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
+        self.maxSize = try container.sdkDecodeIfPresent(.maxSize)
+        if let value = self.accountSid {
             try validateLength("account_sid", value, min: 34, max: 34)
             try sdkValidatePattern("account_sid", value, sdkPatternc7cb941ab84b)
         }
-        if let value = sid {
+        if let value = self.sid {
             try validateLength("sid", value, min: 34, max: 34)
             try sdkValidatePattern("sid", value, sdkPatternd19bdfd65b5a)
         }
     }
 }
 
-public extension ApiV2010AccountQueue {
-    init(
-        dateUpdated: String? = nil,
-        currentSize: Int? = nil,
-        friendlyName: String? = nil,
-        uri: String? = nil,
-        accountSid: String? = nil,
-        averageWaitTime: Int? = nil,
-        sid: String? = nil,
-        dateCreated: String? = nil,
-        maxSize: Int? = nil
-    ) throws {
+extension ApiV2010AccountQueue {
+    public init(dateUpdated: String? = nil, currentSize: Int? = nil, friendlyName: String? = nil, uri: String? = nil, accountSid: String? = nil, averageWaitTime: Int? = nil, sid: String? = nil, dateCreated: String? = nil, maxSize: Int? = nil) throws {
         self.init()
         (self.dateUpdated, self.currentSize) = (dateUpdated, currentSize)
         (self.friendlyName, self.uri) = (friendlyName, uri)

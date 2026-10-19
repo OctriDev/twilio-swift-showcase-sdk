@@ -6,7 +6,7 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension CallsUserDefinedMessageSubscriptionsMethods {
+extension CallsUserDefinedMessageSubscriptionsMethods {
     /// Subscribe to User Defined Messages for a given Call SID.
     ///
     /// - Parameters:
@@ -24,15 +24,7 @@ public extension CallsUserDefinedMessageSubscriptionsMethods {
     ///   a unique string value per API call and can be a randomly generated.
     /// - method: The HTTP method Twilio will use when requesting the above `Url`.
     ///   Either `GET` or `POST`. Default is `POST`.
-    static func createCallsUserDefinedMessageSubscriptions(
-        config: ClientConfig,
-        accountSid: String,
-        callSid: String,
-        callback: String,
-        idempotencyKey: String? = nil,
-        method: CreateCallsUserDefinedMessageSubscriptionsRequestBodyMethod? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountCallUserDefinedMessageSubscription {
+    public static func createCallsUserDefinedMessageSubscriptions(config: ClientConfig, accountSid: String, callSid: String, callback: String, idempotencyKey: String? = nil, method: CreateCallsUserDefinedMessageSubscriptionsRequestBodyMethod? = nil, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountCallUserDefinedMessageSubscription {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
@@ -41,27 +33,8 @@ public extension CallsUserDefinedMessageSubscriptionsMethods {
 
         try sdkValidateUri("Callback", callback)
 
-        let requestBody = CreateCallsUserDefinedMessageSubscriptionsRequestBody(
-            callback: callback,
-            idempotencyKey: idempotencyKey,
-            method: method
-        )
+        let requestBody = CreateCallsUserDefinedMessageSubscriptionsRequestBody(callback: callback, idempotencyKey: idempotencyKey, method: method)
 
-        return try await (sdkRequest(
-            "POST",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(accountSid)),
-                "/Calls/",
-                sdkEncodePathSegment(sdkWireString(callSid)),
-                "/UserDefinedMessageSubscriptions.json",
-            ].joined(),
-            config: config,
-            body: requestBody,
-            contentType: "application/x-www-form-urlencoded",
-            decoder: .json,
-            operationId: "createCallsUserDefinedMessageSubscriptions",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("POST", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Calls/", sdkEncodePathSegment(sdkWireString(callSid)), "/UserDefinedMessageSubscriptions.json"].joined(), config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "createCallsUserDefinedMessageSubscriptions", options: requestOptions)).data
     }
 }

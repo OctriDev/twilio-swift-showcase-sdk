@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Api20100401IpAccessControlList domain models
+// Api20100401IpAccessControlList domain models
 /// Typed representation of the `ApiV2010AccountSipSipIpAccessControlList` API schema.
 public struct ApiV2010AccountSipSipIpAccessControlList: Codable {
     /// A 34 character string that uniquely identifies this resource.
@@ -32,42 +32,34 @@ public struct ApiV2010AccountSipSipIpAccessControlList: Codable {
     }
 
     init() {
-        (sid, accountSid, friendlyName, dateCreated, dateUpdated) = (nil, nil, nil, nil, nil)
-        (subresourceUris, uri) = (nil, nil)
+        (self.sid, self.accountSid, self.friendlyName, self.dateCreated, self.dateUpdated) = (nil, nil, nil, nil, nil)
+        (self.subresourceUris, self.uri) = (nil, nil)
     }
 }
 
-public extension ApiV2010AccountSipSipIpAccessControlList {
-    init(from decoder: Decoder) throws {
+extension ApiV2010AccountSipSipIpAccessControlList {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        sid = try container.sdkDecodeIfPresent(.sid)
-        accountSid = try container.sdkDecodeIfPresent(.accountSid)
-        friendlyName = try container.sdkDecodeIfPresent(.friendlyName)
-        dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
-        dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
-        subresourceUris = try container.sdkDecodeIfPresent(.subresourceUris)
-        uri = try container.sdkDecodeIfPresent(.uri)
-        if let value = sid {
+        self.sid = try container.sdkDecodeIfPresent(.sid)
+        self.accountSid = try container.sdkDecodeIfPresent(.accountSid)
+        self.friendlyName = try container.sdkDecodeIfPresent(.friendlyName)
+        self.dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
+        self.dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
+        self.subresourceUris = try container.sdkDecodeIfPresent(.subresourceUris)
+        self.uri = try container.sdkDecodeIfPresent(.uri)
+        if let value = self.sid {
             try validateLength("sid", value, min: 34, max: 34)
             try sdkValidatePattern("sid", value, sdkPattern99d6601bdb3f)
         }
-        if let value = accountSid {
+        if let value = self.accountSid {
             try validateLength("account_sid", value, min: 34, max: 34)
             try sdkValidatePattern("account_sid", value, sdkPatternc7cb941ab84b)
         }
     }
 }
 
-public extension ApiV2010AccountSipSipIpAccessControlList {
-    init(
-        sid: String? = nil,
-        accountSid: String? = nil,
-        friendlyName: String? = nil,
-        dateCreated: String? = nil,
-        dateUpdated: String? = nil,
-        subresourceUris: [String: JSONValue]? = nil,
-        uri: String? = nil
-    ) throws {
+extension ApiV2010AccountSipSipIpAccessControlList {
+    public init(sid: String? = nil, accountSid: String? = nil, friendlyName: String? = nil, dateCreated: String? = nil, dateUpdated: String? = nil, subresourceUris: [String: JSONValue]? = nil, uri: String? = nil) throws {
         self.init()
         (self.sid, self.accountSid) = (sid, accountSid)
         (self.friendlyName, self.dateCreated) = (friendlyName, dateCreated)

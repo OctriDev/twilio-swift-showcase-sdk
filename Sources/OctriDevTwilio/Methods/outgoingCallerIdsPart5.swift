@@ -6,10 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension OutgoingCallerIdsMethods {
-    /// Lists outgoing caller IDs belonging to an account. Filter the results by `PhoneNumber` or `FriendlyName`, and
-    /// use the page parameters to retrieve results across multiple pages. `PageSize` defaults to 50 and can be set up
-    /// to 1000.
+extension OutgoingCallerIdsMethods {
+    /// Lists outgoing caller IDs belonging to an account. Filter the results by `PhoneNumber` or `FriendlyName`, and use the page parameters to retrieve results across multiple pages. `PageSize` defaults to 50 and can be set up to 1000.
     ///
     /// Retrieve a list of outgoing-caller-ids belonging to the account used to make the request
     ///
@@ -24,42 +22,24 @@ public extension OutgoingCallerIdsMethods {
     ///   50, and the maximum is 1000.
     /// - page: The page index. This value is simply for client state.
     /// - pageToken: The page token. This is provided by the API.
-    static func listOutgoingCallerIds(
-        config: ClientConfig,
-        accountSid: String,
-        phoneNumber: String? = nil,
-        friendlyName: String? = nil,
-        pageSize: Int? = nil,
-        page: Int? = nil,
-        pageToken: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ListOutgoingCallerIdsResponse {
+    public static func listOutgoingCallerIds(config: ClientConfig, accountSid: String, phoneNumber: String? = nil, friendlyName: String? = nil, pageSize: Int? = nil, page: Int? = nil, pageToken: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ListOutgoingCallerIdsResponse {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
-        if let pageSize {
+        if let pageSize = pageSize {
             try validateRange("PageSize", Double(pageSize), min: 1, max: 1000)
         }
 
-        if let page {
+        if let page = page {
             try validateRange("Page", Double(page), min: 0)
         }
 
-        return try await (sdkRequest(
-            "GET",
-            ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/OutgoingCallerIds.json"]
-                .joined(),
-            config: config,
-            query: [
-                SdkQueryParameter("PhoneNumber", value: phoneNumber),
-                SdkQueryParameter("FriendlyName", value: friendlyName),
-                SdkQueryParameter("PageSize", value: pageSize),
-                SdkQueryParameter("Page", value: page),
-                SdkQueryParameter("PageToken", value: pageToken),
-            ],
-            decoder: .json,
-            operationId: "listOutgoingCallerIds",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/OutgoingCallerIds.json"].joined(), config: config, query: [
+            SdkQueryParameter("PhoneNumber", value: phoneNumber),
+            SdkQueryParameter("FriendlyName", value: friendlyName),
+            SdkQueryParameter("PageSize", value: pageSize),
+            SdkQueryParameter("Page", value: page),
+            SdkQueryParameter("PageToken", value: pageToken),
+        ], decoder: .json, operationId: "listOutgoingCallerIds", options: requestOptions)).data
     }
 }

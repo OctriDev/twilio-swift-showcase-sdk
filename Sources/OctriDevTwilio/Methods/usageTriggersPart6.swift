@@ -6,10 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension UsageTriggersMethods {
-    /// Lists usage triggers belonging to an account. Filter the results by recurrence, trigger field, or usage
-    /// category, and use the page parameters to navigate the results. The response includes pagination metadata and the
-    /// matching usage triggers.
+extension UsageTriggersMethods {
+    /// Lists usage triggers belonging to an account. Filter the results by recurrence, trigger field, or usage category, and use the page parameters to navigate the results. The response includes pagination metadata and the matching usage triggers.
     ///
     /// Retrieve a list of usage-triggers belonging to the account used to make the request
     ///
@@ -32,43 +30,25 @@ public extension UsageTriggersMethods {
     ///   50, and the maximum is 1000.
     /// - page: The page index. This value is simply for client state.
     /// - pageToken: The page token. This is provided by the API.
-    static func listUsageTriggers(
-        config: ClientConfig,
-        accountSid: String,
-        recurring: UsageTriggerEnumRecurring? = nil,
-        triggerBy: UsageTriggerEnumTriggerField? = nil,
-        usageCategory: String? = nil,
-        pageSize: Int? = nil,
-        page: Int? = nil,
-        pageToken: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ListUsageTriggersResponse {
+    public static func listUsageTriggers(config: ClientConfig, accountSid: String, recurring: UsageTriggerEnumRecurring? = nil, triggerBy: UsageTriggerEnumTriggerField? = nil, usageCategory: String? = nil, pageSize: Int? = nil, page: Int? = nil, pageToken: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ListUsageTriggersResponse {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
-        if let pageSize {
+        if let pageSize = pageSize {
             try validateRange("PageSize", Double(pageSize), min: 1, max: 1000)
         }
 
-        if let page {
+        if let page = page {
             try validateRange("Page", Double(page), min: 0)
         }
 
-        return try await (sdkRequest(
-            "GET",
-            ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Usage/Triggers.json"].joined(),
-            config: config,
-            query: [
-                SdkQueryParameter("Recurring", value: recurring),
-                SdkQueryParameter("TriggerBy", value: triggerBy),
-                SdkQueryParameter("UsageCategory", value: usageCategory),
-                SdkQueryParameter("PageSize", value: pageSize),
-                SdkQueryParameter("Page", value: page),
-                SdkQueryParameter("PageToken", value: pageToken),
-            ],
-            decoder: .json,
-            operationId: "listUsageTriggers",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Usage/Triggers.json"].joined(), config: config, query: [
+            SdkQueryParameter("Recurring", value: recurring),
+            SdkQueryParameter("TriggerBy", value: triggerBy),
+            SdkQueryParameter("UsageCategory", value: usageCategory),
+            SdkQueryParameter("PageSize", value: pageSize),
+            SdkQueryParameter("Page", value: page),
+            SdkQueryParameter("PageToken", value: pageToken),
+        ], decoder: .json, operationId: "listUsageTriggers", options: requestOptions)).data
     }
 }

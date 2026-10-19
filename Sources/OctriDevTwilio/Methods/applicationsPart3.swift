@@ -6,9 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ApplicationsMethods {
-    /// Lists application resources created by a specific account. Filter the results by `FriendlyName`, and use the
-    /// pagination parameters to navigate the list.
+extension ApplicationsMethods {
+    /// Lists application resources created by a specific account. Filter the results by `FriendlyName`, and use the pagination parameters to navigate the list.
     ///
     /// Retrieve a list of applications representing an application within the requesting account
     ///
@@ -22,39 +21,23 @@ public extension ApplicationsMethods {
     ///   50, and the maximum is 1000.
     /// - page: The page index. This value is simply for client state.
     /// - pageToken: The page token. This is provided by the API.
-    static func listApplications(
-        config: ClientConfig,
-        accountSid: String,
-        friendlyName: String? = nil,
-        pageSize: Int? = nil,
-        page: Int? = nil,
-        pageToken: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ListApplicationsResponse {
+    public static func listApplications(config: ClientConfig, accountSid: String, friendlyName: String? = nil, pageSize: Int? = nil, page: Int? = nil, pageToken: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ListApplicationsResponse {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
-        if let pageSize {
+        if let pageSize = pageSize {
             try validateRange("PageSize", Double(pageSize), min: 1, max: 1000)
         }
 
-        if let page {
+        if let page = page {
             try validateRange("Page", Double(page), min: 0)
         }
 
-        return try await (sdkRequest(
-            "GET",
-            ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Applications.json"].joined(),
-            config: config,
-            query: [
-                SdkQueryParameter("FriendlyName", value: friendlyName),
-                SdkQueryParameter("PageSize", value: pageSize),
-                SdkQueryParameter("Page", value: page),
-                SdkQueryParameter("PageToken", value: pageToken),
-            ],
-            decoder: .json,
-            operationId: "listApplications",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Applications.json"].joined(), config: config, query: [
+            SdkQueryParameter("FriendlyName", value: friendlyName),
+            SdkQueryParameter("PageSize", value: pageSize),
+            SdkQueryParameter("Page", value: page),
+            SdkQueryParameter("PageToken", value: pageToken),
+        ], decoder: .json, operationId: "listApplications", options: requestOptions)).data
     }
 }

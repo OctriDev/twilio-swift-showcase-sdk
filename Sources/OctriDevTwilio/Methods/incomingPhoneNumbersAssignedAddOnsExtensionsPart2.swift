@@ -6,9 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension IncomingPhoneNumbersAssignedAddOnsExtensionsMethods {
-    /// Retrieves an Extension for an assigned Add-on on an incoming phone number. Use the account, phone number,
-    /// assigned Add-on, and Extension SIDs to identify the resource.
+extension IncomingPhoneNumbersAssignedAddOnsExtensionsMethods {
+    /// Retrieves an Extension for an assigned Add-on on an incoming phone number. Use the account, phone number, assigned Add-on, and Extension SIDs to identify the resource.
     ///
     /// Fetch an instance of an Extension for the Assigned Add-on.
     ///
@@ -21,14 +20,7 @@ public extension IncomingPhoneNumbersAssignedAddOnsExtensionsMethods {
     ///   installation.
     /// - sid: The Twilio-provided string that uniquely identifies the resource to
     ///   fetch.
-    static func fetchIncomingPhoneNumbersAssignedAddOnsExtensions(
-        config: ClientConfig,
-        accountSid: String,
-        resourceSid: String,
-        assignedAddOnSid: String,
-        sid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountIncomingPhoneNumberIncomingPhoneNumberAssignedX1fcf5f2168 {
+    public static func fetchIncomingPhoneNumbersAssignedAddOnsExtensions(config: ClientConfig, accountSid: String, resourceSid: String, assignedAddOnSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountIncomingPhoneNumberIncomingPhoneNumberAssignedX1fcf5f2168 {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
@@ -41,23 +33,6 @@ public extension IncomingPhoneNumbersAssignedAddOnsExtensionsMethods {
         try validateLength("Sid", sid, min: 34, max: 34)
         try sdkValidatePattern("Sid", sid, sdkPattern2f6af96dacb8)
 
-        return try await (sdkRequest(
-            "GET",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(accountSid)),
-                "/IncomingPhoneNumbers/",
-                sdkEncodePathSegment(sdkWireString(resourceSid)),
-                "/AssignedAddOns/",
-                sdkEncodePathSegment(sdkWireString(assignedAddOnSid)),
-                "/Extensions/",
-                sdkEncodePathSegment(sdkWireString(sid)),
-                ".json",
-            ].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "fetchIncomingPhoneNumbersAssignedAddOnsExtensions",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/IncomingPhoneNumbers/", sdkEncodePathSegment(sdkWireString(resourceSid)), "/AssignedAddOns/", sdkEncodePathSegment(sdkWireString(assignedAddOnSid)), "/Extensions/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, decoder: .json, operationId: "fetchIncomingPhoneNumbersAssignedAddOnsExtensions", options: requestOptions)).data
     }
 }

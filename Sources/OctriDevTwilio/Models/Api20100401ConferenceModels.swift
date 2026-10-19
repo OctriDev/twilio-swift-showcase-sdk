@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Api20100401Conference domain models
+// Api20100401Conference domain models
 /// Typed representation of the `ApiV2010AccountConference` API schema.
 public struct ApiV2010AccountConference: Codable {
     /// The SID of the Account that created this Conference resource.
@@ -51,57 +51,44 @@ public struct ApiV2010AccountConference: Codable {
     }
 
     init() {
-        (accountSid, dateCreated, dateUpdated, apiVersion, friendlyName) = (nil, nil, nil, nil, nil)
-        (region, sid, status, uri, subresourceUris) = (nil, nil, nil, nil, nil)
-        (reasonConferenceEnded, callSidEndingConference) = (nil, nil)
+        (self.accountSid, self.dateCreated, self.dateUpdated, self.apiVersion, self.friendlyName) = (nil, nil, nil, nil, nil)
+        (self.region, self.sid, self.status, self.uri, self.subresourceUris) = (nil, nil, nil, nil, nil)
+        (self.reasonConferenceEnded, self.callSidEndingConference) = (nil, nil)
     }
 }
 
-public extension ApiV2010AccountConference {
-    init(from decoder: Decoder) throws {
+extension ApiV2010AccountConference {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        accountSid = try container.sdkDecodeIfPresent(.accountSid)
-        dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
-        dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
-        apiVersion = try container.sdkDecodeIfPresent(.apiVersion)
-        friendlyName = try container.sdkDecodeIfPresent(.friendlyName)
-        region = try container.sdkDecodeIfPresent(.region)
-        sid = try container.sdkDecodeIfPresent(.sid)
-        status = try container.sdkDecodeIfPresent(.status)
-        uri = try container.sdkDecodeIfPresent(.uri)
-        subresourceUris = try container.sdkDecodeIfPresent(.subresourceUris)
-        reasonConferenceEnded = try container.sdkDecodeIfPresent(.reasonConferenceEnded)
-        callSidEndingConference = try container.sdkDecodeIfPresent(.callSidEndingConference)
-        if let value = accountSid {
+        self.accountSid = try container.sdkDecodeIfPresent(.accountSid)
+        self.dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
+        self.dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
+        self.apiVersion = try container.sdkDecodeIfPresent(.apiVersion)
+        self.friendlyName = try container.sdkDecodeIfPresent(.friendlyName)
+        self.region = try container.sdkDecodeIfPresent(.region)
+        self.sid = try container.sdkDecodeIfPresent(.sid)
+        self.status = try container.sdkDecodeIfPresent(.status)
+        self.uri = try container.sdkDecodeIfPresent(.uri)
+        self.subresourceUris = try container.sdkDecodeIfPresent(.subresourceUris)
+        self.reasonConferenceEnded = try container.sdkDecodeIfPresent(.reasonConferenceEnded)
+        self.callSidEndingConference = try container.sdkDecodeIfPresent(.callSidEndingConference)
+        if let value = self.accountSid {
             try validateLength("account_sid", value, min: 34, max: 34)
             try sdkValidatePattern("account_sid", value, sdkPatternc7cb941ab84b)
         }
-        if let value = sid {
+        if let value = self.sid {
             try validateLength("sid", value, min: 34, max: 34)
             try sdkValidatePattern("sid", value, sdkPatternb5f37fc1f4d4)
         }
-        if let value = callSidEndingConference {
+        if let value = self.callSidEndingConference {
             try validateLength("call_sid_ending_conference", value, min: 34, max: 34)
             try sdkValidatePattern("call_sid_ending_conference", value, sdkPattern25b2d94fcc27)
         }
     }
 }
 
-public extension ApiV2010AccountConference {
-    init(
-        accountSid: String? = nil,
-        dateCreated: String? = nil,
-        dateUpdated: String? = nil,
-        apiVersion: String? = nil,
-        friendlyName: String? = nil,
-        region: String? = nil,
-        sid: String? = nil,
-        status: ConferenceEnumStatus? = nil,
-        uri: String? = nil,
-        subresourceUris: [String: JSONValue]? = nil,
-        reasonConferenceEnded: ConferenceEnumReasonConferenceEnded? = nil,
-        callSidEndingConference: String? = nil
-    ) throws {
+extension ApiV2010AccountConference {
+    public init(accountSid: String? = nil, dateCreated: String? = nil, dateUpdated: String? = nil, apiVersion: String? = nil, friendlyName: String? = nil, region: String? = nil, sid: String? = nil, status: ConferenceEnumStatus? = nil, uri: String? = nil, subresourceUris: [String: JSONValue]? = nil, reasonConferenceEnded: ConferenceEnumReasonConferenceEnded? = nil, callSidEndingConference: String? = nil) throws {
         self.init()
         (self.accountSid, self.dateCreated) = (accountSid, dateCreated)
         (self.dateUpdated, self.apiVersion) = (dateUpdated, apiVersion)
@@ -129,15 +116,12 @@ public extension ApiV2010AccountConference {
 public struct ConferenceEnumUpdateStatus: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let completed = ConferenceEnumUpdateStatus(rawValue: "completed")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -152,21 +136,16 @@ public struct ConferenceEnumUpdateStatus: RawRepresentable, Hashable, Codable, S
 public struct ConferenceEnumReasonConferenceEnded: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let conferenceEndedViaApi = ConferenceEnumReasonConferenceEnded(rawValue: "conference-ended-via-api")
-    public static let participantWithEndConferenceOnExitLeft =
-        ConferenceEnumReasonConferenceEnded(rawValue: "participant-with-end-conference-on-exit-left")
-    public static let participantWithEndConferenceOnExitKicked =
-        ConferenceEnumReasonConferenceEnded(rawValue: "participant-with-end-conference-on-exit-kicked")
+    public static let participantWithEndConferenceOnExitLeft = ConferenceEnumReasonConferenceEnded(rawValue: "participant-with-end-conference-on-exit-left")
+    public static let participantWithEndConferenceOnExitKicked = ConferenceEnumReasonConferenceEnded(rawValue: "participant-with-end-conference-on-exit-kicked")
     public static let lastParticipantKicked = ConferenceEnumReasonConferenceEnded(rawValue: "last-participant-kicked")
     public static let lastParticipantLeft = ConferenceEnumReasonConferenceEnded(rawValue: "last-participant-left")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -179,17 +158,14 @@ public struct ConferenceEnumReasonConferenceEnded: RawRepresentable, Hashable, C
 public struct ConferenceEnumStatus: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let `init` = ConferenceEnumStatus(rawValue: "init")
     public static let inProgress = ConferenceEnumStatus(rawValue: "in-progress")
     public static let completed = ConferenceEnumStatus(rawValue: "completed")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

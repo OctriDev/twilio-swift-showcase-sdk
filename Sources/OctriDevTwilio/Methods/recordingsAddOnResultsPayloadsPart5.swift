@@ -6,10 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension RecordingsAddOnResultsPayloadsMethods {
-    /// Retrieves the stored data for a payload belonging to an AddOnResult for a recording. Use the account, recording,
-    /// result, and payload SIDs to identify the data resource; the response provides a redirect to the stored payload
-    /// data.
+extension RecordingsAddOnResultsPayloadsMethods {
+    /// Retrieves the stored data for a payload belonging to an AddOnResult for a recording. Use the account, recording, result, and payload SIDs to identify the data resource; the response provides a redirect to the stored payload data.
     ///
     /// Fetch an instance of a result payload
     ///
@@ -23,14 +21,7 @@ public extension RecordingsAddOnResultsPayloadsMethods {
     ///   belongs.
     /// - payloadSid: The Twilio-provided string that uniquely identifies the
     ///   Recording AddOnResult Payload resource to fetch.
-    static func fetchRecordingsAddOnResultsPayloadsData(
-        config: ClientConfig,
-        accountSid: String,
-        referenceSid: String,
-        addOnResultSid: String,
-        payloadSid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
+    public static func fetchRecordingsAddOnResultsPayloadsData(config: ClientConfig, accountSid: String, referenceSid: String, addOnResultSid: String, payloadSid: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
@@ -43,24 +34,6 @@ public extension RecordingsAddOnResultsPayloadsMethods {
         try validateLength("PayloadSid", payloadSid, min: 34, max: 34)
         try sdkValidatePattern("PayloadSid", payloadSid, sdkPatternb9139acbf072)
 
-        return try await (sdkRequest(
-            "GET",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(accountSid)),
-                "/Recordings/",
-                sdkEncodePathSegment(sdkWireString(referenceSid)),
-                "/AddOnResults/",
-                sdkEncodePathSegment(sdkWireString(addOnResultSid)),
-                "/Payloads/",
-                sdkEncodePathSegment(sdkWireString(payloadSid)),
-                "/Data.json",
-            ].joined(),
-            config: config,
-            decoder: .empty,
-            operationId: "fetchRecordingsAddOnResultsPayloadsData",
-            options: requestOptions,
-            errors: ["307": ApiV2010AccountRecordingRecordingAddOnResultRecordingAddOnResX725ba4fcaf.self]
-        )).data
+        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Recordings/", sdkEncodePathSegment(sdkWireString(referenceSid)), "/AddOnResults/", sdkEncodePathSegment(sdkWireString(addOnResultSid)), "/Payloads/", sdkEncodePathSegment(sdkWireString(payloadSid)), "/Data.json"].joined(), config: config, decoder: .empty, operationId: "fetchRecordingsAddOnResultsPayloadsData", options: requestOptions, errors: ["307": ApiV2010AccountRecordingRecordingAddOnResultRecordingAddOnResX725ba4fcaf.self])).data
     }
 }

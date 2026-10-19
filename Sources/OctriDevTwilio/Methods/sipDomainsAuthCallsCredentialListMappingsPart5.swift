@@ -6,7 +6,7 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension SipDomainsAuthCallsCredentialListMappingsMethods {
+extension SipDomainsAuthCallsCredentialListMappingsMethods {
     /// Delete a credential list mapping from the requested domain
     ///
     /// - Parameters:
@@ -16,13 +16,7 @@ public extension SipDomainsAuthCallsCredentialListMappingsMethods {
     /// - domainSid: The SID of the SIP domain that contains the resource to delete.
     /// - sid: The Twilio-provided string that uniquely identifies the
     ///   CredentialListMapping resource to delete.
-    static func deleteSipDomainsAuthCallsCredentialListMappings(
-        config: ClientConfig,
-        accountSid: String,
-        domainSid: String,
-        sid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
+    public static func deleteSipDomainsAuthCallsCredentialListMappings(config: ClientConfig, accountSid: String, domainSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
@@ -32,21 +26,6 @@ public extension SipDomainsAuthCallsCredentialListMappingsMethods {
         try validateLength("Sid", sid, min: 34, max: 34)
         try sdkValidatePattern("Sid", sid, sdkPattern189973589bff)
 
-        return try await (sdkRequest(
-            "DELETE",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(accountSid)),
-                "/SIP/Domains/",
-                sdkEncodePathSegment(sdkWireString(domainSid)),
-                "/Auth/Calls/CredentialListMappings/",
-                sdkEncodePathSegment(sdkWireString(sid)),
-                ".json",
-            ].joined(),
-            config: config,
-            decoder: .empty,
-            operationId: "deleteSipDomainsAuthCallsCredentialListMappings",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("DELETE", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/SIP/Domains/", sdkEncodePathSegment(sdkWireString(domainSid)), "/Auth/Calls/CredentialListMappings/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, decoder: .empty, operationId: "deleteSipDomainsAuthCallsCredentialListMappings", options: requestOptions)).data
     }
 }

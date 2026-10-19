@@ -6,9 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension MessagesMediaMethods {
-    /// Retrieves a specific media resource associated with a message. Supply the account SID, message SID, and media
-    /// SID to identify the resource.
+extension MessagesMediaMethods {
+    /// Retrieves a specific media resource associated with a message. Supply the account SID, message SID, and media SID to identify the resource.
     ///
     /// Fetch a single Media resource associated with a specific Message resource
     ///
@@ -20,13 +19,7 @@ public extension MessagesMediaMethods {
     ///   Media resource.
     /// - sid: The Twilio-provided string that uniquely identifies the Media
     ///   resource to fetch.
-    static func fetchMessagesMedia(
-        config: ClientConfig,
-        accountSid: String,
-        messageSid: String,
-        sid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountMessageMedia {
+    public static func fetchMessagesMedia(config: ClientConfig, accountSid: String, messageSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountMessageMedia {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
@@ -36,21 +29,6 @@ public extension MessagesMediaMethods {
         try validateLength("Sid", sid, min: 34, max: 34)
         try sdkValidatePattern("Sid", sid, sdkPattern95ed076eca3b)
 
-        return try await (sdkRequest(
-            "GET",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(accountSid)),
-                "/Messages/",
-                sdkEncodePathSegment(sdkWireString(messageSid)),
-                "/Media/",
-                sdkEncodePathSegment(sdkWireString(sid)),
-                ".json",
-            ].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "fetchMessagesMedia",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Messages/", sdkEncodePathSegment(sdkWireString(messageSid)), "/Media/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, decoder: .json, operationId: "fetchMessagesMedia", options: requestOptions)).data
     }
 }

@@ -6,9 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension KeysMethods {
-    /// Retrieves a Key resource from an account. Use the account SID and Key SID to identify the resource whose name
-    /// and timestamps you need.
+extension KeysMethods {
+    /// Retrieves a Key resource from an account. Use the account SID and Key SID to identify the resource whose name and timestamps you need.
     ///
     /// - Parameters:
     /// - accountSid: The SID of the
@@ -16,36 +15,17 @@ public extension KeysMethods {
     ///   resource to fetch.
     /// - sid: The Twilio-provided string that uniquely identifies the Key resource
     ///   to fetch.
-    static func fetchKeys(
-        config: ClientConfig,
-        accountSid: String,
-        sid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountKey {
+    public static func fetchKeys(config: ClientConfig, accountSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountKey {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
         try validateLength("Sid", sid, min: 34, max: 34)
         try sdkValidatePattern("Sid", sid, sdkPatternba6ad770c6a8)
 
-        return try await (sdkRequest(
-            "GET",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(accountSid)),
-                "/Keys/",
-                sdkEncodePathSegment(sdkWireString(sid)),
-                ".json",
-            ].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "fetchKeys",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Keys/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, decoder: .json, operationId: "fetchKeys", options: requestOptions)).data
     }
 
-    /// Updates the friendly name of a Key resource in an account. Supply `FriendlyName` to change the resource's
-    /// descriptive name; the request body may be omitted when you have no field to update.
+    /// Updates the friendly name of a Key resource in an account. Supply `FriendlyName` to change the resource's descriptive name; the request body may be omitted when you have no field to update.
     ///
     /// - Parameters:
     /// - accountSid: The SID of the
@@ -55,13 +35,7 @@ public extension KeysMethods {
     ///   to update.
     /// - friendlyName: A descriptive string that you create to describe the
     ///   resource. It can be up to 64 characters long.
-    static func updateKeys(
-        config: ClientConfig,
-        accountSid: String,
-        sid: String,
-        friendlyName: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountKey {
+    public static func updateKeys(config: ClientConfig, accountSid: String, sid: String, friendlyName: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountKey {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
@@ -70,21 +44,6 @@ public extension KeysMethods {
 
         let requestBody = UpdateKeysRequestBody(friendlyName: friendlyName)
 
-        return try await (sdkRequest(
-            "POST",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(accountSid)),
-                "/Keys/",
-                sdkEncodePathSegment(sdkWireString(sid)),
-                ".json",
-            ].joined(),
-            config: config,
-            body: requestBody,
-            contentType: "application/x-www-form-urlencoded",
-            decoder: .json,
-            operationId: "updateKeys",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("POST", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Keys/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "updateKeys", options: requestOptions)).data
     }
 }

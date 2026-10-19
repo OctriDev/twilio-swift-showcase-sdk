@@ -6,7 +6,7 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension RecordingsAddOnResultsPayloadsMethods {
+extension RecordingsAddOnResultsPayloadsMethods {
     /// Delete a payload from the result along with all associated Data
     ///
     /// - Parameters:
@@ -19,14 +19,7 @@ public extension RecordingsAddOnResultsPayloadsMethods {
     ///   belongs.
     /// - sid: The Twilio-provided string that uniquely identifies the Recording
     ///   AddOnResult Payload resource to delete.
-    static func deleteRecordingsAddOnResultsPayloads(
-        config: ClientConfig,
-        accountSid: String,
-        referenceSid: String,
-        addOnResultSid: String,
-        sid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
+    public static func deleteRecordingsAddOnResultsPayloads(config: ClientConfig, accountSid: String, referenceSid: String, addOnResultSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
@@ -39,23 +32,6 @@ public extension RecordingsAddOnResultsPayloadsMethods {
         try validateLength("Sid", sid, min: 34, max: 34)
         try sdkValidatePattern("Sid", sid, sdkPatternb9139acbf072)
 
-        return try await (sdkRequest(
-            "DELETE",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(accountSid)),
-                "/Recordings/",
-                sdkEncodePathSegment(sdkWireString(referenceSid)),
-                "/AddOnResults/",
-                sdkEncodePathSegment(sdkWireString(addOnResultSid)),
-                "/Payloads/",
-                sdkEncodePathSegment(sdkWireString(sid)),
-                ".json",
-            ].joined(),
-            config: config,
-            decoder: .empty,
-            operationId: "deleteRecordingsAddOnResultsPayloads",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("DELETE", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Recordings/", sdkEncodePathSegment(sdkWireString(referenceSid)), "/AddOnResults/", sdkEncodePathSegment(sdkWireString(addOnResultSid)), "/Payloads/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, decoder: .empty, operationId: "deleteRecordingsAddOnResultsPayloads", options: requestOptions)).data
     }
 }

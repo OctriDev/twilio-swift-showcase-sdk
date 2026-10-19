@@ -7,7 +7,7 @@ import Foundation
     import FoundationNetworking
 #endif
 
-/// Canonical usageRecords operation model declarations
+// Canonical usageRecords operation model declarations
 public struct ListUsageRecordsResponse: Codable {
     public var end: Int?
     public var firstPageUri: String?
@@ -32,50 +32,40 @@ public struct ListUsageRecordsResponse: Codable {
     }
 
     init() {
-        (end, firstPageUri, nextPageUri, page, pageSize) = (nil, nil, nil, nil, nil)
-        (previousPageUri, start, uri, usageRecords) = (nil, nil, nil, nil)
+        (self.end, self.firstPageUri, self.nextPageUri, self.page, self.pageSize) = (nil, nil, nil, nil, nil)
+        (self.previousPageUri, self.start, self.uri, self.usageRecords) = (nil, nil, nil, nil)
     }
 }
 
-public extension ListUsageRecordsResponse {
-    init(from decoder: Decoder) throws {
+extension ListUsageRecordsResponse {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        end = try container.sdkDecodeIfPresent(.end)
-        firstPageUri = try container.sdkDecodeIfPresent(.firstPageUri)
-        nextPageUri = try container.sdkDecodeIfPresent(.nextPageUri)
-        page = try container.sdkDecodeIfPresent(.page)
-        pageSize = try container.sdkDecodeIfPresent(.pageSize)
-        previousPageUri = try container.sdkDecodeIfPresent(.previousPageUri)
-        start = try container.sdkDecodeIfPresent(.start)
-        uri = try container.sdkDecodeIfPresent(.uri)
-        usageRecords = try container.sdkDecodeIfPresent(.usageRecords)
-        if let value = firstPageUri {
+        self.end = try container.sdkDecodeIfPresent(.end)
+        self.firstPageUri = try container.sdkDecodeIfPresent(.firstPageUri)
+        self.nextPageUri = try container.sdkDecodeIfPresent(.nextPageUri)
+        self.page = try container.sdkDecodeIfPresent(.page)
+        self.pageSize = try container.sdkDecodeIfPresent(.pageSize)
+        self.previousPageUri = try container.sdkDecodeIfPresent(.previousPageUri)
+        self.start = try container.sdkDecodeIfPresent(.start)
+        self.uri = try container.sdkDecodeIfPresent(.uri)
+        self.usageRecords = try container.sdkDecodeIfPresent(.usageRecords)
+        if let value = self.firstPageUri {
             try sdkValidateUri("first_page_uri", value)
         }
-        if let value = nextPageUri {
+        if let value = self.nextPageUri {
             try sdkValidateUri("next_page_uri", value)
         }
-        if let value = previousPageUri {
+        if let value = self.previousPageUri {
             try sdkValidateUri("previous_page_uri", value)
         }
-        if let value = uri {
+        if let value = self.uri {
             try sdkValidateUri("uri", value)
         }
     }
 }
 
-public extension ListUsageRecordsResponse {
-    init(
-        end: Int? = nil,
-        firstPageUri: String? = nil,
-        nextPageUri: String? = nil,
-        page: Int? = nil,
-        pageSize: Int? = nil,
-        previousPageUri: String? = nil,
-        start: Int? = nil,
-        uri: String? = nil,
-        usageRecords: [ApiV2010AccountUsageUsageRecord]? = nil
-    ) throws {
+extension ListUsageRecordsResponse {
+    public init(end: Int? = nil, firstPageUri: String? = nil, nextPageUri: String? = nil, page: Int? = nil, pageSize: Int? = nil, previousPageUri: String? = nil, start: Int? = nil, uri: String? = nil, usageRecords: [ApiV2010AccountUsageUsageRecord]? = nil) throws {
         self.init()
         (self.end, self.firstPageUri) = (end, firstPageUri)
         (self.nextPageUri, self.page) = (nextPageUri, page)
@@ -121,50 +111,40 @@ public struct ListUsageRecordsAllTimeResponse: Codable {
     }
 
     init() {
-        (end, firstPageUri, nextPageUri, page, pageSize) = (nil, nil, nil, nil, nil)
-        (previousPageUri, start, uri, usageRecords) = (nil, nil, nil, nil)
+        (self.end, self.firstPageUri, self.nextPageUri, self.page, self.pageSize) = (nil, nil, nil, nil, nil)
+        (self.previousPageUri, self.start, self.uri, self.usageRecords) = (nil, nil, nil, nil)
     }
 }
 
-public extension ListUsageRecordsAllTimeResponse {
-    init(from decoder: Decoder) throws {
+extension ListUsageRecordsAllTimeResponse {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        end = try container.sdkDecodeIfPresent(.end)
-        firstPageUri = try container.sdkDecodeIfPresent(.firstPageUri)
-        nextPageUri = try container.sdkDecodeIfPresent(.nextPageUri)
-        page = try container.sdkDecodeIfPresent(.page)
-        pageSize = try container.sdkDecodeIfPresent(.pageSize)
-        previousPageUri = try container.sdkDecodeIfPresent(.previousPageUri)
-        start = try container.sdkDecodeIfPresent(.start)
-        uri = try container.sdkDecodeIfPresent(.uri)
-        usageRecords = try container.sdkDecodeIfPresent(.usageRecords)
-        if let value = firstPageUri {
+        self.end = try container.sdkDecodeIfPresent(.end)
+        self.firstPageUri = try container.sdkDecodeIfPresent(.firstPageUri)
+        self.nextPageUri = try container.sdkDecodeIfPresent(.nextPageUri)
+        self.page = try container.sdkDecodeIfPresent(.page)
+        self.pageSize = try container.sdkDecodeIfPresent(.pageSize)
+        self.previousPageUri = try container.sdkDecodeIfPresent(.previousPageUri)
+        self.start = try container.sdkDecodeIfPresent(.start)
+        self.uri = try container.sdkDecodeIfPresent(.uri)
+        self.usageRecords = try container.sdkDecodeIfPresent(.usageRecords)
+        if let value = self.firstPageUri {
             try sdkValidateUri("first_page_uri", value)
         }
-        if let value = nextPageUri {
+        if let value = self.nextPageUri {
             try sdkValidateUri("next_page_uri", value)
         }
-        if let value = previousPageUri {
+        if let value = self.previousPageUri {
             try sdkValidateUri("previous_page_uri", value)
         }
-        if let value = uri {
+        if let value = self.uri {
             try sdkValidateUri("uri", value)
         }
     }
 }
 
-public extension ListUsageRecordsAllTimeResponse {
-    init(
-        end: Int? = nil,
-        firstPageUri: String? = nil,
-        nextPageUri: String? = nil,
-        page: Int? = nil,
-        pageSize: Int? = nil,
-        previousPageUri: String? = nil,
-        start: Int? = nil,
-        uri: String? = nil,
-        usageRecords: [ApiV2010AccountUsageUsageRecordUsageRecordAllTime]? = nil
-    ) throws {
+extension ListUsageRecordsAllTimeResponse {
+    public init(end: Int? = nil, firstPageUri: String? = nil, nextPageUri: String? = nil, page: Int? = nil, pageSize: Int? = nil, previousPageUri: String? = nil, start: Int? = nil, uri: String? = nil, usageRecords: [ApiV2010AccountUsageUsageRecordUsageRecordAllTime]? = nil) throws {
         self.init()
         (self.end, self.firstPageUri) = (end, firstPageUri)
         (self.nextPageUri, self.page) = (nextPageUri, page)
@@ -210,50 +190,40 @@ public struct ListUsageRecordsLastMonthResponse: Codable {
     }
 
     init() {
-        (end, firstPageUri, nextPageUri, page, pageSize) = (nil, nil, nil, nil, nil)
-        (previousPageUri, start, uri, usageRecords) = (nil, nil, nil, nil)
+        (self.end, self.firstPageUri, self.nextPageUri, self.page, self.pageSize) = (nil, nil, nil, nil, nil)
+        (self.previousPageUri, self.start, self.uri, self.usageRecords) = (nil, nil, nil, nil)
     }
 }
 
-public extension ListUsageRecordsLastMonthResponse {
-    init(from decoder: Decoder) throws {
+extension ListUsageRecordsLastMonthResponse {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        end = try container.sdkDecodeIfPresent(.end)
-        firstPageUri = try container.sdkDecodeIfPresent(.firstPageUri)
-        nextPageUri = try container.sdkDecodeIfPresent(.nextPageUri)
-        page = try container.sdkDecodeIfPresent(.page)
-        pageSize = try container.sdkDecodeIfPresent(.pageSize)
-        previousPageUri = try container.sdkDecodeIfPresent(.previousPageUri)
-        start = try container.sdkDecodeIfPresent(.start)
-        uri = try container.sdkDecodeIfPresent(.uri)
-        usageRecords = try container.sdkDecodeIfPresent(.usageRecords)
-        if let value = firstPageUri {
+        self.end = try container.sdkDecodeIfPresent(.end)
+        self.firstPageUri = try container.sdkDecodeIfPresent(.firstPageUri)
+        self.nextPageUri = try container.sdkDecodeIfPresent(.nextPageUri)
+        self.page = try container.sdkDecodeIfPresent(.page)
+        self.pageSize = try container.sdkDecodeIfPresent(.pageSize)
+        self.previousPageUri = try container.sdkDecodeIfPresent(.previousPageUri)
+        self.start = try container.sdkDecodeIfPresent(.start)
+        self.uri = try container.sdkDecodeIfPresent(.uri)
+        self.usageRecords = try container.sdkDecodeIfPresent(.usageRecords)
+        if let value = self.firstPageUri {
             try sdkValidateUri("first_page_uri", value)
         }
-        if let value = nextPageUri {
+        if let value = self.nextPageUri {
             try sdkValidateUri("next_page_uri", value)
         }
-        if let value = previousPageUri {
+        if let value = self.previousPageUri {
             try sdkValidateUri("previous_page_uri", value)
         }
-        if let value = uri {
+        if let value = self.uri {
             try sdkValidateUri("uri", value)
         }
     }
 }
 
-public extension ListUsageRecordsLastMonthResponse {
-    init(
-        end: Int? = nil,
-        firstPageUri: String? = nil,
-        nextPageUri: String? = nil,
-        page: Int? = nil,
-        pageSize: Int? = nil,
-        previousPageUri: String? = nil,
-        start: Int? = nil,
-        uri: String? = nil,
-        usageRecords: [ApiV2010AccountUsageUsageRecordUsageRecordLastMonth]? = nil
-    ) throws {
+extension ListUsageRecordsLastMonthResponse {
+    public init(end: Int? = nil, firstPageUri: String? = nil, nextPageUri: String? = nil, page: Int? = nil, pageSize: Int? = nil, previousPageUri: String? = nil, start: Int? = nil, uri: String? = nil, usageRecords: [ApiV2010AccountUsageUsageRecordUsageRecordLastMonth]? = nil) throws {
         self.init()
         (self.end, self.firstPageUri) = (end, firstPageUri)
         (self.nextPageUri, self.page) = (nextPageUri, page)
@@ -299,50 +269,40 @@ public struct ListUsageRecordsMonthlyResponse: Codable {
     }
 
     init() {
-        (end, firstPageUri, nextPageUri, page, pageSize) = (nil, nil, nil, nil, nil)
-        (previousPageUri, start, uri, usageRecords) = (nil, nil, nil, nil)
+        (self.end, self.firstPageUri, self.nextPageUri, self.page, self.pageSize) = (nil, nil, nil, nil, nil)
+        (self.previousPageUri, self.start, self.uri, self.usageRecords) = (nil, nil, nil, nil)
     }
 }
 
-public extension ListUsageRecordsMonthlyResponse {
-    init(from decoder: Decoder) throws {
+extension ListUsageRecordsMonthlyResponse {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        end = try container.sdkDecodeIfPresent(.end)
-        firstPageUri = try container.sdkDecodeIfPresent(.firstPageUri)
-        nextPageUri = try container.sdkDecodeIfPresent(.nextPageUri)
-        page = try container.sdkDecodeIfPresent(.page)
-        pageSize = try container.sdkDecodeIfPresent(.pageSize)
-        previousPageUri = try container.sdkDecodeIfPresent(.previousPageUri)
-        start = try container.sdkDecodeIfPresent(.start)
-        uri = try container.sdkDecodeIfPresent(.uri)
-        usageRecords = try container.sdkDecodeIfPresent(.usageRecords)
-        if let value = firstPageUri {
+        self.end = try container.sdkDecodeIfPresent(.end)
+        self.firstPageUri = try container.sdkDecodeIfPresent(.firstPageUri)
+        self.nextPageUri = try container.sdkDecodeIfPresent(.nextPageUri)
+        self.page = try container.sdkDecodeIfPresent(.page)
+        self.pageSize = try container.sdkDecodeIfPresent(.pageSize)
+        self.previousPageUri = try container.sdkDecodeIfPresent(.previousPageUri)
+        self.start = try container.sdkDecodeIfPresent(.start)
+        self.uri = try container.sdkDecodeIfPresent(.uri)
+        self.usageRecords = try container.sdkDecodeIfPresent(.usageRecords)
+        if let value = self.firstPageUri {
             try sdkValidateUri("first_page_uri", value)
         }
-        if let value = nextPageUri {
+        if let value = self.nextPageUri {
             try sdkValidateUri("next_page_uri", value)
         }
-        if let value = previousPageUri {
+        if let value = self.previousPageUri {
             try sdkValidateUri("previous_page_uri", value)
         }
-        if let value = uri {
+        if let value = self.uri {
             try sdkValidateUri("uri", value)
         }
     }
 }
 
-public extension ListUsageRecordsMonthlyResponse {
-    init(
-        end: Int? = nil,
-        firstPageUri: String? = nil,
-        nextPageUri: String? = nil,
-        page: Int? = nil,
-        pageSize: Int? = nil,
-        previousPageUri: String? = nil,
-        start: Int? = nil,
-        uri: String? = nil,
-        usageRecords: [ApiV2010AccountUsageUsageRecordUsageRecordMonthly]? = nil
-    ) throws {
+extension ListUsageRecordsMonthlyResponse {
+    public init(end: Int? = nil, firstPageUri: String? = nil, nextPageUri: String? = nil, page: Int? = nil, pageSize: Int? = nil, previousPageUri: String? = nil, start: Int? = nil, uri: String? = nil, usageRecords: [ApiV2010AccountUsageUsageRecordUsageRecordMonthly]? = nil) throws {
         self.init()
         (self.end, self.firstPageUri) = (end, firstPageUri)
         (self.nextPageUri, self.page) = (nextPageUri, page)
@@ -388,50 +348,40 @@ public struct ListUsageRecordsTodayResponse: Codable {
     }
 
     init() {
-        (end, firstPageUri, nextPageUri, page, pageSize) = (nil, nil, nil, nil, nil)
-        (previousPageUri, start, uri, usageRecords) = (nil, nil, nil, nil)
+        (self.end, self.firstPageUri, self.nextPageUri, self.page, self.pageSize) = (nil, nil, nil, nil, nil)
+        (self.previousPageUri, self.start, self.uri, self.usageRecords) = (nil, nil, nil, nil)
     }
 }
 
-public extension ListUsageRecordsTodayResponse {
-    init(from decoder: Decoder) throws {
+extension ListUsageRecordsTodayResponse {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        end = try container.sdkDecodeIfPresent(.end)
-        firstPageUri = try container.sdkDecodeIfPresent(.firstPageUri)
-        nextPageUri = try container.sdkDecodeIfPresent(.nextPageUri)
-        page = try container.sdkDecodeIfPresent(.page)
-        pageSize = try container.sdkDecodeIfPresent(.pageSize)
-        previousPageUri = try container.sdkDecodeIfPresent(.previousPageUri)
-        start = try container.sdkDecodeIfPresent(.start)
-        uri = try container.sdkDecodeIfPresent(.uri)
-        usageRecords = try container.sdkDecodeIfPresent(.usageRecords)
-        if let value = firstPageUri {
+        self.end = try container.sdkDecodeIfPresent(.end)
+        self.firstPageUri = try container.sdkDecodeIfPresent(.firstPageUri)
+        self.nextPageUri = try container.sdkDecodeIfPresent(.nextPageUri)
+        self.page = try container.sdkDecodeIfPresent(.page)
+        self.pageSize = try container.sdkDecodeIfPresent(.pageSize)
+        self.previousPageUri = try container.sdkDecodeIfPresent(.previousPageUri)
+        self.start = try container.sdkDecodeIfPresent(.start)
+        self.uri = try container.sdkDecodeIfPresent(.uri)
+        self.usageRecords = try container.sdkDecodeIfPresent(.usageRecords)
+        if let value = self.firstPageUri {
             try sdkValidateUri("first_page_uri", value)
         }
-        if let value = nextPageUri {
+        if let value = self.nextPageUri {
             try sdkValidateUri("next_page_uri", value)
         }
-        if let value = previousPageUri {
+        if let value = self.previousPageUri {
             try sdkValidateUri("previous_page_uri", value)
         }
-        if let value = uri {
+        if let value = self.uri {
             try sdkValidateUri("uri", value)
         }
     }
 }
 
-public extension ListUsageRecordsTodayResponse {
-    init(
-        end: Int? = nil,
-        firstPageUri: String? = nil,
-        nextPageUri: String? = nil,
-        page: Int? = nil,
-        pageSize: Int? = nil,
-        previousPageUri: String? = nil,
-        start: Int? = nil,
-        uri: String? = nil,
-        usageRecords: [ApiV2010AccountUsageUsageRecordUsageRecordToday]? = nil
-    ) throws {
+extension ListUsageRecordsTodayResponse {
+    public init(end: Int? = nil, firstPageUri: String? = nil, nextPageUri: String? = nil, page: Int? = nil, pageSize: Int? = nil, previousPageUri: String? = nil, start: Int? = nil, uri: String? = nil, usageRecords: [ApiV2010AccountUsageUsageRecordUsageRecordToday]? = nil) throws {
         self.init()
         (self.end, self.firstPageUri) = (end, firstPageUri)
         (self.nextPageUri, self.page) = (nextPageUri, page)
@@ -477,50 +427,40 @@ public struct ListUsageRecordsYearlyResponse: Codable {
     }
 
     init() {
-        (end, firstPageUri, nextPageUri, page, pageSize) = (nil, nil, nil, nil, nil)
-        (previousPageUri, start, uri, usageRecords) = (nil, nil, nil, nil)
+        (self.end, self.firstPageUri, self.nextPageUri, self.page, self.pageSize) = (nil, nil, nil, nil, nil)
+        (self.previousPageUri, self.start, self.uri, self.usageRecords) = (nil, nil, nil, nil)
     }
 }
 
-public extension ListUsageRecordsYearlyResponse {
-    init(from decoder: Decoder) throws {
+extension ListUsageRecordsYearlyResponse {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        end = try container.sdkDecodeIfPresent(.end)
-        firstPageUri = try container.sdkDecodeIfPresent(.firstPageUri)
-        nextPageUri = try container.sdkDecodeIfPresent(.nextPageUri)
-        page = try container.sdkDecodeIfPresent(.page)
-        pageSize = try container.sdkDecodeIfPresent(.pageSize)
-        previousPageUri = try container.sdkDecodeIfPresent(.previousPageUri)
-        start = try container.sdkDecodeIfPresent(.start)
-        uri = try container.sdkDecodeIfPresent(.uri)
-        usageRecords = try container.sdkDecodeIfPresent(.usageRecords)
-        if let value = firstPageUri {
+        self.end = try container.sdkDecodeIfPresent(.end)
+        self.firstPageUri = try container.sdkDecodeIfPresent(.firstPageUri)
+        self.nextPageUri = try container.sdkDecodeIfPresent(.nextPageUri)
+        self.page = try container.sdkDecodeIfPresent(.page)
+        self.pageSize = try container.sdkDecodeIfPresent(.pageSize)
+        self.previousPageUri = try container.sdkDecodeIfPresent(.previousPageUri)
+        self.start = try container.sdkDecodeIfPresent(.start)
+        self.uri = try container.sdkDecodeIfPresent(.uri)
+        self.usageRecords = try container.sdkDecodeIfPresent(.usageRecords)
+        if let value = self.firstPageUri {
             try sdkValidateUri("first_page_uri", value)
         }
-        if let value = nextPageUri {
+        if let value = self.nextPageUri {
             try sdkValidateUri("next_page_uri", value)
         }
-        if let value = previousPageUri {
+        if let value = self.previousPageUri {
             try sdkValidateUri("previous_page_uri", value)
         }
-        if let value = uri {
+        if let value = self.uri {
             try sdkValidateUri("uri", value)
         }
     }
 }
 
-public extension ListUsageRecordsYearlyResponse {
-    init(
-        end: Int? = nil,
-        firstPageUri: String? = nil,
-        nextPageUri: String? = nil,
-        page: Int? = nil,
-        pageSize: Int? = nil,
-        previousPageUri: String? = nil,
-        start: Int? = nil,
-        uri: String? = nil,
-        usageRecords: [ApiV2010AccountUsageUsageRecordUsageRecordYearly]? = nil
-    ) throws {
+extension ListUsageRecordsYearlyResponse {
+    public init(end: Int? = nil, firstPageUri: String? = nil, nextPageUri: String? = nil, page: Int? = nil, pageSize: Int? = nil, previousPageUri: String? = nil, start: Int? = nil, uri: String? = nil, usageRecords: [ApiV2010AccountUsageUsageRecordUsageRecordYearly]? = nil) throws {
         self.init()
         (self.end, self.firstPageUri) = (end, firstPageUri)
         (self.nextPageUri, self.page) = (nextPageUri, page)
@@ -566,33 +506,33 @@ public struct ListUsageRecordsYesterdayResponse: Codable {
     }
 
     init() {
-        (end, firstPageUri, nextPageUri, page, pageSize) = (nil, nil, nil, nil, nil)
-        (previousPageUri, start, uri, usageRecords) = (nil, nil, nil, nil)
+        (self.end, self.firstPageUri, self.nextPageUri, self.page, self.pageSize) = (nil, nil, nil, nil, nil)
+        (self.previousPageUri, self.start, self.uri, self.usageRecords) = (nil, nil, nil, nil)
     }
 }
 
-public extension ListUsageRecordsYesterdayResponse {
-    init(from decoder: Decoder) throws {
+extension ListUsageRecordsYesterdayResponse {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        end = try container.sdkDecodeIfPresent(.end)
-        firstPageUri = try container.sdkDecodeIfPresent(.firstPageUri)
-        nextPageUri = try container.sdkDecodeIfPresent(.nextPageUri)
-        page = try container.sdkDecodeIfPresent(.page)
-        pageSize = try container.sdkDecodeIfPresent(.pageSize)
-        previousPageUri = try container.sdkDecodeIfPresent(.previousPageUri)
-        start = try container.sdkDecodeIfPresent(.start)
-        uri = try container.sdkDecodeIfPresent(.uri)
-        usageRecords = try container.sdkDecodeIfPresent(.usageRecords)
-        if let value = firstPageUri {
+        self.end = try container.sdkDecodeIfPresent(.end)
+        self.firstPageUri = try container.sdkDecodeIfPresent(.firstPageUri)
+        self.nextPageUri = try container.sdkDecodeIfPresent(.nextPageUri)
+        self.page = try container.sdkDecodeIfPresent(.page)
+        self.pageSize = try container.sdkDecodeIfPresent(.pageSize)
+        self.previousPageUri = try container.sdkDecodeIfPresent(.previousPageUri)
+        self.start = try container.sdkDecodeIfPresent(.start)
+        self.uri = try container.sdkDecodeIfPresent(.uri)
+        self.usageRecords = try container.sdkDecodeIfPresent(.usageRecords)
+        if let value = self.firstPageUri {
             try sdkValidateUri("first_page_uri", value)
         }
-        if let value = nextPageUri {
+        if let value = self.nextPageUri {
             try sdkValidateUri("next_page_uri", value)
         }
-        if let value = previousPageUri {
+        if let value = self.previousPageUri {
             try sdkValidateUri("previous_page_uri", value)
         }
-        if let value = uri {
+        if let value = self.uri {
             try sdkValidateUri("uri", value)
         }
     }

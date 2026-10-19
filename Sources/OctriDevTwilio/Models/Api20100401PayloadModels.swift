@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Api20100401Payload domain models
+// Api20100401Payload domain models
 /// Typed representation of the `ApiV2010AccountRecordingRecordingAddOnResultRecordingAddOnResultPayload` API
 /// schema.
 public struct ApiV2010AccountRecordingRecordingAddOnResultRecordingAddOnResultPayload: Codable {
@@ -45,67 +45,55 @@ public struct ApiV2010AccountRecordingRecordingAddOnResultRecordingAddOnResultPa
     }
 
     init() {
-        (sid, addOnResultSid, accountSid, label, addOnSid) = (nil, nil, nil, nil, nil)
-        (addOnConfigurationSid, contentType, dateCreated, dateUpdated, referenceSid) = (nil, nil, nil, nil, nil)
-        subresourceUris = nil
+        (self.sid, self.addOnResultSid, self.accountSid, self.label, self.addOnSid) = (nil, nil, nil, nil, nil)
+        (self.addOnConfigurationSid, self.contentType, self.dateCreated, self.dateUpdated, self.referenceSid) = (nil, nil, nil, nil, nil)
+        self.subresourceUris = nil
     }
 }
 
-public extension ApiV2010AccountRecordingRecordingAddOnResultRecordingAddOnResultPayload {
-    init(from decoder: Decoder) throws {
+extension ApiV2010AccountRecordingRecordingAddOnResultRecordingAddOnResultPayload {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        sid = try container.sdkDecodeIfPresent(.sid)
-        addOnResultSid = try container.sdkDecodeIfPresent(.addOnResultSid)
-        accountSid = try container.sdkDecodeIfPresent(.accountSid)
-        label = try container.sdkDecodeIfPresent(.label)
-        addOnSid = try container.sdkDecodeIfPresent(.addOnSid)
-        addOnConfigurationSid = try container.sdkDecodeIfPresent(.addOnConfigurationSid)
-        contentType = try container.sdkDecodeIfPresent(.contentType)
-        dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
-        dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
-        referenceSid = try container.sdkDecodeIfPresent(.referenceSid)
-        subresourceUris = try container.sdkDecodeIfPresent(.subresourceUris)
-        if let value = sid {
+        self.sid = try container.sdkDecodeIfPresent(.sid)
+        self.addOnResultSid = try container.sdkDecodeIfPresent(.addOnResultSid)
+        self.accountSid = try container.sdkDecodeIfPresent(.accountSid)
+        self.label = try container.sdkDecodeIfPresent(.label)
+        self.addOnSid = try container.sdkDecodeIfPresent(.addOnSid)
+        self.addOnConfigurationSid = try container.sdkDecodeIfPresent(.addOnConfigurationSid)
+        self.contentType = try container.sdkDecodeIfPresent(.contentType)
+        self.dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
+        self.dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
+        self.referenceSid = try container.sdkDecodeIfPresent(.referenceSid)
+        self.subresourceUris = try container.sdkDecodeIfPresent(.subresourceUris)
+        if let value = self.sid {
             try validateLength("sid", value, min: 34, max: 34)
             try sdkValidatePattern("sid", value, sdkPatternb9139acbf072)
         }
-        if let value = addOnResultSid {
+        if let value = self.addOnResultSid {
             try validateLength("add_on_result_sid", value, min: 34, max: 34)
             try sdkValidatePattern("add_on_result_sid", value, sdkPatterne89fe25d0ced)
         }
-        if let value = accountSid {
+        if let value = self.accountSid {
             try validateLength("account_sid", value, min: 34, max: 34)
             try sdkValidatePattern("account_sid", value, sdkPatternc7cb941ab84b)
         }
-        if let value = addOnSid {
+        if let value = self.addOnSid {
             try validateLength("add_on_sid", value, min: 34, max: 34)
             try sdkValidatePattern("add_on_sid", value, sdkPatterna87282c6565b)
         }
-        if let value = addOnConfigurationSid {
+        if let value = self.addOnConfigurationSid {
             try validateLength("add_on_configuration_sid", value, min: 34, max: 34)
             try sdkValidatePattern("add_on_configuration_sid", value, sdkPatternbb2f9d1d1c1e)
         }
-        if let value = referenceSid {
+        if let value = self.referenceSid {
             try validateLength("reference_sid", value, min: 34, max: 34)
             try sdkValidatePattern("reference_sid", value, sdkPatternfad3f05341a2)
         }
     }
 }
 
-public extension ApiV2010AccountRecordingRecordingAddOnResultRecordingAddOnResultPayload {
-    init(
-        sid: String? = nil,
-        addOnResultSid: String? = nil,
-        accountSid: String? = nil,
-        label: String? = nil,
-        addOnSid: String? = nil,
-        addOnConfigurationSid: String? = nil,
-        contentType: String? = nil,
-        dateCreated: String? = nil,
-        dateUpdated: String? = nil,
-        referenceSid: String? = nil,
-        subresourceUris: [String: JSONValue]? = nil
-    ) throws {
+extension ApiV2010AccountRecordingRecordingAddOnResultRecordingAddOnResultPayload {
+    public init(sid: String? = nil, addOnResultSid: String? = nil, accountSid: String? = nil, label: String? = nil, addOnSid: String? = nil, addOnConfigurationSid: String? = nil, contentType: String? = nil, dateCreated: String? = nil, dateUpdated: String? = nil, referenceSid: String? = nil, subresourceUris: [String: JSONValue]? = nil) throws {
         self.init()
         (self.sid, self.addOnResultSid) = (sid, addOnResultSid)
         (self.accountSid, self.label) = (accountSid, label)

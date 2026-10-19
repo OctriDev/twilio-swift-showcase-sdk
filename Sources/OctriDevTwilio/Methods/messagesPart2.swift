@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension MessagesMethods {
-    struct CreateMessagesOptions: Codable {
+extension MessagesMethods {
+    public struct CreateMessagesOptions: Codable {
         public var accountSid: String
         public var to: String
         public var statusCallback: String?
@@ -42,9 +42,7 @@ public extension MessagesMethods {
         }
     }
 
-    /// Creates and sends a message to a phone number or channel address. Supply `To` in E.164 format or as a channel
-    /// address, and use the optional fields to configure delivery, privacy, or scheduling. A 201 response returns the
-    /// created Message resource.
+    /// Creates and sends a message to a phone number or channel address. Supply `To` in E.164 format or as a channel address, and use the optional fields to configure delivery, privacy, or scheduling. A 201 response returns the created Message resource.
     ///
     /// Send a message
     ///
@@ -188,11 +186,7 @@ public extension MessagesMethods {
     ///   emplates) or by [fetching your
     ///   Templates](https://www.twilio.com/docs/content/content-api-resources#fetch-a
     ///   ll-content-resources).
-    static func createMessages(
-        config: ClientConfig,
-        options: CreateMessagesOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountMessage {
+    public static func createMessages(config: ClientConfig, options: CreateMessagesOptions, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountMessage {
         try validateLength("AccountSid", options.accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", options.accountSid, sdkPatternc7cb941ab84b)
 
@@ -221,16 +215,6 @@ public extension MessagesMethods {
 
         let requestBody = CreateMessagesRequestBody(options: options)
 
-        return try await (sdkRequest(
-            "POST",
-            ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(options.accountSid)), "/Messages.json"]
-                .joined(),
-            config: config,
-            body: requestBody,
-            contentType: "application/x-www-form-urlencoded",
-            decoder: .json,
-            operationId: "createMessages",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("POST", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(options.accountSid)), "/Messages.json"].joined(), config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "createMessages", options: requestOptions)).data
     }
 }

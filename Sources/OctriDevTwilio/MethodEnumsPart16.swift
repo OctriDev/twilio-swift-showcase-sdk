@@ -11,7 +11,7 @@ struct CreateSipDomainsAuthCallsIpAccessControlListMappingsRequestBody: Encodabl
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(ipAccessControlListSid, forKey: SdkCodingKey("IpAccessControlListSid"))
+        try keyedContainer.encode(self.ipAccessControlListSid, forKey: SdkCodingKey("IpAccessControlListSid"))
     }
 }
 
@@ -20,7 +20,7 @@ struct CreateSipDomainsAuthRegistrationsCredentialListMappingsRequestBody: Encod
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(credentialListSid, forKey: SdkCodingKey("CredentialListSid"))
+        try keyedContainer.encode(self.credentialListSid, forKey: SdkCodingKey("CredentialListSid"))
     }
 }
 
@@ -30,8 +30,8 @@ struct CreateSipCredentialListsCredentialsRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(username, forKey: SdkCodingKey("Username"))
-        try keyedContainer.encode(password, forKey: SdkCodingKey("Password"))
+        try keyedContainer.encode(self.username, forKey: SdkCodingKey("Username"))
+        try keyedContainer.encode(self.password, forKey: SdkCodingKey("Password"))
     }
 }
 
@@ -40,7 +40,7 @@ struct UpdateSipCredentialListsCredentialsRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encodeIfPresent(password, forKey: SdkCodingKey("Password"))
+        try keyedContainer.encodeIfPresent(self.password, forKey: SdkCodingKey("Password"))
     }
 }
 
@@ -49,7 +49,7 @@ struct CreateSipCredentialListsRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(friendlyName, forKey: SdkCodingKey("FriendlyName"))
+        try keyedContainer.encode(self.friendlyName, forKey: SdkCodingKey("FriendlyName"))
     }
 }
 
@@ -58,7 +58,7 @@ struct UpdateSipCredentialListsRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(friendlyName, forKey: SdkCodingKey("FriendlyName"))
+        try keyedContainer.encode(self.friendlyName, forKey: SdkCodingKey("FriendlyName"))
     }
 }
 
@@ -67,7 +67,7 @@ struct CreateSipDomainsCredentialListMappingsRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(credentialListSid, forKey: SdkCodingKey("CredentialListSid"))
+        try keyedContainer.encode(self.credentialListSid, forKey: SdkCodingKey("CredentialListSid"))
     }
 }
 
@@ -88,35 +88,35 @@ struct CreateSipDomainsRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(domainName, forKey: SdkCodingKey("DomainName"))
-        try keyedContainer.encodeIfPresent(friendlyName, forKey: SdkCodingKey("FriendlyName"))
-        try keyedContainer.encodeIfPresent(voiceUrl, forKey: SdkCodingKey("VoiceUrl"))
-        try keyedContainer.encodeIfPresent(voiceMethod, forKey: SdkCodingKey("VoiceMethod"))
-        try keyedContainer.encodeIfPresent(voiceFallbackUrl, forKey: SdkCodingKey("VoiceFallbackUrl"))
-        try keyedContainer.encodeIfPresent(voiceFallbackMethod, forKey: SdkCodingKey("VoiceFallbackMethod"))
-        try keyedContainer.encodeIfPresent(voiceStatusCallbackUrl, forKey: SdkCodingKey("VoiceStatusCallbackUrl"))
-        try keyedContainer.encodeIfPresent(voiceStatusCallbackMethod, forKey: SdkCodingKey("VoiceStatusCallbackMethod"))
-        try keyedContainer.encodeIfPresent(sipRegistration, forKey: SdkCodingKey("SipRegistration"))
-        try keyedContainer.encodeIfPresent(emergencyCallingEnabled, forKey: SdkCodingKey("EmergencyCallingEnabled"))
-        try keyedContainer.encodeIfPresent(secure, forKey: SdkCodingKey("Secure"))
-        try keyedContainer.encodeIfPresent(byocTrunkSid, forKey: SdkCodingKey("ByocTrunkSid"))
-        try keyedContainer.encodeIfPresent(emergencyCallerSid, forKey: SdkCodingKey("EmergencyCallerSid"))
+        try keyedContainer.encode(self.domainName, forKey: SdkCodingKey("DomainName"))
+        try keyedContainer.encodeIfPresent(self.friendlyName, forKey: SdkCodingKey("FriendlyName"))
+        try keyedContainer.encodeIfPresent(self.voiceUrl, forKey: SdkCodingKey("VoiceUrl"))
+        try keyedContainer.encodeIfPresent(self.voiceMethod, forKey: SdkCodingKey("VoiceMethod"))
+        try keyedContainer.encodeIfPresent(self.voiceFallbackUrl, forKey: SdkCodingKey("VoiceFallbackUrl"))
+        try keyedContainer.encodeIfPresent(self.voiceFallbackMethod, forKey: SdkCodingKey("VoiceFallbackMethod"))
+        try keyedContainer.encodeIfPresent(self.voiceStatusCallbackUrl, forKey: SdkCodingKey("VoiceStatusCallbackUrl"))
+        try keyedContainer.encodeIfPresent(self.voiceStatusCallbackMethod, forKey: SdkCodingKey("VoiceStatusCallbackMethod"))
+        try keyedContainer.encodeIfPresent(self.sipRegistration, forKey: SdkCodingKey("SipRegistration"))
+        try keyedContainer.encodeIfPresent(self.emergencyCallingEnabled, forKey: SdkCodingKey("EmergencyCallingEnabled"))
+        try keyedContainer.encodeIfPresent(self.secure, forKey: SdkCodingKey("Secure"))
+        try keyedContainer.encodeIfPresent(self.byocTrunkSid, forKey: SdkCodingKey("ByocTrunkSid"))
+        try keyedContainer.encodeIfPresent(self.emergencyCallerSid, forKey: SdkCodingKey("EmergencyCallerSid"))
     }
 
     init(options: SipDomainsMethods.CreateSipDomainsOptions) {
-        domainName = options.domainName
-        friendlyName = options.friendlyName
-        voiceUrl = options.voiceUrl
-        voiceMethod = options.voiceMethod
-        voiceFallbackUrl = options.voiceFallbackUrl
-        voiceFallbackMethod = options.voiceFallbackMethod
-        voiceStatusCallbackUrl = options.voiceStatusCallbackUrl
-        voiceStatusCallbackMethod = options.voiceStatusCallbackMethod
-        sipRegistration = options.sipRegistration
-        emergencyCallingEnabled = options.emergencyCallingEnabled
-        secure = options.secure
-        byocTrunkSid = options.byocTrunkSid
-        emergencyCallerSid = options.emergencyCallerSid
+        self.domainName = options.domainName
+        self.friendlyName = options.friendlyName
+        self.voiceUrl = options.voiceUrl
+        self.voiceMethod = options.voiceMethod
+        self.voiceFallbackUrl = options.voiceFallbackUrl
+        self.voiceFallbackMethod = options.voiceFallbackMethod
+        self.voiceStatusCallbackUrl = options.voiceStatusCallbackUrl
+        self.voiceStatusCallbackMethod = options.voiceStatusCallbackMethod
+        self.sipRegistration = options.sipRegistration
+        self.emergencyCallingEnabled = options.emergencyCallingEnabled
+        self.secure = options.secure
+        self.byocTrunkSid = options.byocTrunkSid
+        self.emergencyCallerSid = options.emergencyCallerSid
     }
 }
 
@@ -137,35 +137,35 @@ struct UpdateSipDomainsRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encodeIfPresent(friendlyName, forKey: SdkCodingKey("FriendlyName"))
-        try keyedContainer.encodeIfPresent(voiceFallbackMethod, forKey: SdkCodingKey("VoiceFallbackMethod"))
-        try keyedContainer.encodeIfPresent(voiceFallbackUrl, forKey: SdkCodingKey("VoiceFallbackUrl"))
-        try keyedContainer.encodeIfPresent(voiceMethod, forKey: SdkCodingKey("VoiceMethod"))
-        try keyedContainer.encodeIfPresent(voiceStatusCallbackMethod, forKey: SdkCodingKey("VoiceStatusCallbackMethod"))
-        try keyedContainer.encodeIfPresent(voiceStatusCallbackUrl, forKey: SdkCodingKey("VoiceStatusCallbackUrl"))
-        try keyedContainer.encodeIfPresent(voiceUrl, forKey: SdkCodingKey("VoiceUrl"))
-        try keyedContainer.encodeIfPresent(sipRegistration, forKey: SdkCodingKey("SipRegistration"))
-        try keyedContainer.encodeIfPresent(domainName, forKey: SdkCodingKey("DomainName"))
-        try keyedContainer.encodeIfPresent(emergencyCallingEnabled, forKey: SdkCodingKey("EmergencyCallingEnabled"))
-        try keyedContainer.encodeIfPresent(secure, forKey: SdkCodingKey("Secure"))
-        try keyedContainer.encodeIfPresent(byocTrunkSid, forKey: SdkCodingKey("ByocTrunkSid"))
-        try keyedContainer.encodeIfPresent(emergencyCallerSid, forKey: SdkCodingKey("EmergencyCallerSid"))
+        try keyedContainer.encodeIfPresent(self.friendlyName, forKey: SdkCodingKey("FriendlyName"))
+        try keyedContainer.encodeIfPresent(self.voiceFallbackMethod, forKey: SdkCodingKey("VoiceFallbackMethod"))
+        try keyedContainer.encodeIfPresent(self.voiceFallbackUrl, forKey: SdkCodingKey("VoiceFallbackUrl"))
+        try keyedContainer.encodeIfPresent(self.voiceMethod, forKey: SdkCodingKey("VoiceMethod"))
+        try keyedContainer.encodeIfPresent(self.voiceStatusCallbackMethod, forKey: SdkCodingKey("VoiceStatusCallbackMethod"))
+        try keyedContainer.encodeIfPresent(self.voiceStatusCallbackUrl, forKey: SdkCodingKey("VoiceStatusCallbackUrl"))
+        try keyedContainer.encodeIfPresent(self.voiceUrl, forKey: SdkCodingKey("VoiceUrl"))
+        try keyedContainer.encodeIfPresent(self.sipRegistration, forKey: SdkCodingKey("SipRegistration"))
+        try keyedContainer.encodeIfPresent(self.domainName, forKey: SdkCodingKey("DomainName"))
+        try keyedContainer.encodeIfPresent(self.emergencyCallingEnabled, forKey: SdkCodingKey("EmergencyCallingEnabled"))
+        try keyedContainer.encodeIfPresent(self.secure, forKey: SdkCodingKey("Secure"))
+        try keyedContainer.encodeIfPresent(self.byocTrunkSid, forKey: SdkCodingKey("ByocTrunkSid"))
+        try keyedContainer.encodeIfPresent(self.emergencyCallerSid, forKey: SdkCodingKey("EmergencyCallerSid"))
     }
 
     init(options: SipDomainsMethods.UpdateSipDomainsOptions) {
-        friendlyName = options.friendlyName
-        voiceFallbackMethod = options.voiceFallbackMethod
-        voiceFallbackUrl = options.voiceFallbackUrl
-        voiceMethod = options.voiceMethod
-        voiceStatusCallbackMethod = options.voiceStatusCallbackMethod
-        voiceStatusCallbackUrl = options.voiceStatusCallbackUrl
-        voiceUrl = options.voiceUrl
-        sipRegistration = options.sipRegistration
-        domainName = options.domainName
-        emergencyCallingEnabled = options.emergencyCallingEnabled
-        secure = options.secure
-        byocTrunkSid = options.byocTrunkSid
-        emergencyCallerSid = options.emergencyCallerSid
+        self.friendlyName = options.friendlyName
+        self.voiceFallbackMethod = options.voiceFallbackMethod
+        self.voiceFallbackUrl = options.voiceFallbackUrl
+        self.voiceMethod = options.voiceMethod
+        self.voiceStatusCallbackMethod = options.voiceStatusCallbackMethod
+        self.voiceStatusCallbackUrl = options.voiceStatusCallbackUrl
+        self.voiceUrl = options.voiceUrl
+        self.sipRegistration = options.sipRegistration
+        self.domainName = options.domainName
+        self.emergencyCallingEnabled = options.emergencyCallingEnabled
+        self.secure = options.secure
+        self.byocTrunkSid = options.byocTrunkSid
+        self.emergencyCallerSid = options.emergencyCallerSid
     }
 }
 
@@ -174,7 +174,7 @@ struct CreateSipIpAccessControlListsRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(friendlyName, forKey: SdkCodingKey("FriendlyName"))
+        try keyedContainer.encode(self.friendlyName, forKey: SdkCodingKey("FriendlyName"))
     }
 }
 
@@ -183,7 +183,7 @@ struct UpdateSipIpAccessControlListsRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(friendlyName, forKey: SdkCodingKey("FriendlyName"))
+        try keyedContainer.encode(self.friendlyName, forKey: SdkCodingKey("FriendlyName"))
     }
 }
 
@@ -192,7 +192,7 @@ struct CreateSipDomainsIpAccessControlListMappingsRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(ipAccessControlListSid, forKey: SdkCodingKey("IpAccessControlListSid"))
+        try keyedContainer.encode(self.ipAccessControlListSid, forKey: SdkCodingKey("IpAccessControlListSid"))
     }
 }
 
@@ -203,8 +203,8 @@ struct CreateSipIpAccessControlListsIpAddressesRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(friendlyName, forKey: SdkCodingKey("FriendlyName"))
-        try keyedContainer.encode(ipAddress, forKey: SdkCodingKey("IpAddress"))
-        try keyedContainer.encodeIfPresent(cidrPrefixLength, forKey: SdkCodingKey("CidrPrefixLength"))
+        try keyedContainer.encode(self.friendlyName, forKey: SdkCodingKey("FriendlyName"))
+        try keyedContainer.encode(self.ipAddress, forKey: SdkCodingKey("IpAddress"))
+        try keyedContainer.encodeIfPresent(self.cidrPrefixLength, forKey: SdkCodingKey("CidrPrefixLength"))
     }
 }

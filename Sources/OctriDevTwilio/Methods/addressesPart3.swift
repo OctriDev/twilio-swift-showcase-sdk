@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension AddressesMethods {
-    struct ListAddressesOptions: Codable {
+extension AddressesMethods {
+    public struct ListAddressesOptions: Codable {
         public var accountSid: String
         public var customerName: String?
         public var friendlyName: String?
@@ -22,8 +22,7 @@ public extension AddressesMethods {
         }
     }
 
-    /// Lists address resources associated with a specific account. Filter the results by customer name, friendly name,
-    /// emergency-calling status, or ISO country code, and use the pagination parameters to navigate the results.
+    /// Lists address resources associated with a specific account. Filter the results by customer name, friendly name, emergency-calling status, or ISO country code, and use the pagination parameters to navigate the results.
     ///
     /// - Parameters:
     /// - accountSid: The SID of the
@@ -38,11 +37,7 @@ public extension AddressesMethods {
     ///   50, and the maximum is 1000.
     /// - page: The page index. This value is simply for client state.
     /// - pageToken: The page token. This is provided by the API.
-    static func listAddresses(
-        config: ClientConfig,
-        options: ListAddressesOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ListAddressesResponse {
+    public static func listAddresses(config: ClientConfig, options: ListAddressesOptions, requestOptions: RequestOptions? = nil) async throws -> ListAddressesResponse {
         try validateLength("AccountSid", options.accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", options.accountSid, sdkPatternc7cb941ab84b)
 
@@ -54,23 +49,14 @@ public extension AddressesMethods {
             try validateRange("Page", Double(page), min: 0)
         }
 
-        return try await (sdkRequest(
-            "GET",
-            ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(options.accountSid)), "/Addresses.json"]
-                .joined(),
-            config: config,
-            query: [
-                SdkQueryParameter("CustomerName", value: options.customerName),
-                SdkQueryParameter("FriendlyName", value: options.friendlyName),
-                SdkQueryParameter("EmergencyEnabled", value: options.emergencyEnabled),
-                SdkQueryParameter("IsoCountry", value: options.isoCountry),
-                SdkQueryParameter("PageSize", value: options.pageSize),
-                SdkQueryParameter("Page", value: options.page),
-                SdkQueryParameter("PageToken", value: options.pageToken),
-            ],
-            decoder: .json,
-            operationId: "listAddresses",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(options.accountSid)), "/Addresses.json"].joined(), config: config, query: [
+            SdkQueryParameter("CustomerName", value: options.customerName),
+            SdkQueryParameter("FriendlyName", value: options.friendlyName),
+            SdkQueryParameter("EmergencyEnabled", value: options.emergencyEnabled),
+            SdkQueryParameter("IsoCountry", value: options.isoCountry),
+            SdkQueryParameter("PageSize", value: options.pageSize),
+            SdkQueryParameter("Page", value: options.page),
+            SdkQueryParameter("PageToken", value: options.pageToken),
+        ], decoder: .json, operationId: "listAddresses", options: requestOptions)).data
     }
 }

@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Api20100401Member domain models
+// Api20100401Member domain models
 /// Typed representation of the `ApiV2010AccountQueueMember` API schema.
 public struct ApiV2010AccountQueueMember: Codable {
     /// The SID of the Call the Member resource is associated with.
@@ -29,40 +29,33 @@ public struct ApiV2010AccountQueueMember: Codable {
     }
 
     init() {
-        (callSid, dateEnqueued, position, uri, waitTime) = (nil, nil, nil, nil, nil)
-        queueSid = nil
+        (self.callSid, self.dateEnqueued, self.position, self.uri, self.waitTime) = (nil, nil, nil, nil, nil)
+        self.queueSid = nil
     }
 }
 
-public extension ApiV2010AccountQueueMember {
-    init(from decoder: Decoder) throws {
+extension ApiV2010AccountQueueMember {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        callSid = try container.sdkDecodeIfPresent(.callSid)
-        dateEnqueued = try container.sdkDecodeIfPresent(.dateEnqueued)
-        position = try container.sdkDecodeIfPresent(.position)
-        uri = try container.sdkDecodeIfPresent(.uri)
-        waitTime = try container.sdkDecodeIfPresent(.waitTime)
-        queueSid = try container.sdkDecodeIfPresent(.queueSid)
-        if let value = callSid {
+        self.callSid = try container.sdkDecodeIfPresent(.callSid)
+        self.dateEnqueued = try container.sdkDecodeIfPresent(.dateEnqueued)
+        self.position = try container.sdkDecodeIfPresent(.position)
+        self.uri = try container.sdkDecodeIfPresent(.uri)
+        self.waitTime = try container.sdkDecodeIfPresent(.waitTime)
+        self.queueSid = try container.sdkDecodeIfPresent(.queueSid)
+        if let value = self.callSid {
             try validateLength("call_sid", value, min: 34, max: 34)
             try sdkValidatePattern("call_sid", value, sdkPattern25b2d94fcc27)
         }
-        if let value = queueSid {
+        if let value = self.queueSid {
             try validateLength("queue_sid", value, min: 34, max: 34)
             try sdkValidatePattern("queue_sid", value, sdkPatternd19bdfd65b5a)
         }
     }
 }
 
-public extension ApiV2010AccountQueueMember {
-    init(
-        callSid: String? = nil,
-        dateEnqueued: String? = nil,
-        position: Int? = nil,
-        uri: String? = nil,
-        waitTime: Int? = nil,
-        queueSid: String? = nil
-    ) throws {
+extension ApiV2010AccountQueueMember {
+    public init(callSid: String? = nil, dateEnqueued: String? = nil, position: Int? = nil, uri: String? = nil, waitTime: Int? = nil, queueSid: String? = nil) throws {
         self.init()
         (self.callSid, self.dateEnqueued) = (callSid, dateEnqueued)
         (self.position, self.uri) = (position, uri)

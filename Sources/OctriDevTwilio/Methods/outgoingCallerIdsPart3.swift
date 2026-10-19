@@ -6,10 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension OutgoingCallerIdsMethods {
-    /// Updates the friendly name of an outgoing caller ID resource. Use `AccountSid` and `Sid` to identify the account
-    /// and caller ID, and supply `FriendlyName` to change its description. The friendly name can contain up to 64
-    /// characters.
+extension OutgoingCallerIdsMethods {
+    /// Updates the friendly name of an outgoing caller ID resource. Use `AccountSid` and `Sid` to identify the account and caller ID, and supply `FriendlyName` to change its description. The friendly name can contain up to 64 characters.
     ///
     /// Updates the caller-id
     ///
@@ -21,13 +19,7 @@ public extension OutgoingCallerIdsMethods {
     ///   OutgoingCallerId resource to update.
     /// - friendlyName: A descriptive string that you create to describe the
     ///   resource. It can be up to 64 characters long.
-    static func updateOutgoingCallerIds(
-        config: ClientConfig,
-        accountSid: String,
-        sid: String,
-        friendlyName: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountOutgoingCallerId {
+    public static func updateOutgoingCallerIds(config: ClientConfig, accountSid: String, sid: String, friendlyName: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountOutgoingCallerId {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
@@ -36,21 +28,6 @@ public extension OutgoingCallerIdsMethods {
 
         let requestBody = UpdateOutgoingCallerIdsRequestBody(friendlyName: friendlyName)
 
-        return try await (sdkRequest(
-            "POST",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(accountSid)),
-                "/OutgoingCallerIds/",
-                sdkEncodePathSegment(sdkWireString(sid)),
-                ".json",
-            ].joined(),
-            config: config,
-            body: requestBody,
-            contentType: "application/x-www-form-urlencoded",
-            decoder: .json,
-            operationId: "updateOutgoingCallerIds",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("POST", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/OutgoingCallerIds/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "updateOutgoingCallerIds", options: requestOptions)).data
     }
 }

@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Shared domain models
+// Shared domain models
 /// Typed representation of the `ApiV2010AccountMessageMedia` API schema.
 public struct ApiV2010AccountMessageMedia: Codable {
     /// The SID of the Account associated with this Media resource.
@@ -32,46 +32,38 @@ public struct ApiV2010AccountMessageMedia: Codable {
     }
 
     init() {
-        (accountSid, contentType, dateCreated, dateUpdated, parentSid) = (nil, nil, nil, nil, nil)
-        (sid, uri) = (nil, nil)
+        (self.accountSid, self.contentType, self.dateCreated, self.dateUpdated, self.parentSid) = (nil, nil, nil, nil, nil)
+        (self.sid, self.uri) = (nil, nil)
     }
 }
 
-public extension ApiV2010AccountMessageMedia {
-    init(from decoder: Decoder) throws {
+extension ApiV2010AccountMessageMedia {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        accountSid = try container.sdkDecodeIfPresent(.accountSid)
-        contentType = try container.sdkDecodeIfPresent(.contentType)
-        dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
-        dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
-        parentSid = try container.sdkDecodeIfPresent(.parentSid)
-        sid = try container.sdkDecodeIfPresent(.sid)
-        uri = try container.sdkDecodeIfPresent(.uri)
-        if let value = accountSid {
+        self.accountSid = try container.sdkDecodeIfPresent(.accountSid)
+        self.contentType = try container.sdkDecodeIfPresent(.contentType)
+        self.dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
+        self.dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
+        self.parentSid = try container.sdkDecodeIfPresent(.parentSid)
+        self.sid = try container.sdkDecodeIfPresent(.sid)
+        self.uri = try container.sdkDecodeIfPresent(.uri)
+        if let value = self.accountSid {
             try validateLength("account_sid", value, min: 34, max: 34)
             try sdkValidatePattern("account_sid", value, sdkPatternc7cb941ab84b)
         }
-        if let value = parentSid {
+        if let value = self.parentSid {
             try validateLength("parent_sid", value, min: 34, max: 34)
             try sdkValidatePattern("parent_sid", value, sdkPattern65b3eddf4a12)
         }
-        if let value = sid {
+        if let value = self.sid {
             try validateLength("sid", value, min: 34, max: 34)
             try sdkValidatePattern("sid", value, sdkPattern95ed076eca3b)
         }
     }
 }
 
-public extension ApiV2010AccountMessageMedia {
-    init(
-        accountSid: String? = nil,
-        contentType: String? = nil,
-        dateCreated: String? = nil,
-        dateUpdated: String? = nil,
-        parentSid: String? = nil,
-        sid: String? = nil,
-        uri: String? = nil
-    ) throws {
+extension ApiV2010AccountMessageMedia {
+    public init(accountSid: String? = nil, contentType: String? = nil, dateCreated: String? = nil, dateUpdated: String? = nil, parentSid: String? = nil, sid: String? = nil, uri: String? = nil) throws {
         self.init()
         (self.accountSid, self.contentType) = (accountSid, contentType)
         (self.dateCreated, self.dateUpdated) = (dateCreated, dateUpdated)

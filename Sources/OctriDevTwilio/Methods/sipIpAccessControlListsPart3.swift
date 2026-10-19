@@ -6,9 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension SipIpAccessControlListsMethods {
-    /// Creates an IP access control list for an account. Provide a `FriendlyName` to identify the list; the response
-    /// includes its generated SID and resource URI.
+extension SipIpAccessControlListsMethods {
+    /// Creates an IP access control list for an account. Provide a `FriendlyName` to identify the list; the response includes its generated SID and resource URI.
     ///
     /// Create a new IpAccessControlList resource
     ///
@@ -18,32 +17,16 @@ public extension SipIpAccessControlListsMethods {
     ///   resource.
     /// - friendlyName: A human readable descriptive text that describes the
     ///   IpAccessControlList, up to 255 characters long.
-    static func createSipIpAccessControlLists(
-        config: ClientConfig,
-        accountSid: String,
-        friendlyName: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountSipSipIpAccessControlList {
+    public static func createSipIpAccessControlLists(config: ClientConfig, accountSid: String, friendlyName: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountSipSipIpAccessControlList {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
         let requestBody = CreateSipIpAccessControlListsRequestBody(friendlyName: friendlyName)
 
-        return try await (sdkRequest(
-            "POST",
-            ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/SIP/IpAccessControlLists.json"]
-                .joined(),
-            config: config,
-            body: requestBody,
-            contentType: "application/x-www-form-urlencoded",
-            decoder: .json,
-            operationId: "createSipIpAccessControlLists",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("POST", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/SIP/IpAccessControlLists.json"].joined(), config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "createSipIpAccessControlLists", options: requestOptions)).data
     }
 
-    /// Retrieves a specific IP access control list for an account. Use `AccountSid` and `Sid` to identify the account
-    /// and list; both values must use their resource-specific 34-character identifier format.
+    /// Retrieves a specific IP access control list for an account. Use `AccountSid` and `Sid` to identify the account and list; both values must use their resource-specific 34-character identifier format.
     ///
     /// Fetch a specific instance of an IpAccessControlList
     ///
@@ -52,31 +35,13 @@ public extension SipIpAccessControlListsMethods {
     ///   [Account](https://www.twilio.com/docs/iam/api/account) responsible for this
     ///   resource.
     /// - sid: A 34 character string that uniquely identifies the resource to fetch.
-    static func fetchSipIpAccessControlLists(
-        config: ClientConfig,
-        accountSid: String,
-        sid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountSipSipIpAccessControlList {
+    public static func fetchSipIpAccessControlLists(config: ClientConfig, accountSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountSipSipIpAccessControlList {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
         try validateLength("Sid", sid, min: 34, max: 34)
         try sdkValidatePattern("Sid", sid, sdkPattern99d6601bdb3f)
 
-        return try await (sdkRequest(
-            "GET",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(accountSid)),
-                "/SIP/IpAccessControlLists/",
-                sdkEncodePathSegment(sdkWireString(sid)),
-                ".json",
-            ].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "fetchSipIpAccessControlLists",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/SIP/IpAccessControlLists/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, decoder: .json, operationId: "fetchSipIpAccessControlLists", options: requestOptions)).data
     }
 }

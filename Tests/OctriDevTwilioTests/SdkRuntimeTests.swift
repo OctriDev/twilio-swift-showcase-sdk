@@ -2,8 +2,8 @@
 // This file is machine-generated from your OpenAPI spec.
 
 import Foundation
-@testable import OctriDevTwilio
 import XCTest
+@testable import OctriDevTwilio
 
 private struct ProbeResponse: Codable {
     let ok: Bool
@@ -49,7 +49,7 @@ final class SdkRuntimeTests: XCTestCase {
             "GET",
             "/probe",
             config: config,
-            body: EmptyBody?.none,
+            body: Optional<EmptyBody>.none,
             operationId: "probe"
         )
         XCTAssertTrue(response.data.ok)
@@ -81,7 +81,7 @@ final class SdkRuntimeTests: XCTestCase {
             "POST",
             "/2010-04-01/Accounts.json",
             config: config,
-            body: EmptyBody?.none,
+            body: Optional<EmptyBody>.none,
             operationId: "createAccounts"
         )
         let request = try XCTUnwrap(captured)
@@ -130,7 +130,7 @@ final class SdkRuntimeTests: XCTestCase {
                 "POST",
                 "/2010-04-01/Accounts.json",
                 config: config,
-                body: EmptyBody?.none,
+                body: Optional<EmptyBody>.none,
                 operationId: "createAccounts"
             )
             let request = try XCTUnwrap(captured)
@@ -164,7 +164,7 @@ final class SdkRuntimeTests: XCTestCase {
                 "POST",
                 "/2010-04-01/Accounts.json",
                 config: config,
-                body: EmptyBody?.none,
+                body: Optional<EmptyBody>.none,
                 operationId: "createAccounts"
             )
             XCTFail("expected SdkValidationError")
@@ -180,4 +180,5 @@ final class SdkRuntimeTests: XCTestCase {
         }
         XCTAssertFalse(middlewareCalled)
     }
+
 }

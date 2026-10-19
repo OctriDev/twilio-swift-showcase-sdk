@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension RecordingsMethods {
-    struct ListRecordingsOptions: Codable {
+extension RecordingsMethods {
+    public struct ListRecordingsOptions: Codable {
         public var accountSid: String
         public var dateCreated: Date?
         public var dateCreated2: Date?
@@ -24,8 +24,7 @@ public extension RecordingsMethods {
         }
     }
 
-    /// Lists recordings belonging to the account identified by `AccountSid`. Filter results by creation date, call,
-    /// conference, or soft-deletion status, and use `PageSize` and `PageToken` to control pagination.
+    /// Lists recordings belonging to the account identified by `AccountSid`. Filter results by creation date, call, conference, or soft-deletion status, and use `PageSize` and `PageToken` to control pagination.
     ///
     /// Retrieve a list of recordings belonging to the account used to make the request
     ///
@@ -62,11 +61,7 @@ public extension RecordingsMethods {
     ///   50, and the maximum is 1000.
     /// - page: The page index. This value is simply for client state.
     /// - pageToken: The page token. This is provided by the API.
-    static func listRecordings(
-        config: ClientConfig,
-        options: ListRecordingsOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ListRecordingsResponse {
+    public static func listRecordings(config: ClientConfig, options: ListRecordingsOptions, requestOptions: RequestOptions? = nil) async throws -> ListRecordingsResponse {
         try validateLength("AccountSid", options.accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", options.accountSid, sdkPatternc7cb941ab84b)
 
@@ -100,25 +95,16 @@ public extension RecordingsMethods {
             try validateRange("Page", Double(page), min: 0)
         }
 
-        return try await (sdkRequest(
-            "GET",
-            ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(options.accountSid)), "/Recordings.json"]
-                .joined(),
-            config: config,
-            query: [
-                SdkQueryParameter("DateCreated", value: options.dateCreated),
-                SdkQueryParameter("DateCreated<", value: options.dateCreated2),
-                SdkQueryParameter("DateCreated>", value: options.dateCreated3),
-                SdkQueryParameter("CallSid", value: options.callSid),
-                SdkQueryParameter("ConferenceSid", value: options.conferenceSid),
-                SdkQueryParameter("IncludeSoftDeleted", value: options.includeSoftDeleted),
-                SdkQueryParameter("PageSize", value: options.pageSize),
-                SdkQueryParameter("Page", value: options.page),
-                SdkQueryParameter("PageToken", value: options.pageToken),
-            ],
-            decoder: .json,
-            operationId: "listRecordings",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(options.accountSid)), "/Recordings.json"].joined(), config: config, query: [
+            SdkQueryParameter("DateCreated", value: options.dateCreated),
+            SdkQueryParameter("DateCreated<", value: options.dateCreated2),
+            SdkQueryParameter("DateCreated>", value: options.dateCreated3),
+            SdkQueryParameter("CallSid", value: options.callSid),
+            SdkQueryParameter("ConferenceSid", value: options.conferenceSid),
+            SdkQueryParameter("IncludeSoftDeleted", value: options.includeSoftDeleted),
+            SdkQueryParameter("PageSize", value: options.pageSize),
+            SdkQueryParameter("Page", value: options.page),
+            SdkQueryParameter("PageToken", value: options.pageToken),
+        ], decoder: .json, operationId: "listRecordings", options: requestOptions)).data
     }
 }

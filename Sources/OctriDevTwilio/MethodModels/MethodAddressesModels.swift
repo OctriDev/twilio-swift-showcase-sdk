@@ -7,7 +7,7 @@ import Foundation
     import FoundationNetworking
 #endif
 
-/// Canonical addresses operation model declarations
+// Canonical addresses operation model declarations
 public struct ListAddressesResponse: Codable {
     public var end: Int?
     public var firstPageUri: String?
@@ -32,50 +32,40 @@ public struct ListAddressesResponse: Codable {
     }
 
     init() {
-        (end, firstPageUri, nextPageUri, page, pageSize) = (nil, nil, nil, nil, nil)
-        (previousPageUri, start, uri, addresses) = (nil, nil, nil, nil)
+        (self.end, self.firstPageUri, self.nextPageUri, self.page, self.pageSize) = (nil, nil, nil, nil, nil)
+        (self.previousPageUri, self.start, self.uri, self.addresses) = (nil, nil, nil, nil)
     }
 }
 
-public extension ListAddressesResponse {
-    init(from decoder: Decoder) throws {
+extension ListAddressesResponse {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        end = try container.sdkDecodeIfPresent(.end)
-        firstPageUri = try container.sdkDecodeIfPresent(.firstPageUri)
-        nextPageUri = try container.sdkDecodeIfPresent(.nextPageUri)
-        page = try container.sdkDecodeIfPresent(.page)
-        pageSize = try container.sdkDecodeIfPresent(.pageSize)
-        previousPageUri = try container.sdkDecodeIfPresent(.previousPageUri)
-        start = try container.sdkDecodeIfPresent(.start)
-        uri = try container.sdkDecodeIfPresent(.uri)
-        addresses = try container.sdkDecodeIfPresent(.addresses)
-        if let value = firstPageUri {
+        self.end = try container.sdkDecodeIfPresent(.end)
+        self.firstPageUri = try container.sdkDecodeIfPresent(.firstPageUri)
+        self.nextPageUri = try container.sdkDecodeIfPresent(.nextPageUri)
+        self.page = try container.sdkDecodeIfPresent(.page)
+        self.pageSize = try container.sdkDecodeIfPresent(.pageSize)
+        self.previousPageUri = try container.sdkDecodeIfPresent(.previousPageUri)
+        self.start = try container.sdkDecodeIfPresent(.start)
+        self.uri = try container.sdkDecodeIfPresent(.uri)
+        self.addresses = try container.sdkDecodeIfPresent(.addresses)
+        if let value = self.firstPageUri {
             try sdkValidateUri("first_page_uri", value)
         }
-        if let value = nextPageUri {
+        if let value = self.nextPageUri {
             try sdkValidateUri("next_page_uri", value)
         }
-        if let value = previousPageUri {
+        if let value = self.previousPageUri {
             try sdkValidateUri("previous_page_uri", value)
         }
-        if let value = uri {
+        if let value = self.uri {
             try sdkValidateUri("uri", value)
         }
     }
 }
 
-public extension ListAddressesResponse {
-    init(
-        end: Int? = nil,
-        firstPageUri: String? = nil,
-        nextPageUri: String? = nil,
-        page: Int? = nil,
-        pageSize: Int? = nil,
-        previousPageUri: String? = nil,
-        start: Int? = nil,
-        uri: String? = nil,
-        addresses: [ApiV2010AccountAddress]? = nil
-    ) throws {
+extension ListAddressesResponse {
+    public init(end: Int? = nil, firstPageUri: String? = nil, nextPageUri: String? = nil, page: Int? = nil, pageSize: Int? = nil, previousPageUri: String? = nil, start: Int? = nil, uri: String? = nil, addresses: [ApiV2010AccountAddress]? = nil) throws {
         self.init()
         (self.end, self.firstPageUri) = (end, firstPageUri)
         (self.nextPageUri, self.page) = (nextPageUri, page)
