@@ -6,7 +6,7 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension SipDomainsCredentialListMappingsMethods {
+public extension SipDomainsCredentialListMappingsMethods {
     /// Create a CredentialListMapping resource for an account.
     ///
     /// - Parameters:
@@ -17,7 +17,13 @@ extension SipDomainsCredentialListMappingsMethods {
     ///   for which the CredentialList resource will be mapped.
     /// - credentialListSid: A 34 character string that uniquely identifies the
     ///   CredentialList resource to map to the SIP domain.
-    public static func createSipDomainsCredentialListMappings(config: ClientConfig, accountSid: String, domainSid: String, credentialListSid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountSipSipDomainSipCredentialListMapping {
+    static func createSipDomainsCredentialListMappings(
+        config: ClientConfig,
+        accountSid: String,
+        domainSid: String,
+        credentialListSid: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountSipSipDomainSipCredentialListMapping {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
@@ -29,6 +35,21 @@ extension SipDomainsCredentialListMappingsMethods {
 
         let requestBody = CreateSipDomainsCredentialListMappingsRequestBody(credentialListSid: credentialListSid)
 
-        return try (await sdkRequest("POST", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/SIP/Domains/", sdkEncodePathSegment(sdkWireString(domainSid)), "/CredentialListMappings.json"].joined(), config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "createSipDomainsCredentialListMappings", options: requestOptions)).data
+        return try await (sdkRequest(
+            "POST",
+            [
+                "/2010-04-01/Accounts/",
+                sdkEncodePathSegment(sdkWireString(accountSid)),
+                "/SIP/Domains/",
+                sdkEncodePathSegment(sdkWireString(domainSid)),
+                "/CredentialListMappings.json",
+            ].joined(),
+            config: config,
+            body: requestBody,
+            contentType: "application/x-www-form-urlencoded",
+            decoder: .json,
+            operationId: "createSipDomainsCredentialListMappings",
+            options: requestOptions
+        )).data
     }
 }

@@ -8,8 +8,9 @@ import Foundation
 #endif
 public enum RecordingsTranscriptionsMethods {}
 
-extension RecordingsTranscriptionsMethods {
-    /// Retrieves a transcription created from a recording. Use the account, recording, and transcription SIDs to identify it, then inspect its status and transcription text when available.
+public extension RecordingsTranscriptionsMethods {
+    /// Retrieves a transcription created from a recording. Use the account, recording, and transcription SIDs to
+    /// identify it, then inspect its status and transcription text when available.
     ///
     /// - Parameters:
     /// - accountSid: The SID of the
@@ -20,7 +21,13 @@ extension RecordingsTranscriptionsMethods {
     ///   the transcription to fetch.
     /// - sid: The Twilio-provided string that uniquely identifies the Transcription
     ///   resource to fetch.
-    public static func fetchRecordingsTranscriptions(config: ClientConfig, accountSid: String, recordingSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountRecordingRecordingTranscription {
+    static func fetchRecordingsTranscriptions(
+        config: ClientConfig,
+        accountSid: String,
+        recordingSid: String,
+        sid: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountRecordingRecordingTranscription {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
@@ -30,6 +37,21 @@ extension RecordingsTranscriptionsMethods {
         try validateLength("Sid", sid, min: 34, max: 34)
         try sdkValidatePattern("Sid", sid, sdkPatterndb618e54c931)
 
-        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Recordings/", sdkEncodePathSegment(sdkWireString(recordingSid)), "/Transcriptions/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, decoder: .json, operationId: "fetchRecordingsTranscriptions", options: requestOptions)).data
+        return try await (sdkRequest(
+            "GET",
+            [
+                "/2010-04-01/Accounts/",
+                sdkEncodePathSegment(sdkWireString(accountSid)),
+                "/Recordings/",
+                sdkEncodePathSegment(sdkWireString(recordingSid)),
+                "/Transcriptions/",
+                sdkEncodePathSegment(sdkWireString(sid)),
+                ".json",
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "fetchRecordingsTranscriptions",
+            options: requestOptions
+        )).data
     }
 }

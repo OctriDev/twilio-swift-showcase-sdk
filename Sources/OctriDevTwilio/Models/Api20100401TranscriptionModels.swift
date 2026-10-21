@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Api20100401Transcription domain models
+/// Api20100401Transcription domain models
 /// Typed representation of the `ApiV2010AccountTranscription` API schema.
 public struct ApiV2010AccountTranscription: Codable {
     /// The SID of the Account that created the Transcription resource.
@@ -51,45 +51,59 @@ public struct ApiV2010AccountTranscription: Codable {
     }
 
     init() {
-        (self.accountSid, self.apiVersion, self.dateCreated, self.dateUpdated, self.duration) = (nil, nil, nil, nil, nil)
-        (self.price, self.priceUnit, self.recordingSid, self.sid, self.status) = (nil, nil, nil, nil, nil)
-        (self.transcriptionText, self.type, self.uri) = (nil, nil, nil)
+        (accountSid, apiVersion, dateCreated, dateUpdated, duration) = (nil, nil, nil, nil, nil)
+        (price, priceUnit, recordingSid, sid, status) = (nil, nil, nil, nil, nil)
+        (transcriptionText, type, uri) = (nil, nil, nil)
     }
 }
 
-extension ApiV2010AccountTranscription {
-    public init(from decoder: Decoder) throws {
+public extension ApiV2010AccountTranscription {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.accountSid = try container.sdkDecodeIfPresent(.accountSid)
-        self.apiVersion = try container.sdkDecodeIfPresent(.apiVersion)
-        self.dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
-        self.dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
-        self.duration = try container.sdkDecodeIfPresent(.duration)
-        self.price = try container.sdkDecodeIfPresent(.price)
-        self.priceUnit = try container.sdkDecodeIfPresent(.priceUnit)
-        self.recordingSid = try container.sdkDecodeIfPresent(.recordingSid)
-        self.sid = try container.sdkDecodeIfPresent(.sid)
-        self.status = try container.sdkDecodeIfPresent(.status)
-        self.transcriptionText = try container.sdkDecodeIfPresent(.transcriptionText)
-        self.type = try container.sdkDecodeIfPresent(.type)
-        self.uri = try container.sdkDecodeIfPresent(.uri)
-        if let value = self.accountSid {
+        accountSid = try container.sdkDecodeIfPresent(.accountSid)
+        apiVersion = try container.sdkDecodeIfPresent(.apiVersion)
+        dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
+        dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
+        duration = try container.sdkDecodeIfPresent(.duration)
+        price = try container.sdkDecodeIfPresent(.price)
+        priceUnit = try container.sdkDecodeIfPresent(.priceUnit)
+        recordingSid = try container.sdkDecodeIfPresent(.recordingSid)
+        sid = try container.sdkDecodeIfPresent(.sid)
+        status = try container.sdkDecodeIfPresent(.status)
+        transcriptionText = try container.sdkDecodeIfPresent(.transcriptionText)
+        type = try container.sdkDecodeIfPresent(.type)
+        uri = try container.sdkDecodeIfPresent(.uri)
+        if let value = accountSid {
             try validateLength("account_sid", value, min: 34, max: 34)
             try sdkValidatePattern("account_sid", value, sdkPatternc7cb941ab84b)
         }
-        if let value = self.recordingSid {
+        if let value = recordingSid {
             try validateLength("recording_sid", value, min: 34, max: 34)
             try sdkValidatePattern("recording_sid", value, sdkPatternfad3f05341a2)
         }
-        if let value = self.sid {
+        if let value = sid {
             try validateLength("sid", value, min: 34, max: 34)
             try sdkValidatePattern("sid", value, sdkPatterndb618e54c931)
         }
     }
 }
 
-extension ApiV2010AccountTranscription {
-    public init(accountSid: String? = nil, apiVersion: String? = nil, dateCreated: String? = nil, dateUpdated: String? = nil, duration: String? = nil, price: Double? = nil, priceUnit: String? = nil, recordingSid: String? = nil, sid: String? = nil, status: TranscriptionEnumStatus? = nil, transcriptionText: String? = nil, type: String? = nil, uri: String? = nil) throws {
+public extension ApiV2010AccountTranscription {
+    init(
+        accountSid: String? = nil,
+        apiVersion: String? = nil,
+        dateCreated: String? = nil,
+        dateUpdated: String? = nil,
+        duration: String? = nil,
+        price: Double? = nil,
+        priceUnit: String? = nil,
+        recordingSid: String? = nil,
+        sid: String? = nil,
+        status: TranscriptionEnumStatus? = nil,
+        transcriptionText: String? = nil,
+        type: String? = nil,
+        uri: String? = nil
+    ) throws {
         self.init()
         (self.accountSid, self.apiVersion) = (accountSid, apiVersion)
         (self.dateCreated, self.dateUpdated) = (dateCreated, dateUpdated)
@@ -117,14 +131,17 @@ extension ApiV2010AccountTranscription {
 public struct TranscriptionEnumStatus: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let inProgress = TranscriptionEnumStatus(rawValue: "in-progress")
     public static let completed = TranscriptionEnumStatus(rawValue: "completed")
     public static let failed = TranscriptionEnumStatus(rawValue: "failed")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

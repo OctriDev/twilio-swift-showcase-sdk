@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension NotificationsMethods {
-    public struct ListNotificationsOptions: Codable {
+public extension NotificationsMethods {
+    struct ListNotificationsOptions: Codable {
         public var accountSid: String
         public var log: Int?
         public var messageDate: String?
@@ -22,7 +22,8 @@ extension NotificationsMethods {
         }
     }
 
-    /// Lists notifications belonging to an account. Filter results by log level or message date, and use the paging parameters to navigate the results. The response contains notification records and page metadata.
+    /// Lists notifications belonging to an account. Filter results by log level or message date, and use the paging
+    /// parameters to navigate the results. The response contains notification records and page metadata.
     ///
     /// Retrieve a list of notifications belonging to the account used to make the request
     ///
@@ -49,7 +50,11 @@ extension NotificationsMethods {
     ///   50, and the maximum is 1000.
     /// - page: The page index. This value is simply for client state.
     /// - pageToken: The page token. This is provided by the API.
-    public static func listNotifications(config: ClientConfig, options: ListNotificationsOptions, requestOptions: RequestOptions? = nil) async throws -> ListNotificationsResponse {
+    static func listNotifications(
+        config: ClientConfig,
+        options: ListNotificationsOptions,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ListNotificationsResponse {
         try validateLength("AccountSid", options.accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", options.accountSid, sdkPatternc7cb941ab84b)
 
@@ -73,14 +78,23 @@ extension NotificationsMethods {
             try validateRange("Page", Double(page), min: 0)
         }
 
-        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(options.accountSid)), "/Notifications.json"].joined(), config: config, query: [
-            SdkQueryParameter("Log", value: options.log),
-            SdkQueryParameter("MessageDate", value: options.messageDate),
-            SdkQueryParameter("MessageDate<", value: options.messageDate2),
-            SdkQueryParameter("MessageDate>", value: options.messageDate3),
-            SdkQueryParameter("PageSize", value: options.pageSize),
-            SdkQueryParameter("Page", value: options.page),
-            SdkQueryParameter("PageToken", value: options.pageToken),
-        ], decoder: .json, operationId: "listNotifications", options: requestOptions)).data
+        return try await (sdkRequest(
+            "GET",
+            ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(options.accountSid)), "/Notifications.json"]
+                .joined(),
+            config: config,
+            query: [
+                SdkQueryParameter("Log", value: options.log),
+                SdkQueryParameter("MessageDate", value: options.messageDate),
+                SdkQueryParameter("MessageDate<", value: options.messageDate2),
+                SdkQueryParameter("MessageDate>", value: options.messageDate3),
+                SdkQueryParameter("PageSize", value: options.pageSize),
+                SdkQueryParameter("Page", value: options.page),
+                SdkQueryParameter("PageToken", value: options.pageToken),
+            ],
+            decoder: .json,
+            operationId: "listNotifications",
+            options: requestOptions
+        )).data
     }
 }

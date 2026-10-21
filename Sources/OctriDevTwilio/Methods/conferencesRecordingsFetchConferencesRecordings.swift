@@ -6,8 +6,9 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ConferencesRecordingsMethods {
-    /// Retrieves a specific recording associated with a conference. Provide the account, conference, and recording identifiers to identify the recording resource.
+public extension ConferencesRecordingsMethods {
+    /// Retrieves a specific recording associated with a conference. Provide the account, conference, and recording
+    /// identifiers to identify the recording resource.
     ///
     /// Fetch an instance of a recording for a call
     ///
@@ -19,7 +20,13 @@ extension ConferencesRecordingsMethods {
     ///   associated with the recording to fetch.
     /// - sid: The Twilio-provided string that uniquely identifies the Conference
     ///   Recording resource to fetch.
-    public static func fetchConferencesRecordings(config: ClientConfig, accountSid: String, conferenceSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountConferenceConferenceRecording {
+    static func fetchConferencesRecordings(
+        config: ClientConfig,
+        accountSid: String,
+        conferenceSid: String,
+        sid: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountConferenceConferenceRecording {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
@@ -29,6 +36,21 @@ extension ConferencesRecordingsMethods {
         try validateLength("Sid", sid, min: 34, max: 34)
         try sdkValidatePattern("Sid", sid, sdkPatternfad3f05341a2)
 
-        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Conferences/", sdkEncodePathSegment(sdkWireString(conferenceSid)), "/Recordings/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, decoder: .json, operationId: "fetchConferencesRecordings", options: requestOptions)).data
+        return try await (sdkRequest(
+            "GET",
+            [
+                "/2010-04-01/Accounts/",
+                sdkEncodePathSegment(sdkWireString(accountSid)),
+                "/Conferences/",
+                sdkEncodePathSegment(sdkWireString(conferenceSid)),
+                "/Recordings/",
+                sdkEncodePathSegment(sdkWireString(sid)),
+                ".json",
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "fetchConferencesRecordings",
+            options: requestOptions
+        )).data
     }
 }

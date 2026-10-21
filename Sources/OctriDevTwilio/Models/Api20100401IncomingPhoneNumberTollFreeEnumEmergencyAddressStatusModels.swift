@@ -3,23 +3,31 @@
 
 import Foundation
 
-// Api20100401IncomingPhoneNumberTollFree domain models
+/// Api20100401IncomingPhoneNumberTollFree domain models
 /// The status of address registration with emergency services. A registered emergency address will be used
 /// during handling of emergency calls from this number.
-public struct IncomingPhoneNumberTollFreeEnumEmergencyAddressStatus: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct IncomingPhoneNumberTollFreeEnumEmergencyAddressStatus: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let registered = IncomingPhoneNumberTollFreeEnumEmergencyAddressStatus(rawValue: "registered")
     public static let unregistered = IncomingPhoneNumberTollFreeEnumEmergencyAddressStatus(rawValue: "unregistered")
-    public static let pendingRegistration = IncomingPhoneNumberTollFreeEnumEmergencyAddressStatus(rawValue: "pending-registration")
-    public static let registrationFailure = IncomingPhoneNumberTollFreeEnumEmergencyAddressStatus(rawValue: "registration-failure")
-    public static let pendingUnregistration = IncomingPhoneNumberTollFreeEnumEmergencyAddressStatus(rawValue: "pending-unregistration")
-    public static let unregistrationFailure = IncomingPhoneNumberTollFreeEnumEmergencyAddressStatus(rawValue: "unregistration-failure")
+    public static let pendingRegistration =
+        IncomingPhoneNumberTollFreeEnumEmergencyAddressStatus(rawValue: "pending-registration")
+    public static let registrationFailure =
+        IncomingPhoneNumberTollFreeEnumEmergencyAddressStatus(rawValue: "registration-failure")
+    public static let pendingUnregistration =
+        IncomingPhoneNumberTollFreeEnumEmergencyAddressStatus(rawValue: "pending-unregistration")
+    public static let unregistrationFailure =
+        IncomingPhoneNumberTollFreeEnumEmergencyAddressStatus(rawValue: "unregistration-failure")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

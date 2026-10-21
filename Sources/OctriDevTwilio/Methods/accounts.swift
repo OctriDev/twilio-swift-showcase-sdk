@@ -8,21 +8,34 @@ import Foundation
 #endif
 public enum AccountsMethods {}
 
-extension AccountsMethods {
-    /// Retrieves a specific account by its Account SID. Supply `Sid` as a 34-character account identifier beginning with `AC` followed by 32 hexadecimal characters.
+public extension AccountsMethods {
+    /// Retrieves a specific account by its Account SID. Supply `Sid` as a 34-character account identifier beginning
+    /// with `AC` followed by 32 hexadecimal characters.
     ///
     /// Fetch the account specified by the provided Account Sid
     ///
     /// - Parameters:
     /// - sid: The Account Sid that uniquely identifies the account to fetch
-    public static func fetchAccounts(config: ClientConfig, sid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010Account {
+    static func fetchAccounts(
+        config: ClientConfig,
+        sid: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010Account {
         try validateLength("Sid", sid, min: 34, max: 34)
         try sdkValidatePattern("Sid", sid, sdkPatternc7cb941ab84b)
 
-        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, decoder: .json, operationId: "fetchAccounts", options: requestOptions)).data
+        return try await (sdkRequest(
+            "GET",
+            ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "fetchAccounts",
+            options: requestOptions
+        )).data
     }
 
-    /// Updates properties of a specific account. Supply `FriendlyName`, `Status`, or both to change the account; a 409 response indicates that another request modified the account concurrently.
+    /// Updates properties of a specific account. Supply `FriendlyName`, `Status`, or both to change the account; a 409
+    /// response indicates that another request modified the account concurrently.
     ///
     /// Modify the properties of a given Account
     ///
@@ -31,12 +44,27 @@ extension AccountsMethods {
     /// - friendlyName: Update the human-readable description of this Account
     /// - status: The status of this account. Usually `active`, but can be
     ///   `suspended` or `closed`.
-    public static func updateAccounts(config: ClientConfig, sid: String, friendlyName: String? = nil, status: AccountEnumStatus? = nil, requestOptions: RequestOptions? = nil) async throws -> ApiV2010Account {
+    static func updateAccounts(
+        config: ClientConfig,
+        sid: String,
+        friendlyName: String? = nil,
+        status: AccountEnumStatus? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010Account {
         try validateLength("Sid", sid, min: 34, max: 34)
         try sdkValidatePattern("Sid", sid, sdkPatternc7cb941ab84b)
 
         let requestBody = UpdateAccountsRequestBody(friendlyName: friendlyName, status: status)
 
-        return try (await sdkRequest("POST", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "updateAccounts", options: requestOptions)).data
+        return try await (sdkRequest(
+            "POST",
+            ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(),
+            config: config,
+            body: requestBody,
+            contentType: "application/x-www-form-urlencoded",
+            decoder: .json,
+            operationId: "updateAccounts",
+            options: requestOptions
+        )).data
     }
 }

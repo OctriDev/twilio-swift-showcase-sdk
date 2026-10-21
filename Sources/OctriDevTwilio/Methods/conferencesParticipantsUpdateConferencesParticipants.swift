@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ConferencesParticipantsMethods {
-    public struct UpdateConferencesParticipantsOptions: Codable {
+public extension ConferencesParticipantsMethods {
+    struct UpdateConferencesParticipantsOptions: Codable {
         public var accountSid: String
         public var conferenceSid: String
         public var callSid: String
@@ -31,7 +31,9 @@ extension ConferencesParticipantsMethods {
         }
     }
 
-    /// Updates configurable properties of a participant in a conference. Use `AccountSid`, `ConferenceSid`, and `CallSid` to identify the participant, then supply the form fields for the settings you want to change. If `Coaching` is true, provide `CallSidToCoach`.
+    /// Updates configurable properties of a participant in a conference. Use `AccountSid`, `ConferenceSid`, and
+    /// `CallSid` to identify the participant, then supply the form fields for the settings you want to change. If
+    /// `Coaching` is true, provide `CallSidToCoach`.
     ///
     /// Update the properties of the participant
     ///
@@ -84,7 +86,11 @@ extension ConferencesParticipantsMethods {
     /// - callSidToCoach: The SID of the participant who is being `coached`. The
     ///   participant being coached is the only participant who can hear the
     ///   participant who is `coaching`.
-    public static func updateConferencesParticipants(config: ClientConfig, options: UpdateConferencesParticipantsOptions, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountConferenceParticipant {
+    static func updateConferencesParticipants(
+        config: ClientConfig,
+        options: UpdateConferencesParticipantsOptions,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountConferenceParticipant {
         try validateLength("AccountSid", options.accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", options.accountSid, sdkPatternc7cb941ab84b)
 
@@ -110,6 +116,23 @@ extension ConferencesParticipantsMethods {
 
         let requestBody = UpdateConferencesParticipantsRequestBody(options: options)
 
-        return try (await sdkRequest("POST", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(options.accountSid)), "/Conferences/", sdkEncodePathSegment(sdkWireString(options.conferenceSid)), "/Participants/", sdkEncodePathSegment(sdkWireString(options.callSid)), ".json"].joined(), config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "updateConferencesParticipants", options: requestOptions)).data
+        return try await (sdkRequest(
+            "POST",
+            [
+                "/2010-04-01/Accounts/",
+                sdkEncodePathSegment(sdkWireString(options.accountSid)),
+                "/Conferences/",
+                sdkEncodePathSegment(sdkWireString(options.conferenceSid)),
+                "/Participants/",
+                sdkEncodePathSegment(sdkWireString(options.callSid)),
+                ".json",
+            ].joined(),
+            config: config,
+            body: requestBody,
+            contentType: "application/x-www-form-urlencoded",
+            decoder: .json,
+            operationId: "updateConferencesParticipants",
+            options: requestOptions
+        )).data
     }
 }

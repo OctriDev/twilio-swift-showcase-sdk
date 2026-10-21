@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension ConferencesParticipantsMethods {
-    public struct ListConferencesParticipantsOptions: Codable {
+public extension ConferencesParticipantsMethods {
+    struct ListConferencesParticipantsOptions: Codable {
         public var accountSid: String
         public var conferenceSid: String
         public var muted: Bool?
@@ -23,7 +23,8 @@ extension ConferencesParticipantsMethods {
         }
     }
 
-    /// Lists participants in a specific conference. Use `Muted`, `Hold`, and `Coaching` to filter participants by their current settings. Use `PageSize`, `Page`, and `PageToken` to paginate the results.
+    /// Lists participants in a specific conference. Use `Muted`, `Hold`, and `Coaching` to filter participants by their
+    /// current settings. Use `PageSize`, `Page`, and `PageToken` to paginate the results.
     ///
     /// Retrieve a list of participants belonging to the account used to make the request
     ///
@@ -42,7 +43,11 @@ extension ConferencesParticipantsMethods {
     ///   50, and the maximum is 1000.
     /// - page: The page index. This value is simply for client state.
     /// - pageToken: The page token. This is provided by the API.
-    public static func listConferencesParticipants(config: ClientConfig, options: ListConferencesParticipantsOptions, requestOptions: RequestOptions? = nil) async throws -> ListConferencesParticipantsResponse {
+    static func listConferencesParticipants(
+        config: ClientConfig,
+        options: ListConferencesParticipantsOptions,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ListConferencesParticipantsResponse {
         try validateLength("AccountSid", options.accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", options.accountSid, sdkPatternc7cb941ab84b)
 
@@ -57,13 +62,27 @@ extension ConferencesParticipantsMethods {
             try validateRange("Page", Double(page), min: 0)
         }
 
-        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(options.accountSid)), "/Conferences/", sdkEncodePathSegment(sdkWireString(options.conferenceSid)), "/Participants.json"].joined(), config: config, query: [
-            SdkQueryParameter("Muted", value: options.muted),
-            SdkQueryParameter("Hold", value: options.hold),
-            SdkQueryParameter("Coaching", value: options.coaching),
-            SdkQueryParameter("PageSize", value: options.pageSize),
-            SdkQueryParameter("Page", value: options.page),
-            SdkQueryParameter("PageToken", value: options.pageToken),
-        ], decoder: .json, operationId: "listConferencesParticipants", options: requestOptions)).data
+        return try await (sdkRequest(
+            "GET",
+            [
+                "/2010-04-01/Accounts/",
+                sdkEncodePathSegment(sdkWireString(options.accountSid)),
+                "/Conferences/",
+                sdkEncodePathSegment(sdkWireString(options.conferenceSid)),
+                "/Participants.json",
+            ].joined(),
+            config: config,
+            query: [
+                SdkQueryParameter("Muted", value: options.muted),
+                SdkQueryParameter("Hold", value: options.hold),
+                SdkQueryParameter("Coaching", value: options.coaching),
+                SdkQueryParameter("PageSize", value: options.pageSize),
+                SdkQueryParameter("Page", value: options.page),
+                SdkQueryParameter("PageToken", value: options.pageToken),
+            ],
+            decoder: .json,
+            operationId: "listConferencesParticipants",
+            options: requestOptions
+        )).data
     }
 }

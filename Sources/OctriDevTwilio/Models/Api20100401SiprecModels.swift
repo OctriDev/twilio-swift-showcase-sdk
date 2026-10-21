@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Api20100401Siprec domain models
+/// Api20100401Siprec domain models
 /// Typed representation of the `ApiV2010AccountCallSiprec` API schema.
 public struct ApiV2010AccountCallSiprec: Codable {
     /// The SID of the Siprec resource.
@@ -33,38 +33,46 @@ public struct ApiV2010AccountCallSiprec: Codable {
     }
 
     init() {
-        (self.sid, self.accountSid, self.callSid, self.name, self.status) = (nil, nil, nil, nil, nil)
-        (self.dateUpdated, self.uri) = (nil, nil)
+        (sid, accountSid, callSid, name, status) = (nil, nil, nil, nil, nil)
+        (dateUpdated, uri) = (nil, nil)
     }
 }
 
-extension ApiV2010AccountCallSiprec {
-    public init(from decoder: Decoder) throws {
+public extension ApiV2010AccountCallSiprec {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.sid = try container.sdkDecodeIfPresent(.sid)
-        self.accountSid = try container.sdkDecodeIfPresent(.accountSid)
-        self.callSid = try container.sdkDecodeIfPresent(.callSid)
-        self.name = try container.sdkDecodeIfPresent(.name)
-        self.status = try container.sdkDecodeIfPresent(.status)
-        self.dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
-        self.uri = try container.sdkDecodeIfPresent(.uri)
-        if let value = self.sid {
+        sid = try container.sdkDecodeIfPresent(.sid)
+        accountSid = try container.sdkDecodeIfPresent(.accountSid)
+        callSid = try container.sdkDecodeIfPresent(.callSid)
+        name = try container.sdkDecodeIfPresent(.name)
+        status = try container.sdkDecodeIfPresent(.status)
+        dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
+        uri = try container.sdkDecodeIfPresent(.uri)
+        if let value = sid {
             try validateLength("sid", value, min: 34, max: 34)
             try sdkValidatePattern("sid", value, sdkPattern0745fbf7c526)
         }
-        if let value = self.accountSid {
+        if let value = accountSid {
             try validateLength("account_sid", value, min: 34, max: 34)
             try sdkValidatePattern("account_sid", value, sdkPatternc7cb941ab84b)
         }
-        if let value = self.callSid {
+        if let value = callSid {
             try validateLength("call_sid", value, min: 34, max: 34)
             try sdkValidatePattern("call_sid", value, sdkPattern25b2d94fcc27)
         }
     }
 }
 
-extension ApiV2010AccountCallSiprec {
-    public init(sid: String? = nil, accountSid: String? = nil, callSid: String? = nil, name: String? = nil, status: SiprecEnumStatus? = nil, dateUpdated: String? = nil, uri: String? = nil) throws {
+public extension ApiV2010AccountCallSiprec {
+    init(
+        sid: String? = nil,
+        accountSid: String? = nil,
+        callSid: String? = nil,
+        name: String? = nil,
+        status: SiprecEnumStatus? = nil,
+        dateUpdated: String? = nil,
+        uri: String? = nil
+    ) throws {
         self.init()
         (self.sid, self.accountSid) = (sid, accountSid)
         (self.callSid, self.name) = (callSid, name)
@@ -89,13 +97,16 @@ extension ApiV2010AccountCallSiprec {
 public struct SiprecEnumStatus: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let inProgress = SiprecEnumStatus(rawValue: "in-progress")
     public static let stopped = SiprecEnumStatus(rawValue: "stopped")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -108,12 +119,15 @@ public struct SiprecEnumStatus: RawRepresentable, Hashable, Codable, Sendable, S
 public struct SiprecEnumUpdateStatus: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let stopped = SiprecEnumUpdateStatus(rawValue: "stopped")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -126,14 +140,17 @@ public struct SiprecEnumUpdateStatus: RawRepresentable, Hashable, Codable, Senda
 public struct SiprecEnumTrack: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let inboundTrack = SiprecEnumTrack(rawValue: "inbound_track")
     public static let outboundTrack = SiprecEnumTrack(rawValue: "outbound_track")
     public static let bothTracks = SiprecEnumTrack(rawValue: "both_tracks")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
