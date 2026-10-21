@@ -19,14 +19,7 @@ public enum CallsUserDefinedMessagesMethods {
     /// - content: The User Defined Message in the form of URL-encoded JSON string.
     /// - idempotencyKey: A unique string value to identify API call. This should be
     ///   a unique string value per API call and can be a randomly generated.
-    public static func createCallsUserDefinedMessages(
-        config: ClientConfig,
-        accountSid: String,
-        callSid: String,
-        content: String,
-        idempotencyKey: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountCallUserDefinedMessage {
+    public static func createCallsUserDefinedMessages(config: ClientConfig, accountSid: String, callSid: String, content: String, idempotencyKey: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountCallUserDefinedMessage {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
@@ -35,21 +28,6 @@ public enum CallsUserDefinedMessagesMethods {
 
         let requestBody = CreateCallsUserDefinedMessagesRequestBody(content: content, idempotencyKey: idempotencyKey)
 
-        return try await (sdkRequest(
-            "POST",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(accountSid)),
-                "/Calls/",
-                sdkEncodePathSegment(sdkWireString(callSid)),
-                "/UserDefinedMessages.json",
-            ].joined(),
-            config: config,
-            body: requestBody,
-            contentType: "application/x-www-form-urlencoded",
-            decoder: .json,
-            operationId: "createCallsUserDefinedMessages",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("POST", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Calls/", sdkEncodePathSegment(sdkWireString(callSid)), "/UserDefinedMessages.json"].joined(), config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "createCallsUserDefinedMessages", options: requestOptions)).data
     }
 }

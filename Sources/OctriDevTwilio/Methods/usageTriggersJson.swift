@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension UsageTriggersMethods {
-    struct CreateUsageTriggersOptions: Codable {
+extension UsageTriggersMethods {
+    public struct CreateUsageTriggersOptions: Codable {
         public var accountSid: String
         public var callbackUrl: String
         public var triggerValue: String
@@ -25,9 +25,7 @@ public extension UsageTriggersMethods {
         }
     }
 
-    /// Creates a usage trigger for an account to monitor a usage category and value. Supply `CallbackUrl`,
-    /// `TriggerValue`, and `UsageCategory`; choose `TriggerBy` and `Recurring` to configure what the trigger monitors
-    /// and how often it can fire. The callback method defaults to `POST` when omitted.
+    /// Creates a usage trigger for an account to monitor a usage category and value. Supply `CallbackUrl`, `TriggerValue`, and `UsageCategory`; choose `TriggerBy` and `Recurring` to configure what the trigger monitors and how often it can fire. The callback method defaults to `POST` when omitted.
     ///
     /// Create a new UsageTrigger
     ///
@@ -59,11 +57,7 @@ public extension UsageTriggersMethods {
     ///   in the [UsageRecords
     ///   documentation](https://www.twilio.com/docs/usage/api/usage-record#usage-coun
     ///   t-price).
-    static func createUsageTriggers(
-        config: ClientConfig,
-        options: CreateUsageTriggersOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountUsageUsageTrigger {
+    public static func createUsageTriggers(config: ClientConfig, options: CreateUsageTriggersOptions, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountUsageUsageTrigger {
         try validateLength("AccountSid", options.accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", options.accountSid, sdkPatternc7cb941ab84b)
 
@@ -71,16 +65,6 @@ public extension UsageTriggersMethods {
 
         let requestBody = CreateUsageTriggersRequestBody(options: options)
 
-        return try await (sdkRequest(
-            "POST",
-            ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(options.accountSid)), "/Usage/Triggers.json"]
-                .joined(),
-            config: config,
-            body: requestBody,
-            contentType: "application/x-www-form-urlencoded",
-            decoder: .json,
-            operationId: "createUsageTriggers",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("POST", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(options.accountSid)), "/Usage/Triggers.json"].joined(), config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "createUsageTriggers", options: requestOptions)).data
     }
 }

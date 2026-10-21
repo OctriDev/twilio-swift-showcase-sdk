@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Api20100401Key domain models
+// Api20100401Key domain models
 /// Typed representation of the `ApiV2010AccountKey` API schema.
 public struct ApiV2010AccountKey: Codable {
     /// The unique string that that we created to identify the Key resource.
@@ -23,31 +23,26 @@ public struct ApiV2010AccountKey: Codable {
     }
 
     init() {
-        (sid, friendlyName, dateCreated, dateUpdated) = (nil, nil, nil, nil)
+        (self.sid, self.friendlyName, self.dateCreated, self.dateUpdated) = (nil, nil, nil, nil)
     }
 }
 
-public extension ApiV2010AccountKey {
-    init(from decoder: Decoder) throws {
+extension ApiV2010AccountKey {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        sid = try container.sdkDecodeIfPresent(.sid)
-        friendlyName = try container.sdkDecodeIfPresent(.friendlyName)
-        dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
-        dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
-        if let value = sid {
+        self.sid = try container.sdkDecodeIfPresent(.sid)
+        self.friendlyName = try container.sdkDecodeIfPresent(.friendlyName)
+        self.dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
+        self.dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
+        if let value = self.sid {
             try validateLength("sid", value, min: 34, max: 34)
             try sdkValidatePattern("sid", value, sdkPatternba6ad770c6a8)
         }
     }
 }
 
-public extension ApiV2010AccountKey {
-    init(
-        sid: String? = nil,
-        friendlyName: String? = nil,
-        dateCreated: String? = nil,
-        dateUpdated: String? = nil
-    ) throws {
+extension ApiV2010AccountKey {
+    public init(sid: String? = nil, friendlyName: String? = nil, dateCreated: String? = nil, dateUpdated: String? = nil) throws {
         self.init()
         (self.sid, self.friendlyName) = (sid, friendlyName)
         (self.dateCreated, self.dateUpdated) = (dateCreated, dateUpdated)

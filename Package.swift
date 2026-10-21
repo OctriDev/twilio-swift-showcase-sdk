@@ -5,15 +5,15 @@
 
 import PackageDescription
 
-/// HTTP transport: URLSession (Foundation)
+// HTTP transport: URLSession (Foundation)
 let package = Package(
     name: "OctriDevTwilio",
     platforms: [.macOS(.v12), .iOS(.v15), .tvOS(.v15), .watchOS(.v8)],
     products: [
-        .library(name: "OctriDevTwilio", targets: ["OctriDevTwilio"]),
+        .library(name: "OctriDevTwilio", targets: ["OctriDevTwilio"])
     ],
     targets: [
         .target(name: "OctriDevTwilio"),
-        .testTarget(name: "OctriDevTwilioTests", dependencies: ["OctriDevTwilio"]),
+        .testTarget(name: "OctriDevTwilioTests", dependencies: ["OctriDevTwilio"])
     ]
 )

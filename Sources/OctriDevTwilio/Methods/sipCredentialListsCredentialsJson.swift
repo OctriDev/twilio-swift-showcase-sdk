@@ -6,9 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension SipCredentialListsCredentialsMethods {
-    /// Lists the credentials in a specified SIP credential list. Use `PageSize`, `Page`, and `PageToken` to control
-    /// pagination through the results.
+extension SipCredentialListsCredentialsMethods {
+    /// Lists the credentials in a specified SIP credential list. Use `PageSize`, `Page`, and `PageToken` to control pagination through the results.
     ///
     /// Retrieve a list of credentials.
     ///
@@ -21,47 +20,25 @@ public extension SipCredentialListsCredentialsMethods {
     ///   50, and the maximum is 1000.
     /// - page: The page index. This value is simply for client state.
     /// - pageToken: The page token. This is provided by the API.
-    static func listSipCredentialListsCredentials(
-        config: ClientConfig,
-        accountSid: String,
-        credentialListSid: String,
-        pageSize: Int? = nil,
-        page: Int? = nil,
-        pageToken: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ListSipCredentialListsCredentialsResponse {
+    public static func listSipCredentialListsCredentials(config: ClientConfig, accountSid: String, credentialListSid: String, pageSize: Int? = nil, page: Int? = nil, pageToken: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ListSipCredentialListsCredentialsResponse {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
         try validateLength("CredentialListSid", credentialListSid, min: 34, max: 34)
         try sdkValidatePattern("CredentialListSid", credentialListSid, sdkPattern189973589bff)
 
-        if let pageSize {
+        if let pageSize = pageSize {
             try validateRange("PageSize", Double(pageSize), min: 1, max: 1000)
         }
 
-        if let page {
+        if let page = page {
             try validateRange("Page", Double(page), min: 0)
         }
 
-        return try await (sdkRequest(
-            "GET",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(accountSid)),
-                "/SIP/CredentialLists/",
-                sdkEncodePathSegment(sdkWireString(credentialListSid)),
-                "/Credentials.json",
-            ].joined(),
-            config: config,
-            query: [
-                SdkQueryParameter("PageSize", value: pageSize),
-                SdkQueryParameter("Page", value: page),
-                SdkQueryParameter("PageToken", value: pageToken),
-            ],
-            decoder: .json,
-            operationId: "listSipCredentialListsCredentials",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/SIP/CredentialLists/", sdkEncodePathSegment(sdkWireString(credentialListSid)), "/Credentials.json"].joined(), config: config, query: [
+            SdkQueryParameter("PageSize", value: pageSize),
+            SdkQueryParameter("Page", value: page),
+            SdkQueryParameter("PageToken", value: pageToken),
+        ], decoder: .json, operationId: "listSipCredentialListsCredentials", options: requestOptions)).data
     }
 }

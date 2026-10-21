@@ -8,9 +8,8 @@ import Foundation
 #endif
 public enum CallsStreamsMethods {}
 
-public extension CallsStreamsMethods {
-    /// Stops a Stream associated with a call. Set `Status` to `stopped`, and identify the Stream by its SID or the name
-    /// used when it was created.
+extension CallsStreamsMethods {
+    /// Stops a Stream associated with a call. Set `Status` to `stopped`, and identify the Stream by its SID or the name used when it was created.
     ///
     /// Stop a Stream using either the SID of the Stream resource or the `name` used when creating the resource
     ///
@@ -22,14 +21,7 @@ public extension CallsStreamsMethods {
     ///   [Call](https://www.twilio.com/docs/voice/api/call-resource) the Stream
     ///   resource is associated with.
     /// - sid: The SID or the `name` of the Stream resource to be stopped
-    static func updateCallsStreams(
-        config: ClientConfig,
-        accountSid: String,
-        callSid: String,
-        sid: String,
-        status: StreamEnumUpdateStatus,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountCallStream {
+    public static func updateCallsStreams(config: ClientConfig, accountSid: String, callSid: String, sid: String, status: StreamEnumUpdateStatus, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountCallStream {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
@@ -38,23 +30,6 @@ public extension CallsStreamsMethods {
 
         let requestBody = UpdateCallsStreamsRequestBody(status: status)
 
-        return try await (sdkRequest(
-            "POST",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(accountSid)),
-                "/Calls/",
-                sdkEncodePathSegment(sdkWireString(callSid)),
-                "/Streams/",
-                sdkEncodePathSegment(sdkWireString(sid)),
-                ".json",
-            ].joined(),
-            config: config,
-            body: requestBody,
-            contentType: "application/x-www-form-urlencoded",
-            decoder: .json,
-            operationId: "updateCallsStreams",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("POST", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Calls/", sdkEncodePathSegment(sdkWireString(callSid)), "/Streams/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "updateCallsStreams", options: requestOptions)).data
     }
 }

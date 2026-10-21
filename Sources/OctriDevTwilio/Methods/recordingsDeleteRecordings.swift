@@ -6,7 +6,7 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension RecordingsMethods {
+extension RecordingsMethods {
     /// Deletes a recording from an account. Use `AccountSid` and `Sid` to identify the account and recording to remove.
     ///
     /// Delete a recording from your account
@@ -17,31 +17,13 @@ public extension RecordingsMethods {
     ///   Recording resources to delete.
     /// - sid: The Twilio-provided string that uniquely identifies the Recording
     ///   resource to delete.
-    static func deleteRecordings(
-        config: ClientConfig,
-        accountSid: String,
-        sid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
+    public static func deleteRecordings(config: ClientConfig, accountSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
         try validateLength("Sid", sid, min: 34, max: 34)
         try sdkValidatePattern("Sid", sid, sdkPatternfad3f05341a2)
 
-        return try await (sdkRequest(
-            "DELETE",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(accountSid)),
-                "/Recordings/",
-                sdkEncodePathSegment(sdkWireString(sid)),
-                ".json",
-            ].joined(),
-            config: config,
-            decoder: .empty,
-            operationId: "deleteRecordings",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("DELETE", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Recordings/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, decoder: .empty, operationId: "deleteRecordings", options: requestOptions)).data
     }
 }

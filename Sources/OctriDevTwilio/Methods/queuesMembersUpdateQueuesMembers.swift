@@ -6,9 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension QueuesMembersMethods {
-    /// Dequeues a specific member and starts the call's execution at the supplied URL. Provide `Url` as the
-    /// destination, and use `Method` to choose whether request data is sent as form data or query parameters.
+extension QueuesMembersMethods {
+    /// Dequeues a specific member and starts the call's execution at the supplied URL. Provide `Url` as the destination, and use `Method` to choose whether request data is sent as form data or query parameters.
     ///
     /// Dequeue a member from a queue and have the member's call begin executing the TwiML document at that URL
     ///
@@ -23,15 +22,7 @@ public extension QueuesMembersMethods {
     /// - method: How to pass the update request data. Can be `GET` or `POST` and
     ///   the default is `POST`. `POST` sends the data as encoded form data and `GET`
     ///   sends the data as query parameters.
-    static func updateQueuesMembers(
-        config: ClientConfig,
-        accountSid: String,
-        queueSid: String,
-        callSid: String,
-        url: String,
-        method: UpdateQueuesMembersRequestBodyMethod? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountQueueMember {
+    public static func updateQueuesMembers(config: ClientConfig, accountSid: String, queueSid: String, callSid: String, url: String, method: UpdateQueuesMembersRequestBodyMethod? = nil, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountQueueMember {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
@@ -42,23 +33,6 @@ public extension QueuesMembersMethods {
 
         let requestBody = UpdateQueuesMembersRequestBody(url: url, method: method)
 
-        return try await (sdkRequest(
-            "POST",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(accountSid)),
-                "/Queues/",
-                sdkEncodePathSegment(sdkWireString(queueSid)),
-                "/Members/",
-                sdkEncodePathSegment(sdkWireString(callSid)),
-                ".json",
-            ].joined(),
-            config: config,
-            body: requestBody,
-            contentType: "application/x-www-form-urlencoded",
-            decoder: .json,
-            operationId: "updateQueuesMembers",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("POST", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Queues/", sdkEncodePathSegment(sdkWireString(queueSid)), "/Members/", sdkEncodePathSegment(sdkWireString(callSid)), ".json"].joined(), config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "updateQueuesMembers", options: requestOptions)).data
     }
 }

@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Api20100401NewKey domain models
+// Api20100401NewKey domain models
 /// Typed representation of the `ApiV2010AccountNewKey` API schema.
 public struct ApiV2010AccountNewKey: Codable {
     /// The unique string that that we created to identify the NewKey resource. You will use this as the basic-auth
@@ -29,33 +29,27 @@ public struct ApiV2010AccountNewKey: Codable {
     }
 
     init() {
-        (sid, friendlyName, dateCreated, dateUpdated, secret) = (nil, nil, nil, nil, nil)
+        (self.sid, self.friendlyName, self.dateCreated, self.dateUpdated, self.secret) = (nil, nil, nil, nil, nil)
     }
 }
 
-public extension ApiV2010AccountNewKey {
-    init(from decoder: Decoder) throws {
+extension ApiV2010AccountNewKey {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        sid = try container.sdkDecodeIfPresent(.sid)
-        friendlyName = try container.sdkDecodeIfPresent(.friendlyName)
-        dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
-        dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
-        secret = try container.sdkDecodeIfPresent(.secret)
-        if let value = sid {
+        self.sid = try container.sdkDecodeIfPresent(.sid)
+        self.friendlyName = try container.sdkDecodeIfPresent(.friendlyName)
+        self.dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
+        self.dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
+        self.secret = try container.sdkDecodeIfPresent(.secret)
+        if let value = self.sid {
             try validateLength("sid", value, min: 34, max: 34)
             try sdkValidatePattern("sid", value, sdkPatternba6ad770c6a8)
         }
     }
 }
 
-public extension ApiV2010AccountNewKey {
-    init(
-        sid: String? = nil,
-        friendlyName: String? = nil,
-        dateCreated: String? = nil,
-        dateUpdated: String? = nil,
-        secret: String? = nil
-    ) throws {
+extension ApiV2010AccountNewKey {
+    public init(sid: String? = nil, friendlyName: String? = nil, dateCreated: String? = nil, dateUpdated: String? = nil, secret: String? = nil) throws {
         self.init()
         (self.sid, self.friendlyName) = (sid, friendlyName)
         (self.dateCreated, self.dateUpdated) = (dateCreated, dateUpdated)

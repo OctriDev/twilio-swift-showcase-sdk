@@ -27,67 +27,35 @@ public class CallsNamespace {
         userDefinedMessageSubscriptions = CallsUserDefinedMessageSubscriptionsNamespace(config: config)
     }
 
-    /// Create a new outgoing call to phones, SIP-enabled endpoints or Twilio Client connections
-    public func create(
-        options: CallsMethods.CreateCallsOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountCall {
-        try await CallsMethods.createCalls(config: config, options: options, requestOptions: requestOptions)
+/// Create a new outgoing call to phones, SIP-enabled endpoints or Twilio Client connections
+    public func create(options: CallsMethods.CreateCallsOptions, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountCall {
+        return try await CallsMethods.createCalls(config: config, options: options, requestOptions: requestOptions)
     }
 
-    /// Lists calls made to and from a specified account. Filter the results by caller, recipient, parent call, status,
-    /// or start and end times. Use the page parameters to navigate through the results.
+/// Lists calls made to and from a specified account. Filter the results by caller, recipient, parent call, status, or start and end times. Use the page parameters to navigate through the results.
     ///
     /// Retrieves a collection of calls made to and from your account
-    public func list(
-        options: CallsMethods.ListCallsOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ListCallsResponse {
-        try await CallsMethods.listCalls(config: config, options: options, requestOptions: requestOptions)
+    public func list(options: CallsMethods.ListCallsOptions, requestOptions: RequestOptions? = nil) async throws -> ListCallsResponse {
+        return try await CallsMethods.listCalls(config: config, options: options, requestOptions: requestOptions)
     }
 
-    /// Delete a Call record from your account. Once the record is deleted, it will no longer appear in the API and
-    /// Account Portal logs.
-    public func delete(
-        accountSid: String,
-        sid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await CallsMethods.deleteCalls(
-            config: config,
-            accountSid: accountSid,
-            sid: sid,
-            requestOptions: requestOptions
-        )
+/// Delete a Call record from your account. Once the record is deleted, it will no longer appear in the API and Account Portal logs.
+    public func delete(accountSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await CallsMethods.deleteCalls(config: config, accountSid: accountSid, sid: sid, requestOptions: requestOptions)
     }
 
-    /// Retrieves a specific call from an account. Provide the account SID and call SID to identify the call whose
-    /// details you need. The response includes call status and timing information when available.
+/// Retrieves a specific call from an account. Provide the account SID and call SID to identify the call whose details you need. The response includes call status and timing information when available.
     ///
     /// Fetch the call specified by the provided Call SID
-    public func fetch(
-        accountSid: String,
-        sid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountCall {
-        try await CallsMethods.fetchCalls(
-            config: config,
-            accountSid: accountSid,
-            sid: sid,
-            requestOptions: requestOptions
-        )
+    public func fetch(accountSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountCall {
+        return try await CallsMethods.fetchCalls(config: config, accountSid: accountSid, sid: sid, requestOptions: requestOptions)
     }
 
-    /// Updates a call by redirecting it to new TwiML instructions or by terminating it. Provide either a `Url` to
-    /// retrieve instructions from or `Twiml` instructions directly; these fields are mutually exclusive. Use `Status`
-    /// to cancel or complete the call, or configure callback and request-method settings for a redirect.
+/// Updates a call by redirecting it to new TwiML instructions or by terminating it. Provide either a `Url` to retrieve instructions from or `Twiml` instructions directly; these fields are mutually exclusive. Use `Status` to cancel or complete the call, or configure callback and request-method settings for a redirect.
     ///
     /// Initiates a call redirect or terminates a call
-    public func update(
-        options: CallsMethods.UpdateCallsOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountCall {
-        try await CallsMethods.updateCalls(config: config, options: options, requestOptions: requestOptions)
+    public func update(options: CallsMethods.UpdateCallsOptions, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountCall {
+        return try await CallsMethods.updateCalls(config: config, options: options, requestOptions: requestOptions)
     }
 }
 
@@ -97,81 +65,32 @@ public class ConferencesRecordingsNamespace {
         self.config = config
     }
 
-    /// Lists recordings associated with a conference. Use the date filter to narrow results and the page parameters to
-    /// navigate through the conference's recordings.
+/// Lists recordings associated with a conference. Use the date filter to narrow results and the page parameters to navigate through the conference's recordings.
     ///
     /// Retrieve a list of recordings belonging to the call used to make the request
-    public func list(
-        options: ConferencesRecordingsMethods.ListConferencesRecordingsOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ListConferencesRecordingsResponse {
-        try await ConferencesRecordingsMethods.listConferencesRecordings(
-            config: config,
-            options: options,
-            requestOptions: requestOptions
-        )
+    public func list(options: ConferencesRecordingsMethods.ListConferencesRecordingsOptions, requestOptions: RequestOptions? = nil) async throws -> ListConferencesRecordingsResponse {
+        return try await ConferencesRecordingsMethods.listConferencesRecordings(config: config, options: options, requestOptions: requestOptions)
     }
 
-    /// Updates the status of a conference recording and, when pausing it, can control how the pause is recorded. Supply
-    /// `Status` to select the recording state; use `Twilio.CURRENT` as `Sid` to target the active recording.
+/// Updates the status of a conference recording and, when pausing it, can control how the pause is recorded. Supply `Status` to select the recording state; use `Twilio.CURRENT` as `Sid` to target the active recording.
     ///
-    /// Changes the status of the recording to paused, stopped, or in-progress. Note: To use `Twilio.CURRENT`, pass it
-    /// as recording sid.
-    public func update(
-        accountSid: String,
-        conferenceSid: String,
-        sid: String,
-        status: ConferenceRecordingEnumStatus,
-        pauseBehavior: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountConferenceConferenceRecording {
-        try await ConferencesRecordingsMethods.updateConferencesRecordings(
-            config: config,
-            accountSid: accountSid,
-            conferenceSid: conferenceSid,
-            sid: sid,
-            status: status,
-            pauseBehavior: pauseBehavior,
-            requestOptions: requestOptions
-        )
+    /// Changes the status of the recording to paused, stopped, or in-progress. Note: To use `Twilio.CURRENT`, pass it as recording sid.
+    public func update(accountSid: String, conferenceSid: String, sid: String, status: ConferenceRecordingEnumStatus, pauseBehavior: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountConferenceConferenceRecording {
+        return try await ConferencesRecordingsMethods.updateConferencesRecordings(config: config, accountSid: accountSid, conferenceSid: conferenceSid, sid: sid, status: status, pauseBehavior: pauseBehavior, requestOptions: requestOptions)
     }
 
-    /// Retrieves a specific recording associated with a conference. Provide the account, conference, and recording
-    /// identifiers to identify the recording resource.
+/// Retrieves a specific recording associated with a conference. Provide the account, conference, and recording identifiers to identify the recording resource.
     ///
     /// Fetch an instance of a recording for a call
-    public func fetch(
-        accountSid: String,
-        conferenceSid: String,
-        sid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountConferenceConferenceRecording {
-        try await ConferencesRecordingsMethods.fetchConferencesRecordings(
-            config: config,
-            accountSid: accountSid,
-            conferenceSid: conferenceSid,
-            sid: sid,
-            requestOptions: requestOptions
-        )
+    public func fetch(accountSid: String, conferenceSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountConferenceConferenceRecording {
+        return try await ConferencesRecordingsMethods.fetchConferencesRecordings(config: config, accountSid: accountSid, conferenceSid: conferenceSid, sid: sid, requestOptions: requestOptions)
     }
 
-    /// Deletes a recording associated with a conference from the account. Provide the account, conference, and
-    /// recording identifiers to specify the resource to remove.
+/// Deletes a recording associated with a conference from the account. Provide the account, conference, and recording identifiers to specify the resource to remove.
     ///
     /// Delete a recording from your account
-    public func delete(
-        accountSid: String,
-        conferenceSid: String,
-        sid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await ConferencesRecordingsMethods.deleteConferencesRecordings(
-            config: config,
-            accountSid: accountSid,
-            conferenceSid: conferenceSid,
-            sid: sid,
-            requestOptions: requestOptions
-        )
+    public func delete(accountSid: String, conferenceSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await ConferencesRecordingsMethods.deleteConferencesRecordings(config: config, accountSid: accountSid, conferenceSid: conferenceSid, sid: sid, requestOptions: requestOptions)
     }
 }
 
@@ -181,89 +100,37 @@ public class ConferencesParticipantsNamespace {
         self.config = config
     }
 
-    /// Retrieves a participant in a specific conference. Use `AccountSid`, `ConferenceSid`, and `CallSid` to identify
-    /// the account, conference, and participant. You can identify the participant by call SID or label; percent-encode
-    /// characters in a label that are not URL-safe.
+/// Retrieves a participant in a specific conference. Use `AccountSid`, `ConferenceSid`, and `CallSid` to identify the account, conference, and participant. You can identify the participant by call SID or label; percent-encode characters in a label that are not URL-safe.
     ///
     /// Fetch an instance of a participant
-    public func fetch(
-        accountSid: String,
-        conferenceSid: String,
-        callSid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountConferenceParticipant {
-        try await ConferencesParticipantsMethods.fetchConferencesParticipants(
-            config: config,
-            accountSid: accountSid,
-            conferenceSid: conferenceSid,
-            callSid: callSid,
-            requestOptions: requestOptions
-        )
+    public func fetch(accountSid: String, conferenceSid: String, callSid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountConferenceParticipant {
+        return try await ConferencesParticipantsMethods.fetchConferencesParticipants(config: config, accountSid: accountSid, conferenceSid: conferenceSid, callSid: callSid, requestOptions: requestOptions)
     }
 
-    /// Updates configurable properties of a participant in a conference. Use `AccountSid`, `ConferenceSid`, and
-    /// `CallSid` to identify the participant, then supply the form fields for the settings you want to change. If
-    /// `Coaching` is true, provide `CallSidToCoach`.
+/// Updates configurable properties of a participant in a conference. Use `AccountSid`, `ConferenceSid`, and `CallSid` to identify the participant, then supply the form fields for the settings you want to change. If `Coaching` is true, provide `CallSidToCoach`.
     ///
     /// Update the properties of the participant
-    public func update(
-        options: ConferencesParticipantsMethods.UpdateConferencesParticipantsOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountConferenceParticipant {
-        try await ConferencesParticipantsMethods.updateConferencesParticipants(
-            config: config,
-            options: options,
-            requestOptions: requestOptions
-        )
+    public func update(options: ConferencesParticipantsMethods.UpdateConferencesParticipantsOptions, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountConferenceParticipant {
+        return try await ConferencesParticipantsMethods.updateConferencesParticipants(config: config, options: options, requestOptions: requestOptions)
     }
 
-    /// Removes a participant from a conference. Use `AccountSid`, `ConferenceSid`, and `CallSid` to identify the
-    /// account, conference, and participant. You can identify the participant by call SID or label; percent-encode
-    /// characters in a label that are not URL-safe.
+/// Removes a participant from a conference. Use `AccountSid`, `ConferenceSid`, and `CallSid` to identify the account, conference, and participant. You can identify the participant by call SID or label; percent-encode characters in a label that are not URL-safe.
     ///
     /// Kick a participant from a given conference
-    public func delete(
-        accountSid: String,
-        conferenceSid: String,
-        callSid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await ConferencesParticipantsMethods.deleteConferencesParticipants(
-            config: config,
-            accountSid: accountSid,
-            conferenceSid: conferenceSid,
-            callSid: callSid,
-            requestOptions: requestOptions
-        )
+    public func delete(accountSid: String, conferenceSid: String, callSid: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await ConferencesParticipantsMethods.deleteConferencesParticipants(config: config, accountSid: accountSid, conferenceSid: conferenceSid, callSid: callSid, requestOptions: requestOptions)
     }
 
-    /// Creates a participant in a conference by placing a call from `From` to `To`. Provide both endpoints and
-    /// optionally configure call behavior, conference settings, and status callbacks. The response includes the
-    /// participant and associated call identifiers.
-    public func create(
-        options: ConferencesParticipantsMethods.CreateConferencesParticipantsOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountConferenceParticipant {
-        try await ConferencesParticipantsMethods.createConferencesParticipants(
-            config: config,
-            options: options,
-            requestOptions: requestOptions
-        )
+/// Creates a participant in a conference by placing a call from `From` to `To`. Provide both endpoints and optionally configure call behavior, conference settings, and status callbacks. The response includes the participant and associated call identifiers.
+    public func create(options: ConferencesParticipantsMethods.CreateConferencesParticipantsOptions, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountConferenceParticipant {
+        return try await ConferencesParticipantsMethods.createConferencesParticipants(config: config, options: options, requestOptions: requestOptions)
     }
 
-    /// Lists participants in a specific conference. Use `Muted`, `Hold`, and `Coaching` to filter participants by their
-    /// current settings. Use `PageSize`, `Page`, and `PageToken` to paginate the results.
+/// Lists participants in a specific conference. Use `Muted`, `Hold`, and `Coaching` to filter participants by their current settings. Use `PageSize`, `Page`, and `PageToken` to paginate the results.
     ///
     /// Retrieve a list of participants belonging to the account used to make the request
-    public func list(
-        options: ConferencesParticipantsMethods.ListConferencesParticipantsOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ListConferencesParticipantsResponse {
-        try await ConferencesParticipantsMethods.listConferencesParticipants(
-            config: config,
-            options: options,
-            requestOptions: requestOptions
-        )
+    public func list(options: ConferencesParticipantsMethods.ListConferencesParticipantsOptions, requestOptions: RequestOptions? = nil) async throws -> ListConferencesParticipantsResponse {
+        return try await ConferencesParticipantsMethods.listConferencesParticipants(config: config, options: options, requestOptions: requestOptions)
     }
 }
 
@@ -277,53 +144,23 @@ public class ConferencesNamespace {
         participants = ConferencesParticipantsNamespace(config: config)
     }
 
-    /// Retrieves a specific conference for an account. Use the conference SID to identify it and inspect its status,
-    /// region, and reason for ending.
+/// Retrieves a specific conference for an account. Use the conference SID to identify it and inspect its status, region, and reason for ending.
     ///
     /// Fetch an instance of a conference
-    public func fetch(
-        accountSid: String,
-        sid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountConference {
-        try await ConferencesMethods.fetchConferences(
-            config: config,
-            accountSid: accountSid,
-            sid: sid,
-            requestOptions: requestOptions
-        )
+    public func fetch(accountSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountConference {
+        return try await ConferencesMethods.fetchConferences(config: config, accountSid: accountSid, sid: sid, requestOptions: requestOptions)
     }
 
-    /// Updates a conference's status or announcement configuration. Set `Status` to `completed` to end the conference,
-    /// or provide an announcement URL and its HTTP method. The response contains the updated conference resource.
-    public func update(
-        accountSid: String,
-        sid: String,
-        status: ConferenceEnumUpdateStatus? = nil,
-        announceUrl: String? = nil,
-        announceMethod: UpdateConferencesRequestBodyAnnounceMethod? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountConference {
-        try await ConferencesMethods.updateConferences(
-            config: config,
-            accountSid: accountSid,
-            sid: sid,
-            status: status,
-            announceUrl: announceUrl,
-            announceMethod: announceMethod,
-            requestOptions: requestOptions
-        )
+/// Updates a conference's status or announcement configuration. Set `Status` to `completed` to end the conference, or provide an announcement URL and its HTTP method. The response contains the updated conference resource.
+    public func update(accountSid: String, sid: String, status: ConferenceEnumUpdateStatus? = nil, announceUrl: String? = nil, announceMethod: UpdateConferencesRequestBodyAnnounceMethod? = nil, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountConference {
+        return try await ConferencesMethods.updateConferences(config: config, accountSid: accountSid, sid: sid, status: status, announceUrl: announceUrl, announceMethod: announceMethod, requestOptions: requestOptions)
     }
 
-    /// Lists conferences belonging to the specified account. Filter results by creation or update date, friendly name,
-    /// or status, and use the page parameters to navigate the results.
+/// Lists conferences belonging to the specified account. Filter results by creation or update date, friendly name, or status, and use the page parameters to navigate the results.
     ///
     /// Retrieve a list of conferences belonging to the account used to make the request
-    public func list(
-        options: ConferencesMethods.ListConferencesOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ListConferencesResponse {
-        try await ConferencesMethods.listConferences(config: config, options: options, requestOptions: requestOptions)
+    public func list(options: ConferencesMethods.ListConferencesOptions, requestOptions: RequestOptions? = nil) async throws -> ListConferencesResponse {
+        return try await ConferencesMethods.listConferences(config: config, options: options, requestOptions: requestOptions)
     }
 }
 
@@ -333,69 +170,31 @@ public class ConnectAppsNamespace {
         self.config = config
     }
 
-    /// Retrieves a specific Connect App belonging to an account. Supply the account and Connect App identifiers to read
-    /// its configuration and requested permissions.
+/// Retrieves a specific Connect App belonging to an account. Supply the account and Connect App identifiers to read its configuration and requested permissions.
     ///
     /// Fetch an instance of a connect-app
-    public func fetch(
-        accountSid: String,
-        sid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountConnectApp {
-        try await ConnectAppsMethods.fetchConnectApps(
-            config: config,
-            accountSid: accountSid,
-            sid: sid,
-            requestOptions: requestOptions
-        )
+    public func fetch(accountSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountConnectApp {
+        return try await ConnectAppsMethods.fetchConnectApps(config: config, accountSid: accountSid, sid: sid, requestOptions: requestOptions)
     }
 
-    /// Updates the configuration of a Connect App belonging to an account. Provide the fields to change, such as its
-    /// redirect URLs, descriptive details, or requested permissions.
+/// Updates the configuration of a Connect App belonging to an account. Provide the fields to change, such as its redirect URLs, descriptive details, or requested permissions.
     ///
     /// Update a connect-app with the specified parameters
-    public func update(
-        options: ConnectAppsMethods.UpdateConnectAppsOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountConnectApp {
-        try await ConnectAppsMethods.updateConnectApps(config: config, options: options, requestOptions: requestOptions)
+    public func update(options: ConnectAppsMethods.UpdateConnectAppsOptions, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountConnectApp {
+        return try await ConnectAppsMethods.updateConnectApps(config: config, options: options, requestOptions: requestOptions)
     }
 
-    /// Deletes a Connect App belonging to an account. Provide the account and Connect App identifiers to specify the
-    /// resource to remove.
+/// Deletes a Connect App belonging to an account. Provide the account and Connect App identifiers to specify the resource to remove.
     ///
     /// Delete an instance of a connect-app
-    public func delete(
-        accountSid: String,
-        sid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await ConnectAppsMethods.deleteConnectApps(
-            config: config,
-            accountSid: accountSid,
-            sid: sid,
-            requestOptions: requestOptions
-        )
+    public func delete(accountSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await ConnectAppsMethods.deleteConnectApps(config: config, accountSid: accountSid, sid: sid, requestOptions: requestOptions)
     }
 
-    /// Lists Connect Apps belonging to the specified account. Use the page parameters to navigate through the account's
-    /// Connect Apps.
+/// Lists Connect Apps belonging to the specified account. Use the page parameters to navigate through the account's Connect Apps.
     ///
     /// Retrieve a list of connect-apps belonging to the account used to make the request
-    public func list(
-        accountSid: String,
-        pageSize: Int? = nil,
-        page: Int? = nil,
-        pageToken: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ListConnectAppsResponse {
-        try await ConnectAppsMethods.listConnectApps(
-            config: config,
-            accountSid: accountSid,
-            pageSize: pageSize,
-            page: page,
-            pageToken: pageToken,
-            requestOptions: requestOptions
-        )
+    public func list(accountSid: String, pageSize: Int? = nil, page: Int? = nil, pageToken: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ListConnectAppsResponse {
+        return try await ConnectAppsMethods.listConnectApps(config: config, accountSid: accountSid, pageSize: pageSize, page: page, pageToken: pageToken, requestOptions: requestOptions)
     }
 }

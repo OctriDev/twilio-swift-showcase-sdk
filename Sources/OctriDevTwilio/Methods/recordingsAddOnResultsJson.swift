@@ -6,9 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension RecordingsAddOnResultsMethods {
-    /// Lists AddOnResults belonging to a recording. Use `PageSize` and `PageToken` to control which results are
-    /// returned and to navigate the paginated response.
+extension RecordingsAddOnResultsMethods {
+    /// Lists AddOnResults belonging to a recording. Use `PageSize` and `PageToken` to control which results are returned and to navigate the paginated response.
     ///
     /// Retrieve a list of results belonging to the recording
     ///
@@ -22,47 +21,25 @@ public extension RecordingsAddOnResultsMethods {
     ///   50, and the maximum is 1000.
     /// - page: The page index. This value is simply for client state.
     /// - pageToken: The page token. This is provided by the API.
-    static func listRecordingsAddOnResults(
-        config: ClientConfig,
-        accountSid: String,
-        referenceSid: String,
-        pageSize: Int? = nil,
-        page: Int? = nil,
-        pageToken: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ListRecordingsAddOnResultsResponse {
+    public static func listRecordingsAddOnResults(config: ClientConfig, accountSid: String, referenceSid: String, pageSize: Int? = nil, page: Int? = nil, pageToken: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ListRecordingsAddOnResultsResponse {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
         try validateLength("ReferenceSid", referenceSid, min: 34, max: 34)
         try sdkValidatePattern("ReferenceSid", referenceSid, sdkPatternfad3f05341a2)
 
-        if let pageSize {
+        if let pageSize = pageSize {
             try validateRange("PageSize", Double(pageSize), min: 1, max: 1000)
         }
 
-        if let page {
+        if let page = page {
             try validateRange("Page", Double(page), min: 0)
         }
 
-        return try await (sdkRequest(
-            "GET",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(accountSid)),
-                "/Recordings/",
-                sdkEncodePathSegment(sdkWireString(referenceSid)),
-                "/AddOnResults.json",
-            ].joined(),
-            config: config,
-            query: [
-                SdkQueryParameter("PageSize", value: pageSize),
-                SdkQueryParameter("Page", value: page),
-                SdkQueryParameter("PageToken", value: pageToken),
-            ],
-            decoder: .json,
-            operationId: "listRecordingsAddOnResults",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Recordings/", sdkEncodePathSegment(sdkWireString(referenceSid)), "/AddOnResults.json"].joined(), config: config, query: [
+            SdkQueryParameter("PageSize", value: pageSize),
+            SdkQueryParameter("Page", value: page),
+            SdkQueryParameter("PageToken", value: pageToken),
+        ], decoder: .json, operationId: "listRecordingsAddOnResults", options: requestOptions)).data
     }
 }

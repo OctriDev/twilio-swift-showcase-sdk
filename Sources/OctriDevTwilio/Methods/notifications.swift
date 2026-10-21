@@ -8,10 +8,8 @@ import Foundation
 #endif
 public enum NotificationsMethods {}
 
-public extension NotificationsMethods {
-    /// Retrieves a notification belonging to an account. Supply the account SID and notification SID to identify the
-    /// resource. The response includes notification details such as the message, error information, and originating
-    /// request data.
+extension NotificationsMethods {
+    /// Retrieves a notification belonging to an account. Supply the account SID and notification SID to identify the resource. The response includes notification details such as the message, error information, and originating request data.
     ///
     /// Fetch a notification belonging to the account used to make the request
     ///
@@ -21,31 +19,13 @@ public extension NotificationsMethods {
     ///   Notification resource to fetch.
     /// - sid: The Twilio-provided string that uniquely identifies the Notification
     ///   resource to fetch.
-    static func fetchNotifications(
-        config: ClientConfig,
-        accountSid: String,
-        sid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountNotificationInstance {
+    public static func fetchNotifications(config: ClientConfig, accountSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountNotificationInstance {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
         try validateLength("Sid", sid, min: 34, max: 34)
         try sdkValidatePattern("Sid", sid, sdkPatternb9fb14eb1cd8)
 
-        return try await (sdkRequest(
-            "GET",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(accountSid)),
-                "/Notifications/",
-                sdkEncodePathSegment(sdkWireString(sid)),
-                ".json",
-            ].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "fetchNotifications",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Notifications/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, decoder: .json, operationId: "fetchNotifications", options: requestOptions)).data
     }
 }

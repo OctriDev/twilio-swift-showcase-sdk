@@ -8,13 +8,10 @@ import Foundation
 #endif
 public enum CallsTranscriptionsMethods {}
 
-public extension CallsTranscriptionsMethods {
-    /// Stops a realtime transcription associated with a call. Identify it by its transcription SID or by the `name`
-    /// supplied when it was created, and set `Status` to `stopped`. The response contains the transcription object with
-    /// its updated status.
+extension CallsTranscriptionsMethods {
+    /// Stops a realtime transcription associated with a call. Identify it by its transcription SID or by the `name` supplied when it was created, and set `Status` to `stopped`. The response contains the transcription object with its updated status.
     ///
-    /// Stop a Transcription using either the SID of the Transcription resource or the `name` used when creating the
-    /// resource
+    /// Stop a Transcription using either the SID of the Transcription resource or the `name` used when creating the resource
     ///
     /// - Parameters:
     /// - accountSid: The SID of the
@@ -25,14 +22,7 @@ public extension CallsTranscriptionsMethods {
     ///   Transcription resource is associated with.
     /// - sid: The SID of the Transcription resource, or the `name` used when
     ///   creating the resource
-    static func updateCallsTranscriptions(
-        config: ClientConfig,
-        accountSid: String,
-        callSid: String,
-        sid: String,
-        status: RealtimeTranscriptionEnumUpdateStatus,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountCallRealtimeTranscription {
+    public static func updateCallsTranscriptions(config: ClientConfig, accountSid: String, callSid: String, sid: String, status: RealtimeTranscriptionEnumUpdateStatus, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountCallRealtimeTranscription {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
@@ -41,23 +31,6 @@ public extension CallsTranscriptionsMethods {
 
         let requestBody = UpdateCallsTranscriptionsRequestBody(status: status)
 
-        return try await (sdkRequest(
-            "POST",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(accountSid)),
-                "/Calls/",
-                sdkEncodePathSegment(sdkWireString(callSid)),
-                "/Transcriptions/",
-                sdkEncodePathSegment(sdkWireString(sid)),
-                ".json",
-            ].joined(),
-            config: config,
-            body: requestBody,
-            contentType: "application/x-www-form-urlencoded",
-            decoder: .json,
-            operationId: "updateCallsTranscriptions",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("POST", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Calls/", sdkEncodePathSegment(sdkWireString(callSid)), "/Transcriptions/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "updateCallsTranscriptions", options: requestOptions)).data
     }
 }

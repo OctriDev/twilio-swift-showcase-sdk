@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension IncomingPhoneNumbersMethods {
-    struct CreateIncomingPhoneNumbersLocalOptions: Codable {
+extension IncomingPhoneNumbersMethods {
+    public struct CreateIncomingPhoneNumbersLocalOptions: Codable {
         public var accountSid: String
         public var phoneNumber: String
         public var apiVersion: String?
@@ -39,9 +39,7 @@ public extension IncomingPhoneNumbersMethods {
         }
     }
 
-    /// Creates a local incoming phone number for an account. Supply `PhoneNumber` in E.164 format and configure
-    /// optional voice, SMS, and callback settings as needed. The response includes the created phone number resource
-    /// and its SID.
+    /// Creates a local incoming phone number for an account. Supply `PhoneNumber` in E.164 format and configure optional voice, SMS, and callback settings as needed. The response includes the created phone number resource and its SID.
     ///
     /// - Parameters:
     /// - accountSid: The SID of the
@@ -106,11 +104,7 @@ public extension IncomingPhoneNumbersMethods {
     ///   versa.
     /// - bundleSid: The SID of the Bundle resource that you associate with the
     ///   phone number. Some regions require a Bundle to meet local Regulations.
-    static func createIncomingPhoneNumbersLocal(
-        config: ClientConfig,
-        options: CreateIncomingPhoneNumbersLocalOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountIncomingPhoneNumberIncomingPhoneNumberLocal {
+    public static func createIncomingPhoneNumbersLocal(config: ClientConfig, options: CreateIncomingPhoneNumbersLocalOptions, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountIncomingPhoneNumberIncomingPhoneNumberLocal {
         try validateLength("AccountSid", options.accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", options.accountSid, sdkPatternc7cb941ab84b)
 
@@ -171,19 +165,6 @@ public extension IncomingPhoneNumbersMethods {
 
         let requestBody = CreateIncomingPhoneNumbersLocalRequestBody(options: options)
 
-        return try await (sdkRequest(
-            "POST",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(options.accountSid)),
-                "/IncomingPhoneNumbers/Local.json",
-            ].joined(),
-            config: config,
-            body: requestBody,
-            contentType: "application/x-www-form-urlencoded",
-            decoder: .json,
-            operationId: "createIncomingPhoneNumbersLocal",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("POST", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(options.accountSid)), "/IncomingPhoneNumbers/Local.json"].joined(), config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "createIncomingPhoneNumbersLocal", options: requestOptions)).data
     }
 }

@@ -6,7 +6,7 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension SipDomainsCredentialListMappingsMethods {
+extension SipDomainsCredentialListMappingsMethods {
     /// Delete a CredentialListMapping resource from an account.
     ///
     /// - Parameters:
@@ -17,13 +17,7 @@ public extension SipDomainsCredentialListMappingsMethods {
     ///   that includes the resource to delete.
     /// - sid: A 34 character string that uniquely identifies the resource to
     ///   delete.
-    static func deleteSipDomainsCredentialListMappings(
-        config: ClientConfig,
-        accountSid: String,
-        domainSid: String,
-        sid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
+    public static func deleteSipDomainsCredentialListMappings(config: ClientConfig, accountSid: String, domainSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
@@ -33,21 +27,6 @@ public extension SipDomainsCredentialListMappingsMethods {
         try validateLength("Sid", sid, min: 34, max: 34)
         try sdkValidatePattern("Sid", sid, sdkPattern189973589bff)
 
-        return try await (sdkRequest(
-            "DELETE",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(accountSid)),
-                "/SIP/Domains/",
-                sdkEncodePathSegment(sdkWireString(domainSid)),
-                "/CredentialListMappings/",
-                sdkEncodePathSegment(sdkWireString(sid)),
-                ".json",
-            ].joined(),
-            config: config,
-            decoder: .empty,
-            operationId: "deleteSipDomainsCredentialListMappings",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("DELETE", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/SIP/Domains/", sdkEncodePathSegment(sdkWireString(domainSid)), "/CredentialListMappings/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, decoder: .empty, operationId: "deleteSipDomainsCredentialListMappings", options: requestOptions)).data
     }
 }

@@ -6,9 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ConnectAppsMethods {
-    /// Lists Connect Apps belonging to the specified account. Use the page parameters to navigate through the account's
-    /// Connect Apps.
+extension ConnectAppsMethods {
+    /// Lists Connect Apps belonging to the specified account. Use the page parameters to navigate through the account's Connect Apps.
     ///
     /// Retrieve a list of connect-apps belonging to the account used to make the request
     ///
@@ -20,37 +19,22 @@ public extension ConnectAppsMethods {
     ///   50, and the maximum is 1000.
     /// - page: The page index. This value is simply for client state.
     /// - pageToken: The page token. This is provided by the API.
-    static func listConnectApps(
-        config: ClientConfig,
-        accountSid: String,
-        pageSize: Int? = nil,
-        page: Int? = nil,
-        pageToken: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ListConnectAppsResponse {
+    public static func listConnectApps(config: ClientConfig, accountSid: String, pageSize: Int? = nil, page: Int? = nil, pageToken: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ListConnectAppsResponse {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
-        if let pageSize {
+        if let pageSize = pageSize {
             try validateRange("PageSize", Double(pageSize), min: 1, max: 1000)
         }
 
-        if let page {
+        if let page = page {
             try validateRange("Page", Double(page), min: 0)
         }
 
-        return try await (sdkRequest(
-            "GET",
-            ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/ConnectApps.json"].joined(),
-            config: config,
-            query: [
-                SdkQueryParameter("PageSize", value: pageSize),
-                SdkQueryParameter("Page", value: page),
-                SdkQueryParameter("PageToken", value: pageToken),
-            ],
-            decoder: .json,
-            operationId: "listConnectApps",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/ConnectApps.json"].joined(), config: config, query: [
+            SdkQueryParameter("PageSize", value: pageSize),
+            SdkQueryParameter("Page", value: page),
+            SdkQueryParameter("PageToken", value: pageToken),
+        ], decoder: .json, operationId: "listConnectApps", options: requestOptions)).data
     }
 }

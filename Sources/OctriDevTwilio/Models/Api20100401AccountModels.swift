@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Api20100401Account domain models
+// Api20100401Account domain models
 /// Typed representation of the `ApiV2010Account` API schema.
 public struct ApiV2010Account: Codable {
     /// The authorization token for this account. This token should be kept a secret, so no sharing.
@@ -43,48 +43,37 @@ public struct ApiV2010Account: Codable {
     }
 
     init() {
-        (authToken, dateCreated, dateUpdated, friendlyName, ownerAccountSid) = (nil, nil, nil, nil, nil)
-        (sid, status, subresourceUris, type, uri) = (nil, nil, nil, nil, nil)
+        (self.authToken, self.dateCreated, self.dateUpdated, self.friendlyName, self.ownerAccountSid) = (nil, nil, nil, nil, nil)
+        (self.sid, self.status, self.subresourceUris, self.type, self.uri) = (nil, nil, nil, nil, nil)
     }
 }
 
-public extension ApiV2010Account {
-    init(from decoder: Decoder) throws {
+extension ApiV2010Account {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        authToken = try container.sdkDecodeIfPresent(.authToken)
-        dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
-        dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
-        friendlyName = try container.sdkDecodeIfPresent(.friendlyName)
-        ownerAccountSid = try container.sdkDecodeIfPresent(.ownerAccountSid)
-        sid = try container.sdkDecodeIfPresent(.sid)
-        status = try container.sdkDecodeIfPresent(.status)
-        subresourceUris = try container.sdkDecodeIfPresent(.subresourceUris)
-        type = try container.sdkDecodeIfPresent(.type)
-        uri = try container.sdkDecodeIfPresent(.uri)
-        if let value = ownerAccountSid {
+        self.authToken = try container.sdkDecodeIfPresent(.authToken)
+        self.dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
+        self.dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
+        self.friendlyName = try container.sdkDecodeIfPresent(.friendlyName)
+        self.ownerAccountSid = try container.sdkDecodeIfPresent(.ownerAccountSid)
+        self.sid = try container.sdkDecodeIfPresent(.sid)
+        self.status = try container.sdkDecodeIfPresent(.status)
+        self.subresourceUris = try container.sdkDecodeIfPresent(.subresourceUris)
+        self.type = try container.sdkDecodeIfPresent(.type)
+        self.uri = try container.sdkDecodeIfPresent(.uri)
+        if let value = self.ownerAccountSid {
             try validateLength("owner_account_sid", value, min: 34, max: 34)
             try sdkValidatePattern("owner_account_sid", value, sdkPatternc7cb941ab84b)
         }
-        if let value = sid {
+        if let value = self.sid {
             try validateLength("sid", value, min: 34, max: 34)
             try sdkValidatePattern("sid", value, sdkPatternc7cb941ab84b)
         }
     }
 }
 
-public extension ApiV2010Account {
-    init(
-        authToken: String? = nil,
-        dateCreated: String? = nil,
-        dateUpdated: String? = nil,
-        friendlyName: String? = nil,
-        ownerAccountSid: String? = nil,
-        sid: String? = nil,
-        status: AccountEnumStatus? = nil,
-        subresourceUris: [String: JSONValue]? = nil,
-        type: AccountEnumType? = nil,
-        uri: String? = nil
-    ) throws {
+extension ApiV2010Account {
+    public init(authToken: String? = nil, dateCreated: String? = nil, dateUpdated: String? = nil, friendlyName: String? = nil, ownerAccountSid: String? = nil, sid: String? = nil, status: AccountEnumStatus? = nil, subresourceUris: [String: JSONValue]? = nil, type: AccountEnumType? = nil, uri: String? = nil) throws {
         self.init()
         (self.authToken, self.dateCreated) = (authToken, dateCreated)
         (self.dateUpdated, self.friendlyName) = (dateUpdated, friendlyName)
@@ -106,16 +95,13 @@ public extension ApiV2010Account {
 public struct AccountEnumType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let trial = AccountEnumType(rawValue: "Trial")
     public static let full = AccountEnumType(rawValue: "Full")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -128,17 +114,14 @@ public struct AccountEnumType: RawRepresentable, Hashable, Codable, Sendable, Sd
 public struct AccountEnumStatus: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let active = AccountEnumStatus(rawValue: "active")
     public static let suspended = AccountEnumStatus(rawValue: "suspended")
     public static let closed = AccountEnumStatus(rawValue: "closed")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

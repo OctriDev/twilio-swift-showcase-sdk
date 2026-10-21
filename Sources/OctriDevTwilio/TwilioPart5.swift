@@ -13,83 +13,39 @@ public class MessagesNamespace {
         feedback = MessagesFeedbackNamespace(config: config)
     }
 
-    /// Creates and sends a message to a phone number or channel address. Supply `To` in E.164 format or as a channel
-    /// address, and use the optional fields to configure delivery, privacy, or scheduling. A 201 response returns the
-    /// created Message resource.
+/// Creates and sends a message to a phone number or channel address. Supply `To` in E.164 format or as a channel address, and use the optional fields to configure delivery, privacy, or scheduling. A 201 response returns the created Message resource.
     ///
     /// Send a message
-    public func create(
-        options: MessagesMethods.CreateMessagesOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountMessage {
-        try await MessagesMethods.createMessages(config: config, options: options, requestOptions: requestOptions)
+    public func create(options: MessagesMethods.CreateMessagesOptions, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountMessage {
+        return try await MessagesMethods.createMessages(config: config, options: options, requestOptions: requestOptions)
     }
 
-    /// Lists message resources associated with an account. Filter the results by recipient, sender, or sent date, and
-    /// use the page parameters to navigate the list.
+/// Lists message resources associated with an account. Filter the results by recipient, sender, or sent date, and use the page parameters to navigate the list.
     ///
     /// Retrieve a list of Message resources associated with a Twilio Account
-    public func list(
-        options: MessagesMethods.ListMessagesOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ListMessagesResponse {
-        try await MessagesMethods.listMessages(config: config, options: options, requestOptions: requestOptions)
+    public func list(options: MessagesMethods.ListMessagesOptions, requestOptions: RequestOptions? = nil) async throws -> ListMessagesResponse {
+        return try await MessagesMethods.listMessages(config: config, options: options, requestOptions: requestOptions)
     }
 
-    /// Deletes a Message resource from an account. Supply the account SID and Message SID for the resource you want to
-    /// remove. The operation does not return a response body.
+/// Deletes a Message resource from an account. Supply the account SID and Message SID for the resource you want to remove. The operation does not return a response body.
     ///
     /// Deletes a Message resource from your account
-    public func delete(
-        accountSid: String,
-        sid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await MessagesMethods.deleteMessages(
-            config: config,
-            accountSid: accountSid,
-            sid: sid,
-            requestOptions: requestOptions
-        )
+    public func delete(accountSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await MessagesMethods.deleteMessages(config: config, accountSid: accountSid, sid: sid, requestOptions: requestOptions)
     }
 
-    /// Retrieves a specific Message resource belonging to an account. Provide the account SID and Message SID to
-    /// identify the resource. The response includes the message content, delivery status, and resource metadata.
+/// Retrieves a specific Message resource belonging to an account. Provide the account SID and Message SID to identify the resource. The response includes the message content, delivery status, and resource metadata.
     ///
     /// Fetch a specific Message
-    public func fetch(
-        accountSid: String,
-        sid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountMessage {
-        try await MessagesMethods.fetchMessages(
-            config: config,
-            accountSid: accountSid,
-            sid: sid,
-            requestOptions: requestOptions
-        )
+    public func fetch(accountSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountMessage {
+        return try await MessagesMethods.fetchMessages(config: config, accountSid: accountSid, sid: sid, requestOptions: requestOptions)
     }
 
-    /// Updates a Message resource to change its body or cancel a message that has not yet been sent. Supply `Body` to
-    /// replace the message text or set it to an empty string to redact the text; use `Status` to cancel the message.
-    /// The response returns the updated Message resource.
+/// Updates a Message resource to change its body or cancel a message that has not yet been sent. Supply `Body` to replace the message text or set it to an empty string to redact the text; use `Status` to cancel the message. The response returns the updated Message resource.
     ///
     /// Update a Message resource (used to redact Message `body` text and to cancel not-yet-sent messages)
-    public func update(
-        accountSid: String,
-        sid: String,
-        body: String? = nil,
-        status: MessageEnumUpdateStatus? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountMessage {
-        try await MessagesMethods.updateMessages(
-            config: config,
-            accountSid: accountSid,
-            sid: sid,
-            body: body,
-            status: status,
-            requestOptions: requestOptions
-        )
+    public func update(accountSid: String, sid: String, body: String? = nil, status: MessageEnumUpdateStatus? = nil, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountMessage {
+        return try await MessagesMethods.updateMessages(config: config, accountSid: accountSid, sid: sid, body: body, status: status, requestOptions: requestOptions)
     }
 }
 
@@ -99,69 +55,25 @@ public class QueuesMembersNamespace {
         self.config = config
     }
 
-    /// Retrieves a specific member of a queue. Supply the account SID, queue SID, and call SID to identify the queue
-    /// member.
+/// Retrieves a specific member of a queue. Supply the account SID, queue SID, and call SID to identify the queue member.
     ///
     /// Fetch a specific member from the queue
-    public func fetch(
-        accountSid: String,
-        queueSid: String,
-        callSid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountQueueMember {
-        try await QueuesMembersMethods.fetchQueuesMembers(
-            config: config,
-            accountSid: accountSid,
-            queueSid: queueSid,
-            callSid: callSid,
-            requestOptions: requestOptions
-        )
+    public func fetch(accountSid: String, queueSid: String, callSid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountQueueMember {
+        return try await QueuesMembersMethods.fetchQueuesMembers(config: config, accountSid: accountSid, queueSid: queueSid, callSid: callSid, requestOptions: requestOptions)
     }
 
-    /// Dequeues a specific member and starts the call's execution at the supplied URL. Provide `Url` as the
-    /// destination, and use `Method` to choose whether request data is sent as form data or query parameters.
+/// Dequeues a specific member and starts the call's execution at the supplied URL. Provide `Url` as the destination, and use `Method` to choose whether request data is sent as form data or query parameters.
     ///
     /// Dequeue a member from a queue and have the member's call begin executing the TwiML document at that URL
-    public func update(
-        accountSid: String,
-        queueSid: String,
-        callSid: String,
-        url: String,
-        method: UpdateQueuesMembersRequestBodyMethod? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountQueueMember {
-        try await QueuesMembersMethods.updateQueuesMembers(
-            config: config,
-            accountSid: accountSid,
-            queueSid: queueSid,
-            callSid: callSid,
-            url: url,
-            method: method,
-            requestOptions: requestOptions
-        )
+    public func update(accountSid: String, queueSid: String, callSid: String, url: String, method: UpdateQueuesMembersRequestBodyMethod? = nil, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountQueueMember {
+        return try await QueuesMembersMethods.updateQueuesMembers(config: config, accountSid: accountSid, queueSid: queueSid, callSid: callSid, url: url, method: method, requestOptions: requestOptions)
     }
 
-    /// Lists members of a specific queue. Use the page parameters to navigate the results and review each member's
-    /// call, position, and wait time.
+/// Lists members of a specific queue. Use the page parameters to navigate the results and review each member's call, position, and wait time.
     ///
     /// Retrieve the members of the queue
-    public func list(
-        accountSid: String,
-        queueSid: String,
-        pageSize: Int? = nil,
-        page: Int? = nil,
-        pageToken: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ListQueuesMembersResponse {
-        try await QueuesMembersMethods.listQueuesMembers(
-            config: config,
-            accountSid: accountSid,
-            queueSid: queueSid,
-            pageSize: pageSize,
-            page: page,
-            pageToken: pageToken,
-            requestOptions: requestOptions
-        )
+    public func list(accountSid: String, queueSid: String, pageSize: Int? = nil, page: Int? = nil, pageToken: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ListQueuesMembersResponse {
+        return try await QueuesMembersMethods.listQueuesMembers(config: config, accountSid: accountSid, queueSid: queueSid, pageSize: pageSize, page: page, pageToken: pageToken, requestOptions: requestOptions)
     }
 }
 
@@ -173,100 +85,39 @@ public class QueuesNamespace {
         members = QueuesMembersNamespace(config: config)
     }
 
-    /// Retrieves a queue identified by its SID. Use `AccountSid` and `Sid` to identify the account and queue to
-    /// retrieve.
+/// Retrieves a queue identified by its SID. Use `AccountSid` and `Sid` to identify the account and queue to retrieve.
     ///
     /// Fetch an instance of a queue identified by the QueueSid
-    public func fetch(
-        accountSid: String,
-        sid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountQueue {
-        try await QueuesMethods.fetchQueues(
-            config: config,
-            accountSid: accountSid,
-            sid: sid,
-            requestOptions: requestOptions
-        )
+    public func fetch(accountSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountQueue {
+        return try await QueuesMethods.fetchQueues(config: config, accountSid: accountSid, sid: sid, requestOptions: requestOptions)
     }
 
-    /// Updates the name or maximum size of a queue. Use `AccountSid` and `Sid` to identify the queue, and supply
-    /// `FriendlyName`, `MaxSize`, or both to change its settings. The response contains the updated queue object.
+/// Updates the name or maximum size of a queue. Use `AccountSid` and `Sid` to identify the queue, and supply `FriendlyName`, `MaxSize`, or both to change its settings. The response contains the updated queue object.
     ///
     /// Update the queue with the new parameters
-    public func update(
-        accountSid: String,
-        sid: String,
-        friendlyName: String? = nil,
-        maxSize: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountQueue {
-        try await QueuesMethods.updateQueues(
-            config: config,
-            accountSid: accountSid,
-            sid: sid,
-            friendlyName: friendlyName,
-            maxSize: maxSize,
-            requestOptions: requestOptions
-        )
+    public func update(accountSid: String, sid: String, friendlyName: String? = nil, maxSize: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountQueue {
+        return try await QueuesMethods.updateQueues(config: config, accountSid: accountSid, sid: sid, friendlyName: friendlyName, maxSize: maxSize, requestOptions: requestOptions)
     }
 
-    /// Deletes an empty queue from an account. Use `AccountSid` and `Sid` to identify the account and queue; the queue
-    /// must be empty before you remove it.
+/// Deletes an empty queue from an account. Use `AccountSid` and `Sid` to identify the account and queue; the queue must be empty before you remove it.
     ///
     /// Remove an empty queue
-    public func delete(
-        accountSid: String,
-        sid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await QueuesMethods.deleteQueues(
-            config: config,
-            accountSid: accountSid,
-            sid: sid,
-            requestOptions: requestOptions
-        )
+    public func delete(accountSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await QueuesMethods.deleteQueues(config: config, accountSid: accountSid, sid: sid, requestOptions: requestOptions)
     }
 
-    /// Lists queues belonging to an account. Use `PageSize` to control the number of queues per page and `Page` or
-    /// `PageToken` to navigate the results.
+/// Lists queues belonging to an account. Use `PageSize` to control the number of queues per page and `Page` or `PageToken` to navigate the results.
     ///
     /// Retrieve a list of queues belonging to the account used to make the request
-    public func list(
-        accountSid: String,
-        pageSize: Int? = nil,
-        page: Int? = nil,
-        pageToken: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ListQueuesResponse {
-        try await QueuesMethods.listQueues(
-            config: config,
-            accountSid: accountSid,
-            pageSize: pageSize,
-            page: page,
-            pageToken: pageToken,
-            requestOptions: requestOptions
-        )
+    public func list(accountSid: String, pageSize: Int? = nil, page: Int? = nil, pageToken: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ListQueuesResponse {
+        return try await QueuesMethods.listQueues(config: config, accountSid: accountSid, pageSize: pageSize, page: page, pageToken: pageToken, requestOptions: requestOptions)
     }
 
-    /// Creates a queue for an account. Supply `FriendlyName` to describe the queue; `MaxSize` controls the number of
-    /// calls it can hold and defaults to 1000 when omitted. The response contains the created queue and its generated
-    /// SID.
+/// Creates a queue for an account. Supply `FriendlyName` to describe the queue; `MaxSize` controls the number of calls it can hold and defaults to 1000 when omitted. The response contains the created queue and its generated SID.
     ///
     /// Create a queue
-    public func create(
-        accountSid: String,
-        friendlyName: String,
-        maxSize: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountQueue {
-        try await QueuesMethods.createQueues(
-            config: config,
-            accountSid: accountSid,
-            friendlyName: friendlyName,
-            maxSize: maxSize,
-            requestOptions: requestOptions
-        )
+    public func create(accountSid: String, friendlyName: String, maxSize: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountQueue {
+        return try await QueuesMethods.createQueues(config: config, accountSid: accountSid, friendlyName: friendlyName, maxSize: maxSize, requestOptions: requestOptions)
     }
 }
 
@@ -276,84 +127,29 @@ public class SigningKeysNamespace {
         self.config = config
     }
 
-    /// Create a new Signing Key for the account making the request.
-    public func create(
-        accountSid: String,
-        friendlyName: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountNewSigningKey {
-        try await SigningKeysMethods.createSigningKeys(
-            config: config,
-            accountSid: accountSid,
-            friendlyName: friendlyName,
-            requestOptions: requestOptions
-        )
+/// Create a new Signing Key for the account making the request.
+    public func create(accountSid: String, friendlyName: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountNewSigningKey {
+        return try await SigningKeysMethods.createSigningKeys(config: config, accountSid: accountSid, friendlyName: friendlyName, requestOptions: requestOptions)
     }
 
-    /// Lists signing keys for an account. Use the paging parameters to control which results are returned and to
-    /// continue through the paginated list. The response includes signing key records and page metadata.
-    public func list(
-        accountSid: String,
-        pageSize: Int? = nil,
-        page: Int? = nil,
-        pageToken: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ListSigningKeysResponse {
-        try await SigningKeysMethods.listSigningKeys(
-            config: config,
-            accountSid: accountSid,
-            pageSize: pageSize,
-            page: page,
-            pageToken: pageToken,
-            requestOptions: requestOptions
-        )
+/// Lists signing keys for an account. Use the paging parameters to control which results are returned and to continue through the paginated list. The response includes signing key records and page metadata.
+    public func list(accountSid: String, pageSize: Int? = nil, page: Int? = nil, pageToken: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ListSigningKeysResponse {
+        return try await SigningKeysMethods.listSigningKeys(config: config, accountSid: accountSid, pageSize: pageSize, page: page, pageToken: pageToken, requestOptions: requestOptions)
     }
 
-    /// Retrieves a specific signing key from an account. Use `AccountSid` and `Sid` to identify the account and signing
-    /// key; both identifiers must match their documented SID formats.
-    public func fetch(
-        accountSid: String,
-        sid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountSigningKey {
-        try await SigningKeysMethods.fetchSigningKeys(
-            config: config,
-            accountSid: accountSid,
-            sid: sid,
-            requestOptions: requestOptions
-        )
+/// Retrieves a specific signing key from an account. Use `AccountSid` and `Sid` to identify the account and signing key; both identifiers must match their documented SID formats.
+    public func fetch(accountSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountSigningKey {
+        return try await SigningKeysMethods.fetchSigningKeys(config: config, accountSid: accountSid, sid: sid, requestOptions: requestOptions)
     }
 
-    /// Updates the friendly name of a signing key. Supply `FriendlyName` to change the name; omit it if you do not want
-    /// to update that field.
-    public func update(
-        accountSid: String,
-        sid: String,
-        friendlyName: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountSigningKey {
-        try await SigningKeysMethods.updateSigningKeys(
-            config: config,
-            accountSid: accountSid,
-            sid: sid,
-            friendlyName: friendlyName,
-            requestOptions: requestOptions
-        )
+/// Updates the friendly name of a signing key. Supply `FriendlyName` to change the name; omit it if you do not want to update that field.
+    public func update(accountSid: String, sid: String, friendlyName: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountSigningKey {
+        return try await SigningKeysMethods.updateSigningKeys(config: config, accountSid: accountSid, sid: sid, friendlyName: friendlyName, requestOptions: requestOptions)
     }
 
-    /// Deletes a signing key from an account. Identify the account and signing key with their SIDs, using the
-    /// documented prefixes and 32-character hexadecimal suffixes.
-    public func delete(
-        accountSid: String,
-        sid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await SigningKeysMethods.deleteSigningKeys(
-            config: config,
-            accountSid: accountSid,
-            sid: sid,
-            requestOptions: requestOptions
-        )
+/// Deletes a signing key from an account. Identify the account and signing key with their SIDs, using the documented prefixes and 32-character hexadecimal suffixes.
+    public func delete(accountSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await SigningKeysMethods.deleteSigningKeys(config: config, accountSid: accountSid, sid: sid, requestOptions: requestOptions)
     }
 }
 
@@ -363,37 +159,18 @@ public class NotificationsNamespace {
         self.config = config
     }
 
-    /// Retrieves a notification belonging to an account. Supply the account SID and notification SID to identify the
-    /// resource. The response includes notification details such as the message, error information, and originating
-    /// request data.
+/// Retrieves a notification belonging to an account. Supply the account SID and notification SID to identify the resource. The response includes notification details such as the message, error information, and originating request data.
     ///
     /// Fetch a notification belonging to the account used to make the request
-    public func fetch(
-        accountSid: String,
-        sid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountNotificationInstance {
-        try await NotificationsMethods.fetchNotifications(
-            config: config,
-            accountSid: accountSid,
-            sid: sid,
-            requestOptions: requestOptions
-        )
+    public func fetch(accountSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountNotificationInstance {
+        return try await NotificationsMethods.fetchNotifications(config: config, accountSid: accountSid, sid: sid, requestOptions: requestOptions)
     }
 
-    /// Lists notifications belonging to an account. Filter results by log level or message date, and use the paging
-    /// parameters to navigate the results. The response contains notification records and page metadata.
+/// Lists notifications belonging to an account. Filter results by log level or message date, and use the paging parameters to navigate the results. The response contains notification records and page metadata.
     ///
     /// Retrieve a list of notifications belonging to the account used to make the request
-    public func list(
-        options: NotificationsMethods.ListNotificationsOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ListNotificationsResponse {
-        try await NotificationsMethods.listNotifications(
-            config: config,
-            options: options,
-            requestOptions: requestOptions
-        )
+    public func list(options: NotificationsMethods.ListNotificationsOptions, requestOptions: RequestOptions? = nil) async throws -> ListNotificationsResponse {
+        return try await NotificationsMethods.listNotifications(config: config, options: options, requestOptions: requestOptions)
     }
 }
 
@@ -403,83 +180,31 @@ public class OutgoingCallerIdsNamespace {
         self.config = config
     }
 
-    /// Retrieves an outgoing caller ID belonging to an account. Supply the account SID and outgoing caller ID SID to
-    /// identify the resource. The response includes the caller ID's phone number, friendly name, and resource metadata.
+/// Retrieves an outgoing caller ID belonging to an account. Supply the account SID and outgoing caller ID SID to identify the resource. The response includes the caller ID's phone number, friendly name, and resource metadata.
     ///
     /// Fetch an outgoing-caller-id belonging to the account used to make the request
-    public func fetch(
-        accountSid: String,
-        sid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountOutgoingCallerId {
-        try await OutgoingCallerIdsMethods.fetchOutgoingCallerIds(
-            config: config,
-            accountSid: accountSid,
-            sid: sid,
-            requestOptions: requestOptions
-        )
+    public func fetch(accountSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountOutgoingCallerId {
+        return try await OutgoingCallerIdsMethods.fetchOutgoingCallerIds(config: config, accountSid: accountSid, sid: sid, requestOptions: requestOptions)
     }
 
-    /// Updates the friendly name of an outgoing caller ID resource. Use `AccountSid` and `Sid` to identify the account
-    /// and caller ID, and supply `FriendlyName` to change its description. The friendly name can contain up to 64
-    /// characters.
+/// Updates the friendly name of an outgoing caller ID resource. Use `AccountSid` and `Sid` to identify the account and caller ID, and supply `FriendlyName` to change its description. The friendly name can contain up to 64 characters.
     ///
     /// Updates the caller-id
-    public func update(
-        accountSid: String,
-        sid: String,
-        friendlyName: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountOutgoingCallerId {
-        try await OutgoingCallerIdsMethods.updateOutgoingCallerIds(
-            config: config,
-            accountSid: accountSid,
-            sid: sid,
-            friendlyName: friendlyName,
-            requestOptions: requestOptions
-        )
+    public func update(accountSid: String, sid: String, friendlyName: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountOutgoingCallerId {
+        return try await OutgoingCallerIdsMethods.updateOutgoingCallerIds(config: config, accountSid: accountSid, sid: sid, friendlyName: friendlyName, requestOptions: requestOptions)
     }
 
-    /// Deletes an outgoing caller ID resource from an account. Use `AccountSid` and `Sid` to identify the account and
-    /// the caller ID to remove. The caller ID SID must use the `PN` format.
+/// Deletes an outgoing caller ID resource from an account. Use `AccountSid` and `Sid` to identify the account and the caller ID to remove. The caller ID SID must use the `PN` format.
     ///
     /// Delete the caller-id specified from the account
-    public func delete(
-        accountSid: String,
-        sid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
-        try await OutgoingCallerIdsMethods.deleteOutgoingCallerIds(
-            config: config,
-            accountSid: accountSid,
-            sid: sid,
-            requestOptions: requestOptions
-        )
+    public func delete(accountSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        return try await OutgoingCallerIdsMethods.deleteOutgoingCallerIds(config: config, accountSid: accountSid, sid: sid, requestOptions: requestOptions)
     }
 
-    /// Lists outgoing caller IDs belonging to an account. Filter the results by `PhoneNumber` or `FriendlyName`, and
-    /// use the page parameters to retrieve results across multiple pages. `PageSize` defaults to 50 and can be set up
-    /// to 1000.
+/// Lists outgoing caller IDs belonging to an account. Filter the results by `PhoneNumber` or `FriendlyName`, and use the page parameters to retrieve results across multiple pages. `PageSize` defaults to 50 and can be set up to 1000.
     ///
     /// Retrieve a list of outgoing-caller-ids belonging to the account used to make the request
-    public func list(
-        accountSid: String,
-        phoneNumber: String? = nil,
-        friendlyName: String? = nil,
-        pageSize: Int? = nil,
-        page: Int? = nil,
-        pageToken: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ListOutgoingCallerIdsResponse {
-        try await OutgoingCallerIdsMethods.listOutgoingCallerIds(
-            config: config,
-            accountSid: accountSid,
-            phoneNumber: phoneNumber,
-            friendlyName: friendlyName,
-            pageSize: pageSize,
-            page: page,
-            pageToken: pageToken,
-            requestOptions: requestOptions
-        )
+    public func list(accountSid: String, phoneNumber: String? = nil, friendlyName: String? = nil, pageSize: Int? = nil, page: Int? = nil, pageToken: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ListOutgoingCallerIdsResponse {
+        return try await OutgoingCallerIdsMethods.listOutgoingCallerIds(config: config, accountSid: accountSid, phoneNumber: phoneNumber, friendlyName: friendlyName, pageSize: pageSize, page: page, pageToken: pageToken, requestOptions: requestOptions)
     }
 }

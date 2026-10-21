@@ -6,10 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension SipCredentialListsMethods {
-    /// Creates a SIP credential list for the specified account. Provide a `FriendlyName` to describe the list; the
-    /// schema requires this field and the documented description limits it to 64 characters. The response includes the
-    /// created list's identifier and resource metadata.
+extension SipCredentialListsMethods {
+    /// Creates a SIP credential list for the specified account. Provide a `FriendlyName` to describe the list; the schema requires this field and the documented description limits it to 64 characters. The response includes the created list's identifier and resource metadata.
     ///
     /// Create a Credential List
     ///
@@ -18,27 +16,12 @@ public extension SipCredentialListsMethods {
     ///   resource.
     /// - friendlyName: A human readable descriptive text that describes the
     ///   CredentialList, up to 64 characters long.
-    static func createSipCredentialLists(
-        config: ClientConfig,
-        accountSid: String,
-        friendlyName: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountSipSipCredentialList {
+    public static func createSipCredentialLists(config: ClientConfig, accountSid: String, friendlyName: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountSipSipCredentialList {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
         let requestBody = CreateSipCredentialListsRequestBody(friendlyName: friendlyName)
 
-        return try await (sdkRequest(
-            "POST",
-            ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/SIP/CredentialLists.json"]
-                .joined(),
-            config: config,
-            body: requestBody,
-            contentType: "application/x-www-form-urlencoded",
-            decoder: .json,
-            operationId: "createSipCredentialLists",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("POST", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/SIP/CredentialLists.json"].joined(), config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "createSipCredentialLists", options: requestOptions)).data
     }
 }

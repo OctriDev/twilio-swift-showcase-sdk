@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension SipDomainsMethods {
-    struct UpdateSipDomainsOptions: Codable {
+extension SipDomainsMethods {
+    public struct UpdateSipDomainsOptions: Codable {
         public var accountSid: String
         public var sid: String
         public var friendlyName: String?
@@ -30,8 +30,7 @@ public extension SipDomainsMethods {
         }
     }
 
-    /// Updates the configuration of a SIP domain. Supply only the attributes you want to change; method fields accept
-    /// `GET` or `POST`, and URL fields must be valid URIs.
+    /// Updates the configuration of a SIP domain. Supply only the attributes you want to change; method fields accept `GET` or `POST`, and URL fields must be valid URIs.
     ///
     /// Update the attributes of a domain
     ///
@@ -70,11 +69,7 @@ public extension SipDomainsMethods {
     /// - emergencyCallerSid: Whether an emergency caller sid is configured for the
     ///   domain. If present, this phone number will be used as the callback for the
     ///   emergency call.
-    static func updateSipDomains(
-        config: ClientConfig,
-        options: UpdateSipDomainsOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountSipSipDomain {
+    public static func updateSipDomains(config: ClientConfig, options: UpdateSipDomainsOptions, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountSipSipDomain {
         try validateLength("AccountSid", options.accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", options.accountSid, sdkPatternc7cb941ab84b)
 
@@ -105,21 +100,6 @@ public extension SipDomainsMethods {
 
         let requestBody = UpdateSipDomainsRequestBody(options: options)
 
-        return try await (sdkRequest(
-            "POST",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(options.accountSid)),
-                "/SIP/Domains/",
-                sdkEncodePathSegment(sdkWireString(options.sid)),
-                ".json",
-            ].joined(),
-            config: config,
-            body: requestBody,
-            contentType: "application/x-www-form-urlencoded",
-            decoder: .json,
-            operationId: "updateSipDomains",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("POST", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(options.accountSid)), "/SIP/Domains/", sdkEncodePathSegment(sdkWireString(options.sid)), ".json"].joined(), config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "updateSipDomains", options: requestOptions)).data
     }
 }

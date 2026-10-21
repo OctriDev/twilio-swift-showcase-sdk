@@ -6,10 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension QueuesMethods {
-    /// Creates a queue for an account. Supply `FriendlyName` to describe the queue; `MaxSize` controls the number of
-    /// calls it can hold and defaults to 1000 when omitted. The response contains the created queue and its generated
-    /// SID.
+extension QueuesMethods {
+    /// Creates a queue for an account. Supply `FriendlyName` to describe the queue; `MaxSize` controls the number of calls it can hold and defaults to 1000 when omitted. The response contains the created queue and its generated SID.
     ///
     /// Create a queue
     ///
@@ -21,27 +19,12 @@ public extension QueuesMethods {
     ///   resource. It can be up to 64 characters long.
     /// - maxSize: The maximum number of calls allowed to be in the queue. The
     ///   default is 1000. The maximum is 5000.
-    static func createQueues(
-        config: ClientConfig,
-        accountSid: String,
-        friendlyName: String,
-        maxSize: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountQueue {
+    public static func createQueues(config: ClientConfig, accountSid: String, friendlyName: String, maxSize: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountQueue {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
         let requestBody = CreateQueuesRequestBody(friendlyName: friendlyName, maxSize: maxSize)
 
-        return try await (sdkRequest(
-            "POST",
-            ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Queues.json"].joined(),
-            config: config,
-            body: requestBody,
-            contentType: "application/x-www-form-urlencoded",
-            decoder: .json,
-            operationId: "createQueues",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("POST", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Queues.json"].joined(), config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "createQueues", options: requestOptions)).data
     }
 }

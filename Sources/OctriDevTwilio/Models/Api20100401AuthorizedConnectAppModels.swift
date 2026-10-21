@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Api20100401AuthorizedConnectApp domain models
+// Api20100401AuthorizedConnectApp domain models
 /// Typed representation of the `ApiV2010AccountAuthorizedConnectApp` API schema.
 public struct ApiV2010AccountAuthorizedConnectApp: Codable {
     /// The SID of the Account that created the AuthorizedConnectApp resource.
@@ -35,53 +35,38 @@ public struct ApiV2010AccountAuthorizedConnectApp: Codable {
     }
 
     init() {
-        (accountSid, connectAppCompanyName, connectAppDescription, connectAppFriendlyName, connectAppHomepageUrl) = (
-            nil,
-            nil,
-            nil,
-            nil,
-            nil
-        )
-        (connectAppSid, permissions, uri) = (nil, nil, nil)
+        (self.accountSid, self.connectAppCompanyName, self.connectAppDescription, self.connectAppFriendlyName, self.connectAppHomepageUrl) = (nil, nil, nil, nil, nil)
+        (self.connectAppSid, self.permissions, self.uri) = (nil, nil, nil)
     }
 }
 
-public extension ApiV2010AccountAuthorizedConnectApp {
-    init(from decoder: Decoder) throws {
+extension ApiV2010AccountAuthorizedConnectApp {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        accountSid = try container.sdkDecodeIfPresent(.accountSid)
-        connectAppCompanyName = try container.sdkDecodeIfPresent(.connectAppCompanyName)
-        connectAppDescription = try container.sdkDecodeIfPresent(.connectAppDescription)
-        connectAppFriendlyName = try container.sdkDecodeIfPresent(.connectAppFriendlyName)
-        connectAppHomepageUrl = try container.sdkDecodeIfPresent(.connectAppHomepageUrl)
-        connectAppSid = try container.sdkDecodeIfPresent(.connectAppSid)
-        permissions = try container.sdkDecodeIfPresent(.permissions)
-        uri = try container.sdkDecodeIfPresent(.uri)
-        if let value = accountSid {
+        self.accountSid = try container.sdkDecodeIfPresent(.accountSid)
+        self.connectAppCompanyName = try container.sdkDecodeIfPresent(.connectAppCompanyName)
+        self.connectAppDescription = try container.sdkDecodeIfPresent(.connectAppDescription)
+        self.connectAppFriendlyName = try container.sdkDecodeIfPresent(.connectAppFriendlyName)
+        self.connectAppHomepageUrl = try container.sdkDecodeIfPresent(.connectAppHomepageUrl)
+        self.connectAppSid = try container.sdkDecodeIfPresent(.connectAppSid)
+        self.permissions = try container.sdkDecodeIfPresent(.permissions)
+        self.uri = try container.sdkDecodeIfPresent(.uri)
+        if let value = self.accountSid {
             try validateLength("account_sid", value, min: 34, max: 34)
             try sdkValidatePattern("account_sid", value, sdkPatternc7cb941ab84b)
         }
-        if let value = connectAppHomepageUrl {
+        if let value = self.connectAppHomepageUrl {
             try sdkValidateUri("connect_app_homepage_url", value)
         }
-        if let value = connectAppSid {
+        if let value = self.connectAppSid {
             try validateLength("connect_app_sid", value, min: 34, max: 34)
             try sdkValidatePattern("connect_app_sid", value, sdkPattern682cc462e4d3)
         }
     }
 }
 
-public extension ApiV2010AccountAuthorizedConnectApp {
-    init(
-        accountSid: String? = nil,
-        connectAppCompanyName: String? = nil,
-        connectAppDescription: String? = nil,
-        connectAppFriendlyName: String? = nil,
-        connectAppHomepageUrl: String? = nil,
-        connectAppSid: String? = nil,
-        permissions: [AuthorizedConnectAppEnumPermission]? = nil,
-        uri: String? = nil
-    ) throws {
+extension ApiV2010AccountAuthorizedConnectApp {
+    public init(accountSid: String? = nil, connectAppCompanyName: String? = nil, connectAppDescription: String? = nil, connectAppFriendlyName: String? = nil, connectAppHomepageUrl: String? = nil, connectAppSid: String? = nil, permissions: [AuthorizedConnectAppEnumPermission]? = nil, uri: String? = nil) throws {
         self.init()
         (self.accountSid, self.connectAppCompanyName) = (accountSid, connectAppCompanyName)
         self.connectAppDescription = connectAppDescription
@@ -106,16 +91,13 @@ public extension ApiV2010AccountAuthorizedConnectApp {
 public struct AuthorizedConnectAppEnumPermission: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let getAll = AuthorizedConnectAppEnumPermission(rawValue: "get-all")
     public static let postAll = AuthorizedConnectAppEnumPermission(rawValue: "post-all")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

@@ -6,9 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension KeysMethods {
-    /// Lists API Keys created by a specific account. Use the page parameters to navigate the results, and set
-    /// `PageSize` to control how many keys each page contains.
+extension KeysMethods {
+    /// Lists API Keys created by a specific account. Use the page parameters to navigate the results, and set `PageSize` to control how many keys each page contains.
     ///
     /// - Parameters:
     /// - accountSid: The SID of the
@@ -18,42 +17,26 @@ public extension KeysMethods {
     ///   50, and the maximum is 1000.
     /// - page: The page index. This value is simply for client state.
     /// - pageToken: The page token. This is provided by the API.
-    static func listKeys(
-        config: ClientConfig,
-        accountSid: String,
-        pageSize: Int? = nil,
-        page: Int? = nil,
-        pageToken: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ListKeysResponse {
+    public static func listKeys(config: ClientConfig, accountSid: String, pageSize: Int? = nil, page: Int? = nil, pageToken: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ListKeysResponse {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
-        if let pageSize {
+        if let pageSize = pageSize {
             try validateRange("PageSize", Double(pageSize), min: 1, max: 1000)
         }
 
-        if let page {
+        if let page = page {
             try validateRange("Page", Double(page), min: 0)
         }
 
-        return try await (sdkRequest(
-            "GET",
-            ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Keys.json"].joined(),
-            config: config,
-            query: [
-                SdkQueryParameter("PageSize", value: pageSize),
-                SdkQueryParameter("Page", value: page),
-                SdkQueryParameter("PageToken", value: pageToken),
-            ],
-            decoder: .json,
-            operationId: "listKeys",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Keys.json"].joined(), config: config, query: [
+            SdkQueryParameter("PageSize", value: pageSize),
+            SdkQueryParameter("Page", value: page),
+            SdkQueryParameter("PageToken", value: pageToken),
+        ], decoder: .json, operationId: "listKeys", options: requestOptions)).data
     }
 
-    /// Creates a new API Key for an account. Optionally provide `FriendlyName` to label the key; the response includes
-    /// its secret, which is returned only when the key is first created.
+    /// Creates a new API Key for an account. Optionally provide `FriendlyName` to label the key; the response includes its secret, which is returned only when the key is first created.
     ///
     /// - Parameters:
     /// - accountSid: The SID of the
@@ -61,26 +44,12 @@ public extension KeysMethods {
     ///   responsible for the new Key resource.
     /// - friendlyName: A descriptive string that you create to describe the
     ///   resource. It can be up to 64 characters long.
-    static func createKeys(
-        config: ClientConfig,
-        accountSid: String,
-        friendlyName: String? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountNewKey {
+    public static func createKeys(config: ClientConfig, accountSid: String, friendlyName: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountNewKey {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
         let requestBody = CreateKeysRequestBody(friendlyName: friendlyName)
 
-        return try await (sdkRequest(
-            "POST",
-            ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Keys.json"].joined(),
-            config: config,
-            body: requestBody,
-            contentType: "application/x-www-form-urlencoded",
-            decoder: .json,
-            operationId: "createKeys",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("POST", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Keys.json"].joined(), config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "createKeys", options: requestOptions)).data
     }
 }

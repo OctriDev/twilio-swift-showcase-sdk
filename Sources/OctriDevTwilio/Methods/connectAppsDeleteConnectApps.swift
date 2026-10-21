@@ -6,9 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ConnectAppsMethods {
-    /// Deletes a Connect App belonging to an account. Provide the account and Connect App identifiers to specify the
-    /// resource to remove.
+extension ConnectAppsMethods {
+    /// Deletes a Connect App belonging to an account. Provide the account and Connect App identifiers to specify the resource to remove.
     ///
     /// Delete an instance of a connect-app
     ///
@@ -18,31 +17,13 @@ public extension ConnectAppsMethods {
     ///   ConnectApp resource to fetch.
     /// - sid: The Twilio-provided string that uniquely identifies the ConnectApp
     ///   resource to fetch.
-    static func deleteConnectApps(
-        config: ClientConfig,
-        accountSid: String,
-        sid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
+    public static func deleteConnectApps(config: ClientConfig, accountSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
         try validateLength("Sid", sid, min: 34, max: 34)
         try sdkValidatePattern("Sid", sid, sdkPattern682cc462e4d3)
 
-        return try await (sdkRequest(
-            "DELETE",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(accountSid)),
-                "/ConnectApps/",
-                sdkEncodePathSegment(sdkWireString(sid)),
-                ".json",
-            ].joined(),
-            config: config,
-            decoder: .empty,
-            operationId: "deleteConnectApps",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("DELETE", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/ConnectApps/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, decoder: .empty, operationId: "deleteConnectApps", options: requestOptions)).data
     }
 }

@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension AddressesMethods {
-    struct CreateAddressesOptions: Codable {
+extension AddressesMethods {
+    public struct CreateAddressesOptions: Codable {
         public var accountSid: String
         public var customerName: String
         public var street: String
@@ -20,15 +20,7 @@ public extension AddressesMethods {
         public var autoCorrectAddress: Bool?
         public var streetSecondary: String?
 
-        public init(
-            accountSid: String,
-            customerName: String,
-            street: String,
-            city: String,
-            region: String,
-            postalCode: String,
-            isoCountry: String
-        ) {
+        public init(accountSid: String, customerName: String, street: String, city: String, region: String, postalCode: String, isoCountry: String) {
             self.accountSid = accountSid
             self.customerName = customerName
             self.street = street
@@ -39,9 +31,7 @@ public extension AddressesMethods {
         }
     }
 
-    /// Creates an address resource for a specific account. Provide `CustomerName`, `Street`, `City`, `Region`,
-    /// `PostalCode`, and `IsoCountry`; `AutoCorrectAddress` defaults to true when omitted. A 201 response returns the
-    /// created address.
+    /// Creates an address resource for a specific account. Provide `CustomerName`, `Street`, `City`, `Region`, `PostalCode`, and `IsoCountry`; `AutoCorrectAddress` defaults to true when omitted. A 201 response returns the created address.
     ///
     /// - Parameters:
     /// - accountSid: The SID of the
@@ -63,26 +53,12 @@ public extension AddressesMethods {
     ///   will correct the address you provide if necessary. If `false`, we won't
     ///   alter the address you provide.
     /// - streetSecondary: The additional number and street address of the address.
-    static func createAddresses(
-        config: ClientConfig,
-        options: CreateAddressesOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountAddress {
+    public static func createAddresses(config: ClientConfig, options: CreateAddressesOptions, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountAddress {
         try validateLength("AccountSid", options.accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", options.accountSid, sdkPatternc7cb941ab84b)
 
         let requestBody = CreateAddressesRequestBody(options: options)
 
-        return try await (sdkRequest(
-            "POST",
-            ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(options.accountSid)), "/Addresses.json"]
-                .joined(),
-            config: config,
-            body: requestBody,
-            contentType: "application/x-www-form-urlencoded",
-            decoder: .json,
-            operationId: "createAddresses",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("POST", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(options.accountSid)), "/Addresses.json"].joined(), config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "createAddresses", options: requestOptions)).data
     }
 }

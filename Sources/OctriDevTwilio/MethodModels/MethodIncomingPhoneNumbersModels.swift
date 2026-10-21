@@ -7,9 +7,8 @@ import Foundation
     import FoundationNetworking
 #endif
 
-/// Canonical incomingPhoneNumbers operation model declarations
-public typealias ListIncomingPhoneNumbersTollFreeResponseIncomingPhoneNumbersList =
-    [ApiV2010AccountIncomingPhoneNumberIncomingPhoneNumberTollFree]
+// Canonical incomingPhoneNumbers operation model declarations
+public typealias ListIncomingPhoneNumbersTollFreeResponseIncomingPhoneNumbersList = [ApiV2010AccountIncomingPhoneNumberIncomingPhoneNumberTollFree]
 
 public struct ListIncomingPhoneNumbersTollFreeResponse: Codable {
     public var end: Int?
@@ -35,50 +34,40 @@ public struct ListIncomingPhoneNumbersTollFreeResponse: Codable {
     }
 
     init() {
-        (end, firstPageUri, nextPageUri, page, pageSize) = (nil, nil, nil, nil, nil)
-        (previousPageUri, start, uri, incomingPhoneNumbers) = (nil, nil, nil, nil)
+        (self.end, self.firstPageUri, self.nextPageUri, self.page, self.pageSize) = (nil, nil, nil, nil, nil)
+        (self.previousPageUri, self.start, self.uri, self.incomingPhoneNumbers) = (nil, nil, nil, nil)
     }
 }
 
-public extension ListIncomingPhoneNumbersTollFreeResponse {
-    init(from decoder: Decoder) throws {
+extension ListIncomingPhoneNumbersTollFreeResponse {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        end = try container.sdkDecodeIfPresent(.end)
-        firstPageUri = try container.sdkDecodeIfPresent(.firstPageUri)
-        nextPageUri = try container.sdkDecodeIfPresent(.nextPageUri)
-        page = try container.sdkDecodeIfPresent(.page)
-        pageSize = try container.sdkDecodeIfPresent(.pageSize)
-        previousPageUri = try container.sdkDecodeIfPresent(.previousPageUri)
-        start = try container.sdkDecodeIfPresent(.start)
-        uri = try container.sdkDecodeIfPresent(.uri)
-        incomingPhoneNumbers = try container.sdkDecodeIfPresent(.incomingPhoneNumbers)
-        if let value = firstPageUri {
+        self.end = try container.sdkDecodeIfPresent(.end)
+        self.firstPageUri = try container.sdkDecodeIfPresent(.firstPageUri)
+        self.nextPageUri = try container.sdkDecodeIfPresent(.nextPageUri)
+        self.page = try container.sdkDecodeIfPresent(.page)
+        self.pageSize = try container.sdkDecodeIfPresent(.pageSize)
+        self.previousPageUri = try container.sdkDecodeIfPresent(.previousPageUri)
+        self.start = try container.sdkDecodeIfPresent(.start)
+        self.uri = try container.sdkDecodeIfPresent(.uri)
+        self.incomingPhoneNumbers = try container.sdkDecodeIfPresent(.incomingPhoneNumbers)
+        if let value = self.firstPageUri {
             try sdkValidateUri("first_page_uri", value)
         }
-        if let value = nextPageUri {
+        if let value = self.nextPageUri {
             try sdkValidateUri("next_page_uri", value)
         }
-        if let value = previousPageUri {
+        if let value = self.previousPageUri {
             try sdkValidateUri("previous_page_uri", value)
         }
-        if let value = uri {
+        if let value = self.uri {
             try sdkValidateUri("uri", value)
         }
     }
 }
 
-public extension ListIncomingPhoneNumbersTollFreeResponse {
-    init(
-        end: Int? = nil,
-        firstPageUri: String? = nil,
-        nextPageUri: String? = nil,
-        page: Int? = nil,
-        pageSize: Int? = nil,
-        previousPageUri: String? = nil,
-        start: Int? = nil,
-        uri: String? = nil,
-        incomingPhoneNumbers: ListIncomingPhoneNumbersTollFreeResponseIncomingPhoneNumbersList? = nil
-    ) throws {
+extension ListIncomingPhoneNumbersTollFreeResponse {
+    public init(end: Int? = nil, firstPageUri: String? = nil, nextPageUri: String? = nil, page: Int? = nil, pageSize: Int? = nil, previousPageUri: String? = nil, start: Int? = nil, uri: String? = nil, incomingPhoneNumbers: ListIncomingPhoneNumbersTollFreeResponseIncomingPhoneNumbersList? = nil) throws {
         self.init()
         (self.end, self.firstPageUri) = (end, firstPageUri)
         (self.nextPageUri, self.page) = (nextPageUri, page)
@@ -124,50 +113,40 @@ public struct ListIncomingPhoneNumbersLocalResponse: Codable {
     }
 
     init() {
-        (end, firstPageUri, nextPageUri, page, pageSize) = (nil, nil, nil, nil, nil)
-        (previousPageUri, start, uri, incomingPhoneNumbers) = (nil, nil, nil, nil)
+        (self.end, self.firstPageUri, self.nextPageUri, self.page, self.pageSize) = (nil, nil, nil, nil, nil)
+        (self.previousPageUri, self.start, self.uri, self.incomingPhoneNumbers) = (nil, nil, nil, nil)
     }
 }
 
-public extension ListIncomingPhoneNumbersLocalResponse {
-    init(from decoder: Decoder) throws {
+extension ListIncomingPhoneNumbersLocalResponse {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        end = try container.sdkDecodeIfPresent(.end)
-        firstPageUri = try container.sdkDecodeIfPresent(.firstPageUri)
-        nextPageUri = try container.sdkDecodeIfPresent(.nextPageUri)
-        page = try container.sdkDecodeIfPresent(.page)
-        pageSize = try container.sdkDecodeIfPresent(.pageSize)
-        previousPageUri = try container.sdkDecodeIfPresent(.previousPageUri)
-        start = try container.sdkDecodeIfPresent(.start)
-        uri = try container.sdkDecodeIfPresent(.uri)
-        incomingPhoneNumbers = try container.sdkDecodeIfPresent(.incomingPhoneNumbers)
-        if let value = firstPageUri {
+        self.end = try container.sdkDecodeIfPresent(.end)
+        self.firstPageUri = try container.sdkDecodeIfPresent(.firstPageUri)
+        self.nextPageUri = try container.sdkDecodeIfPresent(.nextPageUri)
+        self.page = try container.sdkDecodeIfPresent(.page)
+        self.pageSize = try container.sdkDecodeIfPresent(.pageSize)
+        self.previousPageUri = try container.sdkDecodeIfPresent(.previousPageUri)
+        self.start = try container.sdkDecodeIfPresent(.start)
+        self.uri = try container.sdkDecodeIfPresent(.uri)
+        self.incomingPhoneNumbers = try container.sdkDecodeIfPresent(.incomingPhoneNumbers)
+        if let value = self.firstPageUri {
             try sdkValidateUri("first_page_uri", value)
         }
-        if let value = nextPageUri {
+        if let value = self.nextPageUri {
             try sdkValidateUri("next_page_uri", value)
         }
-        if let value = previousPageUri {
+        if let value = self.previousPageUri {
             try sdkValidateUri("previous_page_uri", value)
         }
-        if let value = uri {
+        if let value = self.uri {
             try sdkValidateUri("uri", value)
         }
     }
 }
 
-public extension ListIncomingPhoneNumbersLocalResponse {
-    init(
-        end: Int? = nil,
-        firstPageUri: String? = nil,
-        nextPageUri: String? = nil,
-        page: Int? = nil,
-        pageSize: Int? = nil,
-        previousPageUri: String? = nil,
-        start: Int? = nil,
-        uri: String? = nil,
-        incomingPhoneNumbers: [ApiV2010AccountIncomingPhoneNumberIncomingPhoneNumberLocal]? = nil
-    ) throws {
+extension ListIncomingPhoneNumbersLocalResponse {
+    public init(end: Int? = nil, firstPageUri: String? = nil, nextPageUri: String? = nil, page: Int? = nil, pageSize: Int? = nil, previousPageUri: String? = nil, start: Int? = nil, uri: String? = nil, incomingPhoneNumbers: [ApiV2010AccountIncomingPhoneNumberIncomingPhoneNumberLocal]? = nil) throws {
         self.init()
         (self.end, self.firstPageUri) = (end, firstPageUri)
         (self.nextPageUri, self.page) = (nextPageUri, page)
@@ -213,50 +192,40 @@ public struct ListIncomingPhoneNumbersResponse: Codable {
     }
 
     init() {
-        (end, firstPageUri, nextPageUri, page, pageSize) = (nil, nil, nil, nil, nil)
-        (previousPageUri, start, uri, incomingPhoneNumbers) = (nil, nil, nil, nil)
+        (self.end, self.firstPageUri, self.nextPageUri, self.page, self.pageSize) = (nil, nil, nil, nil, nil)
+        (self.previousPageUri, self.start, self.uri, self.incomingPhoneNumbers) = (nil, nil, nil, nil)
     }
 }
 
-public extension ListIncomingPhoneNumbersResponse {
-    init(from decoder: Decoder) throws {
+extension ListIncomingPhoneNumbersResponse {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        end = try container.sdkDecodeIfPresent(.end)
-        firstPageUri = try container.sdkDecodeIfPresent(.firstPageUri)
-        nextPageUri = try container.sdkDecodeIfPresent(.nextPageUri)
-        page = try container.sdkDecodeIfPresent(.page)
-        pageSize = try container.sdkDecodeIfPresent(.pageSize)
-        previousPageUri = try container.sdkDecodeIfPresent(.previousPageUri)
-        start = try container.sdkDecodeIfPresent(.start)
-        uri = try container.sdkDecodeIfPresent(.uri)
-        incomingPhoneNumbers = try container.sdkDecodeIfPresent(.incomingPhoneNumbers)
-        if let value = firstPageUri {
+        self.end = try container.sdkDecodeIfPresent(.end)
+        self.firstPageUri = try container.sdkDecodeIfPresent(.firstPageUri)
+        self.nextPageUri = try container.sdkDecodeIfPresent(.nextPageUri)
+        self.page = try container.sdkDecodeIfPresent(.page)
+        self.pageSize = try container.sdkDecodeIfPresent(.pageSize)
+        self.previousPageUri = try container.sdkDecodeIfPresent(.previousPageUri)
+        self.start = try container.sdkDecodeIfPresent(.start)
+        self.uri = try container.sdkDecodeIfPresent(.uri)
+        self.incomingPhoneNumbers = try container.sdkDecodeIfPresent(.incomingPhoneNumbers)
+        if let value = self.firstPageUri {
             try sdkValidateUri("first_page_uri", value)
         }
-        if let value = nextPageUri {
+        if let value = self.nextPageUri {
             try sdkValidateUri("next_page_uri", value)
         }
-        if let value = previousPageUri {
+        if let value = self.previousPageUri {
             try sdkValidateUri("previous_page_uri", value)
         }
-        if let value = uri {
+        if let value = self.uri {
             try sdkValidateUri("uri", value)
         }
     }
 }
 
-public extension ListIncomingPhoneNumbersResponse {
-    init(
-        end: Int? = nil,
-        firstPageUri: String? = nil,
-        nextPageUri: String? = nil,
-        page: Int? = nil,
-        pageSize: Int? = nil,
-        previousPageUri: String? = nil,
-        start: Int? = nil,
-        uri: String? = nil,
-        incomingPhoneNumbers: [ApiV2010AccountIncomingPhoneNumber]? = nil
-    ) throws {
+extension ListIncomingPhoneNumbersResponse {
+    public init(end: Int? = nil, firstPageUri: String? = nil, nextPageUri: String? = nil, page: Int? = nil, pageSize: Int? = nil, previousPageUri: String? = nil, start: Int? = nil, uri: String? = nil, incomingPhoneNumbers: [ApiV2010AccountIncomingPhoneNumber]? = nil) throws {
         self.init()
         (self.end, self.firstPageUri) = (end, firstPageUri)
         (self.nextPageUri, self.page) = (nextPageUri, page)
@@ -302,50 +271,40 @@ public struct ListIncomingPhoneNumbersMobileResponse: Codable {
     }
 
     init() {
-        (end, firstPageUri, nextPageUri, page, pageSize) = (nil, nil, nil, nil, nil)
-        (previousPageUri, start, uri, incomingPhoneNumbers) = (nil, nil, nil, nil)
+        (self.end, self.firstPageUri, self.nextPageUri, self.page, self.pageSize) = (nil, nil, nil, nil, nil)
+        (self.previousPageUri, self.start, self.uri, self.incomingPhoneNumbers) = (nil, nil, nil, nil)
     }
 }
 
-public extension ListIncomingPhoneNumbersMobileResponse {
-    init(from decoder: Decoder) throws {
+extension ListIncomingPhoneNumbersMobileResponse {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        end = try container.sdkDecodeIfPresent(.end)
-        firstPageUri = try container.sdkDecodeIfPresent(.firstPageUri)
-        nextPageUri = try container.sdkDecodeIfPresent(.nextPageUri)
-        page = try container.sdkDecodeIfPresent(.page)
-        pageSize = try container.sdkDecodeIfPresent(.pageSize)
-        previousPageUri = try container.sdkDecodeIfPresent(.previousPageUri)
-        start = try container.sdkDecodeIfPresent(.start)
-        uri = try container.sdkDecodeIfPresent(.uri)
-        incomingPhoneNumbers = try container.sdkDecodeIfPresent(.incomingPhoneNumbers)
-        if let value = firstPageUri {
+        self.end = try container.sdkDecodeIfPresent(.end)
+        self.firstPageUri = try container.sdkDecodeIfPresent(.firstPageUri)
+        self.nextPageUri = try container.sdkDecodeIfPresent(.nextPageUri)
+        self.page = try container.sdkDecodeIfPresent(.page)
+        self.pageSize = try container.sdkDecodeIfPresent(.pageSize)
+        self.previousPageUri = try container.sdkDecodeIfPresent(.previousPageUri)
+        self.start = try container.sdkDecodeIfPresent(.start)
+        self.uri = try container.sdkDecodeIfPresent(.uri)
+        self.incomingPhoneNumbers = try container.sdkDecodeIfPresent(.incomingPhoneNumbers)
+        if let value = self.firstPageUri {
             try sdkValidateUri("first_page_uri", value)
         }
-        if let value = nextPageUri {
+        if let value = self.nextPageUri {
             try sdkValidateUri("next_page_uri", value)
         }
-        if let value = previousPageUri {
+        if let value = self.previousPageUri {
             try sdkValidateUri("previous_page_uri", value)
         }
-        if let value = uri {
+        if let value = self.uri {
             try sdkValidateUri("uri", value)
         }
     }
 }
 
-public extension ListIncomingPhoneNumbersMobileResponse {
-    init(
-        end: Int? = nil,
-        firstPageUri: String? = nil,
-        nextPageUri: String? = nil,
-        page: Int? = nil,
-        pageSize: Int? = nil,
-        previousPageUri: String? = nil,
-        start: Int? = nil,
-        uri: String? = nil,
-        incomingPhoneNumbers: [ApiV2010AccountIncomingPhoneNumberIncomingPhoneNumberMobile]? = nil
-    ) throws {
+extension ListIncomingPhoneNumbersMobileResponse {
+    public init(end: Int? = nil, firstPageUri: String? = nil, nextPageUri: String? = nil, page: Int? = nil, pageSize: Int? = nil, previousPageUri: String? = nil, start: Int? = nil, uri: String? = nil, incomingPhoneNumbers: [ApiV2010AccountIncomingPhoneNumberIncomingPhoneNumberMobile]? = nil) throws {
         self.init()
         (self.end, self.firstPageUri) = (end, firstPageUri)
         (self.nextPageUri, self.page) = (nextPageUri, page)

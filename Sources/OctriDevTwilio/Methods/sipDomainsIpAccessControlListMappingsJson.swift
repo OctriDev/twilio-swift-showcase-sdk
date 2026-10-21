@@ -6,9 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension SipDomainsIpAccessControlListMappingsMethods {
-    /// Creates a mapping between an IP access control list and a SIP domain. Submit `IpAccessControlListSid` to
-    /// identify the list to associate with the domain. The response includes the created mapping and its identifiers.
+extension SipDomainsIpAccessControlListMappingsMethods {
+    /// Creates a mapping between an IP access control list and a SIP domain. Submit `IpAccessControlListSid` to identify the list to associate with the domain. The response includes the created mapping and its identifiers.
     ///
     /// Create a new IpAccessControlListMapping resource.
     ///
@@ -18,13 +17,7 @@ public extension SipDomainsIpAccessControlListMappingsMethods {
     /// - domainSid: A 34 character string that uniquely identifies the SIP domain.
     /// - ipAccessControlListSid: The unique id of the IP access control list to map
     ///   to the SIP domain.
-    static func createSipDomainsIpAccessControlListMappings(
-        config: ClientConfig,
-        accountSid: String,
-        domainSid: String,
-        ipAccessControlListSid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountSipSipDomainSipIpAccessControlListMapping {
+    public static func createSipDomainsIpAccessControlListMappings(config: ClientConfig, accountSid: String, domainSid: String, ipAccessControlListSid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountSipSipDomainSipIpAccessControlListMapping {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
@@ -34,24 +27,8 @@ public extension SipDomainsIpAccessControlListMappingsMethods {
         try validateLength("IpAccessControlListSid", ipAccessControlListSid, min: 34, max: 34)
         try sdkValidatePattern("IpAccessControlListSid", ipAccessControlListSid, sdkPattern99d6601bdb3f)
 
-        let requestBody =
-            CreateSipDomainsIpAccessControlListMappingsRequestBody(ipAccessControlListSid: ipAccessControlListSid)
+        let requestBody = CreateSipDomainsIpAccessControlListMappingsRequestBody(ipAccessControlListSid: ipAccessControlListSid)
 
-        return try await (sdkRequest(
-            "POST",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(accountSid)),
-                "/SIP/Domains/",
-                sdkEncodePathSegment(sdkWireString(domainSid)),
-                "/IpAccessControlListMappings.json",
-            ].joined(),
-            config: config,
-            body: requestBody,
-            contentType: "application/x-www-form-urlencoded",
-            decoder: .json,
-            operationId: "createSipDomainsIpAccessControlListMappings",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("POST", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/SIP/Domains/", sdkEncodePathSegment(sdkWireString(domainSid)), "/IpAccessControlListMappings.json"].joined(), config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "createSipDomainsIpAccessControlListMappings", options: requestOptions)).data
     }
 }

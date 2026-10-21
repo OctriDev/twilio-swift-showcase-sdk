@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// ApiV2010Account domain models
+// ApiV2010Account domain models
 public typealias ApiV2010AccountSip = [String: JSONValue]
 
 public typealias ApiV2010AccountSipSipDomainSipAuth = [String: JSONValue]
@@ -27,20 +27,20 @@ public struct ApiV2010AccountOutgoingCallerIdSmsVerificationSendCodeAttemptsItem
     }
 
     init() {
-        (attemptSid, time) = (nil, nil)
+        (self.attemptSid, self.time) = (nil, nil)
     }
 }
 
-public extension ApiV2010AccountOutgoingCallerIdSmsVerificationSendCodeAttemptsItem {
-    init(from decoder: Decoder) throws {
+extension ApiV2010AccountOutgoingCallerIdSmsVerificationSendCodeAttemptsItem {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        attemptSid = try container.sdkDecodeIfPresent(.attemptSid)
-        time = try container.sdkDecodeIfPresent(.time)
+        self.attemptSid = try container.sdkDecodeIfPresent(.attemptSid)
+        self.time = try container.sdkDecodeIfPresent(.time)
     }
 }
 
-public extension ApiV2010AccountOutgoingCallerIdSmsVerificationSendCodeAttemptsItem {
-    init(attemptSid: String? = nil, time: String? = nil) {
+extension ApiV2010AccountOutgoingCallerIdSmsVerificationSendCodeAttemptsItem {
+    public init(attemptSid: String? = nil, time: String? = nil) {
         self.init()
         (self.attemptSid, self.time) = (attemptSid, time)
     }
@@ -65,31 +65,26 @@ public struct ApiV2010AccountOutgoingCallerIdVerificationCheck: Codable {
     }
 
     init() {
-        (phoneNumber, verificationSid, status, callerIdSid) = (nil, nil, nil, nil)
+        (self.phoneNumber, self.verificationSid, self.status, self.callerIdSid) = (nil, nil, nil, nil)
     }
 }
 
-public extension ApiV2010AccountOutgoingCallerIdVerificationCheck {
-    init(from decoder: Decoder) throws {
+extension ApiV2010AccountOutgoingCallerIdVerificationCheck {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        phoneNumber = try container.sdkDecodeIfPresent(.phoneNumber)
-        verificationSid = try container.sdkDecodeIfPresent(.verificationSid)
-        status = try container.sdkDecodeIfPresent(.status)
-        callerIdSid = try container.sdkDecodeIfPresent(.callerIdSid)
-        if let value = callerIdSid {
+        self.phoneNumber = try container.sdkDecodeIfPresent(.phoneNumber)
+        self.verificationSid = try container.sdkDecodeIfPresent(.verificationSid)
+        self.status = try container.sdkDecodeIfPresent(.status)
+        self.callerIdSid = try container.sdkDecodeIfPresent(.callerIdSid)
+        if let value = self.callerIdSid {
             try validateLength("caller_id_sid", value, min: 34, max: 34)
             try sdkValidatePattern("caller_id_sid", value, sdkPattern9792ce0bb10f)
         }
     }
 }
 
-public extension ApiV2010AccountOutgoingCallerIdVerificationCheck {
-    init(
-        phoneNumber: String? = nil,
-        verificationSid: String? = nil,
-        status: String? = nil,
-        callerIdSid: String? = nil
-    ) throws {
+extension ApiV2010AccountOutgoingCallerIdVerificationCheck {
+    public init(phoneNumber: String? = nil, verificationSid: String? = nil, status: String? = nil, callerIdSid: String? = nil) throws {
         self.init()
         (self.phoneNumber, self.verificationSid) = (phoneNumber, verificationSid)
         (self.status, self.callerIdSid) = (status, callerIdSid)
@@ -100,8 +95,7 @@ public extension ApiV2010AccountOutgoingCallerIdVerificationCheck {
     }
 }
 
-public typealias ApiV2010AccountOutgoingCallerIdSmsVerificationSendCodeAttemptsList =
-    [ApiV2010AccountOutgoingCallerIdSmsVerificationSendCodeAttemptsItem]
+public typealias ApiV2010AccountOutgoingCallerIdSmsVerificationSendCodeAttemptsList = [ApiV2010AccountOutgoingCallerIdSmsVerificationSendCodeAttemptsItem]
 
 /// Typed representation of the `ApiV2010AccountOutgoingCallerIdSmsVerification` API schema.
 public struct ApiV2010AccountOutgoingCallerIdSmsVerification: Codable {
@@ -120,25 +114,21 @@ public struct ApiV2010AccountOutgoingCallerIdSmsVerification: Codable {
     }
 
     init() {
-        (phoneNumber, verificationSid, sendCodeAttempts) = (nil, nil, nil)
+        (self.phoneNumber, self.verificationSid, self.sendCodeAttempts) = (nil, nil, nil)
     }
 }
 
-public extension ApiV2010AccountOutgoingCallerIdSmsVerification {
-    init(from decoder: Decoder) throws {
+extension ApiV2010AccountOutgoingCallerIdSmsVerification {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        phoneNumber = try container.sdkDecodeIfPresent(.phoneNumber)
-        verificationSid = try container.sdkDecodeIfPresent(.verificationSid)
-        sendCodeAttempts = try container.sdkDecodeIfPresent(.sendCodeAttempts)
+        self.phoneNumber = try container.sdkDecodeIfPresent(.phoneNumber)
+        self.verificationSid = try container.sdkDecodeIfPresent(.verificationSid)
+        self.sendCodeAttempts = try container.sdkDecodeIfPresent(.sendCodeAttempts)
     }
 }
 
-public extension ApiV2010AccountOutgoingCallerIdSmsVerification {
-    init(
-        phoneNumber: String? = nil,
-        verificationSid: String? = nil,
-        sendCodeAttempts: ApiV2010AccountOutgoingCallerIdSmsVerificationSendCodeAttemptsList? = nil
-    ) {
+extension ApiV2010AccountOutgoingCallerIdSmsVerification {
+    public init(phoneNumber: String? = nil, verificationSid: String? = nil, sendCodeAttempts: ApiV2010AccountOutgoingCallerIdSmsVerificationSendCodeAttemptsList? = nil) {
         self.init()
         (self.phoneNumber, self.verificationSid) = (phoneNumber, verificationSid)
         self.sendCodeAttempts = sendCodeAttempts

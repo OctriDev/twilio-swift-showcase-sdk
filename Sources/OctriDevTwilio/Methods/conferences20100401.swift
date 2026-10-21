@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ConferencesMethods {
-    struct ListConferencesOptions: Codable {
+extension ConferencesMethods {
+    public struct ListConferencesOptions: Codable {
         public var accountSid: String
         public var dateCreated: String?
         public var dateCreated2: String?
@@ -26,8 +26,7 @@ public extension ConferencesMethods {
         }
     }
 
-    /// Lists conferences belonging to the specified account. Filter results by creation or update date, friendly name,
-    /// or status, and use the page parameters to navigate the results.
+    /// Lists conferences belonging to the specified account. Filter results by creation or update date, friendly name, or status, and use the page parameters to navigate the results.
     ///
     /// Retrieve a list of conferences belonging to the account used to make the request
     ///
@@ -83,11 +82,7 @@ public extension ConferencesMethods {
     ///   50, and the maximum is 1000.
     /// - page: The page index. This value is simply for client state.
     /// - pageToken: The page token. This is provided by the API.
-    static func listConferences(
-        config: ClientConfig,
-        options: ListConferencesOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ListConferencesResponse {
+    public static func listConferences(config: ClientConfig, options: ListConferencesOptions, requestOptions: RequestOptions? = nil) async throws -> ListConferencesResponse {
         try validateLength("AccountSid", options.accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", options.accountSid, sdkPatternc7cb941ab84b)
 
@@ -123,27 +118,18 @@ public extension ConferencesMethods {
             try validateRange("Page", Double(page), min: 0)
         }
 
-        return try await (sdkRequest(
-            "GET",
-            ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(options.accountSid)), "/Conferences.json"]
-                .joined(),
-            config: config,
-            query: [
-                SdkQueryParameter("DateCreated", value: options.dateCreated),
-                SdkQueryParameter("DateCreated<", value: options.dateCreated2),
-                SdkQueryParameter("DateCreated>", value: options.dateCreated3),
-                SdkQueryParameter("DateUpdated", value: options.dateUpdated),
-                SdkQueryParameter("DateUpdated<", value: options.dateUpdated2),
-                SdkQueryParameter("DateUpdated>", value: options.dateUpdated3),
-                SdkQueryParameter("FriendlyName", value: options.friendlyName),
-                SdkQueryParameter("Status", value: options.status),
-                SdkQueryParameter("PageSize", value: options.pageSize),
-                SdkQueryParameter("Page", value: options.page),
-                SdkQueryParameter("PageToken", value: options.pageToken),
-            ],
-            decoder: .json,
-            operationId: "listConferences",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(options.accountSid)), "/Conferences.json"].joined(), config: config, query: [
+            SdkQueryParameter("DateCreated", value: options.dateCreated),
+            SdkQueryParameter("DateCreated<", value: options.dateCreated2),
+            SdkQueryParameter("DateCreated>", value: options.dateCreated3),
+            SdkQueryParameter("DateUpdated", value: options.dateUpdated),
+            SdkQueryParameter("DateUpdated<", value: options.dateUpdated2),
+            SdkQueryParameter("DateUpdated>", value: options.dateUpdated3),
+            SdkQueryParameter("FriendlyName", value: options.friendlyName),
+            SdkQueryParameter("Status", value: options.status),
+            SdkQueryParameter("PageSize", value: options.pageSize),
+            SdkQueryParameter("Page", value: options.page),
+            SdkQueryParameter("PageToken", value: options.pageToken),
+        ], decoder: .json, operationId: "listConferences", options: requestOptions)).data
     }
 }

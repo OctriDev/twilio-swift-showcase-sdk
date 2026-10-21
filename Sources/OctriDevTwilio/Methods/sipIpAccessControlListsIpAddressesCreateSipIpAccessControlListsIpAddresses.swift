@@ -6,10 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension SipIpAccessControlListsIpAddressesMethods {
-    /// Creates an IP address resource in an IP access control list. Provide `FriendlyName` and an IPv4 address in
-    /// `IpAddress`; optionally set `CidrPrefixLength` to specify the address prefix. The prefix defaults to the full
-    /// address when omitted.
+extension SipIpAccessControlListsIpAddressesMethods {
+    /// Creates an IP address resource in an IP access control list. Provide `FriendlyName` and an IPv4 address in `IpAddress`; optionally set `CidrPrefixLength` to specify the address prefix. The prefix defaults to the full address when omitted.
     ///
     /// Create a new IpAddress resource.
     ///
@@ -27,42 +25,15 @@ public extension SipIpAccessControlListsIpAddressesMethods {
     /// - cidrPrefixLength: An integer representing the length of the CIDR prefix to
     ///   use with this IP address when accepting traffic. By default the entire IP
     ///   address is used.
-    static func createSipIpAccessControlListsIpAddresses(
-        config: ClientConfig,
-        accountSid: String,
-        ipAccessControlListSid: String,
-        friendlyName: String,
-        ipAddress: String,
-        cidrPrefixLength: Int? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountSipSipIpAccessControlListSipIpAddress {
+    public static func createSipIpAccessControlListsIpAddresses(config: ClientConfig, accountSid: String, ipAccessControlListSid: String, friendlyName: String, ipAddress: String, cidrPrefixLength: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountSipSipIpAccessControlListSipIpAddress {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
         try validateLength("IpAccessControlListSid", ipAccessControlListSid, min: 34, max: 34)
         try sdkValidatePattern("IpAccessControlListSid", ipAccessControlListSid, sdkPattern99d6601bdb3f)
 
-        let requestBody = CreateSipIpAccessControlListsIpAddressesRequestBody(
-            friendlyName: friendlyName,
-            ipAddress: ipAddress,
-            cidrPrefixLength: cidrPrefixLength
-        )
+        let requestBody = CreateSipIpAccessControlListsIpAddressesRequestBody(friendlyName: friendlyName, ipAddress: ipAddress, cidrPrefixLength: cidrPrefixLength)
 
-        return try await (sdkRequest(
-            "POST",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(accountSid)),
-                "/SIP/IpAccessControlLists/",
-                sdkEncodePathSegment(sdkWireString(ipAccessControlListSid)),
-                "/IpAddresses.json",
-            ].joined(),
-            config: config,
-            body: requestBody,
-            contentType: "application/x-www-form-urlencoded",
-            decoder: .json,
-            operationId: "createSipIpAccessControlListsIpAddresses",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("POST", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/SIP/IpAccessControlLists/", sdkEncodePathSegment(sdkWireString(ipAccessControlListSid)), "/IpAddresses.json"].joined(), config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "createSipIpAccessControlListsIpAddresses", options: requestOptions)).data
     }
 }

@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Api20100401Message domain models
+// Api20100401Message domain models
 /// Typed representation of the `ApiV2010AccountMessage` API schema.
 public struct ApiV2010AccountMessage: Codable {
     /// The text content of the message
@@ -90,74 +90,53 @@ public struct ApiV2010AccountMessage: Codable {
     }
 
     init() {
-        (body, numSegments, direction, from, to) = (nil, nil, nil, nil, nil)
-        (dateUpdated, price, errorMessage, uri, accountSid) = (nil, nil, nil, nil, nil)
-        (numMedia, status, messagingServiceSid, sid, dateSent) = (nil, nil, nil, nil, nil)
-        (dateCreated, errorCode, priceUnit, apiVersion, subresourceUris) = (nil, nil, nil, nil, nil)
+        (self.body, self.numSegments, self.direction, self.from, self.to) = (nil, nil, nil, nil, nil)
+        (self.dateUpdated, self.price, self.errorMessage, self.uri, self.accountSid) = (nil, nil, nil, nil, nil)
+        (self.numMedia, self.status, self.messagingServiceSid, self.sid, self.dateSent) = (nil, nil, nil, nil, nil)
+        (self.dateCreated, self.errorCode, self.priceUnit, self.apiVersion, self.subresourceUris) = (nil, nil, nil, nil, nil)
     }
 }
 
-public extension ApiV2010AccountMessage {
-    init(from decoder: Decoder) throws {
+extension ApiV2010AccountMessage {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        body = try container.sdkDecodeIfPresent(.body)
-        numSegments = try container.sdkDecodeIfPresent(.numSegments)
-        direction = try container.sdkDecodeIfPresent(.direction)
-        from = try container.sdkDecodeIfPresent(.from)
-        to = try container.sdkDecodeIfPresent(.to)
-        dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
-        price = try container.sdkDecodeIfPresent(.price)
-        errorMessage = try container.sdkDecodeIfPresent(.errorMessage)
-        uri = try container.sdkDecodeIfPresent(.uri)
-        accountSid = try container.sdkDecodeIfPresent(.accountSid)
-        numMedia = try container.sdkDecodeIfPresent(.numMedia)
-        status = try container.sdkDecodeIfPresent(.status)
-        messagingServiceSid = try container.sdkDecodeIfPresent(.messagingServiceSid)
-        sid = try container.sdkDecodeIfPresent(.sid)
-        dateSent = try container.sdkDecodeIfPresent(.dateSent)
-        dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
-        errorCode = try container.sdkDecodeIfPresent(.errorCode)
-        priceUnit = try container.sdkDecodeIfPresent(.priceUnit)
-        apiVersion = try container.sdkDecodeIfPresent(.apiVersion)
-        subresourceUris = try container.sdkDecodeIfPresent(.subresourceUris)
-        if let value = accountSid {
+        self.body = try container.sdkDecodeIfPresent(.body)
+        self.numSegments = try container.sdkDecodeIfPresent(.numSegments)
+        self.direction = try container.sdkDecodeIfPresent(.direction)
+        self.from = try container.sdkDecodeIfPresent(.from)
+        self.to = try container.sdkDecodeIfPresent(.to)
+        self.dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
+        self.price = try container.sdkDecodeIfPresent(.price)
+        self.errorMessage = try container.sdkDecodeIfPresent(.errorMessage)
+        self.uri = try container.sdkDecodeIfPresent(.uri)
+        self.accountSid = try container.sdkDecodeIfPresent(.accountSid)
+        self.numMedia = try container.sdkDecodeIfPresent(.numMedia)
+        self.status = try container.sdkDecodeIfPresent(.status)
+        self.messagingServiceSid = try container.sdkDecodeIfPresent(.messagingServiceSid)
+        self.sid = try container.sdkDecodeIfPresent(.sid)
+        self.dateSent = try container.sdkDecodeIfPresent(.dateSent)
+        self.dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
+        self.errorCode = try container.sdkDecodeIfPresent(.errorCode)
+        self.priceUnit = try container.sdkDecodeIfPresent(.priceUnit)
+        self.apiVersion = try container.sdkDecodeIfPresent(.apiVersion)
+        self.subresourceUris = try container.sdkDecodeIfPresent(.subresourceUris)
+        if let value = self.accountSid {
             try validateLength("account_sid", value, min: 34, max: 34)
             try sdkValidatePattern("account_sid", value, sdkPatternc7cb941ab84b)
         }
-        if let value = messagingServiceSid {
+        if let value = self.messagingServiceSid {
             try validateLength("messaging_service_sid", value, min: 34, max: 34)
             try sdkValidatePattern("messaging_service_sid", value, sdkPatternba39ba18a41a)
         }
-        if let value = sid {
+        if let value = self.sid {
             try validateLength("sid", value, min: 34, max: 34)
             try sdkValidatePattern("sid", value, sdkPattern65b3eddf4a12)
         }
     }
 }
 
-public extension ApiV2010AccountMessage {
-    init(
-        body: String? = nil,
-        numSegments: String? = nil,
-        direction: MessageEnumDirection? = nil,
-        from: String? = nil,
-        to: String? = nil,
-        dateUpdated: String? = nil,
-        price: String? = nil,
-        errorMessage: String? = nil,
-        uri: String? = nil,
-        accountSid: String? = nil,
-        numMedia: String? = nil,
-        status: MessageEnumStatus? = nil,
-        messagingServiceSid: String? = nil,
-        sid: String? = nil,
-        dateSent: String? = nil,
-        dateCreated: String? = nil,
-        errorCode: Int? = nil,
-        priceUnit: String? = nil,
-        apiVersion: String? = nil,
-        subresourceUris: [String: JSONValue]? = nil
-    ) throws {
+extension ApiV2010AccountMessage {
+    public init(body: String? = nil, numSegments: String? = nil, direction: MessageEnumDirection? = nil, from: String? = nil, to: String? = nil, dateUpdated: String? = nil, price: String? = nil, errorMessage: String? = nil, uri: String? = nil, accountSid: String? = nil, numMedia: String? = nil, status: MessageEnumStatus? = nil, messagingServiceSid: String? = nil, sid: String? = nil, dateSent: String? = nil, dateCreated: String? = nil, errorCode: Int? = nil, priceUnit: String? = nil, apiVersion: String? = nil, subresourceUris: [String: JSONValue]? = nil) throws {
         self.init()
         (self.body, self.numSegments) = (body, numSegments)
         (self.direction, self.from) = (direction, from)
@@ -189,16 +168,13 @@ public extension ApiV2010AccountMessage {
 public struct MessageEnumRiskCheck: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let enable = MessageEnumRiskCheck(rawValue: "enable")
     public static let disable = MessageEnumRiskCheck(rawValue: "disable")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -211,15 +187,12 @@ public struct MessageEnumRiskCheck: RawRepresentable, Hashable, Codable, Sendabl
 public struct MessageEnumTrafficType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let free = MessageEnumTrafficType(rawValue: "free")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -234,10 +207,7 @@ public struct MessageEnumTrafficType: RawRepresentable, Hashable, Codable, Senda
 public struct MessageEnumDirection: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let inbound = MessageEnumDirection(rawValue: "inbound")
     public static let outboundApi = MessageEnumDirection(rawValue: "outbound-api")
     public static let outboundCall = MessageEnumDirection(rawValue: "outbound-call")
@@ -245,7 +215,7 @@ public struct MessageEnumDirection: RawRepresentable, Hashable, Codable, Sendabl
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -260,10 +230,7 @@ public struct MessageEnumDirection: RawRepresentable, Hashable, Codable, Sendabl
 public struct MessageEnumStatus: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let queued = MessageEnumStatus(rawValue: "queued")
     public static let sending = MessageEnumStatus(rawValue: "sending")
     public static let sent = MessageEnumStatus(rawValue: "sent")
@@ -280,7 +247,7 @@ public struct MessageEnumStatus: RawRepresentable, Hashable, Codable, Sendable, 
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -293,16 +260,13 @@ public struct MessageEnumStatus: RawRepresentable, Hashable, Codable, Sendable, 
 public struct MessageEnumContentRetention: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let retain = MessageEnumContentRetention(rawValue: "retain")
     public static let discard = MessageEnumContentRetention(rawValue: "discard")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -315,16 +279,13 @@ public struct MessageEnumContentRetention: RawRepresentable, Hashable, Codable, 
 public struct MessageEnumAddressRetention: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let retain = MessageEnumAddressRetention(rawValue: "retain")
     public static let obfuscate = MessageEnumAddressRetention(rawValue: "obfuscate")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -337,15 +298,12 @@ public struct MessageEnumAddressRetention: RawRepresentable, Hashable, Codable, 
 public struct MessageEnumUpdateStatus: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let canceled = MessageEnumUpdateStatus(rawValue: "canceled")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -359,15 +317,12 @@ public struct MessageEnumUpdateStatus: RawRepresentable, Hashable, Codable, Send
 public struct MessageEnumScheduleType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let fixed = MessageEnumScheduleType(rawValue: "fixed")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

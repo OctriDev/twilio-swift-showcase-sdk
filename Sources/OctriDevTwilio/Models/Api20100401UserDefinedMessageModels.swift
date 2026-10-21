@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Api20100401UserDefinedMessage domain models
+// Api20100401UserDefinedMessage domain models
 /// Typed representation of the `ApiV2010AccountCallUserDefinedMessage` API schema.
 public struct ApiV2010AccountCallUserDefinedMessage: Codable {
     /// The SID of the Account that created User Defined Message.
@@ -23,34 +23,34 @@ public struct ApiV2010AccountCallUserDefinedMessage: Codable {
     }
 
     init() {
-        (accountSid, callSid, sid, dateCreated) = (nil, nil, nil, nil)
+        (self.accountSid, self.callSid, self.sid, self.dateCreated) = (nil, nil, nil, nil)
     }
 }
 
-public extension ApiV2010AccountCallUserDefinedMessage {
-    init(from decoder: Decoder) throws {
+extension ApiV2010AccountCallUserDefinedMessage {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        accountSid = try container.sdkDecodeIfPresent(.accountSid)
-        callSid = try container.sdkDecodeIfPresent(.callSid)
-        sid = try container.sdkDecodeIfPresent(.sid)
-        dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
-        if let value = accountSid {
+        self.accountSid = try container.sdkDecodeIfPresent(.accountSid)
+        self.callSid = try container.sdkDecodeIfPresent(.callSid)
+        self.sid = try container.sdkDecodeIfPresent(.sid)
+        self.dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
+        if let value = self.accountSid {
             try validateLength("account_sid", value, min: 34, max: 34)
             try sdkValidatePattern("account_sid", value, sdkPatternc7cb941ab84b)
         }
-        if let value = callSid {
+        if let value = self.callSid {
             try validateLength("call_sid", value, min: 34, max: 34)
             try sdkValidatePattern("call_sid", value, sdkPattern25b2d94fcc27)
         }
-        if let value = sid {
+        if let value = self.sid {
             try validateLength("sid", value, min: 34, max: 34)
             try sdkValidatePattern("sid", value, sdkPattern1931329bacf7)
         }
     }
 }
 
-public extension ApiV2010AccountCallUserDefinedMessage {
-    init(accountSid: String? = nil, callSid: String? = nil, sid: String? = nil, dateCreated: String? = nil) throws {
+extension ApiV2010AccountCallUserDefinedMessage {
+    public init(accountSid: String? = nil, callSid: String? = nil, sid: String? = nil, dateCreated: String? = nil) throws {
         self.init()
         (self.accountSid, self.callSid) = (accountSid, callSid)
         (self.sid, self.dateCreated) = (sid, dateCreated)

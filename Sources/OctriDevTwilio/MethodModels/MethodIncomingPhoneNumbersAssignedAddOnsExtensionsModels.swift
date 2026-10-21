@@ -7,9 +7,8 @@ import Foundation
     import FoundationNetworking
 #endif
 
-/// Canonical incomingPhoneNumbersAssignedAddOnsExtensions operation model declarations
-public typealias ListIncomingPhoneNumbersAssignedAddOnsExtensionsResponseExtensionsList =
-    [ApiV2010AccountIncomingPhoneNumberIncomingPhoneNumberAssignedX1fcf5f2168]
+// Canonical incomingPhoneNumbersAssignedAddOnsExtensions operation model declarations
+public typealias ListIncomingPhoneNumbersAssignedAddOnsExtensionsResponseExtensionsList = [ApiV2010AccountIncomingPhoneNumberIncomingPhoneNumberAssignedX1fcf5f2168]
 
 public struct ListIncomingPhoneNumbersAssignedAddOnsExtensionsResponse: Codable {
     public var end: Int?
@@ -35,50 +34,40 @@ public struct ListIncomingPhoneNumbersAssignedAddOnsExtensionsResponse: Codable 
     }
 
     init() {
-        (end, firstPageUri, nextPageUri, page, pageSize) = (nil, nil, nil, nil, nil)
-        (previousPageUri, start, uri, extensions) = (nil, nil, nil, nil)
+        (self.end, self.firstPageUri, self.nextPageUri, self.page, self.pageSize) = (nil, nil, nil, nil, nil)
+        (self.previousPageUri, self.start, self.uri, self.extensions) = (nil, nil, nil, nil)
     }
 }
 
-public extension ListIncomingPhoneNumbersAssignedAddOnsExtensionsResponse {
-    init(from decoder: Decoder) throws {
+extension ListIncomingPhoneNumbersAssignedAddOnsExtensionsResponse {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        end = try container.sdkDecodeIfPresent(.end)
-        firstPageUri = try container.sdkDecodeIfPresent(.firstPageUri)
-        nextPageUri = try container.sdkDecodeIfPresent(.nextPageUri)
-        page = try container.sdkDecodeIfPresent(.page)
-        pageSize = try container.sdkDecodeIfPresent(.pageSize)
-        previousPageUri = try container.sdkDecodeIfPresent(.previousPageUri)
-        start = try container.sdkDecodeIfPresent(.start)
-        uri = try container.sdkDecodeIfPresent(.uri)
-        extensions = try container.sdkDecodeIfPresent(.extensions)
-        if let value = firstPageUri {
+        self.end = try container.sdkDecodeIfPresent(.end)
+        self.firstPageUri = try container.sdkDecodeIfPresent(.firstPageUri)
+        self.nextPageUri = try container.sdkDecodeIfPresent(.nextPageUri)
+        self.page = try container.sdkDecodeIfPresent(.page)
+        self.pageSize = try container.sdkDecodeIfPresent(.pageSize)
+        self.previousPageUri = try container.sdkDecodeIfPresent(.previousPageUri)
+        self.start = try container.sdkDecodeIfPresent(.start)
+        self.uri = try container.sdkDecodeIfPresent(.uri)
+        self.extensions = try container.sdkDecodeIfPresent(.extensions)
+        if let value = self.firstPageUri {
             try sdkValidateUri("first_page_uri", value)
         }
-        if let value = nextPageUri {
+        if let value = self.nextPageUri {
             try sdkValidateUri("next_page_uri", value)
         }
-        if let value = previousPageUri {
+        if let value = self.previousPageUri {
             try sdkValidateUri("previous_page_uri", value)
         }
-        if let value = uri {
+        if let value = self.uri {
             try sdkValidateUri("uri", value)
         }
     }
 }
 
-public extension ListIncomingPhoneNumbersAssignedAddOnsExtensionsResponse {
-    init(
-        end: Int? = nil,
-        firstPageUri: String? = nil,
-        nextPageUri: String? = nil,
-        page: Int? = nil,
-        pageSize: Int? = nil,
-        previousPageUri: String? = nil,
-        start: Int? = nil,
-        uri: String? = nil,
-        extensions: ListIncomingPhoneNumbersAssignedAddOnsExtensionsResponseExtensionsList? = nil
-    ) throws {
+extension ListIncomingPhoneNumbersAssignedAddOnsExtensionsResponse {
+    public init(end: Int? = nil, firstPageUri: String? = nil, nextPageUri: String? = nil, page: Int? = nil, pageSize: Int? = nil, previousPageUri: String? = nil, start: Int? = nil, uri: String? = nil, extensions: ListIncomingPhoneNumbersAssignedAddOnsExtensionsResponseExtensionsList? = nil) throws {
         self.init()
         (self.end, self.firstPageUri) = (end, firstPageUri)
         (self.nextPageUri, self.page) = (nextPageUri, page)

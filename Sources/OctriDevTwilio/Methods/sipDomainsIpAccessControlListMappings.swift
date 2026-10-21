@@ -8,10 +8,8 @@ import Foundation
 #endif
 public enum SipDomainsIpAccessControlListMappingsMethods {}
 
-public extension SipDomainsIpAccessControlListMappingsMethods {
-    /// Retrieves an IP access control list mapping for a SIP domain. Use `AccountSid`, `DomainSid`, and `Sid` to
-    /// identify the account, SIP domain, and mapping. Each identifier must match the 34-character format for its
-    /// resource.
+extension SipDomainsIpAccessControlListMappingsMethods {
+    /// Retrieves an IP access control list mapping for a SIP domain. Use `AccountSid`, `DomainSid`, and `Sid` to identify the account, SIP domain, and mapping. Each identifier must match the 34-character format for its resource.
     ///
     /// Fetch an IpAccessControlListMapping resource.
     ///
@@ -20,13 +18,7 @@ public extension SipDomainsIpAccessControlListMappingsMethods {
     ///   resource.
     /// - domainSid: A 34 character string that uniquely identifies the SIP domain.
     /// - sid: A 34 character string that uniquely identifies the resource to fetch.
-    static func fetchSipDomainsIpAccessControlListMappings(
-        config: ClientConfig,
-        accountSid: String,
-        domainSid: String,
-        sid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountSipSipDomainSipIpAccessControlListMapping {
+    public static func fetchSipDomainsIpAccessControlListMappings(config: ClientConfig, accountSid: String, domainSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountSipSipDomainSipIpAccessControlListMapping {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
@@ -36,21 +28,6 @@ public extension SipDomainsIpAccessControlListMappingsMethods {
         try validateLength("Sid", sid, min: 34, max: 34)
         try sdkValidatePattern("Sid", sid, sdkPattern99d6601bdb3f)
 
-        return try await (sdkRequest(
-            "GET",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(accountSid)),
-                "/SIP/Domains/",
-                sdkEncodePathSegment(sdkWireString(domainSid)),
-                "/IpAccessControlListMappings/",
-                sdkEncodePathSegment(sdkWireString(sid)),
-                ".json",
-            ].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "fetchSipDomainsIpAccessControlListMappings",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/SIP/Domains/", sdkEncodePathSegment(sdkWireString(domainSid)), "/IpAccessControlListMappings/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, decoder: .json, operationId: "fetchSipDomainsIpAccessControlListMappings", options: requestOptions)).data
     }
 }

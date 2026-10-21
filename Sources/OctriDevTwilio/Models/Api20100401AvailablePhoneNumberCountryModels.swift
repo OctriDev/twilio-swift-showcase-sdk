@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Api20100401AvailablePhoneNumberCountry domain models
+// Api20100401AvailablePhoneNumberCountry domain models
 /// Typed representation of the `ApiV2010AccountAvailablePhoneNumberCountry` API schema.
 public struct ApiV2010AccountAvailablePhoneNumberCountry: Codable {
     /// The ISO-3166-1 country code of the country.
@@ -27,32 +27,26 @@ public struct ApiV2010AccountAvailablePhoneNumberCountry: Codable {
     }
 
     init() {
-        (countryCode, country, uri, beta, subresourceUris) = (nil, nil, nil, nil, nil)
+        (self.countryCode, self.country, self.uri, self.beta, self.subresourceUris) = (nil, nil, nil, nil, nil)
     }
 }
 
-public extension ApiV2010AccountAvailablePhoneNumberCountry {
-    init(from decoder: Decoder) throws {
+extension ApiV2010AccountAvailablePhoneNumberCountry {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        countryCode = try container.sdkDecodeIfPresent(.countryCode)
-        country = try container.sdkDecodeIfPresent(.country)
-        uri = try container.sdkDecodeIfPresent(.uri)
-        beta = try container.sdkDecodeIfPresent(.beta)
-        subresourceUris = try container.sdkDecodeIfPresent(.subresourceUris)
-        if let value = uri {
+        self.countryCode = try container.sdkDecodeIfPresent(.countryCode)
+        self.country = try container.sdkDecodeIfPresent(.country)
+        self.uri = try container.sdkDecodeIfPresent(.uri)
+        self.beta = try container.sdkDecodeIfPresent(.beta)
+        self.subresourceUris = try container.sdkDecodeIfPresent(.subresourceUris)
+        if let value = self.uri {
             try sdkValidateUri("uri", value)
         }
     }
 }
 
-public extension ApiV2010AccountAvailablePhoneNumberCountry {
-    init(
-        countryCode: String? = nil,
-        country: String? = nil,
-        uri: String? = nil,
-        beta: Bool? = nil,
-        subresourceUris: [String: JSONValue]? = nil
-    ) throws {
+extension ApiV2010AccountAvailablePhoneNumberCountry {
+    public init(countryCode: String? = nil, country: String? = nil, uri: String? = nil, beta: Bool? = nil, subresourceUris: [String: JSONValue]? = nil) throws {
         self.init()
         (self.countryCode, self.country) = (countryCode, country)
         (self.uri, self.beta) = (uri, beta)

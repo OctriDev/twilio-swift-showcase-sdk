@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Api20100401OutgoingCallerId domain models
+// Api20100401OutgoingCallerId domain models
 /// Typed representation of the `ApiV2010AccountOutgoingCallerId` API schema.
 public struct ApiV2010AccountOutgoingCallerId: Codable {
     /// The unique string that that we created to identify the OutgoingCallerId resource.
@@ -32,42 +32,34 @@ public struct ApiV2010AccountOutgoingCallerId: Codable {
     }
 
     init() {
-        (sid, dateCreated, dateUpdated, friendlyName, accountSid) = (nil, nil, nil, nil, nil)
-        (phoneNumber, uri) = (nil, nil)
+        (self.sid, self.dateCreated, self.dateUpdated, self.friendlyName, self.accountSid) = (nil, nil, nil, nil, nil)
+        (self.phoneNumber, self.uri) = (nil, nil)
     }
 }
 
-public extension ApiV2010AccountOutgoingCallerId {
-    init(from decoder: Decoder) throws {
+extension ApiV2010AccountOutgoingCallerId {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        sid = try container.sdkDecodeIfPresent(.sid)
-        dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
-        dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
-        friendlyName = try container.sdkDecodeIfPresent(.friendlyName)
-        accountSid = try container.sdkDecodeIfPresent(.accountSid)
-        phoneNumber = try container.sdkDecodeIfPresent(.phoneNumber)
-        uri = try container.sdkDecodeIfPresent(.uri)
-        if let value = sid {
+        self.sid = try container.sdkDecodeIfPresent(.sid)
+        self.dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
+        self.dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
+        self.friendlyName = try container.sdkDecodeIfPresent(.friendlyName)
+        self.accountSid = try container.sdkDecodeIfPresent(.accountSid)
+        self.phoneNumber = try container.sdkDecodeIfPresent(.phoneNumber)
+        self.uri = try container.sdkDecodeIfPresent(.uri)
+        if let value = self.sid {
             try validateLength("sid", value, min: 34, max: 34)
             try sdkValidatePattern("sid", value, sdkPattern9792ce0bb10f)
         }
-        if let value = accountSid {
+        if let value = self.accountSid {
             try validateLength("account_sid", value, min: 34, max: 34)
             try sdkValidatePattern("account_sid", value, sdkPatternc7cb941ab84b)
         }
     }
 }
 
-public extension ApiV2010AccountOutgoingCallerId {
-    init(
-        sid: String? = nil,
-        dateCreated: String? = nil,
-        dateUpdated: String? = nil,
-        friendlyName: String? = nil,
-        accountSid: String? = nil,
-        phoneNumber: String? = nil,
-        uri: String? = nil
-    ) throws {
+extension ApiV2010AccountOutgoingCallerId {
+    public init(sid: String? = nil, dateCreated: String? = nil, dateUpdated: String? = nil, friendlyName: String? = nil, accountSid: String? = nil, phoneNumber: String? = nil, uri: String? = nil) throws {
         self.init()
         (self.sid, self.dateCreated) = (sid, dateCreated)
         (self.dateUpdated, self.friendlyName) = (dateUpdated, friendlyName)

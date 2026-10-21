@@ -6,9 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ConferencesRecordingsMethods {
-    /// Deletes a recording associated with a conference from the account. Provide the account, conference, and
-    /// recording identifiers to specify the resource to remove.
+extension ConferencesRecordingsMethods {
+    /// Deletes a recording associated with a conference from the account. Provide the account, conference, and recording identifiers to specify the resource to remove.
     ///
     /// Delete a recording from your account
     ///
@@ -20,13 +19,7 @@ public extension ConferencesRecordingsMethods {
     ///   associated with the recording to delete.
     /// - sid: The Twilio-provided string that uniquely identifies the Conference
     ///   Recording resource to delete.
-    static func deleteConferencesRecordings(
-        config: ClientConfig,
-        accountSid: String,
-        conferenceSid: String,
-        sid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
+    public static func deleteConferencesRecordings(config: ClientConfig, accountSid: String, conferenceSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
@@ -36,21 +29,6 @@ public extension ConferencesRecordingsMethods {
         try validateLength("Sid", sid, min: 34, max: 34)
         try sdkValidatePattern("Sid", sid, sdkPatternfad3f05341a2)
 
-        return try await (sdkRequest(
-            "DELETE",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(accountSid)),
-                "/Conferences/",
-                sdkEncodePathSegment(sdkWireString(conferenceSid)),
-                "/Recordings/",
-                sdkEncodePathSegment(sdkWireString(sid)),
-                ".json",
-            ].joined(),
-            config: config,
-            decoder: .empty,
-            operationId: "deleteConferencesRecordings",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("DELETE", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Conferences/", sdkEncodePathSegment(sdkWireString(conferenceSid)), "/Recordings/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, decoder: .empty, operationId: "deleteConferencesRecordings", options: requestOptions)).data
     }
 }

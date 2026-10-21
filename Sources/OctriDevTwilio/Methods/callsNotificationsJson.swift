@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension CallsNotificationsMethods {
-    struct ListCallsNotificationsOptions: Codable {
+extension CallsNotificationsMethods {
+    public struct ListCallsNotificationsOptions: Codable {
         public var accountSid: String
         public var callSid: String
         public var log: Int?
@@ -24,8 +24,7 @@ public extension CallsNotificationsMethods {
         }
     }
 
-    /// Lists notifications associated with a specific call. Filter by log level or message date, and use the page
-    /// parameters to navigate the results.
+    /// Lists notifications associated with a specific call. Filter by log level or message date, and use the page parameters to navigate the results.
     ///
     /// - Parameters:
     /// - accountSid: The SID of the
@@ -52,11 +51,7 @@ public extension CallsNotificationsMethods {
     ///   50, and the maximum is 1000.
     /// - page: The page index. This value is simply for client state.
     /// - pageToken: The page token. This is provided by the API.
-    static func listCallsNotifications(
-        config: ClientConfig,
-        options: ListCallsNotificationsOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ListCallsNotificationsResponse {
+    public static func listCallsNotifications(config: ClientConfig, options: ListCallsNotificationsOptions, requestOptions: RequestOptions? = nil) async throws -> ListCallsNotificationsResponse {
         try validateLength("AccountSid", options.accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", options.accountSid, sdkPatternc7cb941ab84b)
 
@@ -83,28 +78,14 @@ public extension CallsNotificationsMethods {
             try validateRange("Page", Double(page), min: 0)
         }
 
-        return try await (sdkRequest(
-            "GET",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(options.accountSid)),
-                "/Calls/",
-                sdkEncodePathSegment(sdkWireString(options.callSid)),
-                "/Notifications.json",
-            ].joined(),
-            config: config,
-            query: [
-                SdkQueryParameter("Log", value: options.log),
-                SdkQueryParameter("MessageDate", value: options.messageDate),
-                SdkQueryParameter("MessageDate<", value: options.messageDate2),
-                SdkQueryParameter("MessageDate>", value: options.messageDate3),
-                SdkQueryParameter("PageSize", value: options.pageSize),
-                SdkQueryParameter("Page", value: options.page),
-                SdkQueryParameter("PageToken", value: options.pageToken),
-            ],
-            decoder: .json,
-            operationId: "listCallsNotifications",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(options.accountSid)), "/Calls/", sdkEncodePathSegment(sdkWireString(options.callSid)), "/Notifications.json"].joined(), config: config, query: [
+            SdkQueryParameter("Log", value: options.log),
+            SdkQueryParameter("MessageDate", value: options.messageDate),
+            SdkQueryParameter("MessageDate<", value: options.messageDate2),
+            SdkQueryParameter("MessageDate>", value: options.messageDate3),
+            SdkQueryParameter("PageSize", value: options.pageSize),
+            SdkQueryParameter("Page", value: options.page),
+            SdkQueryParameter("PageToken", value: options.pageToken),
+        ], decoder: .json, operationId: "listCallsNotifications", options: requestOptions)).data
     }
 }

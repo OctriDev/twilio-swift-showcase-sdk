@@ -6,9 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension SipIpAccessControlListsIpAddressesMethods {
-    /// Deletes an IP address entry from a SIP IP access control list. Identify the account, list, and address resource
-    /// using their SIDs.
+extension SipIpAccessControlListsIpAddressesMethods {
+    /// Deletes an IP address entry from a SIP IP access control list. Identify the account, list, and address resource using their SIDs.
     ///
     /// Delete an IpAddress resource.
     ///
@@ -20,13 +19,7 @@ public extension SipIpAccessControlListsIpAddressesMethods {
     ///   IpAddress resources to delete.
     /// - sid: A 34 character string that uniquely identifies the resource to
     ///   delete.
-    static func deleteSipIpAccessControlListsIpAddresses(
-        config: ClientConfig,
-        accountSid: String,
-        ipAccessControlListSid: String,
-        sid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
+    public static func deleteSipIpAccessControlListsIpAddresses(config: ClientConfig, accountSid: String, ipAccessControlListSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
@@ -36,21 +29,6 @@ public extension SipIpAccessControlListsIpAddressesMethods {
         try validateLength("Sid", sid, min: 34, max: 34)
         try sdkValidatePattern("Sid", sid, sdkPatternabc29aa1a70d)
 
-        return try await (sdkRequest(
-            "DELETE",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(accountSid)),
-                "/SIP/IpAccessControlLists/",
-                sdkEncodePathSegment(sdkWireString(ipAccessControlListSid)),
-                "/IpAddresses/",
-                sdkEncodePathSegment(sdkWireString(sid)),
-                ".json",
-            ].joined(),
-            config: config,
-            decoder: .empty,
-            operationId: "deleteSipIpAccessControlListsIpAddresses",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("DELETE", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/SIP/IpAccessControlLists/", sdkEncodePathSegment(sdkWireString(ipAccessControlListSid)), "/IpAddresses/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, decoder: .empty, operationId: "deleteSipIpAccessControlListsIpAddresses", options: requestOptions)).data
     }
 }

@@ -6,10 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension SipCredentialListsMethods {
-    /// Deletes a SIP credential list for the specified account. Provide the account identifier and credential list
-    /// identifier to select the resource to remove. The response confirms deletion and contains no resource
-    /// representation.
+extension SipCredentialListsMethods {
+    /// Deletes a SIP credential list for the specified account. Provide the account identifier and credential list identifier to select the resource to remove. The response confirms deletion and contains no resource representation.
     ///
     /// Delete a Credential List
     ///
@@ -17,31 +15,13 @@ public extension SipCredentialListsMethods {
     /// - accountSid: The unique id of the Account that is responsible for this
     ///   resource.
     /// - sid: The credential list Sid that uniquely identifies this resource
-    static func deleteSipCredentialLists(
-        config: ClientConfig,
-        accountSid: String,
-        sid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
+    public static func deleteSipCredentialLists(config: ClientConfig, accountSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
         try validateLength("Sid", sid, min: 34, max: 34)
         try sdkValidatePattern("Sid", sid, sdkPattern189973589bff)
 
-        return try await (sdkRequest(
-            "DELETE",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(accountSid)),
-                "/SIP/CredentialLists/",
-                sdkEncodePathSegment(sdkWireString(sid)),
-                ".json",
-            ].joined(),
-            config: config,
-            decoder: .empty,
-            operationId: "deleteSipCredentialLists",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("DELETE", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/SIP/CredentialLists/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, decoder: .empty, operationId: "deleteSipCredentialLists", options: requestOptions)).data
     }
 }

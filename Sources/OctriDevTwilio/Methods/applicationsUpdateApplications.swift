@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ApplicationsMethods {
-    struct UpdateApplicationsOptions: Codable {
+extension ApplicationsMethods {
+    public struct UpdateApplicationsOptions: Codable {
         public var accountSid: String
         public var sid: String
         public var friendlyName: String?
@@ -33,8 +33,7 @@ public extension ApplicationsMethods {
         }
     }
 
-    /// Updates the properties of an existing application. Supply the fields you want to change, such as `FriendlyName`,
-    /// `VoiceUrl`, or `SmsUrl`; URL fields must use URI format, and HTTP method fields accept GET or POST.
+    /// Updates the properties of an existing application. Supply the fields you want to change, such as `FriendlyName`, `VoiceUrl`, or `SmsUrl`; URL fields must use URI format, and HTTP method fields accept GET or POST.
     ///
     /// Updates the application's properties
     ///
@@ -79,11 +78,7 @@ public extension ApplicationsMethods {
     ///   message status information to your application.
     /// - publicApplicationConnectEnabled: Whether to allow other Twilio accounts to
     ///   dial this applicaton using Dial verb. Can be: `true` or `false`.
-    static func updateApplications(
-        config: ClientConfig,
-        options: UpdateApplicationsOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountApplication {
+    public static func updateApplications(config: ClientConfig, options: UpdateApplicationsOptions, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountApplication {
         try validateLength("AccountSid", options.accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", options.accountSid, sdkPatternc7cb941ab84b)
 
@@ -120,21 +115,6 @@ public extension ApplicationsMethods {
 
         let requestBody = UpdateApplicationsRequestBody(options: options)
 
-        return try await (sdkRequest(
-            "POST",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(options.accountSid)),
-                "/Applications/",
-                sdkEncodePathSegment(sdkWireString(options.sid)),
-                ".json",
-            ].joined(),
-            config: config,
-            body: requestBody,
-            contentType: "application/x-www-form-urlencoded",
-            decoder: .json,
-            operationId: "updateApplications",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("POST", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(options.accountSid)), "/Applications/", sdkEncodePathSegment(sdkWireString(options.sid)), ".json"].joined(), config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "updateApplications", options: requestOptions)).data
     }
 }

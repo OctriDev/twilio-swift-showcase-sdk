@@ -8,7 +8,7 @@ import Foundation
 #endif
 public enum CallsPaymentsMethods {}
 
-public extension CallsPaymentsMethods {
+extension CallsPaymentsMethods {
     /// update an instance of payments with different phases of payment flows.
     ///
     /// - Parameters:
@@ -37,17 +37,7 @@ public extension CallsPaymentsMethods {
     ///   or completed. When `cancel` the payment session is cancelled. When
     ///   `complete`, Twilio sends the payment information to the selected Pay
     ///   Connector for processing.
-    static func updateCallsPayments(
-        config: ClientConfig,
-        accountSid: String,
-        callSid: String,
-        sid: String,
-        idempotencyKey: String,
-        statusCallback: String,
-        capture: PaymentsEnumCapture? = nil,
-        status: PaymentsEnumStatus? = nil,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountCallPayments {
+    public static func updateCallsPayments(config: ClientConfig, accountSid: String, callSid: String, sid: String, idempotencyKey: String, statusCallback: String, capture: PaymentsEnumCapture? = nil, status: PaymentsEnumStatus? = nil, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountCallPayments {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
@@ -59,30 +49,8 @@ public extension CallsPaymentsMethods {
 
         try sdkValidateUri("StatusCallback", statusCallback)
 
-        let requestBody = UpdateCallsPaymentsRequestBody(
-            idempotencyKey: idempotencyKey,
-            statusCallback: statusCallback,
-            capture: capture,
-            status: status
-        )
+        let requestBody = UpdateCallsPaymentsRequestBody(idempotencyKey: idempotencyKey, statusCallback: statusCallback, capture: capture, status: status)
 
-        return try await (sdkRequest(
-            "POST",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(accountSid)),
-                "/Calls/",
-                sdkEncodePathSegment(sdkWireString(callSid)),
-                "/Payments/",
-                sdkEncodePathSegment(sdkWireString(sid)),
-                ".json",
-            ].joined(),
-            config: config,
-            body: requestBody,
-            contentType: "application/x-www-form-urlencoded",
-            decoder: .json,
-            operationId: "updateCallsPayments",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("POST", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Calls/", sdkEncodePathSegment(sdkWireString(callSid)), "/Payments/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "updateCallsPayments", options: requestOptions)).data
     }
 }

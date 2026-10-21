@@ -8,10 +8,8 @@ import Foundation
 #endif
 public enum ConferencesParticipantsMethods {}
 
-public extension ConferencesParticipantsMethods {
-    /// Retrieves a participant in a specific conference. Use `AccountSid`, `ConferenceSid`, and `CallSid` to identify
-    /// the account, conference, and participant. You can identify the participant by call SID or label; percent-encode
-    /// characters in a label that are not URL-safe.
+extension ConferencesParticipantsMethods {
+    /// Retrieves a participant in a specific conference. Use `AccountSid`, `ConferenceSid`, and `CallSid` to identify the account, conference, and participant. You can identify the participant by call SID or label; percent-encode characters in a label that are not URL-safe.
     ///
     /// Fetch an instance of a participant
     ///
@@ -24,34 +22,13 @@ public extension ConferencesParticipantsMethods {
     ///   SID or label of the participant to fetch. Non URL safe characters in a label
     ///   must be percent encoded, for example, a space character is represented as
     ///   %20.
-    static func fetchConferencesParticipants(
-        config: ClientConfig,
-        accountSid: String,
-        conferenceSid: String,
-        callSid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountConferenceParticipant {
+    public static func fetchConferencesParticipants(config: ClientConfig, accountSid: String, conferenceSid: String, callSid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountConferenceParticipant {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
         try validateLength("ConferenceSid", conferenceSid, min: 34, max: 34)
         try sdkValidatePattern("ConferenceSid", conferenceSid, sdkPatternb5f37fc1f4d4)
 
-        return try await (sdkRequest(
-            "GET",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(accountSid)),
-                "/Conferences/",
-                sdkEncodePathSegment(sdkWireString(conferenceSid)),
-                "/Participants/",
-                sdkEncodePathSegment(sdkWireString(callSid)),
-                ".json",
-            ].joined(),
-            config: config,
-            decoder: .json,
-            operationId: "fetchConferencesParticipants",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Conferences/", sdkEncodePathSegment(sdkWireString(conferenceSid)), "/Participants/", sdkEncodePathSegment(sdkWireString(callSid)), ".json"].joined(), config: config, decoder: .json, operationId: "fetchConferencesParticipants", options: requestOptions)).data
     }
 }

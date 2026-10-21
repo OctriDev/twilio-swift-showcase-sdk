@@ -8,20 +8,16 @@ import Foundation
 #endif
 /// The HTTP method we should use when calling the `async_amd_status_callback` URL. Can be: `GET` or `POST` and
 /// the default is `POST`.
-public struct CreateCallsRequestBodyAsyncAmdStatusCallbackMethod: RawRepresentable, Hashable, Codable, Sendable,
-    SdkWireConvertible {
+public struct CreateCallsRequestBodyAsyncAmdStatusCallbackMethod: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
-
+    public init(rawValue: String) { self.rawValue = rawValue }
     public static let get = CreateCallsRequestBodyAsyncAmdStatusCallbackMethod(rawValue: "GET")
     public static let post = CreateCallsRequestBodyAsyncAmdStatusCallbackMethod(rawValue: "POST")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        try self.init(rawValue: container.decode(String.self))
+        self.init(rawValue: try container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -35,7 +31,7 @@ struct CreateAccountsRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encodeIfPresent(friendlyName, forKey: SdkCodingKey("FriendlyName"))
+        try keyedContainer.encodeIfPresent(self.friendlyName, forKey: SdkCodingKey("FriendlyName"))
     }
 }
 
@@ -45,8 +41,8 @@ struct UpdateAccountsRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encodeIfPresent(friendlyName, forKey: SdkCodingKey("FriendlyName"))
-        try keyedContainer.encodeIfPresent(status, forKey: SdkCodingKey("Status"))
+        try keyedContainer.encodeIfPresent(self.friendlyName, forKey: SdkCodingKey("FriendlyName"))
+        try keyedContainer.encodeIfPresent(self.status, forKey: SdkCodingKey("Status"))
     }
 }
 
@@ -64,29 +60,29 @@ struct CreateAddressesRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(customerName, forKey: SdkCodingKey("CustomerName"))
-        try keyedContainer.encode(street, forKey: SdkCodingKey("Street"))
-        try keyedContainer.encode(city, forKey: SdkCodingKey("City"))
-        try keyedContainer.encode(region, forKey: SdkCodingKey("Region"))
-        try keyedContainer.encode(postalCode, forKey: SdkCodingKey("PostalCode"))
-        try keyedContainer.encode(isoCountry, forKey: SdkCodingKey("IsoCountry"))
-        try keyedContainer.encodeIfPresent(friendlyName, forKey: SdkCodingKey("FriendlyName"))
-        try keyedContainer.encodeIfPresent(emergencyEnabled, forKey: SdkCodingKey("EmergencyEnabled"))
-        try keyedContainer.encodeIfPresent(autoCorrectAddress, forKey: SdkCodingKey("AutoCorrectAddress"))
-        try keyedContainer.encodeIfPresent(streetSecondary, forKey: SdkCodingKey("StreetSecondary"))
+        try keyedContainer.encode(self.customerName, forKey: SdkCodingKey("CustomerName"))
+        try keyedContainer.encode(self.street, forKey: SdkCodingKey("Street"))
+        try keyedContainer.encode(self.city, forKey: SdkCodingKey("City"))
+        try keyedContainer.encode(self.region, forKey: SdkCodingKey("Region"))
+        try keyedContainer.encode(self.postalCode, forKey: SdkCodingKey("PostalCode"))
+        try keyedContainer.encode(self.isoCountry, forKey: SdkCodingKey("IsoCountry"))
+        try keyedContainer.encodeIfPresent(self.friendlyName, forKey: SdkCodingKey("FriendlyName"))
+        try keyedContainer.encodeIfPresent(self.emergencyEnabled, forKey: SdkCodingKey("EmergencyEnabled"))
+        try keyedContainer.encodeIfPresent(self.autoCorrectAddress, forKey: SdkCodingKey("AutoCorrectAddress"))
+        try keyedContainer.encodeIfPresent(self.streetSecondary, forKey: SdkCodingKey("StreetSecondary"))
     }
 
     init(options: AddressesMethods.CreateAddressesOptions) {
-        customerName = options.customerName
-        street = options.street
-        city = options.city
-        region = options.region
-        postalCode = options.postalCode
-        isoCountry = options.isoCountry
-        friendlyName = options.friendlyName
-        emergencyEnabled = options.emergencyEnabled
-        autoCorrectAddress = options.autoCorrectAddress
-        streetSecondary = options.streetSecondary
+        self.customerName = options.customerName
+        self.street = options.street
+        self.city = options.city
+        self.region = options.region
+        self.postalCode = options.postalCode
+        self.isoCountry = options.isoCountry
+        self.friendlyName = options.friendlyName
+        self.emergencyEnabled = options.emergencyEnabled
+        self.autoCorrectAddress = options.autoCorrectAddress
+        self.streetSecondary = options.streetSecondary
     }
 }
 
@@ -103,27 +99,27 @@ struct UpdateAddressesRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encodeIfPresent(friendlyName, forKey: SdkCodingKey("FriendlyName"))
-        try keyedContainer.encodeIfPresent(customerName, forKey: SdkCodingKey("CustomerName"))
-        try keyedContainer.encodeIfPresent(street, forKey: SdkCodingKey("Street"))
-        try keyedContainer.encodeIfPresent(city, forKey: SdkCodingKey("City"))
-        try keyedContainer.encodeIfPresent(region, forKey: SdkCodingKey("Region"))
-        try keyedContainer.encodeIfPresent(postalCode, forKey: SdkCodingKey("PostalCode"))
-        try keyedContainer.encodeIfPresent(emergencyEnabled, forKey: SdkCodingKey("EmergencyEnabled"))
-        try keyedContainer.encodeIfPresent(autoCorrectAddress, forKey: SdkCodingKey("AutoCorrectAddress"))
-        try keyedContainer.encodeIfPresent(streetSecondary, forKey: SdkCodingKey("StreetSecondary"))
+        try keyedContainer.encodeIfPresent(self.friendlyName, forKey: SdkCodingKey("FriendlyName"))
+        try keyedContainer.encodeIfPresent(self.customerName, forKey: SdkCodingKey("CustomerName"))
+        try keyedContainer.encodeIfPresent(self.street, forKey: SdkCodingKey("Street"))
+        try keyedContainer.encodeIfPresent(self.city, forKey: SdkCodingKey("City"))
+        try keyedContainer.encodeIfPresent(self.region, forKey: SdkCodingKey("Region"))
+        try keyedContainer.encodeIfPresent(self.postalCode, forKey: SdkCodingKey("PostalCode"))
+        try keyedContainer.encodeIfPresent(self.emergencyEnabled, forKey: SdkCodingKey("EmergencyEnabled"))
+        try keyedContainer.encodeIfPresent(self.autoCorrectAddress, forKey: SdkCodingKey("AutoCorrectAddress"))
+        try keyedContainer.encodeIfPresent(self.streetSecondary, forKey: SdkCodingKey("StreetSecondary"))
     }
 
     init(options: AddressesMethods.UpdateAddressesOptions) {
-        friendlyName = options.friendlyName
-        customerName = options.customerName
-        street = options.street
-        city = options.city
-        region = options.region
-        postalCode = options.postalCode
-        emergencyEnabled = options.emergencyEnabled
-        autoCorrectAddress = options.autoCorrectAddress
-        streetSecondary = options.streetSecondary
+        self.friendlyName = options.friendlyName
+        self.customerName = options.customerName
+        self.street = options.street
+        self.city = options.city
+        self.region = options.region
+        self.postalCode = options.postalCode
+        self.emergencyEnabled = options.emergencyEnabled
+        self.autoCorrectAddress = options.autoCorrectAddress
+        self.streetSecondary = options.streetSecondary
     }
 }
 
@@ -147,43 +143,40 @@ struct CreateApplicationsRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encodeIfPresent(apiVersion, forKey: SdkCodingKey("ApiVersion"))
-        try keyedContainer.encodeIfPresent(voiceUrl, forKey: SdkCodingKey("VoiceUrl"))
-        try keyedContainer.encodeIfPresent(voiceMethod, forKey: SdkCodingKey("VoiceMethod"))
-        try keyedContainer.encodeIfPresent(voiceFallbackUrl, forKey: SdkCodingKey("VoiceFallbackUrl"))
-        try keyedContainer.encodeIfPresent(voiceFallbackMethod, forKey: SdkCodingKey("VoiceFallbackMethod"))
-        try keyedContainer.encodeIfPresent(statusCallback, forKey: SdkCodingKey("StatusCallback"))
-        try keyedContainer.encodeIfPresent(statusCallbackMethod, forKey: SdkCodingKey("StatusCallbackMethod"))
-        try keyedContainer.encodeIfPresent(voiceCallerIdLookup, forKey: SdkCodingKey("VoiceCallerIdLookup"))
-        try keyedContainer.encodeIfPresent(smsUrl, forKey: SdkCodingKey("SmsUrl"))
-        try keyedContainer.encodeIfPresent(smsMethod, forKey: SdkCodingKey("SmsMethod"))
-        try keyedContainer.encodeIfPresent(smsFallbackUrl, forKey: SdkCodingKey("SmsFallbackUrl"))
-        try keyedContainer.encodeIfPresent(smsFallbackMethod, forKey: SdkCodingKey("SmsFallbackMethod"))
-        try keyedContainer.encodeIfPresent(smsStatusCallback, forKey: SdkCodingKey("SmsStatusCallback"))
-        try keyedContainer.encodeIfPresent(messageStatusCallback, forKey: SdkCodingKey("MessageStatusCallback"))
-        try keyedContainer.encodeIfPresent(friendlyName, forKey: SdkCodingKey("FriendlyName"))
-        try keyedContainer.encodeIfPresent(
-            publicApplicationConnectEnabled,
-            forKey: SdkCodingKey("PublicApplicationConnectEnabled")
-        )
+        try keyedContainer.encodeIfPresent(self.apiVersion, forKey: SdkCodingKey("ApiVersion"))
+        try keyedContainer.encodeIfPresent(self.voiceUrl, forKey: SdkCodingKey("VoiceUrl"))
+        try keyedContainer.encodeIfPresent(self.voiceMethod, forKey: SdkCodingKey("VoiceMethod"))
+        try keyedContainer.encodeIfPresent(self.voiceFallbackUrl, forKey: SdkCodingKey("VoiceFallbackUrl"))
+        try keyedContainer.encodeIfPresent(self.voiceFallbackMethod, forKey: SdkCodingKey("VoiceFallbackMethod"))
+        try keyedContainer.encodeIfPresent(self.statusCallback, forKey: SdkCodingKey("StatusCallback"))
+        try keyedContainer.encodeIfPresent(self.statusCallbackMethod, forKey: SdkCodingKey("StatusCallbackMethod"))
+        try keyedContainer.encodeIfPresent(self.voiceCallerIdLookup, forKey: SdkCodingKey("VoiceCallerIdLookup"))
+        try keyedContainer.encodeIfPresent(self.smsUrl, forKey: SdkCodingKey("SmsUrl"))
+        try keyedContainer.encodeIfPresent(self.smsMethod, forKey: SdkCodingKey("SmsMethod"))
+        try keyedContainer.encodeIfPresent(self.smsFallbackUrl, forKey: SdkCodingKey("SmsFallbackUrl"))
+        try keyedContainer.encodeIfPresent(self.smsFallbackMethod, forKey: SdkCodingKey("SmsFallbackMethod"))
+        try keyedContainer.encodeIfPresent(self.smsStatusCallback, forKey: SdkCodingKey("SmsStatusCallback"))
+        try keyedContainer.encodeIfPresent(self.messageStatusCallback, forKey: SdkCodingKey("MessageStatusCallback"))
+        try keyedContainer.encodeIfPresent(self.friendlyName, forKey: SdkCodingKey("FriendlyName"))
+        try keyedContainer.encodeIfPresent(self.publicApplicationConnectEnabled, forKey: SdkCodingKey("PublicApplicationConnectEnabled"))
     }
 
     init(options: ApplicationsMethods.CreateApplicationsOptions) {
-        apiVersion = options.apiVersion
-        voiceUrl = options.voiceUrl
-        voiceMethod = options.voiceMethod
-        voiceFallbackUrl = options.voiceFallbackUrl
-        voiceFallbackMethod = options.voiceFallbackMethod
-        statusCallback = options.statusCallback
-        statusCallbackMethod = options.statusCallbackMethod
-        voiceCallerIdLookup = options.voiceCallerIdLookup
-        smsUrl = options.smsUrl
-        smsMethod = options.smsMethod
-        smsFallbackUrl = options.smsFallbackUrl
-        smsFallbackMethod = options.smsFallbackMethod
-        smsStatusCallback = options.smsStatusCallback
-        messageStatusCallback = options.messageStatusCallback
-        friendlyName = options.friendlyName
-        publicApplicationConnectEnabled = options.publicApplicationConnectEnabled
+        self.apiVersion = options.apiVersion
+        self.voiceUrl = options.voiceUrl
+        self.voiceMethod = options.voiceMethod
+        self.voiceFallbackUrl = options.voiceFallbackUrl
+        self.voiceFallbackMethod = options.voiceFallbackMethod
+        self.statusCallback = options.statusCallback
+        self.statusCallbackMethod = options.statusCallbackMethod
+        self.voiceCallerIdLookup = options.voiceCallerIdLookup
+        self.smsUrl = options.smsUrl
+        self.smsMethod = options.smsMethod
+        self.smsFallbackUrl = options.smsFallbackUrl
+        self.smsFallbackMethod = options.smsFallbackMethod
+        self.smsStatusCallback = options.smsStatusCallback
+        self.messageStatusCallback = options.messageStatusCallback
+        self.friendlyName = options.friendlyName
+        self.publicApplicationConnectEnabled = options.publicApplicationConnectEnabled
     }
 }

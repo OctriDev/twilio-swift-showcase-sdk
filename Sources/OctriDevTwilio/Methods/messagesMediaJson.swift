@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension MessagesMediaMethods {
-    struct ListMessagesMediaOptions: Codable {
+extension MessagesMediaMethods {
+    public struct ListMessagesMediaOptions: Codable {
         public var accountSid: String
         public var messageSid: String
         public var dateCreated: Date?
@@ -23,8 +23,7 @@ public extension MessagesMediaMethods {
         }
     }
 
-    /// Lists media resources associated with a specific message. Filter the results by creation date and use the page
-    /// parameters to navigate the list.
+    /// Lists media resources associated with a specific message. Filter the results by creation date and use the page parameters to navigate the list.
     ///
     /// Read a list of Media resources associated with a specific Message resource
     ///
@@ -56,11 +55,7 @@ public extension MessagesMediaMethods {
     ///   50, and the maximum is 1000.
     /// - page: The page index. This value is simply for client state.
     /// - pageToken: The page token. This is provided by the API.
-    static func listMessagesMedia(
-        config: ClientConfig,
-        options: ListMessagesMediaOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ListMessagesMediaResponse {
+    public static func listMessagesMedia(config: ClientConfig, options: ListMessagesMediaOptions, requestOptions: RequestOptions? = nil) async throws -> ListMessagesMediaResponse {
         try validateLength("AccountSid", options.accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", options.accountSid, sdkPatternc7cb941ab84b)
 
@@ -87,27 +82,13 @@ public extension MessagesMediaMethods {
             try validateRange("Page", Double(page), min: 0)
         }
 
-        return try await (sdkRequest(
-            "GET",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(options.accountSid)),
-                "/Messages/",
-                sdkEncodePathSegment(sdkWireString(options.messageSid)),
-                "/Media.json",
-            ].joined(),
-            config: config,
-            query: [
-                SdkQueryParameter("DateCreated", value: options.dateCreated),
-                SdkQueryParameter("DateCreated<", value: options.dateCreated2),
-                SdkQueryParameter("DateCreated>", value: options.dateCreated3),
-                SdkQueryParameter("PageSize", value: options.pageSize),
-                SdkQueryParameter("Page", value: options.page),
-                SdkQueryParameter("PageToken", value: options.pageToken),
-            ],
-            decoder: .json,
-            operationId: "listMessagesMedia",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(options.accountSid)), "/Messages/", sdkEncodePathSegment(sdkWireString(options.messageSid)), "/Media.json"].joined(), config: config, query: [
+            SdkQueryParameter("DateCreated", value: options.dateCreated),
+            SdkQueryParameter("DateCreated<", value: options.dateCreated2),
+            SdkQueryParameter("DateCreated>", value: options.dateCreated3),
+            SdkQueryParameter("PageSize", value: options.pageSize),
+            SdkQueryParameter("Page", value: options.page),
+            SdkQueryParameter("PageToken", value: options.pageToken),
+        ], decoder: .json, operationId: "listMessagesMedia", options: requestOptions)).data
     }
 }

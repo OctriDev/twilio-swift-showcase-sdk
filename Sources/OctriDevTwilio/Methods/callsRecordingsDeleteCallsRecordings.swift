@@ -6,9 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension CallsRecordingsMethods {
-    /// Deletes a recording associated with a specific call from the account. Supply the account, call, and recording
-    /// SIDs to identify the recording to remove.
+extension CallsRecordingsMethods {
+    /// Deletes a recording associated with a specific call from the account. Supply the account, call, and recording SIDs to identify the recording to remove.
     ///
     /// Delete a recording from your account
     ///
@@ -20,13 +19,7 @@ public extension CallsRecordingsMethods {
     ///   SID of the resources to delete.
     /// - sid: The Twilio-provided string that uniquely identifies the Recording
     ///   resource to delete.
-    static func deleteCallsRecordings(
-        config: ClientConfig,
-        accountSid: String,
-        callSid: String,
-        sid: String,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> SdkEmptyResponse {
+    public static func deleteCallsRecordings(config: ClientConfig, accountSid: String, callSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
@@ -36,21 +29,6 @@ public extension CallsRecordingsMethods {
         try validateLength("Sid", sid, min: 34, max: 34)
         try sdkValidatePattern("Sid", sid, sdkPatternfad3f05341a2)
 
-        return try await (sdkRequest(
-            "DELETE",
-            [
-                "/2010-04-01/Accounts/",
-                sdkEncodePathSegment(sdkWireString(accountSid)),
-                "/Calls/",
-                sdkEncodePathSegment(sdkWireString(callSid)),
-                "/Recordings/",
-                sdkEncodePathSegment(sdkWireString(sid)),
-                ".json",
-            ].joined(),
-            config: config,
-            decoder: .empty,
-            operationId: "deleteCallsRecordings",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("DELETE", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Calls/", sdkEncodePathSegment(sdkWireString(callSid)), "/Recordings/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, decoder: .empty, operationId: "deleteCallsRecordings", options: requestOptions)).data
     }
 }

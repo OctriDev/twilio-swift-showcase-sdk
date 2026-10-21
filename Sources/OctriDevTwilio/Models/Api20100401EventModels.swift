@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Api20100401Event domain models
+// Api20100401Event domain models
 /// Typed representation of the `ApiV2010AccountCallCallEvent` API schema.
 public struct ApiV2010AccountCallCallEvent: Codable {
     /// Contains a dictionary representing the request of the call.
@@ -17,20 +17,20 @@ public struct ApiV2010AccountCallCallEvent: Codable {
     }
 
     init() {
-        (request, response) = (nil, nil)
+        (self.request, self.response) = (nil, nil)
     }
 }
 
-public extension ApiV2010AccountCallCallEvent {
-    init(from decoder: Decoder) throws {
+extension ApiV2010AccountCallCallEvent {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        request = try container.sdkDecodeIfPresent(.request)
-        response = try container.sdkDecodeIfPresent(.response)
+        self.request = try container.sdkDecodeIfPresent(.request)
+        self.response = try container.sdkDecodeIfPresent(.response)
     }
 }
 
-public extension ApiV2010AccountCallCallEvent {
-    init(request: JSONValue? = nil, response: JSONValue? = nil) {
+extension ApiV2010AccountCallCallEvent {
+    public init(request: JSONValue? = nil, response: JSONValue? = nil) {
         self.init()
         (self.request, self.response) = (request, response)
     }

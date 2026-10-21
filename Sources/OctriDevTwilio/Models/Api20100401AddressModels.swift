@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Api20100401Address domain models
+// Api20100401Address domain models
 /// Typed representation of the `ApiV2010AccountAddress` API schema.
 public struct ApiV2010AccountAddress: Codable {
     /// The SID of the Account that is responsible for the Address resource.
@@ -64,62 +64,45 @@ public struct ApiV2010AccountAddress: Codable {
     }
 
     init() {
-        (accountSid, city, customerName, dateCreated, dateUpdated) = (nil, nil, nil, nil, nil)
-        (friendlyName, isoCountry, postalCode, region, sid) = (nil, nil, nil, nil, nil)
-        (street, uri, emergencyEnabled, validated, verified) = (nil, nil, nil, nil, nil)
-        streetSecondary = nil
+        (self.accountSid, self.city, self.customerName, self.dateCreated, self.dateUpdated) = (nil, nil, nil, nil, nil)
+        (self.friendlyName, self.isoCountry, self.postalCode, self.region, self.sid) = (nil, nil, nil, nil, nil)
+        (self.street, self.uri, self.emergencyEnabled, self.validated, self.verified) = (nil, nil, nil, nil, nil)
+        self.streetSecondary = nil
     }
 }
 
-public extension ApiV2010AccountAddress {
-    init(from decoder: Decoder) throws {
+extension ApiV2010AccountAddress {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        accountSid = try container.sdkDecodeIfPresent(.accountSid)
-        city = try container.sdkDecodeIfPresent(.city)
-        customerName = try container.sdkDecodeIfPresent(.customerName)
-        dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
-        dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
-        friendlyName = try container.sdkDecodeIfPresent(.friendlyName)
-        isoCountry = try container.sdkDecodeIfPresent(.isoCountry)
-        postalCode = try container.sdkDecodeIfPresent(.postalCode)
-        region = try container.sdkDecodeIfPresent(.region)
-        sid = try container.sdkDecodeIfPresent(.sid)
-        street = try container.sdkDecodeIfPresent(.street)
-        uri = try container.sdkDecodeIfPresent(.uri)
-        emergencyEnabled = try container.sdkDecodeIfPresent(.emergencyEnabled)
-        validated = try container.sdkDecodeIfPresent(.validated)
-        verified = try container.sdkDecodeIfPresent(.verified)
-        streetSecondary = try container.sdkDecodeIfPresent(.streetSecondary)
-        if let value = accountSid {
+        self.accountSid = try container.sdkDecodeIfPresent(.accountSid)
+        self.city = try container.sdkDecodeIfPresent(.city)
+        self.customerName = try container.sdkDecodeIfPresent(.customerName)
+        self.dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
+        self.dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
+        self.friendlyName = try container.sdkDecodeIfPresent(.friendlyName)
+        self.isoCountry = try container.sdkDecodeIfPresent(.isoCountry)
+        self.postalCode = try container.sdkDecodeIfPresent(.postalCode)
+        self.region = try container.sdkDecodeIfPresent(.region)
+        self.sid = try container.sdkDecodeIfPresent(.sid)
+        self.street = try container.sdkDecodeIfPresent(.street)
+        self.uri = try container.sdkDecodeIfPresent(.uri)
+        self.emergencyEnabled = try container.sdkDecodeIfPresent(.emergencyEnabled)
+        self.validated = try container.sdkDecodeIfPresent(.validated)
+        self.verified = try container.sdkDecodeIfPresent(.verified)
+        self.streetSecondary = try container.sdkDecodeIfPresent(.streetSecondary)
+        if let value = self.accountSid {
             try validateLength("account_sid", value, min: 34, max: 34)
             try sdkValidatePattern("account_sid", value, sdkPatternc7cb941ab84b)
         }
-        if let value = sid {
+        if let value = self.sid {
             try validateLength("sid", value, min: 34, max: 34)
             try sdkValidatePattern("sid", value, sdkPattern843918c2faa5)
         }
     }
 }
 
-public extension ApiV2010AccountAddress {
-    init(
-        accountSid: String? = nil,
-        city: String? = nil,
-        customerName: String? = nil,
-        dateCreated: String? = nil,
-        dateUpdated: String? = nil,
-        friendlyName: String? = nil,
-        isoCountry: String? = nil,
-        postalCode: String? = nil,
-        region: String? = nil,
-        sid: String? = nil,
-        street: String? = nil,
-        uri: String? = nil,
-        emergencyEnabled: Bool? = nil,
-        validated: Bool? = nil,
-        verified: Bool? = nil,
-        streetSecondary: String? = nil
-    ) throws {
+extension ApiV2010AccountAddress {
+    public init(accountSid: String? = nil, city: String? = nil, customerName: String? = nil, dateCreated: String? = nil, dateUpdated: String? = nil, friendlyName: String? = nil, isoCountry: String? = nil, postalCode: String? = nil, region: String? = nil, sid: String? = nil, street: String? = nil, uri: String? = nil, emergencyEnabled: Bool? = nil, validated: Bool? = nil, verified: Bool? = nil, streetSecondary: String? = nil) throws {
         self.init()
         (self.accountSid, self.city) = (accountSid, city)
         (self.customerName, self.dateCreated) = (customerName, dateCreated)

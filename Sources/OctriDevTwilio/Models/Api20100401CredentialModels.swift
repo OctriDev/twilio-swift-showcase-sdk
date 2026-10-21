@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Api20100401Credential domain models
+// Api20100401Credential domain models
 /// Typed representation of the `ApiV2010AccountSipSipCredentialListSipCredential` API schema.
 public struct ApiV2010AccountSipSipCredentialListSipCredential: Codable {
     /// A 34 character string that uniquely identifies this resource.
@@ -32,46 +32,38 @@ public struct ApiV2010AccountSipSipCredentialListSipCredential: Codable {
     }
 
     init() {
-        (sid, accountSid, credentialListSid, username, dateCreated) = (nil, nil, nil, nil, nil)
-        (dateUpdated, uri) = (nil, nil)
+        (self.sid, self.accountSid, self.credentialListSid, self.username, self.dateCreated) = (nil, nil, nil, nil, nil)
+        (self.dateUpdated, self.uri) = (nil, nil)
     }
 }
 
-public extension ApiV2010AccountSipSipCredentialListSipCredential {
-    init(from decoder: Decoder) throws {
+extension ApiV2010AccountSipSipCredentialListSipCredential {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        sid = try container.sdkDecodeIfPresent(.sid)
-        accountSid = try container.sdkDecodeIfPresent(.accountSid)
-        credentialListSid = try container.sdkDecodeIfPresent(.credentialListSid)
-        username = try container.sdkDecodeIfPresent(.username)
-        dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
-        dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
-        uri = try container.sdkDecodeIfPresent(.uri)
-        if let value = sid {
+        self.sid = try container.sdkDecodeIfPresent(.sid)
+        self.accountSid = try container.sdkDecodeIfPresent(.accountSid)
+        self.credentialListSid = try container.sdkDecodeIfPresent(.credentialListSid)
+        self.username = try container.sdkDecodeIfPresent(.username)
+        self.dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
+        self.dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
+        self.uri = try container.sdkDecodeIfPresent(.uri)
+        if let value = self.sid {
             try validateLength("sid", value, min: 34, max: 34)
             try sdkValidatePattern("sid", value, sdkPattern5d3925ba9d6f)
         }
-        if let value = accountSid {
+        if let value = self.accountSid {
             try validateLength("account_sid", value, min: 34, max: 34)
             try sdkValidatePattern("account_sid", value, sdkPatternc7cb941ab84b)
         }
-        if let value = credentialListSid {
+        if let value = self.credentialListSid {
             try validateLength("credential_list_sid", value, min: 34, max: 34)
             try sdkValidatePattern("credential_list_sid", value, sdkPattern189973589bff)
         }
     }
 }
 
-public extension ApiV2010AccountSipSipCredentialListSipCredential {
-    init(
-        sid: String? = nil,
-        accountSid: String? = nil,
-        credentialListSid: String? = nil,
-        username: String? = nil,
-        dateCreated: String? = nil,
-        dateUpdated: String? = nil,
-        uri: String? = nil
-    ) throws {
+extension ApiV2010AccountSipSipCredentialListSipCredential {
+    public init(sid: String? = nil, accountSid: String? = nil, credentialListSid: String? = nil, username: String? = nil, dateCreated: String? = nil, dateUpdated: String? = nil, uri: String? = nil) throws {
         self.init()
         (self.sid, self.accountSid) = (sid, accountSid)
         (self.credentialListSid, self.username) = (credentialListSid, username)

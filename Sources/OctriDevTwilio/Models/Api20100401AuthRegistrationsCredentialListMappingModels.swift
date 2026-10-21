@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Api20100401AuthRegistrationsCredentialListMapping domain models
+// Api20100401AuthRegistrationsCredentialListMapping domain models
 /// Typed representation of the
 /// `ApiV2010AccountSipSipDomainSipAuthSipAuthRegistrationsSipAuthRegistrationsCredentialListMapping` API schema.
 public struct ApiV2010AccountSipSipDomainSipAuthSipAuthRegistrationsSipAuthXed44b778d6: Codable {
@@ -27,37 +27,31 @@ public struct ApiV2010AccountSipSipDomainSipAuthSipAuthRegistrationsSipAuthXed44
     }
 
     init() {
-        (accountSid, dateCreated, dateUpdated, friendlyName, sid) = (nil, nil, nil, nil, nil)
+        (self.accountSid, self.dateCreated, self.dateUpdated, self.friendlyName, self.sid) = (nil, nil, nil, nil, nil)
     }
 }
 
-public extension ApiV2010AccountSipSipDomainSipAuthSipAuthRegistrationsSipAuthXed44b778d6 {
-    init(from decoder: Decoder) throws {
+extension ApiV2010AccountSipSipDomainSipAuthSipAuthRegistrationsSipAuthXed44b778d6 {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        accountSid = try container.sdkDecodeIfPresent(.accountSid)
-        dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
-        dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
-        friendlyName = try container.sdkDecodeIfPresent(.friendlyName)
-        sid = try container.sdkDecodeIfPresent(.sid)
-        if let value = accountSid {
+        self.accountSid = try container.sdkDecodeIfPresent(.accountSid)
+        self.dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
+        self.dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
+        self.friendlyName = try container.sdkDecodeIfPresent(.friendlyName)
+        self.sid = try container.sdkDecodeIfPresent(.sid)
+        if let value = self.accountSid {
             try validateLength("account_sid", value, min: 34, max: 34)
             try sdkValidatePattern("account_sid", value, sdkPatternc7cb941ab84b)
         }
-        if let value = sid {
+        if let value = self.sid {
             try validateLength("sid", value, min: 34, max: 34)
             try sdkValidatePattern("sid", value, sdkPattern189973589bff)
         }
     }
 }
 
-public extension ApiV2010AccountSipSipDomainSipAuthSipAuthRegistrationsSipAuthXed44b778d6 {
-    init(
-        accountSid: String? = nil,
-        dateCreated: String? = nil,
-        dateUpdated: String? = nil,
-        friendlyName: String? = nil,
-        sid: String? = nil
-    ) throws {
+extension ApiV2010AccountSipSipDomainSipAuthSipAuthRegistrationsSipAuthXed44b778d6 {
+    public init(accountSid: String? = nil, dateCreated: String? = nil, dateUpdated: String? = nil, friendlyName: String? = nil, sid: String? = nil) throws {
         self.init()
         (self.accountSid, self.dateCreated) = (accountSid, dateCreated)
         (self.dateUpdated, self.friendlyName) = (dateUpdated, friendlyName)

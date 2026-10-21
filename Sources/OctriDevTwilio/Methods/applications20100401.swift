@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-public extension ApplicationsMethods {
-    struct CreateApplicationsOptions: Codable {
+extension ApplicationsMethods {
+    public struct CreateApplicationsOptions: Codable {
         public var accountSid: String
         public var apiVersion: String?
         public var voiceUrl: String?
@@ -31,9 +31,7 @@ public extension ApplicationsMethods {
         }
     }
 
-    /// Creates a new application within an account. Configure voice and messaging URLs and callback methods with fields
-    /// such as `VoiceUrl`, `SmsUrl`, and `StatusCallback`; URL fields must use URI format, and callback methods accept
-    /// GET or POST. The 201 response returns the created application with its generated SID.
+    /// Creates a new application within an account. Configure voice and messaging URLs and callback methods with fields such as `VoiceUrl`, `SmsUrl`, and `StatusCallback`; URL fields must use URI format, and callback methods accept GET or POST. The 201 response returns the created application with its generated SID.
     ///
     /// Create a new application within your account
     ///
@@ -75,11 +73,7 @@ public extension ApplicationsMethods {
     ///   application. It can be up to 64 characters long.
     /// - publicApplicationConnectEnabled: Whether to allow other Twilio accounts to
     ///   dial this applicaton using Dial verb. Can be: `true` or `false`.
-    static func createApplications(
-        config: ClientConfig,
-        options: CreateApplicationsOptions,
-        requestOptions: RequestOptions? = nil
-    ) async throws -> ApiV2010AccountApplication {
+    public static func createApplications(config: ClientConfig, options: CreateApplicationsOptions, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountApplication {
         try validateLength("AccountSid", options.accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", options.accountSid, sdkPatternc7cb941ab84b)
 
@@ -113,16 +107,6 @@ public extension ApplicationsMethods {
 
         let requestBody = CreateApplicationsRequestBody(options: options)
 
-        return try await (sdkRequest(
-            "POST",
-            ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(options.accountSid)), "/Applications.json"]
-                .joined(),
-            config: config,
-            body: requestBody,
-            contentType: "application/x-www-form-urlencoded",
-            decoder: .json,
-            operationId: "createApplications",
-            options: requestOptions
-        )).data
+        return try (await sdkRequest("POST", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(options.accountSid)), "/Applications.json"].joined(), config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "createApplications", options: requestOptions)).data
     }
 }
