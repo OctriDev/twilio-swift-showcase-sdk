@@ -7,3 +7,40 @@ import Foundation
     import FoundationNetworking
 #endif
 public enum SigningKeysMethods {}
+
+extension SigningKeysMethods {
+    /// Retrieves a specific signing key from an account. Use `AccountSid` and `Sid` to identify the account and signing key; both identifiers must match their documented SID formats.
+    public static func fetchSigningKeys(config: ClientConfig, accountSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountSigningKey {
+        try validateLength("AccountSid", accountSid, min: 34, max: 34)
+        try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
+
+        try validateLength("Sid", sid, min: 34, max: 34)
+        try sdkValidatePattern("Sid", sid, sdkPatternba6ad770c6a8)
+
+        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/SigningKeys/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, decoder: .json, operationId: "fetchSigningKeys", options: requestOptions)).data
+    }
+
+    /// Updates the friendly name of a signing key. Supply `FriendlyName` to change the name; omit it if you do not want to update that field.
+    public static func updateSigningKeys(config: ClientConfig, accountSid: String, sid: String, friendlyName: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountSigningKey {
+        try validateLength("AccountSid", accountSid, min: 34, max: 34)
+        try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
+
+        try validateLength("Sid", sid, min: 34, max: 34)
+        try sdkValidatePattern("Sid", sid, sdkPatternba6ad770c6a8)
+
+        let requestBody = UpdateSigningKeysRequestBody(friendlyName: friendlyName)
+
+        return try (await sdkRequest("POST", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/SigningKeys/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "updateSigningKeys", options: requestOptions)).data
+    }
+
+    /// Deletes a signing key from an account. Identify the account and signing key with their SIDs, using the documented prefixes and 32-character hexadecimal suffixes.
+    public static func deleteSigningKeys(config: ClientConfig, accountSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        try validateLength("AccountSid", accountSid, min: 34, max: 34)
+        try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
+
+        try validateLength("Sid", sid, min: 34, max: 34)
+        try sdkValidatePattern("Sid", sid, sdkPatternba6ad770c6a8)
+
+        return try (await sdkRequest("DELETE", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/SigningKeys/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, decoder: .empty, operationId: "deleteSigningKeys", options: requestOptions)).data
+    }
+}

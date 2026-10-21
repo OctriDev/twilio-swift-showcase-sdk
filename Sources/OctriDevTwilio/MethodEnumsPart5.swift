@@ -103,12 +103,12 @@ public struct CreateValidationRequestsRequestBodyStatusCallbackMethod: RawRepres
 }
 
 /// The HTTP method Twilio will use when requesting the above `Url`. Either `GET` or `POST`. Default is `POST`.
-public struct CreateCallsUserDefinedMessageSubscriptionsRequestBodyMethod: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct CreateCallUserDefinedMessageSubscriptionRequestBodyMethod: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
     public init(rawValue: String) { self.rawValue = rawValue }
-    public static let get = CreateCallsUserDefinedMessageSubscriptionsRequestBodyMethod(rawValue: "GET")
-    public static let post = CreateCallsUserDefinedMessageSubscriptionsRequestBodyMethod(rawValue: "POST")
+    public static let get = CreateCallUserDefinedMessageSubscriptionRequestBodyMethod(rawValue: "GET")
+    public static let post = CreateCallUserDefinedMessageSubscriptionRequestBodyMethod(rawValue: "POST")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

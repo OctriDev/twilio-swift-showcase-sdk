@@ -7,3 +7,25 @@ import Foundation
     import FoundationNetworking
 #endif
 public enum UsageTriggersMethods {}
+
+extension UsageTriggersMethods {
+    /// Retrieves a specific usage trigger for the account identified by `AccountSid`. Use the `Sid` value to select the trigger whose configuration and current state you need to inspect.
+    ///
+    /// Fetch and instance of a usage-trigger
+    ///
+    /// - Parameters:
+    /// - accountSid: The SID of the
+    ///   [Account](https://www.twilio.com/docs/iam/api/account) that created the
+    ///   UsageTrigger resource to fetch.
+    /// - sid: The Twilio-provided string that uniquely identifies the UsageTrigger
+    ///   resource to fetch.
+    public static func fetchUsageTriggers(config: ClientConfig, accountSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountUsageUsageTrigger {
+        try validateLength("AccountSid", accountSid, min: 34, max: 34)
+        try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
+
+        try validateLength("Sid", sid, min: 34, max: 34)
+        try sdkValidatePattern("Sid", sid, sdkPattern0c13ca06d199)
+
+        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Usage/Triggers/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, decoder: .json, operationId: "fetchUsageTriggers", options: requestOptions)).data
+    }
+}

@@ -536,7 +536,7 @@ internal func basicOperationSecurityPart1(_ operationId: String) -> [[String]]? 
         return [
             ["accountSid_authToken"]
         ]
-    case "createCallsUserDefinedMessageSubscriptions":
+    case "createCallUserDefinedMessageSubscription":
         return [
             ["accountSid_authToken"]
         ]

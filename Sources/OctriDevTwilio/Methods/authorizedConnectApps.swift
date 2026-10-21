@@ -7,3 +7,24 @@ import Foundation
     import FoundationNetworking
 #endif
 public enum AuthorizedConnectAppsMethods {}
+
+extension AuthorizedConnectAppsMethods {
+    /// Retrieves an authorized Connect App for an account. Use the account SID and Connect App SID to identify the authorization and review the app details and permissions granted to it.
+    ///
+    /// Fetch an instance of an authorized-connect-app
+    ///
+    /// - Parameters:
+    /// - accountSid: The SID of the
+    ///   [Account](https://www.twilio.com/docs/iam/api/account) that created the
+    ///   AuthorizedConnectApp resource to fetch.
+    /// - connectAppSid: The SID of the Connect App to fetch.
+    public static func fetchAuthorizedConnectApps(config: ClientConfig, accountSid: String, connectAppSid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountAuthorizedConnectApp {
+        try validateLength("AccountSid", accountSid, min: 34, max: 34)
+        try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
+
+        try validateLength("ConnectAppSid", connectAppSid, min: 34, max: 34)
+        try sdkValidatePattern("ConnectAppSid", connectAppSid, sdkPattern682cc462e4d3)
+
+        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/AuthorizedConnectApps/", sdkEncodePathSegment(sdkWireString(connectAppSid)), ".json"].joined(), config: config, decoder: .json, operationId: "fetchAuthorizedConnectApps", options: requestOptions)).data
+    }
+}

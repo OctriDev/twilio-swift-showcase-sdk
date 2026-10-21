@@ -7,3 +7,43 @@ import Foundation
     import FoundationNetworking
 #endif
 public enum TranscriptionsMethods {}
+
+extension TranscriptionsMethods {
+    /// Retrieves a transcription resource belonging to an account. Use the account and transcription SIDs to identify the resource and review its status, transcript text, and associated recording.
+    ///
+    /// Fetch an instance of a Transcription
+    ///
+    /// - Parameters:
+    /// - accountSid: The SID of the
+    ///   [Account](https://www.twilio.com/docs/iam/api/account) that created the
+    ///   Transcription resource to fetch.
+    /// - sid: The Twilio-provided string that uniquely identifies the Transcription
+    ///   resource to fetch.
+    public static func fetchTranscriptions(config: ClientConfig, accountSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountTranscription {
+        try validateLength("AccountSid", accountSid, min: 34, max: 34)
+        try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
+
+        try validateLength("Sid", sid, min: 34, max: 34)
+        try sdkValidatePattern("Sid", sid, sdkPatterndb618e54c931)
+
+        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Transcriptions/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, decoder: .json, operationId: "fetchTranscriptions", options: requestOptions)).data
+    }
+
+    /// Delete a transcription from the account used to make the request
+    ///
+    /// - Parameters:
+    /// - accountSid: The SID of the
+    ///   [Account](https://www.twilio.com/docs/iam/api/account) that created the
+    ///   Transcription resources to delete.
+    /// - sid: The Twilio-provided string that uniquely identifies the Transcription
+    ///   resource to delete.
+    public static func deleteTranscriptions(config: ClientConfig, accountSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+        try validateLength("AccountSid", accountSid, min: 34, max: 34)
+        try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
+
+        try validateLength("Sid", sid, min: 34, max: 34)
+        try sdkValidatePattern("Sid", sid, sdkPatterndb618e54c931)
+
+        return try (await sdkRequest("DELETE", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Transcriptions/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, decoder: .empty, operationId: "deleteTranscriptions", options: requestOptions)).data
+    }
+}

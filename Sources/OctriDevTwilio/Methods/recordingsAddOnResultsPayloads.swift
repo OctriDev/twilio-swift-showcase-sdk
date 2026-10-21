@@ -7,3 +7,35 @@ import Foundation
     import FoundationNetworking
 #endif
 public enum RecordingsAddOnResultsPayloadsMethods {}
+
+extension RecordingsAddOnResultsPayloadsMethods {
+    /// Retrieves a payload belonging to an AddOnResult for a recording. Use the account, recording, result, and payload SIDs to identify the payload and inspect its label, MIME type, and related resource URIs.
+    ///
+    /// Fetch an instance of a result payload
+    ///
+    /// - Parameters:
+    /// - accountSid: The SID of the
+    ///   [Account](https://www.twilio.com/docs/iam/api/account) that created the
+    ///   Recording AddOnResult Payload resource to fetch.
+    /// - referenceSid: The SID of the recording to which the AddOnResult resource
+    ///   that contains the payload to fetch belongs.
+    /// - addOnResultSid: The SID of the AddOnResult to which the payload to fetch
+    ///   belongs.
+    /// - sid: The Twilio-provided string that uniquely identifies the Recording
+    ///   AddOnResult Payload resource to fetch.
+    public static func fetchRecordingsAddOnResultsPayloads(config: ClientConfig, accountSid: String, referenceSid: String, addOnResultSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountRecordingRecordingAddOnResultRecordingAddOnResultPayload {
+        try validateLength("AccountSid", accountSid, min: 34, max: 34)
+        try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
+
+        try validateLength("ReferenceSid", referenceSid, min: 34, max: 34)
+        try sdkValidatePattern("ReferenceSid", referenceSid, sdkPatternfad3f05341a2)
+
+        try validateLength("AddOnResultSid", addOnResultSid, min: 34, max: 34)
+        try sdkValidatePattern("AddOnResultSid", addOnResultSid, sdkPatterne89fe25d0ced)
+
+        try validateLength("Sid", sid, min: 34, max: 34)
+        try sdkValidatePattern("Sid", sid, sdkPatternb9139acbf072)
+
+        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Recordings/", sdkEncodePathSegment(sdkWireString(referenceSid)), "/AddOnResults/", sdkEncodePathSegment(sdkWireString(addOnResultSid)), "/Payloads/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, decoder: .json, operationId: "fetchRecordingsAddOnResultsPayloads", options: requestOptions)).data
+    }
+}

@@ -48,10 +48,10 @@ struct CreateCallsUserDefinedMessagesRequestBody: Encodable {
     }
 }
 
-struct CreateCallsUserDefinedMessageSubscriptionsRequestBody: Encodable {
+struct CreateCallUserDefinedMessageSubscriptionRequestBody: Encodable {
     let callback: String
     var idempotencyKey: String?
-    var method: CreateCallsUserDefinedMessageSubscriptionsRequestBodyMethod?
+    var method: CreateCallUserDefinedMessageSubscriptionRequestBodyMethod?
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)

@@ -175,8 +175,8 @@ public class CallsUserDefinedMessageSubscriptionsNamespace {
     }
 
 /// Subscribe to User Defined Messages for a given Call SID.
-    public func create(accountSid: String, callSid: String, callback: String, idempotencyKey: String? = nil, method: CreateCallsUserDefinedMessageSubscriptionsRequestBodyMethod? = nil, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountCallUserDefinedMessageSubscription {
-        return try await CallsUserDefinedMessageSubscriptionsMethods.createCallsUserDefinedMessageSubscriptions(config: config, accountSid: accountSid, callSid: callSid, callback: callback, idempotencyKey: idempotencyKey, method: method, requestOptions: requestOptions)
+    public func create(accountSid: String, callSid: String, callback: String, idempotencyKey: String? = nil, method: CreateCallUserDefinedMessageSubscriptionRequestBodyMethod? = nil, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountCallUserDefinedMessageSubscription {
+        return try await CallsUserDefinedMessageSubscriptionsMethods.createCallUserDefinedMessageSubscription(config: config, accountSid: accountSid, callSid: callSid, callback: callback, idempotencyKey: idempotencyKey, method: method, requestOptions: requestOptions)
     }
 
 /// Delete a specific User Defined Message Subscription.
