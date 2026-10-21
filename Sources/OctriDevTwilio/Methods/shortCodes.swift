@@ -7,3 +7,44 @@ import Foundation
     import FoundationNetworking
 #endif
 public enum ShortCodesMethods {}
+
+public extension ShortCodesMethods {
+    /// Retrieves a specific short code from an account. Use `AccountSid` and `Sid` to identify the account and short
+    /// code; both identifiers must match their documented SID formats.
+    ///
+    /// Fetch an instance of a short code
+    ///
+    /// - Parameters:
+    /// - accountSid: The SID of the
+    ///   [Account](https://www.twilio.com/docs/iam/api/account) that created the
+    ///   ShortCode resource(s) to fetch.
+    /// - sid: The Twilio-provided string that uniquely identifies the ShortCode
+    ///   resource to fetch
+    static func fetchShortCodes(
+        config: ClientConfig,
+        accountSid: String,
+        sid: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountShortCode {
+        try validateLength("AccountSid", accountSid, min: 34, max: 34)
+        try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
+
+        try validateLength("Sid", sid, min: 34, max: 34)
+        try sdkValidatePattern("Sid", sid, sdkPatternd0f630ff0f9b)
+
+        return try await (sdkRequest(
+            "GET",
+            [
+                "/2010-04-01/Accounts/",
+                sdkEncodePathSegment(sdkWireString(accountSid)),
+                "/SMS/ShortCodes/",
+                sdkEncodePathSegment(sdkWireString(sid)),
+                ".json",
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "fetchShortCodes",
+            options: requestOptions
+        )).data
+    }
+}

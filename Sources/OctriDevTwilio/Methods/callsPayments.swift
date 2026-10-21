@@ -7,3 +7,82 @@ import Foundation
     import FoundationNetworking
 #endif
 public enum CallsPaymentsMethods {}
+
+public extension CallsPaymentsMethods {
+    /// update an instance of payments with different phases of payment flows.
+    ///
+    /// - Parameters:
+    /// - accountSid: The SID of the
+    ///   [Account](https://www.twilio.com/docs/iam/api/account) that will update the
+    ///   resource.
+    /// - callSid: The SID of the call that will update the resource. This should be
+    ///   the same call sid that was used to create payments resource.
+    /// - sid: The SID of Payments session that needs to be updated.
+    /// - idempotencyKey: A unique token that will be used to ensure that multiple
+    ///   API calls with the same information do not result in multiple transactions.
+    ///   This should be a unique string value per API call and can be a randomly
+    ///   generated.
+    /// - statusCallback: Provide an absolute or relative URL to receive status
+    ///   updates regarding your Pay session. Read more about the
+    ///   [Update](https://www.twilio.com/docs/voice/api/payment-resource#statuscallba
+    ///   ck-update) and
+    ///   [Complete/Cancel](https://www.twilio.com/docs/voice/api/payment-resource#sta
+    ///   tuscallback-cancelcomplete) POST requests.
+    /// - capture: The piece of payment information that you wish the caller to
+    ///   enter. Must be one of `payment-card-number`, `expiration-date`,
+    ///   `security-code`, `postal-code`, `bank-routing-number`,
+    ///   `bank-account-number`, or their `-matcher` variants for input confirmation
+    ///   when `RequireMatchingInputs` is enabled.
+    /// - status: Indicates whether the current payment session should be cancelled
+    ///   or completed. When `cancel` the payment session is cancelled. When
+    ///   `complete`, Twilio sends the payment information to the selected Pay
+    ///   Connector for processing.
+    static func updateCallsPayments(
+        config: ClientConfig,
+        accountSid: String,
+        callSid: String,
+        sid: String,
+        idempotencyKey: String,
+        statusCallback: String,
+        capture: PaymentsEnumCapture? = nil,
+        status: PaymentsEnumStatus? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountCallPayments {
+        try validateLength("AccountSid", accountSid, min: 34, max: 34)
+        try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
+
+        try validateLength("CallSid", callSid, min: 34, max: 34)
+        try sdkValidatePattern("CallSid", callSid, sdkPattern25b2d94fcc27)
+
+        try validateLength("Sid", sid, min: 34, max: 34)
+        try sdkValidatePattern("Sid", sid, sdkPattern703d8254d87c)
+
+        try sdkValidateUri("StatusCallback", statusCallback)
+
+        let requestBody = UpdateCallsPaymentsRequestBody(
+            idempotencyKey: idempotencyKey,
+            statusCallback: statusCallback,
+            capture: capture,
+            status: status
+        )
+
+        return try await (sdkRequest(
+            "POST",
+            [
+                "/2010-04-01/Accounts/",
+                sdkEncodePathSegment(sdkWireString(accountSid)),
+                "/Calls/",
+                sdkEncodePathSegment(sdkWireString(callSid)),
+                "/Payments/",
+                sdkEncodePathSegment(sdkWireString(sid)),
+                ".json",
+            ].joined(),
+            config: config,
+            body: requestBody,
+            contentType: "application/x-www-form-urlencoded",
+            decoder: .json,
+            operationId: "updateCallsPayments",
+            options: requestOptions
+        )).data
+    }
+}

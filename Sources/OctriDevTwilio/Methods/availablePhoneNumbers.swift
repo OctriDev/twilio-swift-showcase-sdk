@@ -7,3 +7,40 @@ import Foundation
     import FoundationNetworking
 #endif
 public enum AvailablePhoneNumbersMethods {}
+
+public extension AvailablePhoneNumbersMethods {
+    /// Retrieves available phone number information for a specific country. Supply the account SID and an ISO 3166-1
+    /// country code to get the country name, beta status, and related available-number resources.
+    ///
+    /// - Parameters:
+    /// - accountSid: The SID of the
+    ///   [Account](https://www.twilio.com/docs/iam/api/account) requesting the
+    ///   available phone number Country resource.
+    /// - countryCode: The
+    ///   [ISO-3166-1](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code
+    ///   of the country to fetch available phone number information about.
+    static func fetchAvailablePhoneNumbers(
+        config: ClientConfig,
+        accountSid: String,
+        countryCode: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountAvailablePhoneNumberCountry {
+        try validateLength("AccountSid", accountSid, min: 34, max: 34)
+        try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
+
+        return try await (sdkRequest(
+            "GET",
+            [
+                "/2010-04-01/Accounts/",
+                sdkEncodePathSegment(sdkWireString(accountSid)),
+                "/AvailablePhoneNumbers/",
+                sdkEncodePathSegment(sdkWireString(countryCode)),
+                ".json",
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "fetchAvailablePhoneNumbers",
+            options: requestOptions
+        )).data
+    }
+}

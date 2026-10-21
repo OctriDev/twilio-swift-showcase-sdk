@@ -379,10 +379,10 @@ public class CallsUserDefinedMessageSubscriptionsNamespace {
         callSid: String,
         callback: String,
         idempotencyKey: String? = nil,
-        method: CreateCallsUserDefinedMessageSubscriptionsRequestBodyMethod? = nil,
+        method: CreateCallUserDefinedMessageSubscriptionRequestBodyMethod? = nil,
         requestOptions: RequestOptions? = nil
     ) async throws -> ApiV2010AccountCallUserDefinedMessageSubscription {
-        try await CallsUserDefinedMessageSubscriptionsMethods.createCallsUserDefinedMessageSubscriptions(
+        try await CallsUserDefinedMessageSubscriptionsMethods.createCallUserDefinedMessageSubscription(
             config: config,
             accountSid: accountSid,
             callSid: callSid,

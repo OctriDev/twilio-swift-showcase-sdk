@@ -7,3 +7,67 @@ import Foundation
     import FoundationNetworking
 #endif
 public enum CallsRecordingsMethods {}
+
+public extension CallsRecordingsMethods {
+    /// Updates the status or pause behavior of a recording associated with a call. Supply the required `Status` field
+    /// to pause, stop, or resume the recording, and use `Twilio.CURRENT` as the recording identifier to target the
+    /// current active recording.
+    ///
+    /// Changes the status of the recording to paused, stopped, or in-progress. Note: Pass `Twilio.CURRENT` instead of
+    /// recording sid to reference current active recording.
+    ///
+    /// - Parameters:
+    /// - accountSid: The SID of the
+    ///   [Account](https://www.twilio.com/docs/iam/api/account) that created the
+    ///   Recording resource to update.
+    /// - callSid: The [Call](https://www.twilio.com/docs/voice/api/call-resource)
+    ///   SID of the resource to update.
+    /// - sid: The Twilio-provided string that uniquely identifies the Recording
+    ///   resource to update.
+    /// - status: The status of the recording. Can be: `processing`, `completed` and
+    ///   `absent`. For more detailed statuses on in-progress recordings, check out
+    ///   how to [Update a Recording
+    ///   Resource](https://www.twilio.com/docs/voice/api/recording#update-a-recording
+    ///   -resource).
+    /// - pauseBehavior: Whether to record during a pause. Can be: `skip` or
+    ///   `silence` and the default is `silence`. `skip` does not record during the
+    ///   pause period, while `silence` will replace the actual audio of the call with
+    ///   silence during the pause period. This parameter only applies when setting
+    ///   `status` is set to `paused`.
+    static func updateCallsRecordings(
+        config: ClientConfig,
+        accountSid: String,
+        callSid: String,
+        sid: String,
+        status: CallRecordingEnumStatus,
+        pauseBehavior: String? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountCallCallRecording {
+        try validateLength("AccountSid", accountSid, min: 34, max: 34)
+        try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
+
+        try validateLength("CallSid", callSid, min: 34, max: 34)
+        try sdkValidatePattern("CallSid", callSid, sdkPattern25b2d94fcc27)
+
+        let requestBody = UpdateCallsRecordingsRequestBody(status: status, pauseBehavior: pauseBehavior)
+
+        return try await (sdkRequest(
+            "POST",
+            [
+                "/2010-04-01/Accounts/",
+                sdkEncodePathSegment(sdkWireString(accountSid)),
+                "/Calls/",
+                sdkEncodePathSegment(sdkWireString(callSid)),
+                "/Recordings/",
+                sdkEncodePathSegment(sdkWireString(sid)),
+                ".json",
+            ].joined(),
+            config: config,
+            body: requestBody,
+            contentType: "application/x-www-form-urlencoded",
+            decoder: .json,
+            operationId: "updateCallsRecordings",
+            options: requestOptions
+        )).data
+    }
+}

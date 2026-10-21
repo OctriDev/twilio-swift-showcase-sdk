@@ -16985,8 +16985,8 @@
       ]
     },
     {
-      "id": "createCallsUserDefinedMessageSubscriptions",
-      "wireOperationId": "createCallsUserDefinedMessageSubscriptions",
+      "id": "createCallUserDefinedMessageSubscription",
+      "wireOperationId": "createCallUserDefinedMessageSubscription",
       "method": "post",
       "path": "/2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/UserDefinedMessageSubscriptions.json",
       "namespace": [
@@ -17001,7 +17001,7 @@
       "publicMethods": [
         {
           "mode": "normal",
-          "name": "createCallsUserDefinedMessageSubscriptions"
+          "name": "createCallUserDefinedMessageSubscription"
         }
       ],
       "requestModes": [
@@ -68450,7 +68450,7 @@
         ]
       },
       {
-        "id": "createCallsUserDefinedMessageSubscriptions",
+        "id": "createCallUserDefinedMessageSubscription",
         "method": "post",
         "path": "/2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/UserDefinedMessageSubscriptions.json",
         "summary": "Subscribe to User Defined Messages for a given Call SID.",

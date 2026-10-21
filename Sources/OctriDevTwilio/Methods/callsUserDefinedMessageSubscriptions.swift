@@ -7,3 +7,51 @@ import Foundation
     import FoundationNetworking
 #endif
 public enum CallsUserDefinedMessageSubscriptionsMethods {}
+
+public extension CallsUserDefinedMessageSubscriptionsMethods {
+    /// Delete a specific User Defined Message Subscription.
+    ///
+    /// - Parameters:
+    /// - accountSid: The SID of the
+    ///   [Account](https://www.twilio.com/docs/iam/api/account) that subscribed to
+    ///   the User Defined Messages.
+    /// - callSid: The SID of the
+    ///   [Call](https://www.twilio.com/docs/voice/api/call-resource) the User Defined
+    ///   Message Subscription is associated with. This refers to the Call SID that is
+    ///   producing the User Defined Messages.
+    /// - sid: The SID that uniquely identifies this User Defined Message
+    ///   Subscription.
+    static func deleteCallsUserDefinedMessageSubscriptions(
+        config: ClientConfig,
+        accountSid: String,
+        callSid: String,
+        sid: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try validateLength("AccountSid", accountSid, min: 34, max: 34)
+        try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
+
+        try validateLength("CallSid", callSid, min: 34, max: 34)
+        try sdkValidatePattern("CallSid", callSid, sdkPattern25b2d94fcc27)
+
+        try validateLength("Sid", sid, min: 34, max: 34)
+        try sdkValidatePattern("Sid", sid, sdkPattern51de6108ecc1)
+
+        return try await (sdkRequest(
+            "DELETE",
+            [
+                "/2010-04-01/Accounts/",
+                sdkEncodePathSegment(sdkWireString(accountSid)),
+                "/Calls/",
+                sdkEncodePathSegment(sdkWireString(callSid)),
+                "/UserDefinedMessageSubscriptions/",
+                sdkEncodePathSegment(sdkWireString(sid)),
+                ".json",
+            ].joined(),
+            config: config,
+            decoder: .empty,
+            operationId: "deleteCallsUserDefinedMessageSubscriptions",
+            options: requestOptions
+        )).data
+    }
+}

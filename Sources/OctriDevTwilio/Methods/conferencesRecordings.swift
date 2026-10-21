@@ -7,3 +7,67 @@ import Foundation
     import FoundationNetworking
 #endif
 public enum ConferencesRecordingsMethods {}
+
+public extension ConferencesRecordingsMethods {
+    /// Updates the status of a conference recording and, when pausing it, can control how the pause is recorded. Supply
+    /// `Status` to select the recording state; use `Twilio.CURRENT` as `Sid` to target the active recording.
+    ///
+    /// Changes the status of the recording to paused, stopped, or in-progress. Note: To use `Twilio.CURRENT`, pass it
+    /// as recording sid.
+    ///
+    /// - Parameters:
+    /// - accountSid: The SID of the
+    ///   [Account](https://www.twilio.com/docs/iam/api/account) that created the
+    ///   Conference Recording resource to update.
+    /// - conferenceSid: The Conference SID that identifies the conference
+    ///   associated with the recording to update.
+    /// - sid: The Twilio-provided string that uniquely identifies the Conference
+    ///   Recording resource to update. Use `Twilio.CURRENT` to reference the current
+    ///   active recording.
+    /// - status: The status of the recording. Can be: `processing`, `completed` and
+    ///   `absent`. For more detailed statuses on in-progress recordings, check out
+    ///   how to [Update a Recording
+    ///   Resource](https://www.twilio.com/docs/voice/api/recording#update-a-recording
+    ///   -resource).
+    /// - pauseBehavior: Whether to record during a pause. Can be: `skip` or
+    ///   `silence` and the default is `silence`. `skip` does not record during the
+    ///   pause period, while `silence` will replace the actual audio of the call with
+    ///   silence during the pause period. This parameter only applies when setting
+    ///   `status` is set to `paused`.
+    static func updateConferencesRecordings(
+        config: ClientConfig,
+        accountSid: String,
+        conferenceSid: String,
+        sid: String,
+        status: ConferenceRecordingEnumStatus,
+        pauseBehavior: String? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountConferenceConferenceRecording {
+        try validateLength("AccountSid", accountSid, min: 34, max: 34)
+        try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
+
+        try validateLength("ConferenceSid", conferenceSid, min: 34, max: 34)
+        try sdkValidatePattern("ConferenceSid", conferenceSid, sdkPatternb5f37fc1f4d4)
+
+        let requestBody = UpdateConferencesRecordingsRequestBody(status: status, pauseBehavior: pauseBehavior)
+
+        return try await (sdkRequest(
+            "POST",
+            [
+                "/2010-04-01/Accounts/",
+                sdkEncodePathSegment(sdkWireString(accountSid)),
+                "/Conferences/",
+                sdkEncodePathSegment(sdkWireString(conferenceSid)),
+                "/Recordings/",
+                sdkEncodePathSegment(sdkWireString(sid)),
+                ".json",
+            ].joined(),
+            config: config,
+            body: requestBody,
+            contentType: "application/x-www-form-urlencoded",
+            decoder: .json,
+            operationId: "updateConferencesRecordings",
+            options: requestOptions
+        )).data
+    }
+}

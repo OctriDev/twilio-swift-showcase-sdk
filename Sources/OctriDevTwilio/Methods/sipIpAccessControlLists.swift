@@ -7,3 +7,43 @@ import Foundation
     import FoundationNetworking
 #endif
 public enum SipIpAccessControlListsMethods {}
+
+public extension SipIpAccessControlListsMethods {
+    /// Retrieves a specific IP access control list for an account. Use `AccountSid` and `Sid` to identify the account
+    /// and list; both values must use their resource-specific 34-character identifier format.
+    ///
+    /// Fetch a specific instance of an IpAccessControlList
+    ///
+    /// - Parameters:
+    /// - accountSid: The unique id of the
+    ///   [Account](https://www.twilio.com/docs/iam/api/account) responsible for this
+    ///   resource.
+    /// - sid: A 34 character string that uniquely identifies the resource to fetch.
+    static func fetchSipIpAccessControlLists(
+        config: ClientConfig,
+        accountSid: String,
+        sid: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountSipSipIpAccessControlList {
+        try validateLength("AccountSid", accountSid, min: 34, max: 34)
+        try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
+
+        try validateLength("Sid", sid, min: 34, max: 34)
+        try sdkValidatePattern("Sid", sid, sdkPattern99d6601bdb3f)
+
+        return try await (sdkRequest(
+            "GET",
+            [
+                "/2010-04-01/Accounts/",
+                sdkEncodePathSegment(sdkWireString(accountSid)),
+                "/SIP/IpAccessControlLists/",
+                sdkEncodePathSegment(sdkWireString(sid)),
+                ".json",
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "fetchSipIpAccessControlLists",
+            options: requestOptions
+        )).data
+    }
+}

@@ -7,3 +7,51 @@ import Foundation
     import FoundationNetworking
 #endif
 public enum SipDomainsAuthCallsIpAccessControlListMappingsMethods {}
+
+public extension SipDomainsAuthCallsIpAccessControlListMappingsMethods {
+    /// Retrieves a specific IP Access Control List mapping from a SIP domain. Provide the account, domain, and mapping
+    /// SIDs to identify the mapping to fetch.
+    ///
+    /// Fetch a specific instance of an IP Access Control List mapping
+    ///
+    /// - Parameters:
+    /// - accountSid: The SID of the
+    ///   [Account](https://www.twilio.com/docs/iam/api/account) that created the
+    ///   IpAccessControlListMapping resource to fetch.
+    /// - domainSid: The SID of the SIP domain that contains the resource to fetch.
+    /// - sid: The Twilio-provided string that uniquely identifies the
+    ///   IpAccessControlListMapping resource to fetch.
+    static func fetchSipDomainsAuthCallsIpAccessControlListMappings(
+        config: ClientConfig,
+        accountSid: String,
+        domainSid: String,
+        sid: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountSipSipDomainSipAuthSipAuthCallsSipAuthCallsIpAXfae3ce6f63 {
+        try validateLength("AccountSid", accountSid, min: 34, max: 34)
+        try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
+
+        try validateLength("DomainSid", domainSid, min: 34, max: 34)
+        try sdkValidatePattern("DomainSid", domainSid, sdkPatterna7d75da61532)
+
+        try validateLength("Sid", sid, min: 34, max: 34)
+        try sdkValidatePattern("Sid", sid, sdkPattern99d6601bdb3f)
+
+        return try await (sdkRequest(
+            "GET",
+            [
+                "/2010-04-01/Accounts/",
+                sdkEncodePathSegment(sdkWireString(accountSid)),
+                "/SIP/Domains/",
+                sdkEncodePathSegment(sdkWireString(domainSid)),
+                "/Auth/Calls/IpAccessControlListMappings/",
+                sdkEncodePathSegment(sdkWireString(sid)),
+                ".json",
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "fetchSipDomainsAuthCallsIpAccessControlListMappings",
+            options: requestOptions
+        )).data
+    }
+}

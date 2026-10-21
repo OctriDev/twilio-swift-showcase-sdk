@@ -7,3 +7,51 @@ import Foundation
     import FoundationNetworking
 #endif
 public enum IncomingPhoneNumbersAssignedAddOnsMethods {}
+
+public extension IncomingPhoneNumbersAssignedAddOnsMethods {
+    /// Retrieves an add-on installation assigned to an incoming phone number. Use the account SID, phone number SID,
+    /// and add-on installation SID to identify the resource.
+    ///
+    /// Fetch an instance of an Add-on installation currently assigned to this Number.
+    ///
+    /// - Parameters:
+    /// - accountSid: The SID of the
+    ///   [Account](https://www.twilio.com/docs/iam/api/account) that created the
+    ///   resource to fetch.
+    /// - resourceSid: The SID of the Phone Number to which the Add-on is assigned.
+    /// - sid: The Twilio-provided string that uniquely identifies the resource to
+    ///   fetch.
+    static func fetchIncomingPhoneNumbersAssignedAddOns(
+        config: ClientConfig,
+        accountSid: String,
+        resourceSid: String,
+        sid: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountIncomingPhoneNumberIncomingPhoneNumberAssignedAddOn {
+        try validateLength("AccountSid", accountSid, min: 34, max: 34)
+        try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
+
+        try validateLength("ResourceSid", resourceSid, min: 34, max: 34)
+        try sdkValidatePattern("ResourceSid", resourceSid, sdkPattern9792ce0bb10f)
+
+        try validateLength("Sid", sid, min: 34, max: 34)
+        try sdkValidatePattern("Sid", sid, sdkPatternbb2f9d1d1c1e)
+
+        return try await (sdkRequest(
+            "GET",
+            [
+                "/2010-04-01/Accounts/",
+                sdkEncodePathSegment(sdkWireString(accountSid)),
+                "/IncomingPhoneNumbers/",
+                sdkEncodePathSegment(sdkWireString(resourceSid)),
+                "/AssignedAddOns/",
+                sdkEncodePathSegment(sdkWireString(sid)),
+                ".json",
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "fetchIncomingPhoneNumbersAssignedAddOns",
+            options: requestOptions
+        )).data
+    }
+}

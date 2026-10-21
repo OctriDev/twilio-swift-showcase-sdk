@@ -7,3 +7,48 @@ import Foundation
     import FoundationNetworking
 #endif
 public enum QueuesMembersMethods {}
+
+public extension QueuesMembersMethods {
+    /// Retrieves a specific member of a queue. Supply the account SID, queue SID, and call SID to identify the queue
+    /// member.
+    ///
+    /// Fetch a specific member from the queue
+    ///
+    /// - Parameters:
+    /// - accountSid: The SID of the
+    ///   [Account](https://www.twilio.com/docs/iam/api/account) that created the
+    ///   Member resource(s) to fetch.
+    /// - queueSid: The SID of the Queue in which to find the members to fetch.
+    /// - callSid: The [Call](https://www.twilio.com/docs/voice/api/call-resource)
+    ///   SID of the resource(s) to fetch.
+    static func fetchQueuesMembers(
+        config: ClientConfig,
+        accountSid: String,
+        queueSid: String,
+        callSid: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountQueueMember {
+        try validateLength("AccountSid", accountSid, min: 34, max: 34)
+        try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
+
+        try validateLength("QueueSid", queueSid, min: 34, max: 34)
+        try sdkValidatePattern("QueueSid", queueSid, sdkPatternd19bdfd65b5a)
+
+        return try await (sdkRequest(
+            "GET",
+            [
+                "/2010-04-01/Accounts/",
+                sdkEncodePathSegment(sdkWireString(accountSid)),
+                "/Queues/",
+                sdkEncodePathSegment(sdkWireString(queueSid)),
+                "/Members/",
+                sdkEncodePathSegment(sdkWireString(callSid)),
+                ".json",
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "fetchQueuesMembers",
+            options: requestOptions
+        )).data
+    }
+}
