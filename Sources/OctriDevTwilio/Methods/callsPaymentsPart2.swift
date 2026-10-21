@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension CallsPaymentsMethods {
-    public struct CreateCallsPaymentsOptions: Codable {
+public extension CallsPaymentsMethods {
+    struct CreateCallsPaymentsOptions: Codable {
         public var accountSid: String
         public var callSid: String
         public var idempotencyKey: String
@@ -108,7 +108,11 @@ extension CallsPaymentsMethods {
     ///   information before submitting to the payment gateway. If `true`, the caller
     ///   will hear the last 4 digits of their card or account number and must press 1
     ///   to confirm or 2 to cancel. Default is `false`.
-    public static func createCallsPayments(config: ClientConfig, options: CreateCallsPaymentsOptions, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountCallPayments {
+    static func createCallsPayments(
+        config: ClientConfig,
+        options: CreateCallsPaymentsOptions,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountCallPayments {
         try validateLength("AccountSid", options.accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", options.accountSid, sdkPatternc7cb941ab84b)
 
@@ -119,6 +123,21 @@ extension CallsPaymentsMethods {
 
         let requestBody = CreateCallsPaymentsRequestBody(options: options)
 
-        return try (await sdkRequest("POST", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(options.accountSid)), "/Calls/", sdkEncodePathSegment(sdkWireString(options.callSid)), "/Payments.json"].joined(), config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "createCallsPayments", options: requestOptions)).data
+        return try await (sdkRequest(
+            "POST",
+            [
+                "/2010-04-01/Accounts/",
+                sdkEncodePathSegment(sdkWireString(options.accountSid)),
+                "/Calls/",
+                sdkEncodePathSegment(sdkWireString(options.callSid)),
+                "/Payments.json",
+            ].joined(),
+            config: config,
+            body: requestBody,
+            contentType: "application/x-www-form-urlencoded",
+            decoder: .json,
+            operationId: "createCallsPayments",
+            options: requestOptions
+        )).data
     }
 }

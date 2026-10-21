@@ -6,8 +6,9 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension QueuesMethods {
-    /// Updates the name or maximum size of a queue. Use `AccountSid` and `Sid` to identify the queue, and supply `FriendlyName`, `MaxSize`, or both to change its settings. The response contains the updated queue object.
+public extension QueuesMethods {
+    /// Updates the name or maximum size of a queue. Use `AccountSid` and `Sid` to identify the queue, and supply
+    /// `FriendlyName`, `MaxSize`, or both to change its settings. The response contains the updated queue object.
     ///
     /// Update the queue with the new parameters
     ///
@@ -21,7 +22,14 @@ extension QueuesMethods {
     ///   resource. It can be up to 64 characters long.
     /// - maxSize: The maximum number of calls allowed to be in the queue. The
     ///   default is 1000. The maximum is 5000.
-    public static func updateQueues(config: ClientConfig, accountSid: String, sid: String, friendlyName: String? = nil, maxSize: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountQueue {
+    static func updateQueues(
+        config: ClientConfig,
+        accountSid: String,
+        sid: String,
+        friendlyName: String? = nil,
+        maxSize: Int? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountQueue {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
@@ -30,6 +38,21 @@ extension QueuesMethods {
 
         let requestBody = UpdateQueuesRequestBody(friendlyName: friendlyName, maxSize: maxSize)
 
-        return try (await sdkRequest("POST", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Queues/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "updateQueues", options: requestOptions)).data
+        return try await (sdkRequest(
+            "POST",
+            [
+                "/2010-04-01/Accounts/",
+                sdkEncodePathSegment(sdkWireString(accountSid)),
+                "/Queues/",
+                sdkEncodePathSegment(sdkWireString(sid)),
+                ".json",
+            ].joined(),
+            config: config,
+            body: requestBody,
+            contentType: "application/x-www-form-urlencoded",
+            decoder: .json,
+            operationId: "updateQueues",
+            options: requestOptions
+        )).data
     }
 }

@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension CallsSiprecMethods {
-    public struct CreateCallsSiprecOptions: Codable {
+public extension CallsSiprecMethods {
+    struct CreateCallsSiprecOptions: Codable {
         public var accountSid: String
         public var callSid: String
         public var name: String?
@@ -220,7 +220,8 @@ extension CallsSiprecMethods {
         }
     }
 
-    /// Creates a SIPREC resource associated with a call. Use `Track` to choose which audio tracks to record, and optionally provide a connector name and status callback settings.
+    /// Creates a SIPREC resource associated with a call. Use `Track` to choose which audio tracks to record, and
+    /// optionally provide a connector name and status callback settings.
     ///
     /// Create a Siprec
     ///
@@ -437,7 +438,11 @@ extension CallsSiprecMethods {
     /// - parameter98Value: Parameter value
     /// - parameter99Name: Parameter name
     /// - parameter99Value: Parameter value
-    public static func createCallsSiprec(config: ClientConfig, options: CreateCallsSiprecOptions, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountCallSiprec {
+    static func createCallsSiprec(
+        config: ClientConfig,
+        options: CreateCallsSiprecOptions,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountCallSiprec {
         try validateLength("AccountSid", options.accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", options.accountSid, sdkPatternc7cb941ab84b)
 
@@ -450,6 +455,21 @@ extension CallsSiprecMethods {
 
         let requestBody = CreateCallsSiprecRequestBody(options: options)
 
-        return try (await sdkRequest("POST", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(options.accountSid)), "/Calls/", sdkEncodePathSegment(sdkWireString(options.callSid)), "/Siprec.json"].joined(), config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "createCallsSiprec", options: requestOptions)).data
+        return try await (sdkRequest(
+            "POST",
+            [
+                "/2010-04-01/Accounts/",
+                sdkEncodePathSegment(sdkWireString(options.accountSid)),
+                "/Calls/",
+                sdkEncodePathSegment(sdkWireString(options.callSid)),
+                "/Siprec.json",
+            ].joined(),
+            config: config,
+            body: requestBody,
+            contentType: "application/x-www-form-urlencoded",
+            decoder: .json,
+            operationId: "createCallsSiprec",
+            options: requestOptions
+        )).data
     }
 }

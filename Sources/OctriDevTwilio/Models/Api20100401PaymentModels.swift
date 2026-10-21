@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Api20100401Payment domain models
+/// Api20100401Payment domain models
 /// Typed representation of the `ApiV2010AccountCallPayments` API schema.
 public struct ApiV2010AccountCallPayments: Codable {
     /// The SID of the Account that created the Payments resource.
@@ -30,37 +30,44 @@ public struct ApiV2010AccountCallPayments: Codable {
     }
 
     init() {
-        (self.accountSid, self.callSid, self.sid, self.dateCreated, self.dateUpdated) = (nil, nil, nil, nil, nil)
-        self.uri = nil
+        (accountSid, callSid, sid, dateCreated, dateUpdated) = (nil, nil, nil, nil, nil)
+        uri = nil
     }
 }
 
-extension ApiV2010AccountCallPayments {
-    public init(from decoder: Decoder) throws {
+public extension ApiV2010AccountCallPayments {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.accountSid = try container.sdkDecodeIfPresent(.accountSid)
-        self.callSid = try container.sdkDecodeIfPresent(.callSid)
-        self.sid = try container.sdkDecodeIfPresent(.sid)
-        self.dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
-        self.dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
-        self.uri = try container.sdkDecodeIfPresent(.uri)
-        if let value = self.accountSid {
+        accountSid = try container.sdkDecodeIfPresent(.accountSid)
+        callSid = try container.sdkDecodeIfPresent(.callSid)
+        sid = try container.sdkDecodeIfPresent(.sid)
+        dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
+        dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
+        uri = try container.sdkDecodeIfPresent(.uri)
+        if let value = accountSid {
             try validateLength("account_sid", value, min: 34, max: 34)
             try sdkValidatePattern("account_sid", value, sdkPatternc7cb941ab84b)
         }
-        if let value = self.callSid {
+        if let value = callSid {
             try validateLength("call_sid", value, min: 34, max: 34)
             try sdkValidatePattern("call_sid", value, sdkPattern25b2d94fcc27)
         }
-        if let value = self.sid {
+        if let value = sid {
             try validateLength("sid", value, min: 34, max: 34)
             try sdkValidatePattern("sid", value, sdkPattern703d8254d87c)
         }
     }
 }
 
-extension ApiV2010AccountCallPayments {
-    public init(accountSid: String? = nil, callSid: String? = nil, sid: String? = nil, dateCreated: String? = nil, dateUpdated: String? = nil, uri: String? = nil) throws {
+public extension ApiV2010AccountCallPayments {
+    init(
+        accountSid: String? = nil,
+        callSid: String? = nil,
+        sid: String? = nil,
+        dateCreated: String? = nil,
+        dateUpdated: String? = nil,
+        uri: String? = nil
+    ) throws {
         self.init()
         (self.accountSid, self.callSid) = (accountSid, callSid)
         (self.sid, self.dateCreated) = (sid, dateCreated)
@@ -86,14 +93,17 @@ extension ApiV2010AccountCallPayments {
 public struct PaymentsEnumTokenType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let oneTime = PaymentsEnumTokenType(rawValue: "one-time")
     public static let reusable = PaymentsEnumTokenType(rawValue: "reusable")
     public static let paymentMethod = PaymentsEnumTokenType(rawValue: "payment-method")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -106,13 +116,16 @@ public struct PaymentsEnumTokenType: RawRepresentable, Hashable, Codable, Sendab
 public struct PaymentsEnumPaymentMethod: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let creditCard = PaymentsEnumPaymentMethod(rawValue: "credit-card")
     public static let achDebit = PaymentsEnumPaymentMethod(rawValue: "ach-debit")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -127,7 +140,10 @@ public struct PaymentsEnumPaymentMethod: RawRepresentable, Hashable, Codable, Se
 public struct PaymentsEnumCapture: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let paymentCardNumber = PaymentsEnumCapture(rawValue: "payment-card-number")
     public static let expirationDate = PaymentsEnumCapture(rawValue: "expiration-date")
     public static let securityCode = PaymentsEnumCapture(rawValue: "security-code")
@@ -141,7 +157,7 @@ public struct PaymentsEnumCapture: RawRepresentable, Hashable, Codable, Sendable
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -155,14 +171,17 @@ public struct PaymentsEnumCapture: RawRepresentable, Hashable, Codable, Sendable
 public struct PaymentsEnumBankAccountType: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let consumerChecking = PaymentsEnumBankAccountType(rawValue: "consumer-checking")
     public static let consumerSavings = PaymentsEnumBankAccountType(rawValue: "consumer-savings")
     public static let commercialChecking = PaymentsEnumBankAccountType(rawValue: "commercial-checking")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -177,13 +196,16 @@ public struct PaymentsEnumBankAccountType: RawRepresentable, Hashable, Codable, 
 public struct PaymentsEnumStatus: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let complete = PaymentsEnumStatus(rawValue: "complete")
     public static let cancel = PaymentsEnumStatus(rawValue: "cancel")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

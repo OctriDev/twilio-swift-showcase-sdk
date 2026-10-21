@@ -8,8 +8,9 @@ import Foundation
 #endif
 public enum OutgoingCallerIdsMethods {}
 
-extension OutgoingCallerIdsMethods {
-    /// Retrieves an outgoing caller ID belonging to an account. Supply the account SID and outgoing caller ID SID to identify the resource. The response includes the caller ID's phone number, friendly name, and resource metadata.
+public extension OutgoingCallerIdsMethods {
+    /// Retrieves an outgoing caller ID belonging to an account. Supply the account SID and outgoing caller ID SID to
+    /// identify the resource. The response includes the caller ID's phone number, friendly name, and resource metadata.
     ///
     /// Fetch an outgoing-caller-id belonging to the account used to make the request
     ///
@@ -19,13 +20,31 @@ extension OutgoingCallerIdsMethods {
     ///   OutgoingCallerId resource to fetch.
     /// - sid: The Twilio-provided string that uniquely identifies the
     ///   OutgoingCallerId resource to fetch.
-    public static func fetchOutgoingCallerIds(config: ClientConfig, accountSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountOutgoingCallerId {
+    static func fetchOutgoingCallerIds(
+        config: ClientConfig,
+        accountSid: String,
+        sid: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountOutgoingCallerId {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
         try validateLength("Sid", sid, min: 34, max: 34)
         try sdkValidatePattern("Sid", sid, sdkPattern9792ce0bb10f)
 
-        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/OutgoingCallerIds/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, decoder: .json, operationId: "fetchOutgoingCallerIds", options: requestOptions)).data
+        return try await (sdkRequest(
+            "GET",
+            [
+                "/2010-04-01/Accounts/",
+                sdkEncodePathSegment(sdkWireString(accountSid)),
+                "/OutgoingCallerIds/",
+                sdkEncodePathSegment(sdkWireString(sid)),
+                ".json",
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "fetchOutgoingCallerIds",
+            options: requestOptions
+        )).data
     }
 }

@@ -8,8 +8,9 @@ import Foundation
 #endif
 public enum QueuesMethods {}
 
-extension QueuesMethods {
-    /// Retrieves a queue identified by its SID. Use `AccountSid` and `Sid` to identify the account and queue to retrieve.
+public extension QueuesMethods {
+    /// Retrieves a queue identified by its SID. Use `AccountSid` and `Sid` to identify the account and queue to
+    /// retrieve.
     ///
     /// Fetch an instance of a queue identified by the QueueSid
     ///
@@ -19,13 +20,31 @@ extension QueuesMethods {
     ///   Queue resource to fetch.
     /// - sid: The Twilio-provided string that uniquely identifies the Queue
     ///   resource to fetch
-    public static func fetchQueues(config: ClientConfig, accountSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountQueue {
+    static func fetchQueues(
+        config: ClientConfig,
+        accountSid: String,
+        sid: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountQueue {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
         try validateLength("Sid", sid, min: 34, max: 34)
         try sdkValidatePattern("Sid", sid, sdkPatternd19bdfd65b5a)
 
-        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Queues/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, decoder: .json, operationId: "fetchQueues", options: requestOptions)).data
+        return try await (sdkRequest(
+            "GET",
+            [
+                "/2010-04-01/Accounts/",
+                sdkEncodePathSegment(sdkWireString(accountSid)),
+                "/Queues/",
+                sdkEncodePathSegment(sdkWireString(sid)),
+                ".json",
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "fetchQueues",
+            options: requestOptions
+        )).data
     }
 }

@@ -6,8 +6,9 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension QueuesMembersMethods {
-    /// Lists members of a specific queue. Use the page parameters to navigate the results and review each member's call, position, and wait time.
+public extension QueuesMembersMethods {
+    /// Lists members of a specific queue. Use the page parameters to navigate the results and review each member's
+    /// call, position, and wait time.
     ///
     /// Retrieve the members of the queue
     ///
@@ -20,25 +21,47 @@ extension QueuesMembersMethods {
     ///   50, and the maximum is 1000.
     /// - page: The page index. This value is simply for client state.
     /// - pageToken: The page token. This is provided by the API.
-    public static func listQueuesMembers(config: ClientConfig, accountSid: String, queueSid: String, pageSize: Int? = nil, page: Int? = nil, pageToken: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ListQueuesMembersResponse {
+    static func listQueuesMembers(
+        config: ClientConfig,
+        accountSid: String,
+        queueSid: String,
+        pageSize: Int? = nil,
+        page: Int? = nil,
+        pageToken: String? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ListQueuesMembersResponse {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
         try validateLength("QueueSid", queueSid, min: 34, max: 34)
         try sdkValidatePattern("QueueSid", queueSid, sdkPatternd19bdfd65b5a)
 
-        if let pageSize = pageSize {
+        if let pageSize {
             try validateRange("PageSize", Double(pageSize), min: 1, max: 1000)
         }
 
-        if let page = page {
+        if let page {
             try validateRange("Page", Double(page), min: 0)
         }
 
-        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Queues/", sdkEncodePathSegment(sdkWireString(queueSid)), "/Members.json"].joined(), config: config, query: [
-            SdkQueryParameter("PageSize", value: pageSize),
-            SdkQueryParameter("Page", value: page),
-            SdkQueryParameter("PageToken", value: pageToken),
-        ], decoder: .json, operationId: "listQueuesMembers", options: requestOptions)).data
+        return try await (sdkRequest(
+            "GET",
+            [
+                "/2010-04-01/Accounts/",
+                sdkEncodePathSegment(sdkWireString(accountSid)),
+                "/Queues/",
+                sdkEncodePathSegment(sdkWireString(queueSid)),
+                "/Members.json",
+            ].joined(),
+            config: config,
+            query: [
+                SdkQueryParameter("PageSize", value: pageSize),
+                SdkQueryParameter("Page", value: page),
+                SdkQueryParameter("PageToken", value: pageToken),
+            ],
+            decoder: .json,
+            operationId: "listQueuesMembers",
+            options: requestOptions
+        )).data
     }
 }

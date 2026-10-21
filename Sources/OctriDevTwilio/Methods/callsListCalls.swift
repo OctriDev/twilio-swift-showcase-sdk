@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension CallsMethods {
-    public struct ListCallsOptions: Codable {
+public extension CallsMethods {
+    struct ListCallsOptions: Codable {
         public var accountSid: String
         public var to: String?
         public var from: String?
@@ -28,7 +28,8 @@ extension CallsMethods {
         }
     }
 
-    /// Lists calls made to and from a specified account. Filter the results by caller, recipient, parent call, status, or start and end times. Use the page parameters to navigate through the results.
+    /// Lists calls made to and from a specified account. Filter the results by caller, recipient, parent call, status,
+    /// or start and end times. Use the page parameters to navigate through the results.
     ///
     /// Retrieves a collection of calls made to and from your account
     ///
@@ -65,7 +66,11 @@ extension CallsMethods {
     ///   50, and the maximum is 1000.
     /// - page: The page index. This value is simply for client state.
     /// - pageToken: The page token. This is provided by the API.
-    public static func listCalls(config: ClientConfig, options: ListCallsOptions, requestOptions: RequestOptions? = nil) async throws -> ListCallsResponse {
+    static func listCalls(
+        config: ClientConfig,
+        options: ListCallsOptions,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ListCallsResponse {
         try validateLength("AccountSid", options.accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", options.accountSid, sdkPatternc7cb941ab84b)
 
@@ -106,20 +111,28 @@ extension CallsMethods {
             try validateRange("Page", Double(page), min: 0)
         }
 
-        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(options.accountSid)), "/Calls.json"].joined(), config: config, query: [
-            SdkQueryParameter("To", value: options.to),
-            SdkQueryParameter("From", value: options.from),
-            SdkQueryParameter("ParentCallSid", value: options.parentCallSid),
-            SdkQueryParameter("Status", value: options.status),
-            SdkQueryParameter("StartTime", value: options.startTime),
-            SdkQueryParameter("StartTime<", value: options.startTime2),
-            SdkQueryParameter("StartTime>", value: options.startTime3),
-            SdkQueryParameter("EndTime", value: options.endTime),
-            SdkQueryParameter("EndTime<", value: options.endTime2),
-            SdkQueryParameter("EndTime>", value: options.endTime3),
-            SdkQueryParameter("PageSize", value: options.pageSize),
-            SdkQueryParameter("Page", value: options.page),
-            SdkQueryParameter("PageToken", value: options.pageToken),
-        ], decoder: .json, operationId: "listCalls", options: requestOptions)).data
+        return try await (sdkRequest(
+            "GET",
+            ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(options.accountSid)), "/Calls.json"].joined(),
+            config: config,
+            query: [
+                SdkQueryParameter("To", value: options.to),
+                SdkQueryParameter("From", value: options.from),
+                SdkQueryParameter("ParentCallSid", value: options.parentCallSid),
+                SdkQueryParameter("Status", value: options.status),
+                SdkQueryParameter("StartTime", value: options.startTime),
+                SdkQueryParameter("StartTime<", value: options.startTime2),
+                SdkQueryParameter("StartTime>", value: options.startTime3),
+                SdkQueryParameter("EndTime", value: options.endTime),
+                SdkQueryParameter("EndTime<", value: options.endTime2),
+                SdkQueryParameter("EndTime>", value: options.endTime3),
+                SdkQueryParameter("PageSize", value: options.pageSize),
+                SdkQueryParameter("Page", value: options.page),
+                SdkQueryParameter("PageToken", value: options.pageToken),
+            ],
+            decoder: .json,
+            operationId: "listCalls",
+            options: requestOptions
+        )).data
     }
 }

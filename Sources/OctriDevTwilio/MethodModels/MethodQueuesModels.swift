@@ -7,7 +7,7 @@ import Foundation
     import FoundationNetworking
 #endif
 
-// Canonical queues operation model declarations
+/// Canonical queues operation model declarations
 public struct ListQueuesResponse: Codable {
     public var end: Int?
     public var firstPageUri: String?
@@ -32,40 +32,50 @@ public struct ListQueuesResponse: Codable {
     }
 
     init() {
-        (self.end, self.firstPageUri, self.nextPageUri, self.page, self.pageSize) = (nil, nil, nil, nil, nil)
-        (self.previousPageUri, self.start, self.uri, self.queues) = (nil, nil, nil, nil)
+        (end, firstPageUri, nextPageUri, page, pageSize) = (nil, nil, nil, nil, nil)
+        (previousPageUri, start, uri, queues) = (nil, nil, nil, nil)
     }
 }
 
-extension ListQueuesResponse {
-    public init(from decoder: Decoder) throws {
+public extension ListQueuesResponse {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.end = try container.sdkDecodeIfPresent(.end)
-        self.firstPageUri = try container.sdkDecodeIfPresent(.firstPageUri)
-        self.nextPageUri = try container.sdkDecodeIfPresent(.nextPageUri)
-        self.page = try container.sdkDecodeIfPresent(.page)
-        self.pageSize = try container.sdkDecodeIfPresent(.pageSize)
-        self.previousPageUri = try container.sdkDecodeIfPresent(.previousPageUri)
-        self.start = try container.sdkDecodeIfPresent(.start)
-        self.uri = try container.sdkDecodeIfPresent(.uri)
-        self.queues = try container.sdkDecodeIfPresent(.queues)
-        if let value = self.firstPageUri {
+        end = try container.sdkDecodeIfPresent(.end)
+        firstPageUri = try container.sdkDecodeIfPresent(.firstPageUri)
+        nextPageUri = try container.sdkDecodeIfPresent(.nextPageUri)
+        page = try container.sdkDecodeIfPresent(.page)
+        pageSize = try container.sdkDecodeIfPresent(.pageSize)
+        previousPageUri = try container.sdkDecodeIfPresent(.previousPageUri)
+        start = try container.sdkDecodeIfPresent(.start)
+        uri = try container.sdkDecodeIfPresent(.uri)
+        queues = try container.sdkDecodeIfPresent(.queues)
+        if let value = firstPageUri {
             try sdkValidateUri("first_page_uri", value)
         }
-        if let value = self.nextPageUri {
+        if let value = nextPageUri {
             try sdkValidateUri("next_page_uri", value)
         }
-        if let value = self.previousPageUri {
+        if let value = previousPageUri {
             try sdkValidateUri("previous_page_uri", value)
         }
-        if let value = self.uri {
+        if let value = uri {
             try sdkValidateUri("uri", value)
         }
     }
 }
 
-extension ListQueuesResponse {
-    public init(end: Int? = nil, firstPageUri: String? = nil, nextPageUri: String? = nil, page: Int? = nil, pageSize: Int? = nil, previousPageUri: String? = nil, start: Int? = nil, uri: String? = nil, queues: [ApiV2010AccountQueue]? = nil) throws {
+public extension ListQueuesResponse {
+    init(
+        end: Int? = nil,
+        firstPageUri: String? = nil,
+        nextPageUri: String? = nil,
+        page: Int? = nil,
+        pageSize: Int? = nil,
+        previousPageUri: String? = nil,
+        start: Int? = nil,
+        uri: String? = nil,
+        queues: [ApiV2010AccountQueue]? = nil
+    ) throws {
         self.init()
         (self.end, self.firstPageUri) = (end, firstPageUri)
         (self.nextPageUri, self.page) = (nextPageUri, page)

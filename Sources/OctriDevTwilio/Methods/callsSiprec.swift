@@ -8,8 +8,9 @@ import Foundation
 #endif
 public enum CallsSiprecMethods {}
 
-extension CallsSiprecMethods {
-    /// Stops a SIPREC resource associated with a call. Set `Status` to `stopped`, and identify the resource by its SID or the name used when it was created.
+public extension CallsSiprecMethods {
+    /// Stops a SIPREC resource associated with a call. Set `Status` to `stopped`, and identify the resource by its SID
+    /// or the name used when it was created.
     ///
     /// Stop a Siprec using either the SID of the Siprec resource or the `name` used when creating the resource
     ///
@@ -22,7 +23,14 @@ extension CallsSiprecMethods {
     ///   resource is associated with.
     /// - sid: The SID of the Siprec resource, or the `name` used when creating the
     ///   resource
-    public static func updateCallsSiprec(config: ClientConfig, accountSid: String, callSid: String, sid: String, status: SiprecEnumUpdateStatus, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountCallSiprec {
+    static func updateCallsSiprec(
+        config: ClientConfig,
+        accountSid: String,
+        callSid: String,
+        sid: String,
+        status: SiprecEnumUpdateStatus,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountCallSiprec {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
@@ -31,6 +39,23 @@ extension CallsSiprecMethods {
 
         let requestBody = UpdateCallsSiprecRequestBody(status: status)
 
-        return try (await sdkRequest("POST", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Calls/", sdkEncodePathSegment(sdkWireString(callSid)), "/Siprec/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, body: requestBody, contentType: "application/x-www-form-urlencoded", decoder: .json, operationId: "updateCallsSiprec", options: requestOptions)).data
+        return try await (sdkRequest(
+            "POST",
+            [
+                "/2010-04-01/Accounts/",
+                sdkEncodePathSegment(sdkWireString(accountSid)),
+                "/Calls/",
+                sdkEncodePathSegment(sdkWireString(callSid)),
+                "/Siprec/",
+                sdkEncodePathSegment(sdkWireString(sid)),
+                ".json",
+            ].joined(),
+            config: config,
+            body: requestBody,
+            contentType: "application/x-www-form-urlencoded",
+            decoder: .json,
+            operationId: "updateCallsSiprec",
+            options: requestOptions
+        )).data
     }
 }

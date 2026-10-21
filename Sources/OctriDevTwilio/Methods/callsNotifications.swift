@@ -8,8 +8,9 @@ import Foundation
 #endif
 public enum CallsNotificationsMethods {}
 
-extension CallsNotificationsMethods {
-    /// Retrieves a notification associated with a specific call. Use the account, call, and notification SIDs to identify the resource and inspect its error details, request, and response information.
+public extension CallsNotificationsMethods {
+    /// Retrieves a notification associated with a specific call. Use the account, call, and notification SIDs to
+    /// identify the resource and inspect its error details, request, and response information.
     ///
     /// - Parameters:
     /// - accountSid: The SID of the
@@ -19,7 +20,13 @@ extension CallsNotificationsMethods {
     ///   SID of the Call Notification resource to fetch.
     /// - sid: The Twilio-provided string that uniquely identifies the Call
     ///   Notification resource to fetch.
-    public static func fetchCallsNotifications(config: ClientConfig, accountSid: String, callSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountCallCallNotificationInstance {
+    static func fetchCallsNotifications(
+        config: ClientConfig,
+        accountSid: String,
+        callSid: String,
+        sid: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountCallCallNotificationInstance {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
@@ -29,6 +36,21 @@ extension CallsNotificationsMethods {
         try validateLength("Sid", sid, min: 34, max: 34)
         try sdkValidatePattern("Sid", sid, sdkPatternb9fb14eb1cd8)
 
-        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Calls/", sdkEncodePathSegment(sdkWireString(callSid)), "/Notifications/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, decoder: .json, operationId: "fetchCallsNotifications", options: requestOptions)).data
+        return try await (sdkRequest(
+            "GET",
+            [
+                "/2010-04-01/Accounts/",
+                sdkEncodePathSegment(sdkWireString(accountSid)),
+                "/Calls/",
+                sdkEncodePathSegment(sdkWireString(callSid)),
+                "/Notifications/",
+                sdkEncodePathSegment(sdkWireString(sid)),
+                ".json",
+            ].joined(),
+            config: config,
+            decoder: .json,
+            operationId: "fetchCallsNotifications",
+            options: requestOptions
+        )).data
     }
 }

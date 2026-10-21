@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Api20100401Trigger domain models
+/// Api20100401Trigger domain models
 /// Typed representation of the `ApiV2010AccountUsageUsageTrigger` API schema.
 public struct ApiV2010AccountUsageUsageTrigger: Codable {
     /// The SID of the Account that the trigger monitors.
@@ -62,48 +62,65 @@ public struct ApiV2010AccountUsageUsageTrigger: Codable {
     }
 
     init() {
-        (self.accountSid, self.apiVersion, self.callbackMethod, self.callbackUrl, self.currentValue) = (nil, nil, nil, nil, nil)
-        (self.dateCreated, self.dateFired, self.dateUpdated, self.friendlyName, self.recurring) = (nil, nil, nil, nil, nil)
-        (self.sid, self.triggerBy, self.triggerValue, self.uri, self.usageCategory) = (nil, nil, nil, nil, nil)
-        self.usageRecordUri = nil
+        (accountSid, apiVersion, callbackMethod, callbackUrl, currentValue) = (nil, nil, nil, nil, nil)
+        (dateCreated, dateFired, dateUpdated, friendlyName, recurring) = (nil, nil, nil, nil, nil)
+        (sid, triggerBy, triggerValue, uri, usageCategory) = (nil, nil, nil, nil, nil)
+        usageRecordUri = nil
     }
 }
 
-extension ApiV2010AccountUsageUsageTrigger {
-    public init(from decoder: Decoder) throws {
+public extension ApiV2010AccountUsageUsageTrigger {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.accountSid = try container.sdkDecodeIfPresent(.accountSid)
-        self.apiVersion = try container.sdkDecodeIfPresent(.apiVersion)
-        self.callbackMethod = try container.sdkDecodeIfPresent(.callbackMethod)
-        self.callbackUrl = try container.sdkDecodeIfPresent(.callbackUrl)
-        self.currentValue = try container.sdkDecodeIfPresent(.currentValue)
-        self.dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
-        self.dateFired = try container.sdkDecodeIfPresent(.dateFired)
-        self.dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
-        self.friendlyName = try container.sdkDecodeIfPresent(.friendlyName)
-        self.recurring = try container.sdkDecodeIfPresent(.recurring)
-        self.sid = try container.sdkDecodeIfPresent(.sid)
-        self.triggerBy = try container.sdkDecodeIfPresent(.triggerBy)
-        self.triggerValue = try container.sdkDecodeIfPresent(.triggerValue)
-        self.uri = try container.sdkDecodeIfPresent(.uri)
-        self.usageCategory = try container.sdkDecodeIfPresent(.usageCategory)
-        self.usageRecordUri = try container.sdkDecodeIfPresent(.usageRecordUri)
-        if let value = self.accountSid {
+        accountSid = try container.sdkDecodeIfPresent(.accountSid)
+        apiVersion = try container.sdkDecodeIfPresent(.apiVersion)
+        callbackMethod = try container.sdkDecodeIfPresent(.callbackMethod)
+        callbackUrl = try container.sdkDecodeIfPresent(.callbackUrl)
+        currentValue = try container.sdkDecodeIfPresent(.currentValue)
+        dateCreated = try container.sdkDecodeIfPresent(.dateCreated)
+        dateFired = try container.sdkDecodeIfPresent(.dateFired)
+        dateUpdated = try container.sdkDecodeIfPresent(.dateUpdated)
+        friendlyName = try container.sdkDecodeIfPresent(.friendlyName)
+        recurring = try container.sdkDecodeIfPresent(.recurring)
+        sid = try container.sdkDecodeIfPresent(.sid)
+        triggerBy = try container.sdkDecodeIfPresent(.triggerBy)
+        triggerValue = try container.sdkDecodeIfPresent(.triggerValue)
+        uri = try container.sdkDecodeIfPresent(.uri)
+        usageCategory = try container.sdkDecodeIfPresent(.usageCategory)
+        usageRecordUri = try container.sdkDecodeIfPresent(.usageRecordUri)
+        if let value = accountSid {
             try validateLength("account_sid", value, min: 34, max: 34)
             try sdkValidatePattern("account_sid", value, sdkPatternc7cb941ab84b)
         }
-        if let value = self.callbackUrl {
+        if let value = callbackUrl {
             try sdkValidateUri("callback_url", value)
         }
-        if let value = self.sid {
+        if let value = sid {
             try validateLength("sid", value, min: 34, max: 34)
             try sdkValidatePattern("sid", value, sdkPattern0c13ca06d199)
         }
     }
 }
 
-extension ApiV2010AccountUsageUsageTrigger {
-    public init(accountSid: String? = nil, apiVersion: String? = nil, callbackMethod: ApiV2010AccountUsageUsageTriggerCallbackMethod? = nil, callbackUrl: String? = nil, currentValue: String? = nil, dateCreated: String? = nil, dateFired: String? = nil, dateUpdated: String? = nil, friendlyName: String? = nil, recurring: UsageTriggerEnumRecurring? = nil, sid: String? = nil, triggerBy: UsageTriggerEnumTriggerField? = nil, triggerValue: String? = nil, uri: String? = nil, usageCategory: String? = nil, usageRecordUri: String? = nil) throws {
+public extension ApiV2010AccountUsageUsageTrigger {
+    init(
+        accountSid: String? = nil,
+        apiVersion: String? = nil,
+        callbackMethod: ApiV2010AccountUsageUsageTriggerCallbackMethod? = nil,
+        callbackUrl: String? = nil,
+        currentValue: String? = nil,
+        dateCreated: String? = nil,
+        dateFired: String? = nil,
+        dateUpdated: String? = nil,
+        friendlyName: String? = nil,
+        recurring: UsageTriggerEnumRecurring? = nil,
+        sid: String? = nil,
+        triggerBy: UsageTriggerEnumTriggerField? = nil,
+        triggerValue: String? = nil,
+        uri: String? = nil,
+        usageCategory: String? = nil,
+        usageRecordUri: String? = nil
+    ) throws {
         self.init()
         (self.accountSid, self.apiVersion) = (accountSid, apiVersion)
         (self.callbackMethod, self.callbackUrl) = (callbackMethod, callbackUrl)
@@ -133,7 +150,10 @@ extension ApiV2010AccountUsageUsageTrigger {
 public struct UsageTriggerEnumRecurring: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let daily = UsageTriggerEnumRecurring(rawValue: "daily")
     public static let monthly = UsageTriggerEnumRecurring(rawValue: "monthly")
     public static let yearly = UsageTriggerEnumRecurring(rawValue: "yearly")
@@ -141,7 +161,7 @@ public struct UsageTriggerEnumRecurring: RawRepresentable, Hashable, Codable, Se
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -151,16 +171,20 @@ public struct UsageTriggerEnumRecurring: RawRepresentable, Hashable, Codable, Se
 }
 
 /// The HTTP method we use to call `callback_url`. Can be: `GET` or `POST`.
-public struct ApiV2010AccountUsageUsageTriggerCallbackMethod: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct ApiV2010AccountUsageUsageTriggerCallbackMethod: RawRepresentable, Hashable, Codable, Sendable,
+    SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let get = ApiV2010AccountUsageUsageTriggerCallbackMethod(rawValue: "GET")
     public static let post = ApiV2010AccountUsageUsageTriggerCallbackMethod(rawValue: "POST")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -174,14 +198,17 @@ public struct ApiV2010AccountUsageUsageTriggerCallbackMethod: RawRepresentable, 
 public struct UsageTriggerEnumTriggerField: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let count = UsageTriggerEnumTriggerField(rawValue: "count")
     public static let usage = UsageTriggerEnumTriggerField(rawValue: "usage")
     public static let price = UsageTriggerEnumTriggerField(rawValue: "price")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
