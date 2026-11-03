@@ -6,7 +6,7 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension SipDomainsMethods {
+public extension SipDomainsMethods {
     /// Deletes a SIP domain from an account. Specify the account and domain identifiers for the resource to remove.
     ///
     /// Delete an instance of a Domain
@@ -17,13 +17,31 @@ extension SipDomainsMethods {
     ///   SipDomain resources to delete.
     /// - sid: The Twilio-provided string that uniquely identifies the SipDomain
     ///   resource to delete.
-    public static func deleteSipDomains(config: ClientConfig, accountSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+    static func deleteSipDomains(
+        config: ClientConfig,
+        accountSid: String,
+        sid: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
         try validateLength("Sid", sid, min: 34, max: 34)
         try sdkValidatePattern("Sid", sid, sdkPatterna7d75da61532)
 
-        return try (await sdkRequest("DELETE", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/SIP/Domains/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, decoder: .empty, operationId: "deleteSipDomains", options: requestOptions)).data
+        return try await (sdkRequest(
+            "DELETE",
+            [
+                "/2010-04-01/Accounts/",
+                sdkEncodePathSegment(sdkWireString(accountSid)),
+                "/SIP/Domains/",
+                sdkEncodePathSegment(sdkWireString(sid)),
+                ".json",
+            ].joined(),
+            config: config,
+            decoder: .empty,
+            operationId: "deleteSipDomains",
+            options: requestOptions
+        )).data
     }
 }

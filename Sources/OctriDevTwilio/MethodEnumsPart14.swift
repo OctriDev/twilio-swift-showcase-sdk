@@ -17,8 +17,8 @@ struct CreateConferencesParticipantsRequestBody: Encodable {
     }
 
     init(options: ConferencesParticipantsMethods.CreateConferencesParticipantsOptions) {
-        self.part1 = CreateConferencesParticipantsRequestBodyPart1(options: options)
-        self.part2 = CreateConferencesParticipantsRequestBodyPart2(options: options)
+        part1 = CreateConferencesParticipantsRequestBodyPart1(options: options)
+        part2 = CreateConferencesParticipantsRequestBodyPart2(options: options)
     }
 }
 
@@ -75,109 +75,139 @@ struct CreateConferencesParticipantsRequestBodyPart1 {
     var passports: String?
 
     init(options: ConferencesParticipantsMethods.CreateConferencesParticipantsOptions) {
-        self.from = options.from
-        self.to = options.to
-        self.statusCallback = options.statusCallback
-        self.statusCallbackMethod = options.statusCallbackMethod
-        self.statusCallbackEvent = options.statusCallbackEvent
-        self.label = options.label
-        self.timeout = options.timeout
-        self.record = options.record
-        self.muted = options.muted
-        self.beep = options.beep
-        self.startConferenceOnEnter = options.startConferenceOnEnter
-        self.endConferenceOnExit = options.endConferenceOnExit
-        self.waitUrl = options.waitUrl
-        self.waitMethod = options.waitMethod
-        self.earlyMedia = options.earlyMedia
-        self.maxParticipants = options.maxParticipants
-        self.conferenceRecord = options.conferenceRecord
-        self.conferenceTrim = options.conferenceTrim
-        self.conferenceStatusCallback = options.conferenceStatusCallback
-        self.conferenceStatusCallbackMethod = options.conferenceStatusCallbackMethod
-        self.conferenceStatusCallbackEvent = options.conferenceStatusCallbackEvent
-        self.recordingChannels = options.recordingChannels
-        self.recordingStatusCallback = options.recordingStatusCallback
-        self.recordingStatusCallbackMethod = options.recordingStatusCallbackMethod
-        self.sipAuthUsername = options.sipAuthUsername
-        self.sipAuthPassword = options.sipAuthPassword
-        self.region = options.region
-        self.conferenceRecordingStatusCallback = options.conferenceRecordingStatusCallback
-        self.conferenceRecordingStatusCallbackMethod = options.conferenceRecordingStatusCallbackMethod
-        self.recordingStatusCallbackEvent = options.recordingStatusCallbackEvent
-        self.conferenceRecordingStatusCallbackEvent = options.conferenceRecordingStatusCallbackEvent
-        self.coaching = options.coaching
-        self.callSidToCoach = options.callSidToCoach
-        self.jitterBufferSize = options.jitterBufferSize
-        self.byoc = options.byoc
-        self.callerId = options.callerId
-        self.callReason = options.callReason
-        self.recordingTrack = options.recordingTrack
-        self.recordingConfigurationId = options.recordingConfigurationId
-        self.timeLimit = options.timeLimit
-        self.machineDetection = options.machineDetection
-        self.machineDetectionTimeout = options.machineDetectionTimeout
-        self.machineDetectionSpeechThreshold = options.machineDetectionSpeechThreshold
-        self.machineDetectionSpeechEndThreshold = options.machineDetectionSpeechEndThreshold
-        self.machineDetectionSilenceTimeout = options.machineDetectionSilenceTimeout
-        self.amdStatusCallback = options.amdStatusCallback
-        self.amdStatusCallbackMethod = options.amdStatusCallbackMethod
-        self.trim = options.trim
-        self.callToken = options.callToken
-        self.passports = options.passports
+        from = options.from
+        to = options.to
+        statusCallback = options.statusCallback
+        statusCallbackMethod = options.statusCallbackMethod
+        statusCallbackEvent = options.statusCallbackEvent
+        label = options.label
+        timeout = options.timeout
+        record = options.record
+        muted = options.muted
+        beep = options.beep
+        startConferenceOnEnter = options.startConferenceOnEnter
+        endConferenceOnExit = options.endConferenceOnExit
+        waitUrl = options.waitUrl
+        waitMethod = options.waitMethod
+        earlyMedia = options.earlyMedia
+        maxParticipants = options.maxParticipants
+        conferenceRecord = options.conferenceRecord
+        conferenceTrim = options.conferenceTrim
+        conferenceStatusCallback = options.conferenceStatusCallback
+        conferenceStatusCallbackMethod = options.conferenceStatusCallbackMethod
+        conferenceStatusCallbackEvent = options.conferenceStatusCallbackEvent
+        recordingChannels = options.recordingChannels
+        recordingStatusCallback = options.recordingStatusCallback
+        recordingStatusCallbackMethod = options.recordingStatusCallbackMethod
+        sipAuthUsername = options.sipAuthUsername
+        sipAuthPassword = options.sipAuthPassword
+        region = options.region
+        conferenceRecordingStatusCallback = options.conferenceRecordingStatusCallback
+        conferenceRecordingStatusCallbackMethod = options.conferenceRecordingStatusCallbackMethod
+        recordingStatusCallbackEvent = options.recordingStatusCallbackEvent
+        conferenceRecordingStatusCallbackEvent = options.conferenceRecordingStatusCallbackEvent
+        coaching = options.coaching
+        callSidToCoach = options.callSidToCoach
+        jitterBufferSize = options.jitterBufferSize
+        byoc = options.byoc
+        callerId = options.callerId
+        callReason = options.callReason
+        recordingTrack = options.recordingTrack
+        recordingConfigurationId = options.recordingConfigurationId
+        timeLimit = options.timeLimit
+        machineDetection = options.machineDetection
+        machineDetectionTimeout = options.machineDetectionTimeout
+        machineDetectionSpeechThreshold = options.machineDetectionSpeechThreshold
+        machineDetectionSpeechEndThreshold = options.machineDetectionSpeechEndThreshold
+        machineDetectionSilenceTimeout = options.machineDetectionSilenceTimeout
+        amdStatusCallback = options.amdStatusCallback
+        amdStatusCallbackMethod = options.amdStatusCallbackMethod
+        trim = options.trim
+        callToken = options.callToken
+        passports = options.passports
     }
 
     func encode(to keyedContainer: inout KeyedEncodingContainer<SdkCodingKey>) throws {
-        try keyedContainer.encode(self.from, forKey: SdkCodingKey("From"))
-        try keyedContainer.encode(self.to, forKey: SdkCodingKey("To"))
-        try keyedContainer.encodeIfPresent(self.statusCallback, forKey: SdkCodingKey("StatusCallback"))
-        try keyedContainer.encodeIfPresent(self.statusCallbackMethod, forKey: SdkCodingKey("StatusCallbackMethod"))
-        try keyedContainer.encodeIfPresent(self.statusCallbackEvent, forKey: SdkCodingKey("StatusCallbackEvent"))
-        try keyedContainer.encodeIfPresent(self.label, forKey: SdkCodingKey("Label"))
-        try keyedContainer.encodeIfPresent(self.timeout, forKey: SdkCodingKey("Timeout"))
-        try keyedContainer.encodeIfPresent(self.record, forKey: SdkCodingKey("Record"))
-        try keyedContainer.encodeIfPresent(self.muted, forKey: SdkCodingKey("Muted"))
-        try keyedContainer.encodeIfPresent(self.beep, forKey: SdkCodingKey("Beep"))
-        try keyedContainer.encodeIfPresent(self.startConferenceOnEnter, forKey: SdkCodingKey("StartConferenceOnEnter"))
-        try keyedContainer.encodeIfPresent(self.endConferenceOnExit, forKey: SdkCodingKey("EndConferenceOnExit"))
-        try keyedContainer.encodeIfPresent(self.waitUrl, forKey: SdkCodingKey("WaitUrl"))
-        try keyedContainer.encodeIfPresent(self.waitMethod, forKey: SdkCodingKey("WaitMethod"))
-        try keyedContainer.encodeIfPresent(self.earlyMedia, forKey: SdkCodingKey("EarlyMedia"))
-        try keyedContainer.encodeIfPresent(self.maxParticipants, forKey: SdkCodingKey("MaxParticipants"))
-        try keyedContainer.encodeIfPresent(self.conferenceRecord, forKey: SdkCodingKey("ConferenceRecord"))
-        try keyedContainer.encodeIfPresent(self.conferenceTrim, forKey: SdkCodingKey("ConferenceTrim"))
-        try keyedContainer.encodeIfPresent(self.conferenceStatusCallback, forKey: SdkCodingKey("ConferenceStatusCallback"))
-        try keyedContainer.encodeIfPresent(self.conferenceStatusCallbackMethod, forKey: SdkCodingKey("ConferenceStatusCallbackMethod"))
-        try keyedContainer.encodeIfPresent(self.conferenceStatusCallbackEvent, forKey: SdkCodingKey("ConferenceStatusCallbackEvent"))
-        try keyedContainer.encodeIfPresent(self.recordingChannels, forKey: SdkCodingKey("RecordingChannels"))
-        try keyedContainer.encodeIfPresent(self.recordingStatusCallback, forKey: SdkCodingKey("RecordingStatusCallback"))
-        try keyedContainer.encodeIfPresent(self.recordingStatusCallbackMethod, forKey: SdkCodingKey("RecordingStatusCallbackMethod"))
-        try keyedContainer.encodeIfPresent(self.sipAuthUsername, forKey: SdkCodingKey("SipAuthUsername"))
-        try keyedContainer.encodeIfPresent(self.sipAuthPassword, forKey: SdkCodingKey("SipAuthPassword"))
-        try keyedContainer.encodeIfPresent(self.region, forKey: SdkCodingKey("Region"))
-        try keyedContainer.encodeIfPresent(self.conferenceRecordingStatusCallback, forKey: SdkCodingKey("ConferenceRecordingStatusCallback"))
-        try keyedContainer.encodeIfPresent(self.conferenceRecordingStatusCallbackMethod, forKey: SdkCodingKey("ConferenceRecordingStatusCallbackMethod"))
-        try keyedContainer.encodeIfPresent(self.recordingStatusCallbackEvent, forKey: SdkCodingKey("RecordingStatusCallbackEvent"))
-        try keyedContainer.encodeIfPresent(self.conferenceRecordingStatusCallbackEvent, forKey: SdkCodingKey("ConferenceRecordingStatusCallbackEvent"))
-        try keyedContainer.encodeIfPresent(self.coaching, forKey: SdkCodingKey("Coaching"))
-        try keyedContainer.encodeIfPresent(self.callSidToCoach, forKey: SdkCodingKey("CallSidToCoach"))
-        try keyedContainer.encodeIfPresent(self.jitterBufferSize, forKey: SdkCodingKey("JitterBufferSize"))
-        try keyedContainer.encodeIfPresent(self.byoc, forKey: SdkCodingKey("Byoc"))
-        try keyedContainer.encodeIfPresent(self.callerId, forKey: SdkCodingKey("CallerId"))
-        try keyedContainer.encodeIfPresent(self.callReason, forKey: SdkCodingKey("CallReason"))
-        try keyedContainer.encodeIfPresent(self.recordingTrack, forKey: SdkCodingKey("RecordingTrack"))
-        try keyedContainer.encodeIfPresent(self.recordingConfigurationId, forKey: SdkCodingKey("RecordingConfigurationId"))
-        try keyedContainer.encodeIfPresent(self.timeLimit, forKey: SdkCodingKey("TimeLimit"))
-        try keyedContainer.encodeIfPresent(self.machineDetection, forKey: SdkCodingKey("MachineDetection"))
-        try keyedContainer.encodeIfPresent(self.machineDetectionTimeout, forKey: SdkCodingKey("MachineDetectionTimeout"))
-        try keyedContainer.encodeIfPresent(self.machineDetectionSpeechThreshold, forKey: SdkCodingKey("MachineDetectionSpeechThreshold"))
-        try keyedContainer.encodeIfPresent(self.machineDetectionSpeechEndThreshold, forKey: SdkCodingKey("MachineDetectionSpeechEndThreshold"))
-        try keyedContainer.encodeIfPresent(self.machineDetectionSilenceTimeout, forKey: SdkCodingKey("MachineDetectionSilenceTimeout"))
-        try keyedContainer.encodeIfPresent(self.amdStatusCallback, forKey: SdkCodingKey("AmdStatusCallback"))
-        try keyedContainer.encodeIfPresent(self.amdStatusCallbackMethod, forKey: SdkCodingKey("AmdStatusCallbackMethod"))
-        try keyedContainer.encodeIfPresent(self.trim, forKey: SdkCodingKey("Trim"))
-        try keyedContainer.encodeIfPresent(self.callToken, forKey: SdkCodingKey("CallToken"))
-        try keyedContainer.encodeIfPresent(self.passports, forKey: SdkCodingKey("Passports"))
+        try keyedContainer.encode(from, forKey: SdkCodingKey("From"))
+        try keyedContainer.encode(to, forKey: SdkCodingKey("To"))
+        try keyedContainer.encodeIfPresent(statusCallback, forKey: SdkCodingKey("StatusCallback"))
+        try keyedContainer.encodeIfPresent(statusCallbackMethod, forKey: SdkCodingKey("StatusCallbackMethod"))
+        try keyedContainer.encodeIfPresent(statusCallbackEvent, forKey: SdkCodingKey("StatusCallbackEvent"))
+        try keyedContainer.encodeIfPresent(label, forKey: SdkCodingKey("Label"))
+        try keyedContainer.encodeIfPresent(timeout, forKey: SdkCodingKey("Timeout"))
+        try keyedContainer.encodeIfPresent(record, forKey: SdkCodingKey("Record"))
+        try keyedContainer.encodeIfPresent(muted, forKey: SdkCodingKey("Muted"))
+        try keyedContainer.encodeIfPresent(beep, forKey: SdkCodingKey("Beep"))
+        try keyedContainer.encodeIfPresent(startConferenceOnEnter, forKey: SdkCodingKey("StartConferenceOnEnter"))
+        try keyedContainer.encodeIfPresent(endConferenceOnExit, forKey: SdkCodingKey("EndConferenceOnExit"))
+        try keyedContainer.encodeIfPresent(waitUrl, forKey: SdkCodingKey("WaitUrl"))
+        try keyedContainer.encodeIfPresent(waitMethod, forKey: SdkCodingKey("WaitMethod"))
+        try keyedContainer.encodeIfPresent(earlyMedia, forKey: SdkCodingKey("EarlyMedia"))
+        try keyedContainer.encodeIfPresent(maxParticipants, forKey: SdkCodingKey("MaxParticipants"))
+        try keyedContainer.encodeIfPresent(conferenceRecord, forKey: SdkCodingKey("ConferenceRecord"))
+        try keyedContainer.encodeIfPresent(conferenceTrim, forKey: SdkCodingKey("ConferenceTrim"))
+        try keyedContainer.encodeIfPresent(conferenceStatusCallback, forKey: SdkCodingKey("ConferenceStatusCallback"))
+        try keyedContainer.encodeIfPresent(
+            conferenceStatusCallbackMethod,
+            forKey: SdkCodingKey("ConferenceStatusCallbackMethod")
+        )
+        try keyedContainer.encodeIfPresent(
+            conferenceStatusCallbackEvent,
+            forKey: SdkCodingKey("ConferenceStatusCallbackEvent")
+        )
+        try keyedContainer.encodeIfPresent(recordingChannels, forKey: SdkCodingKey("RecordingChannels"))
+        try keyedContainer.encodeIfPresent(recordingStatusCallback, forKey: SdkCodingKey("RecordingStatusCallback"))
+        try keyedContainer.encodeIfPresent(
+            recordingStatusCallbackMethod,
+            forKey: SdkCodingKey("RecordingStatusCallbackMethod")
+        )
+        try keyedContainer.encodeIfPresent(sipAuthUsername, forKey: SdkCodingKey("SipAuthUsername"))
+        try keyedContainer.encodeIfPresent(sipAuthPassword, forKey: SdkCodingKey("SipAuthPassword"))
+        try keyedContainer.encodeIfPresent(region, forKey: SdkCodingKey("Region"))
+        try keyedContainer.encodeIfPresent(
+            conferenceRecordingStatusCallback,
+            forKey: SdkCodingKey("ConferenceRecordingStatusCallback")
+        )
+        try keyedContainer.encodeIfPresent(
+            conferenceRecordingStatusCallbackMethod,
+            forKey: SdkCodingKey("ConferenceRecordingStatusCallbackMethod")
+        )
+        try keyedContainer.encodeIfPresent(
+            recordingStatusCallbackEvent,
+            forKey: SdkCodingKey("RecordingStatusCallbackEvent")
+        )
+        try keyedContainer.encodeIfPresent(
+            conferenceRecordingStatusCallbackEvent,
+            forKey: SdkCodingKey("ConferenceRecordingStatusCallbackEvent")
+        )
+        try keyedContainer.encodeIfPresent(coaching, forKey: SdkCodingKey("Coaching"))
+        try keyedContainer.encodeIfPresent(callSidToCoach, forKey: SdkCodingKey("CallSidToCoach"))
+        try keyedContainer.encodeIfPresent(jitterBufferSize, forKey: SdkCodingKey("JitterBufferSize"))
+        try keyedContainer.encodeIfPresent(byoc, forKey: SdkCodingKey("Byoc"))
+        try keyedContainer.encodeIfPresent(callerId, forKey: SdkCodingKey("CallerId"))
+        try keyedContainer.encodeIfPresent(callReason, forKey: SdkCodingKey("CallReason"))
+        try keyedContainer.encodeIfPresent(recordingTrack, forKey: SdkCodingKey("RecordingTrack"))
+        try keyedContainer.encodeIfPresent(recordingConfigurationId, forKey: SdkCodingKey("RecordingConfigurationId"))
+        try keyedContainer.encodeIfPresent(timeLimit, forKey: SdkCodingKey("TimeLimit"))
+        try keyedContainer.encodeIfPresent(machineDetection, forKey: SdkCodingKey("MachineDetection"))
+        try keyedContainer.encodeIfPresent(machineDetectionTimeout, forKey: SdkCodingKey("MachineDetectionTimeout"))
+        try keyedContainer.encodeIfPresent(
+            machineDetectionSpeechThreshold,
+            forKey: SdkCodingKey("MachineDetectionSpeechThreshold")
+        )
+        try keyedContainer.encodeIfPresent(
+            machineDetectionSpeechEndThreshold,
+            forKey: SdkCodingKey("MachineDetectionSpeechEndThreshold")
+        )
+        try keyedContainer.encodeIfPresent(
+            machineDetectionSilenceTimeout,
+            forKey: SdkCodingKey("MachineDetectionSilenceTimeout")
+        )
+        try keyedContainer.encodeIfPresent(amdStatusCallback, forKey: SdkCodingKey("AmdStatusCallback"))
+        try keyedContainer.encodeIfPresent(amdStatusCallbackMethod, forKey: SdkCodingKey("AmdStatusCallbackMethod"))
+        try keyedContainer.encodeIfPresent(trim, forKey: SdkCodingKey("Trim"))
+        try keyedContainer.encodeIfPresent(callToken, forKey: SdkCodingKey("CallToken"))
+        try keyedContainer.encodeIfPresent(passports, forKey: SdkCodingKey("Passports"))
     }
 }
 
@@ -194,28 +224,28 @@ struct CreateConferencesParticipantsRequestBodyPart2 {
     var emergencyCountry: String?
 
     init(options: ConferencesParticipantsMethods.CreateConferencesParticipantsOptions) {
-        self.clientNotificationUrl = options.clientNotificationUrl
-        self.callerDisplayName = options.callerDisplayName
-        self.emergencyCallerPosition = options.emergencyCallerPosition
-        self.emergencyCallerLocation = options.emergencyCallerLocation
-        self.emergencyName = options.emergencyName
-        self.emergencyAddress = options.emergencyAddress
-        self.emergencyZipCode = options.emergencyZipCode
-        self.emergencyCity = options.emergencyCity
-        self.emergencyState = options.emergencyState
-        self.emergencyCountry = options.emergencyCountry
+        clientNotificationUrl = options.clientNotificationUrl
+        callerDisplayName = options.callerDisplayName
+        emergencyCallerPosition = options.emergencyCallerPosition
+        emergencyCallerLocation = options.emergencyCallerLocation
+        emergencyName = options.emergencyName
+        emergencyAddress = options.emergencyAddress
+        emergencyZipCode = options.emergencyZipCode
+        emergencyCity = options.emergencyCity
+        emergencyState = options.emergencyState
+        emergencyCountry = options.emergencyCountry
     }
 
     func encode(to keyedContainer: inout KeyedEncodingContainer<SdkCodingKey>) throws {
-        try keyedContainer.encodeIfPresent(self.clientNotificationUrl, forKey: SdkCodingKey("ClientNotificationUrl"))
-        try keyedContainer.encodeIfPresent(self.callerDisplayName, forKey: SdkCodingKey("CallerDisplayName"))
-        try keyedContainer.encodeIfPresent(self.emergencyCallerPosition, forKey: SdkCodingKey("EmergencyCallerPosition"))
-        try keyedContainer.encodeIfPresent(self.emergencyCallerLocation, forKey: SdkCodingKey("EmergencyCallerLocation"))
-        try keyedContainer.encodeIfPresent(self.emergencyName, forKey: SdkCodingKey("EmergencyName"))
-        try keyedContainer.encodeIfPresent(self.emergencyAddress, forKey: SdkCodingKey("EmergencyAddress"))
-        try keyedContainer.encodeIfPresent(self.emergencyZipCode, forKey: SdkCodingKey("EmergencyZipCode"))
-        try keyedContainer.encodeIfPresent(self.emergencyCity, forKey: SdkCodingKey("EmergencyCity"))
-        try keyedContainer.encodeIfPresent(self.emergencyState, forKey: SdkCodingKey("EmergencyState"))
-        try keyedContainer.encodeIfPresent(self.emergencyCountry, forKey: SdkCodingKey("EmergencyCountry"))
+        try keyedContainer.encodeIfPresent(clientNotificationUrl, forKey: SdkCodingKey("ClientNotificationUrl"))
+        try keyedContainer.encodeIfPresent(callerDisplayName, forKey: SdkCodingKey("CallerDisplayName"))
+        try keyedContainer.encodeIfPresent(emergencyCallerPosition, forKey: SdkCodingKey("EmergencyCallerPosition"))
+        try keyedContainer.encodeIfPresent(emergencyCallerLocation, forKey: SdkCodingKey("EmergencyCallerLocation"))
+        try keyedContainer.encodeIfPresent(emergencyName, forKey: SdkCodingKey("EmergencyName"))
+        try keyedContainer.encodeIfPresent(emergencyAddress, forKey: SdkCodingKey("EmergencyAddress"))
+        try keyedContainer.encodeIfPresent(emergencyZipCode, forKey: SdkCodingKey("EmergencyZipCode"))
+        try keyedContainer.encodeIfPresent(emergencyCity, forKey: SdkCodingKey("EmergencyCity"))
+        try keyedContainer.encodeIfPresent(emergencyState, forKey: SdkCodingKey("EmergencyState"))
+        try keyedContainer.encodeIfPresent(emergencyCountry, forKey: SdkCodingKey("EmergencyCountry"))
     }
 }

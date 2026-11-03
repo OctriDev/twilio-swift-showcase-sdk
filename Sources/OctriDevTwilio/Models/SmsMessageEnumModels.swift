@@ -3,17 +3,20 @@
 
 import Foundation
 
-// SmsMessageEnum domain models
+/// SmsMessageEnum domain models
 /// Typed representation of the `SmsMessageEnumUpdateStatus` API schema.
 public struct SmsMessageEnumUpdateStatus: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let canceled = SmsMessageEnumUpdateStatus(rawValue: "canceled")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -26,7 +29,10 @@ public struct SmsMessageEnumUpdateStatus: RawRepresentable, Hashable, Codable, S
 public struct SmsMessageEnumDirection: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let inbound = SmsMessageEnumDirection(rawValue: "inbound")
     public static let outboundApi = SmsMessageEnumDirection(rawValue: "outbound-api")
     public static let outboundCall = SmsMessageEnumDirection(rawValue: "outbound-call")
@@ -34,7 +40,7 @@ public struct SmsMessageEnumDirection: RawRepresentable, Hashable, Codable, Send
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -47,7 +53,10 @@ public struct SmsMessageEnumDirection: RawRepresentable, Hashable, Codable, Send
 public struct SmsMessageEnumStatus: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let queued = SmsMessageEnumStatus(rawValue: "queued")
     public static let sending = SmsMessageEnumStatus(rawValue: "sending")
     public static let sent = SmsMessageEnumStatus(rawValue: "sent")
@@ -64,7 +73,7 @@ public struct SmsMessageEnumStatus: RawRepresentable, Hashable, Codable, Sendabl
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

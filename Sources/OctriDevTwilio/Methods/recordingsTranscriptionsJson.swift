@@ -6,8 +6,9 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension RecordingsTranscriptionsMethods {
-    /// Lists transcriptions associated with a specific recording. Use `PageSize`, `Page`, and `PageToken` to control pagination; `PageSize` defaults to 50 when omitted.
+public extension RecordingsTranscriptionsMethods {
+    /// Lists transcriptions associated with a specific recording. Use `PageSize`, `Page`, and `PageToken` to control
+    /// pagination; `PageSize` defaults to 50 when omitted.
     ///
     /// - Parameters:
     /// - accountSid: The SID of the
@@ -20,25 +21,47 @@ extension RecordingsTranscriptionsMethods {
     ///   50, and the maximum is 1000.
     /// - page: The page index. This value is simply for client state.
     /// - pageToken: The page token. This is provided by the API.
-    public static func listRecordingsTranscriptions(config: ClientConfig, accountSid: String, recordingSid: String, pageSize: Int? = nil, page: Int? = nil, pageToken: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ListRecordingsTranscriptionsResponse {
+    static func listRecordingsTranscriptions(
+        config: ClientConfig,
+        accountSid: String,
+        recordingSid: String,
+        pageSize: Int? = nil,
+        page: Int? = nil,
+        pageToken: String? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ListRecordingsTranscriptionsResponse {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
         try validateLength("RecordingSid", recordingSid, min: 34, max: 34)
         try sdkValidatePattern("RecordingSid", recordingSid, sdkPatternfad3f05341a2)
 
-        if let pageSize = pageSize {
+        if let pageSize {
             try validateRange("PageSize", Double(pageSize), min: 1, max: 1000)
         }
 
-        if let page = page {
+        if let page {
             try validateRange("Page", Double(page), min: 0)
         }
 
-        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Recordings/", sdkEncodePathSegment(sdkWireString(recordingSid)), "/Transcriptions.json"].joined(), config: config, query: [
-            SdkQueryParameter("PageSize", value: pageSize),
-            SdkQueryParameter("Page", value: page),
-            SdkQueryParameter("PageToken", value: pageToken),
-        ], decoder: .json, operationId: "listRecordingsTranscriptions", options: requestOptions)).data
+        return try await (sdkRequest(
+            "GET",
+            [
+                "/2010-04-01/Accounts/",
+                sdkEncodePathSegment(sdkWireString(accountSid)),
+                "/Recordings/",
+                sdkEncodePathSegment(sdkWireString(recordingSid)),
+                "/Transcriptions.json",
+            ].joined(),
+            config: config,
+            query: [
+                SdkQueryParameter("PageSize", value: pageSize),
+                SdkQueryParameter("Page", value: page),
+                SdkQueryParameter("PageToken", value: pageToken),
+            ],
+            decoder: .json,
+            operationId: "listRecordingsTranscriptions",
+            options: requestOptions
+        )).data
     }
 }

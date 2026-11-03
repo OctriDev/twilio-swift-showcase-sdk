@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension AvailablePhoneNumbersMethods {
-    public struct ListAvailablePhoneNumbersNationalOptions: Codable {
+public extension AvailablePhoneNumbersMethods {
+    struct ListAvailablePhoneNumbersNationalOptions: Codable {
         public var accountSid: String
         public var countryCode: String
         public var areaCode: Int?
@@ -38,7 +38,8 @@ extension AvailablePhoneNumbersMethods {
         }
     }
 
-    /// Lists available national phone numbers in a specified country. Filter results by capabilities, number pattern, or geographic details to find numbers that meet your requirements.
+    /// Lists available national phone numbers in a specified country. Filter results by capabilities, number pattern,
+    /// or geographic details to find numbers that meet your requirements.
     ///
     /// - Parameters:
     /// - accountSid: The SID of the
@@ -108,7 +109,11 @@ extension AvailablePhoneNumbersMethods {
     ///   50, and the maximum is 1000.
     /// - page: The page index. This value is simply for client state.
     /// - pageToken: The page token. This is provided by the API.
-    public static func listAvailablePhoneNumbersNational(config: ClientConfig, options: ListAvailablePhoneNumbersNationalOptions, requestOptions: RequestOptions? = nil) async throws -> ListAvailablePhoneNumbersNationalResponse {
+    static func listAvailablePhoneNumbersNational(
+        config: ClientConfig,
+        options: ListAvailablePhoneNumbersNationalOptions,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ListAvailablePhoneNumbersNationalResponse {
         try validateLength("AccountSid", options.accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", options.accountSid, sdkPatternc7cb941ab84b)
 
@@ -120,28 +125,42 @@ extension AvailablePhoneNumbersMethods {
             try validateRange("Page", Double(page), min: 0)
         }
 
-        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(options.accountSid)), "/AvailablePhoneNumbers/", sdkEncodePathSegment(sdkWireString(options.countryCode)), "/National.json"].joined(), config: config, query: [
-            SdkQueryParameter("AreaCode", value: options.areaCode),
-            SdkQueryParameter("Contains", value: options.contains),
-            SdkQueryParameter("SmsEnabled", value: options.smsEnabled),
-            SdkQueryParameter("MmsEnabled", value: options.mmsEnabled),
-            SdkQueryParameter("VoiceEnabled", value: options.voiceEnabled),
-            SdkQueryParameter("ExcludeAllAddressRequired", value: options.excludeAllAddressRequired),
-            SdkQueryParameter("ExcludeLocalAddressRequired", value: options.excludeLocalAddressRequired),
-            SdkQueryParameter("ExcludeForeignAddressRequired", value: options.excludeForeignAddressRequired),
-            SdkQueryParameter("Beta", value: options.beta),
-            SdkQueryParameter("NearNumber", value: options.nearNumber),
-            SdkQueryParameter("NearLatLong", value: options.nearLatLong),
-            SdkQueryParameter("Distance", value: options.distance),
-            SdkQueryParameter("InPostalCode", value: options.inPostalCode),
-            SdkQueryParameter("InRegion", value: options.inRegion),
-            SdkQueryParameter("InRateCenter", value: options.inRateCenter),
-            SdkQueryParameter("InLata", value: options.inLata),
-            SdkQueryParameter("InLocality", value: options.inLocality),
-            SdkQueryParameter("FaxEnabled", value: options.faxEnabled),
-            SdkQueryParameter("PageSize", value: options.pageSize),
-            SdkQueryParameter("Page", value: options.page),
-            SdkQueryParameter("PageToken", value: options.pageToken),
-        ], decoder: .json, operationId: "listAvailablePhoneNumbersNational", options: requestOptions)).data
+        return try await (sdkRequest(
+            "GET",
+            [
+                "/2010-04-01/Accounts/",
+                sdkEncodePathSegment(sdkWireString(options.accountSid)),
+                "/AvailablePhoneNumbers/",
+                sdkEncodePathSegment(sdkWireString(options.countryCode)),
+                "/National.json",
+            ].joined(),
+            config: config,
+            query: [
+                SdkQueryParameter("AreaCode", value: options.areaCode),
+                SdkQueryParameter("Contains", value: options.contains),
+                SdkQueryParameter("SmsEnabled", value: options.smsEnabled),
+                SdkQueryParameter("MmsEnabled", value: options.mmsEnabled),
+                SdkQueryParameter("VoiceEnabled", value: options.voiceEnabled),
+                SdkQueryParameter("ExcludeAllAddressRequired", value: options.excludeAllAddressRequired),
+                SdkQueryParameter("ExcludeLocalAddressRequired", value: options.excludeLocalAddressRequired),
+                SdkQueryParameter("ExcludeForeignAddressRequired", value: options.excludeForeignAddressRequired),
+                SdkQueryParameter("Beta", value: options.beta),
+                SdkQueryParameter("NearNumber", value: options.nearNumber),
+                SdkQueryParameter("NearLatLong", value: options.nearLatLong),
+                SdkQueryParameter("Distance", value: options.distance),
+                SdkQueryParameter("InPostalCode", value: options.inPostalCode),
+                SdkQueryParameter("InRegion", value: options.inRegion),
+                SdkQueryParameter("InRateCenter", value: options.inRateCenter),
+                SdkQueryParameter("InLata", value: options.inLata),
+                SdkQueryParameter("InLocality", value: options.inLocality),
+                SdkQueryParameter("FaxEnabled", value: options.faxEnabled),
+                SdkQueryParameter("PageSize", value: options.pageSize),
+                SdkQueryParameter("Page", value: options.page),
+                SdkQueryParameter("PageToken", value: options.pageToken),
+            ],
+            decoder: .json,
+            operationId: "listAvailablePhoneNumbersNational",
+            options: requestOptions
+        )).data
     }
 }

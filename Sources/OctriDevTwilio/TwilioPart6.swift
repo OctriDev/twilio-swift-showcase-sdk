@@ -9,9 +9,30 @@ public class ValidationRequestsNamespace {
         self.config = config
     }
 
-/// Creates a caller ID validation request for an account by initiating a verification call to a phone number. Supply `PhoneNumber` in E.164 format; you can also configure the call delay, extension, friendly name, and status callback. The response includes the validation code that someone must enter when the number is called.
-    public func create(accountSid: String, phoneNumber: String, friendlyName: String? = nil, callDelay: Int? = nil, extension: String? = nil, statusCallback: String? = nil, statusCallbackMethod: CreateValidationRequestsRequestBodyStatusCallbackMethod? = nil, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountValidationRequest {
-        return try await ValidationRequestsMethods.createValidationRequests(config: config, accountSid: accountSid, phoneNumber: phoneNumber, friendlyName: friendlyName, callDelay: callDelay, extension: `extension`, statusCallback: statusCallback, statusCallbackMethod: statusCallbackMethod, requestOptions: requestOptions)
+    /// Creates a caller ID validation request for an account by initiating a verification call to a phone number.
+    /// Supply `PhoneNumber` in E.164 format; you can also configure the call delay, extension, friendly name, and
+    /// status callback. The response includes the validation code that someone must enter when the number is called.
+    public func create(
+        accountSid: String,
+        phoneNumber: String,
+        friendlyName: String? = nil,
+        callDelay: Int? = nil,
+        extension: String? = nil,
+        statusCallback: String? = nil,
+        statusCallbackMethod: CreateValidationRequestsRequestBodyStatusCallbackMethod? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountValidationRequest {
+        try await ValidationRequestsMethods.createValidationRequests(
+            config: config,
+            accountSid: accountSid,
+            phoneNumber: phoneNumber,
+            friendlyName: friendlyName,
+            callDelay: callDelay,
+            extension: `extension`,
+            statusCallback: statusCallback,
+            statusCallbackMethod: statusCallbackMethod,
+            requestOptions: requestOptions
+        )
     }
 }
 
@@ -21,30 +42,90 @@ public class RecordingsAddOnResultsPayloadsNamespace {
         self.config = config
     }
 
-/// Retrieves a payload belonging to an AddOnResult for a recording. Use the account, recording, result, and payload SIDs to identify the payload and inspect its label, MIME type, and related resource URIs.
+    /// Retrieves a payload belonging to an AddOnResult for a recording. Use the account, recording, result, and payload
+    /// SIDs to identify the payload and inspect its label, MIME type, and related resource URIs.
     ///
     /// Fetch an instance of a result payload
-    public func fetch(accountSid: String, referenceSid: String, addOnResultSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountRecordingRecordingAddOnResultRecordingAddOnResultPayload {
-        return try await RecordingsAddOnResultsPayloadsMethods.fetchRecordingsAddOnResultsPayloads(config: config, accountSid: accountSid, referenceSid: referenceSid, addOnResultSid: addOnResultSid, sid: sid, requestOptions: requestOptions)
+    public func fetch(
+        accountSid: String,
+        referenceSid: String,
+        addOnResultSid: String,
+        sid: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountRecordingRecordingAddOnResultRecordingAddOnResultPayload {
+        try await RecordingsAddOnResultsPayloadsMethods.fetchRecordingsAddOnResultsPayloads(
+            config: config,
+            accountSid: accountSid,
+            referenceSid: referenceSid,
+            addOnResultSid: addOnResultSid,
+            sid: sid,
+            requestOptions: requestOptions
+        )
     }
 
-/// Delete a payload from the result along with all associated Data
-    public func delete(accountSid: String, referenceSid: String, addOnResultSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try await RecordingsAddOnResultsPayloadsMethods.deleteRecordingsAddOnResultsPayloads(config: config, accountSid: accountSid, referenceSid: referenceSid, addOnResultSid: addOnResultSid, sid: sid, requestOptions: requestOptions)
+    /// Delete a payload from the result along with all associated Data
+    public func delete(
+        accountSid: String,
+        referenceSid: String,
+        addOnResultSid: String,
+        sid: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await RecordingsAddOnResultsPayloadsMethods.deleteRecordingsAddOnResultsPayloads(
+            config: config,
+            accountSid: accountSid,
+            referenceSid: referenceSid,
+            addOnResultSid: addOnResultSid,
+            sid: sid,
+            requestOptions: requestOptions
+        )
     }
 
-/// Lists payloads belonging to an AddOnResult for a recording. Use `PageSize` and `PageToken` to control which payloads are returned and to navigate the paginated response.
+    /// Lists payloads belonging to an AddOnResult for a recording. Use `PageSize` and `PageToken` to control which
+    /// payloads are returned and to navigate the paginated response.
     ///
     /// Retrieve a list of payloads belonging to the AddOnResult
-    public func list(accountSid: String, referenceSid: String, addOnResultSid: String, pageSize: Int? = nil, page: Int? = nil, pageToken: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ListRecordingsAddOnResultsPayloadsResponse {
-        return try await RecordingsAddOnResultsPayloadsMethods.listRecordingsAddOnResultsPayloads(config: config, accountSid: accountSid, referenceSid: referenceSid, addOnResultSid: addOnResultSid, pageSize: pageSize, page: page, pageToken: pageToken, requestOptions: requestOptions)
+    public func list(
+        accountSid: String,
+        referenceSid: String,
+        addOnResultSid: String,
+        pageSize: Int? = nil,
+        page: Int? = nil,
+        pageToken: String? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ListRecordingsAddOnResultsPayloadsResponse {
+        try await RecordingsAddOnResultsPayloadsMethods.listRecordingsAddOnResultsPayloads(
+            config: config,
+            accountSid: accountSid,
+            referenceSid: referenceSid,
+            addOnResultSid: addOnResultSid,
+            pageSize: pageSize,
+            page: page,
+            pageToken: pageToken,
+            requestOptions: requestOptions
+        )
     }
 
-/// Retrieves the stored data for a payload belonging to an AddOnResult for a recording. Use the account, recording, result, and payload SIDs to identify the data resource; the response provides a redirect to the stored payload data.
+    /// Retrieves the stored data for a payload belonging to an AddOnResult for a recording. Use the account, recording,
+    /// result, and payload SIDs to identify the data resource; the response provides a redirect to the stored payload
+    /// data.
     ///
     /// Fetch an instance of a result payload
-    public func fetchData(accountSid: String, referenceSid: String, addOnResultSid: String, payloadSid: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try await RecordingsAddOnResultsPayloadsMethods.fetchRecordingsAddOnResultsPayloadsData(config: config, accountSid: accountSid, referenceSid: referenceSid, addOnResultSid: addOnResultSid, payloadSid: payloadSid, requestOptions: requestOptions)
+    public func fetchData(
+        accountSid: String,
+        referenceSid: String,
+        addOnResultSid: String,
+        payloadSid: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await RecordingsAddOnResultsPayloadsMethods.fetchRecordingsAddOnResultsPayloadsData(
+            config: config,
+            accountSid: accountSid,
+            referenceSid: referenceSid,
+            addOnResultSid: addOnResultSid,
+            payloadSid: payloadSid,
+            requestOptions: requestOptions
+        )
     }
 }
 
@@ -56,25 +137,65 @@ public class RecordingsAddOnResultsNamespace {
         payloads = RecordingsAddOnResultsPayloadsNamespace(config: config)
     }
 
-/// Retrieves an AddOnResult belonging to a recording. Use the account, recording, and result SIDs to identify the resource and inspect its status, timestamps, and related resource URIs.
+    /// Retrieves an AddOnResult belonging to a recording. Use the account, recording, and result SIDs to identify the
+    /// resource and inspect its status, timestamps, and related resource URIs.
     ///
     /// Fetch an instance of an AddOnResult
-    public func fetch(accountSid: String, referenceSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountRecordingRecordingAddOnResult {
-        return try await RecordingsAddOnResultsMethods.fetchRecordingsAddOnResults(config: config, accountSid: accountSid, referenceSid: referenceSid, sid: sid, requestOptions: requestOptions)
+    public func fetch(
+        accountSid: String,
+        referenceSid: String,
+        sid: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountRecordingRecordingAddOnResult {
+        try await RecordingsAddOnResultsMethods.fetchRecordingsAddOnResults(
+            config: config,
+            accountSid: accountSid,
+            referenceSid: referenceSid,
+            sid: sid,
+            requestOptions: requestOptions
+        )
     }
 
-/// Deletes an AddOnResult associated with a recording and purges all payloads belonging to that result. Identify the resource with its account, recording, and result SIDs before deletion.
+    /// Deletes an AddOnResult associated with a recording and purges all payloads belonging to that result. Identify
+    /// the resource with its account, recording, and result SIDs before deletion.
     ///
     /// Delete a result and purge all associated Payloads
-    public func delete(accountSid: String, referenceSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try await RecordingsAddOnResultsMethods.deleteRecordingsAddOnResults(config: config, accountSid: accountSid, referenceSid: referenceSid, sid: sid, requestOptions: requestOptions)
+    public func delete(
+        accountSid: String,
+        referenceSid: String,
+        sid: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await RecordingsAddOnResultsMethods.deleteRecordingsAddOnResults(
+            config: config,
+            accountSid: accountSid,
+            referenceSid: referenceSid,
+            sid: sid,
+            requestOptions: requestOptions
+        )
     }
 
-/// Lists AddOnResults belonging to a recording. Use `PageSize` and `PageToken` to control which results are returned and to navigate the paginated response.
+    /// Lists AddOnResults belonging to a recording. Use `PageSize` and `PageToken` to control which results are
+    /// returned and to navigate the paginated response.
     ///
     /// Retrieve a list of results belonging to the recording
-    public func list(accountSid: String, referenceSid: String, pageSize: Int? = nil, page: Int? = nil, pageToken: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ListRecordingsAddOnResultsResponse {
-        return try await RecordingsAddOnResultsMethods.listRecordingsAddOnResults(config: config, accountSid: accountSid, referenceSid: referenceSid, pageSize: pageSize, page: page, pageToken: pageToken, requestOptions: requestOptions)
+    public func list(
+        accountSid: String,
+        referenceSid: String,
+        pageSize: Int? = nil,
+        page: Int? = nil,
+        pageToken: String? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ListRecordingsAddOnResultsResponse {
+        try await RecordingsAddOnResultsMethods.listRecordingsAddOnResults(
+            config: config,
+            accountSid: accountSid,
+            referenceSid: referenceSid,
+            pageSize: pageSize,
+            page: page,
+            pageToken: pageToken,
+            requestOptions: requestOptions
+        )
     }
 }
 
@@ -84,19 +205,59 @@ public class RecordingsTranscriptionsNamespace {
         self.config = config
     }
 
-/// Retrieves a transcription created from a recording. Use the account, recording, and transcription SIDs to identify it, then inspect its status and transcription text when available.
-    public func fetch(accountSid: String, recordingSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountRecordingRecordingTranscription {
-        return try await RecordingsTranscriptionsMethods.fetchRecordingsTranscriptions(config: config, accountSid: accountSid, recordingSid: recordingSid, sid: sid, requestOptions: requestOptions)
+    /// Retrieves a transcription created from a recording. Use the account, recording, and transcription SIDs to
+    /// identify it, then inspect its status and transcription text when available.
+    public func fetch(
+        accountSid: String,
+        recordingSid: String,
+        sid: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountRecordingRecordingTranscription {
+        try await RecordingsTranscriptionsMethods.fetchRecordingsTranscriptions(
+            config: config,
+            accountSid: accountSid,
+            recordingSid: recordingSid,
+            sid: sid,
+            requestOptions: requestOptions
+        )
     }
 
-/// Deletes a transcription created from a recording. Identify the transcription using the account, recording, and transcription SIDs.
-    public func delete(accountSid: String, recordingSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try await RecordingsTranscriptionsMethods.deleteRecordingsTranscriptions(config: config, accountSid: accountSid, recordingSid: recordingSid, sid: sid, requestOptions: requestOptions)
+    /// Deletes a transcription created from a recording. Identify the transcription using the account, recording, and
+    /// transcription SIDs.
+    public func delete(
+        accountSid: String,
+        recordingSid: String,
+        sid: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await RecordingsTranscriptionsMethods.deleteRecordingsTranscriptions(
+            config: config,
+            accountSid: accountSid,
+            recordingSid: recordingSid,
+            sid: sid,
+            requestOptions: requestOptions
+        )
     }
 
-/// Lists transcriptions associated with a specific recording. Use `PageSize`, `Page`, and `PageToken` to control pagination; `PageSize` defaults to 50 when omitted.
-    public func list(accountSid: String, recordingSid: String, pageSize: Int? = nil, page: Int? = nil, pageToken: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ListRecordingsTranscriptionsResponse {
-        return try await RecordingsTranscriptionsMethods.listRecordingsTranscriptions(config: config, accountSid: accountSid, recordingSid: recordingSid, pageSize: pageSize, page: page, pageToken: pageToken, requestOptions: requestOptions)
+    /// Lists transcriptions associated with a specific recording. Use `PageSize`, `Page`, and `PageToken` to control
+    /// pagination; `PageSize` defaults to 50 when omitted.
+    public func list(
+        accountSid: String,
+        recordingSid: String,
+        pageSize: Int? = nil,
+        page: Int? = nil,
+        pageToken: String? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ListRecordingsTranscriptionsResponse {
+        try await RecordingsTranscriptionsMethods.listRecordingsTranscriptions(
+            config: config,
+            accountSid: accountSid,
+            recordingSid: recordingSid,
+            pageSize: pageSize,
+            page: page,
+            pageToken: pageToken,
+            requestOptions: requestOptions
+        )
     }
 }
 
@@ -110,25 +271,50 @@ public class RecordingsNamespace {
         transcriptions = RecordingsTranscriptionsNamespace(config: config)
     }
 
-/// Retrieves a recording by its SID. Set `IncludeSoftDeleted` to include metadata for recordings that have been deleted; that metadata is retained for 40 days.
+    /// Retrieves a recording by its SID. Set `IncludeSoftDeleted` to include metadata for recordings that have been
+    /// deleted; that metadata is retained for 40 days.
     ///
     /// Fetch an instance of a recording
-    public func fetch(accountSid: String, sid: String, includeSoftDeleted: Bool? = nil, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountRecording {
-        return try await RecordingsMethods.fetchRecordings(config: config, accountSid: accountSid, sid: sid, includeSoftDeleted: includeSoftDeleted, requestOptions: requestOptions)
+    public func fetch(
+        accountSid: String,
+        sid: String,
+        includeSoftDeleted: Bool? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountRecording {
+        try await RecordingsMethods.fetchRecordings(
+            config: config,
+            accountSid: accountSid,
+            sid: sid,
+            includeSoftDeleted: includeSoftDeleted,
+            requestOptions: requestOptions
+        )
     }
 
-/// Deletes a recording from an account. Use `AccountSid` and `Sid` to identify the account and recording to remove.
+    /// Deletes a recording from an account. Use `AccountSid` and `Sid` to identify the account and recording to remove.
     ///
     /// Delete a recording from your account
-    public func delete(accountSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try await RecordingsMethods.deleteRecordings(config: config, accountSid: accountSid, sid: sid, requestOptions: requestOptions)
+    public func delete(
+        accountSid: String,
+        sid: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await RecordingsMethods.deleteRecordings(
+            config: config,
+            accountSid: accountSid,
+            sid: sid,
+            requestOptions: requestOptions
+        )
     }
 
-/// Lists recordings belonging to the account identified by `AccountSid`. Filter results by creation date, call, conference, or soft-deletion status, and use `PageSize` and `PageToken` to control pagination.
+    /// Lists recordings belonging to the account identified by `AccountSid`. Filter results by creation date, call,
+    /// conference, or soft-deletion status, and use `PageSize` and `PageToken` to control pagination.
     ///
     /// Retrieve a list of recordings belonging to the account used to make the request
-    public func list(options: RecordingsMethods.ListRecordingsOptions, requestOptions: RequestOptions? = nil) async throws -> ListRecordingsResponse {
-        return try await RecordingsMethods.listRecordings(config: config, options: options, requestOptions: requestOptions)
+    public func list(
+        options: RecordingsMethods.ListRecordingsOptions,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ListRecordingsResponse {
+        try await RecordingsMethods.listRecordings(config: config, options: options, requestOptions: requestOptions)
     }
 }
 
@@ -138,25 +324,59 @@ public class ShortCodesNamespace {
         self.config = config
     }
 
-/// Retrieves a specific short code from an account. Use `AccountSid` and `Sid` to identify the account and short code; both identifiers must match their documented SID formats.
+    /// Retrieves a specific short code from an account. Use `AccountSid` and `Sid` to identify the account and short
+    /// code; both identifiers must match their documented SID formats.
     ///
     /// Fetch an instance of a short code
-    public func fetch(accountSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountShortCode {
-        return try await ShortCodesMethods.fetchShortCodes(config: config, accountSid: accountSid, sid: sid, requestOptions: requestOptions)
+    public func fetch(
+        accountSid: String,
+        sid: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountShortCode {
+        try await ShortCodesMethods.fetchShortCodes(
+            config: config,
+            accountSid: accountSid,
+            sid: sid,
+            requestOptions: requestOptions
+        )
     }
 
-/// Updates a short code's configuration for handling incoming SMS messages. Supply any fields you want to change; `SmsMethod` and `SmsFallbackMethod` accept GET or POST, and `ApiVersion` accepts either of the documented API versions.
+    /// Updates a short code's configuration for handling incoming SMS messages. Supply any fields you want to change;
+    /// `SmsMethod` and `SmsFallbackMethod` accept GET or POST, and `ApiVersion` accepts either of the documented API
+    /// versions.
     ///
     /// Update a short code with the following parameters
-    public func update(options: ShortCodesMethods.UpdateShortCodesOptions, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountShortCode {
-        return try await ShortCodesMethods.updateShortCodes(config: config, options: options, requestOptions: requestOptions)
+    public func update(
+        options: ShortCodesMethods.UpdateShortCodesOptions,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountShortCode {
+        try await ShortCodesMethods.updateShortCodes(config: config, options: options, requestOptions: requestOptions)
     }
 
-/// Lists short codes belonging to an account. Filter the results by `FriendlyName` or match numbers with `ShortCode`, which supports partial numbers and `*` as a wildcard; use the pagination parameters to retrieve additional pages.
+    /// Lists short codes belonging to an account. Filter the results by `FriendlyName` or match numbers with
+    /// `ShortCode`, which supports partial numbers and `*` as a wildcard; use the pagination parameters to retrieve
+    /// additional pages.
     ///
     /// Retrieve a list of short-codes belonging to the account used to make the request
-    public func list(accountSid: String, friendlyName: String? = nil, shortCode: String? = nil, pageSize: Int? = nil, page: Int? = nil, pageToken: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ListShortCodesResponse {
-        return try await ShortCodesMethods.listShortCodes(config: config, accountSid: accountSid, friendlyName: friendlyName, shortCode: shortCode, pageSize: pageSize, page: page, pageToken: pageToken, requestOptions: requestOptions)
+    public func list(
+        accountSid: String,
+        friendlyName: String? = nil,
+        shortCode: String? = nil,
+        pageSize: Int? = nil,
+        page: Int? = nil,
+        pageToken: String? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ListShortCodesResponse {
+        try await ShortCodesMethods.listShortCodes(
+            config: config,
+            accountSid: accountSid,
+            friendlyName: friendlyName,
+            shortCode: shortCode,
+            pageSize: pageSize,
+            page: page,
+            pageToken: pageToken,
+            requestOptions: requestOptions
+        )
     }
 }
 
@@ -166,29 +386,81 @@ public class SipDomainsAuthCallsCredentialListMappingsNamespace {
         self.config = config
     }
 
-/// Creates a credential list mapping for calls on a SIP domain. Supply `CredentialListSid` to identify the credential list to map; the account and domain SIDs identify where the mapping is created.
+    /// Creates a credential list mapping for calls on a SIP domain. Supply `CredentialListSid` to identify the
+    /// credential list to map; the account and domain SIDs identify where the mapping is created.
     ///
     /// Create a new credential list mapping resource
-    public func create(accountSid: String, domainSid: String, credentialListSid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountSipSipDomainSipAuthSipAuthCallsSipAuthCallsCreXfe39acaf7f {
-        return try await SipDomainsAuthCallsCredentialListMappingsMethods.createSipDomainsAuthCallsCredentialListMappings(config: config, accountSid: accountSid, domainSid: domainSid, credentialListSid: credentialListSid, requestOptions: requestOptions)
+    public func create(
+        accountSid: String,
+        domainSid: String,
+        credentialListSid: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountSipSipDomainSipAuthSipAuthCallsSipAuthCallsCreXfe39acaf7f {
+        try await SipDomainsAuthCallsCredentialListMappingsMethods.createSipDomainsAuthCallsCredentialListMappings(
+            config: config,
+            accountSid: accountSid,
+            domainSid: domainSid,
+            credentialListSid: credentialListSid,
+            requestOptions: requestOptions
+        )
     }
 
-/// Lists credential list mappings for calls on a specific SIP domain. Use the account and domain SIDs to select the domain, and use the pagination parameters to retrieve mappings across pages.
+    /// Lists credential list mappings for calls on a specific SIP domain. Use the account and domain SIDs to select the
+    /// domain, and use the pagination parameters to retrieve mappings across pages.
     ///
     /// Retrieve a list of credential list mappings belonging to the domain used in the request
-    public func list(accountSid: String, domainSid: String, pageSize: Int? = nil, page: Int? = nil, pageToken: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ListSipDomainsAuthCallsCredentialListMappingsResponse {
-        return try await SipDomainsAuthCallsCredentialListMappingsMethods.listSipDomainsAuthCallsCredentialListMappings(config: config, accountSid: accountSid, domainSid: domainSid, pageSize: pageSize, page: page, pageToken: pageToken, requestOptions: requestOptions)
+    public func list(
+        accountSid: String,
+        domainSid: String,
+        pageSize: Int? = nil,
+        page: Int? = nil,
+        pageToken: String? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ListSipDomainsAuthCallsCredentialListMappingsResponse {
+        try await SipDomainsAuthCallsCredentialListMappingsMethods.listSipDomainsAuthCallsCredentialListMappings(
+            config: config,
+            accountSid: accountSid,
+            domainSid: domainSid,
+            pageSize: pageSize,
+            page: page,
+            pageToken: pageToken,
+            requestOptions: requestOptions
+        )
     }
 
-/// Retrieves a specific credential list mapping for calls on a SIP domain. Use the account, domain, and mapping SIDs to identify the resource; each SID must match its documented format.
+    /// Retrieves a specific credential list mapping for calls on a SIP domain. Use the account, domain, and mapping
+    /// SIDs to identify the resource; each SID must match its documented format.
     ///
     /// Fetch a specific instance of a credential list mapping
-    public func fetch(accountSid: String, domainSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountSipSipDomainSipAuthSipAuthCallsSipAuthCallsCreXfe39acaf7f {
-        return try await SipDomainsAuthCallsCredentialListMappingsMethods.fetchSipDomainsAuthCallsCredentialListMappings(config: config, accountSid: accountSid, domainSid: domainSid, sid: sid, requestOptions: requestOptions)
+    public func fetch(
+        accountSid: String,
+        domainSid: String,
+        sid: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws
+        -> ApiV2010AccountSipSipDomainSipAuthSipAuthCallsSipAuthCallsCreXfe39acaf7f {
+        try await SipDomainsAuthCallsCredentialListMappingsMethods.fetchSipDomainsAuthCallsCredentialListMappings(
+            config: config,
+            accountSid: accountSid,
+            domainSid: domainSid,
+            sid: sid,
+            requestOptions: requestOptions
+        )
     }
 
-/// Delete a credential list mapping from the requested domain
-    public func delete(accountSid: String, domainSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try await SipDomainsAuthCallsCredentialListMappingsMethods.deleteSipDomainsAuthCallsCredentialListMappings(config: config, accountSid: accountSid, domainSid: domainSid, sid: sid, requestOptions: requestOptions)
+    /// Delete a credential list mapping from the requested domain
+    public func delete(
+        accountSid: String,
+        domainSid: String,
+        sid: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await SipDomainsAuthCallsCredentialListMappingsMethods.deleteSipDomainsAuthCallsCredentialListMappings(
+            config: config,
+            accountSid: accountSid,
+            domainSid: domainSid,
+            sid: sid,
+            requestOptions: requestOptions
+        )
     }
 }

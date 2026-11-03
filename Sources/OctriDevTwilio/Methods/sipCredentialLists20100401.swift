@@ -6,8 +6,10 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension SipCredentialListsMethods {
-    /// Lists SIP credential lists for the specified account. Use `PageSize` to control the number of resources on a page and `PageToken` to request a page identified by a token from the API. The response includes page metadata and a `credential_lists` array.
+public extension SipCredentialListsMethods {
+    /// Lists SIP credential lists for the specified account. Use `PageSize` to control the number of resources on a
+    /// page and `PageToken` to request a page identified by a token from the API. The response includes page metadata
+    /// and a `credential_lists` array.
     ///
     /// Get All Credential Lists
     ///
@@ -18,22 +20,38 @@ extension SipCredentialListsMethods {
     ///   50, and the maximum is 1000.
     /// - page: The page index. This value is simply for client state.
     /// - pageToken: The page token. This is provided by the API.
-    public static func listSipCredentialLists(config: ClientConfig, accountSid: String, pageSize: Int? = nil, page: Int? = nil, pageToken: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ListSipCredentialListsResponse {
+    static func listSipCredentialLists(
+        config: ClientConfig,
+        accountSid: String,
+        pageSize: Int? = nil,
+        page: Int? = nil,
+        pageToken: String? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ListSipCredentialListsResponse {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
-        if let pageSize = pageSize {
+        if let pageSize {
             try validateRange("PageSize", Double(pageSize), min: 1, max: 1000)
         }
 
-        if let page = page {
+        if let page {
             try validateRange("Page", Double(page), min: 0)
         }
 
-        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/SIP/CredentialLists.json"].joined(), config: config, query: [
-            SdkQueryParameter("PageSize", value: pageSize),
-            SdkQueryParameter("Page", value: page),
-            SdkQueryParameter("PageToken", value: pageToken),
-        ], decoder: .json, operationId: "listSipCredentialLists", options: requestOptions)).data
+        return try await (sdkRequest(
+            "GET",
+            ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/SIP/CredentialLists.json"]
+                .joined(),
+            config: config,
+            query: [
+                SdkQueryParameter("PageSize", value: pageSize),
+                SdkQueryParameter("Page", value: page),
+                SdkQueryParameter("PageToken", value: pageToken),
+            ],
+            decoder: .json,
+            operationId: "listSipCredentialLists",
+            options: requestOptions
+        )).data
     }
 }

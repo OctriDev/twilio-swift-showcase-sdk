@@ -3,12 +3,15 @@
 
 import Foundation
 
-// Misc domain models
+/// Misc domain models
 /// Typed representation of the `CallEnumEvent` API schema.
 public struct CallEnumEvent: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let initiated = CallEnumEvent(rawValue: "initiated")
     public static let ringing = CallEnumEvent(rawValue: "ringing")
     public static let answered = CallEnumEvent(rawValue: "answered")
@@ -16,7 +19,7 @@ public struct CallEnumEvent: RawRepresentable, Hashable, Codable, Sendable, SdkW
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Api20100401ThisMonth domain models
+/// Api20100401ThisMonth domain models
 /// Typed representation of the `ApiV2010AccountUsageUsageRecordUsageRecordThisMonth` API schema.
 public struct ApiV2010AccountUsageUsageRecordUsageRecordThisMonth: Codable {
     /// The SID of the Account that accrued the usage.
@@ -59,45 +59,61 @@ public struct ApiV2010AccountUsageUsageRecordUsageRecordThisMonth: Codable {
     }
 
     init() {
-        (self.accountSid, self.apiVersion, self.asOf, self.category, self.count) = (nil, nil, nil, nil, nil)
-        (self.countUnit, self.description, self.endDate, self.price, self.priceUnit) = (nil, nil, nil, nil, nil)
-        (self.startDate, self.subresourceUris, self.uri, self.usage, self.usageUnit) = (nil, nil, nil, nil, nil)
+        (accountSid, apiVersion, asOf, category, count) = (nil, nil, nil, nil, nil)
+        (countUnit, description, endDate, price, priceUnit) = (nil, nil, nil, nil, nil)
+        (startDate, subresourceUris, uri, usage, usageUnit) = (nil, nil, nil, nil, nil)
     }
 }
 
-extension ApiV2010AccountUsageUsageRecordUsageRecordThisMonth {
-    public init(from decoder: Decoder) throws {
+public extension ApiV2010AccountUsageUsageRecordUsageRecordThisMonth {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.accountSid = try container.sdkDecodeIfPresent(.accountSid)
-        self.apiVersion = try container.sdkDecodeIfPresent(.apiVersion)
-        self.asOf = try container.sdkDecodeIfPresent(.asOf)
-        self.category = try container.sdkDecodeIfPresent(.category)
-        self.count = try container.sdkDecodeIfPresent(.count)
-        self.countUnit = try container.sdkDecodeIfPresent(.countUnit)
-        self.description = try container.sdkDecodeIfPresent(.description)
-        self.endDate = try container.sdkDecodeIfPresent(.endDate)
-        self.price = try container.sdkDecodeIfPresent(.price)
-        self.priceUnit = try container.sdkDecodeIfPresent(.priceUnit)
-        self.startDate = try container.sdkDecodeIfPresent(.startDate)
-        self.subresourceUris = try container.sdkDecodeIfPresent(.subresourceUris)
-        self.uri = try container.sdkDecodeIfPresent(.uri)
-        self.usage = try container.sdkDecodeIfPresent(.usage)
-        self.usageUnit = try container.sdkDecodeIfPresent(.usageUnit)
-        if let value = self.accountSid {
+        accountSid = try container.sdkDecodeIfPresent(.accountSid)
+        apiVersion = try container.sdkDecodeIfPresent(.apiVersion)
+        asOf = try container.sdkDecodeIfPresent(.asOf)
+        category = try container.sdkDecodeIfPresent(.category)
+        count = try container.sdkDecodeIfPresent(.count)
+        countUnit = try container.sdkDecodeIfPresent(.countUnit)
+        description = try container.sdkDecodeIfPresent(.description)
+        endDate = try container.sdkDecodeIfPresent(.endDate)
+        price = try container.sdkDecodeIfPresent(.price)
+        priceUnit = try container.sdkDecodeIfPresent(.priceUnit)
+        startDate = try container.sdkDecodeIfPresent(.startDate)
+        subresourceUris = try container.sdkDecodeIfPresent(.subresourceUris)
+        uri = try container.sdkDecodeIfPresent(.uri)
+        usage = try container.sdkDecodeIfPresent(.usage)
+        usageUnit = try container.sdkDecodeIfPresent(.usageUnit)
+        if let value = accountSid {
             try validateLength("account_sid", value, min: 34, max: 34)
             try sdkValidatePattern("account_sid", value, sdkPatternc7cb941ab84b)
         }
-        if let value = self.endDate {
+        if let value = endDate {
             try sdkValidateDate("end_date", value)
         }
-        if let value = self.startDate {
+        if let value = startDate {
             try sdkValidateDate("start_date", value)
         }
     }
 }
 
-extension ApiV2010AccountUsageUsageRecordUsageRecordThisMonth {
-    public init(accountSid: String? = nil, apiVersion: String? = nil, asOf: String? = nil, category: String? = nil, count: String? = nil, countUnit: String? = nil, description: String? = nil, endDate: String? = nil, price: Double? = nil, priceUnit: String? = nil, startDate: String? = nil, subresourceUris: [String: JSONValue]? = nil, uri: String? = nil, usage: String? = nil, usageUnit: String? = nil) throws {
+public extension ApiV2010AccountUsageUsageRecordUsageRecordThisMonth {
+    init(
+        accountSid: String? = nil,
+        apiVersion: String? = nil,
+        asOf: String? = nil,
+        category: String? = nil,
+        count: String? = nil,
+        countUnit: String? = nil,
+        description: String? = nil,
+        endDate: String? = nil,
+        price: Double? = nil,
+        priceUnit: String? = nil,
+        startDate: String? = nil,
+        subresourceUris: [String: JSONValue]? = nil,
+        uri: String? = nil,
+        usage: String? = nil,
+        usageUnit: String? = nil
+    ) throws {
         self.init()
         (self.accountSid, self.apiVersion) = (accountSid, apiVersion)
         (self.asOf, self.category) = (asOf, category)

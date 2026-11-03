@@ -3,18 +3,22 @@
 
 import Foundation
 
-// Api20100401IncomingPhoneNumberLocal domain models
+/// Api20100401IncomingPhoneNumberLocal domain models
 /// The HTTP method we use to call `sms_url`. Can be: `GET` or `POST`.
-public struct ApiV2010AccountIncomingPhoneNumberIncomingPhoneNumberLocalSmsMethod: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
+public struct ApiV2010AccountIncomingPhoneNumberIncomingPhoneNumberLocalSmsMethod: RawRepresentable, Hashable, Codable,
+    Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let get = ApiV2010AccountIncomingPhoneNumberIncomingPhoneNumberLocalSmsMethod(rawValue: "GET")
     public static let post = ApiV2010AccountIncomingPhoneNumberIncomingPhoneNumberLocalSmsMethod(rawValue: "POST")
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

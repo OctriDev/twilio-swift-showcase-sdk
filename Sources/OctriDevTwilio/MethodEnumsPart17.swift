@@ -13,9 +13,9 @@ struct UpdateSipIpAccessControlListsIpAddressesRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encodeIfPresent(self.ipAddress, forKey: SdkCodingKey("IpAddress"))
-        try keyedContainer.encodeIfPresent(self.friendlyName, forKey: SdkCodingKey("FriendlyName"))
-        try keyedContainer.encodeIfPresent(self.cidrPrefixLength, forKey: SdkCodingKey("CidrPrefixLength"))
+        try keyedContainer.encodeIfPresent(ipAddress, forKey: SdkCodingKey("IpAddress"))
+        try keyedContainer.encodeIfPresent(friendlyName, forKey: SdkCodingKey("FriendlyName"))
+        try keyedContainer.encodeIfPresent(cidrPrefixLength, forKey: SdkCodingKey("CidrPrefixLength"))
     }
 }
 
@@ -36,11 +36,11 @@ struct CreateCallsSiprecRequestBody: Encodable {
     }
 
     init(options: CallsSiprecMethods.CreateCallsSiprecOptions) {
-        self.part1 = CreateCallsSiprecRequestBodyPart1(options: options)
-        self.part2 = CreateCallsSiprecRequestBodyPart2(options: options)
-        self.part3 = CreateCallsSiprecRequestBodyPart3(options: options)
-        self.part4 = CreateCallsSiprecRequestBodyPart4(options: options)
-        self.part5 = CreateCallsSiprecRequestBodyPart5(options: options)
+        part1 = CreateCallsSiprecRequestBodyPart1(options: options)
+        part2 = CreateCallsSiprecRequestBodyPart2(options: options)
+        part3 = CreateCallsSiprecRequestBodyPart3(options: options)
+        part4 = CreateCallsSiprecRequestBodyPart4(options: options)
+        part5 = CreateCallsSiprecRequestBodyPart5(options: options)
     }
 }
 
@@ -97,108 +97,108 @@ struct CreateCallsSiprecRequestBodyPart1 {
     var parameter23Name: String?
 
     init(options: CallsSiprecMethods.CreateCallsSiprecOptions) {
-        self.name = options.name
-        self.connectorName = options.connectorName
-        self.track = options.track
-        self.statusCallback = options.statusCallback
-        self.statusCallbackMethod = options.statusCallbackMethod
-        self.parameter1Name = options.parameter1Name
-        self.parameter1Value = options.parameter1Value
-        self.parameter2Name = options.parameter2Name
-        self.parameter2Value = options.parameter2Value
-        self.parameter3Name = options.parameter3Name
-        self.parameter3Value = options.parameter3Value
-        self.parameter4Name = options.parameter4Name
-        self.parameter4Value = options.parameter4Value
-        self.parameter5Name = options.parameter5Name
-        self.parameter5Value = options.parameter5Value
-        self.parameter6Name = options.parameter6Name
-        self.parameter6Value = options.parameter6Value
-        self.parameter7Name = options.parameter7Name
-        self.parameter7Value = options.parameter7Value
-        self.parameter8Name = options.parameter8Name
-        self.parameter8Value = options.parameter8Value
-        self.parameter9Name = options.parameter9Name
-        self.parameter9Value = options.parameter9Value
-        self.parameter10Name = options.parameter10Name
-        self.parameter10Value = options.parameter10Value
-        self.parameter11Name = options.parameter11Name
-        self.parameter11Value = options.parameter11Value
-        self.parameter12Name = options.parameter12Name
-        self.parameter12Value = options.parameter12Value
-        self.parameter13Name = options.parameter13Name
-        self.parameter13Value = options.parameter13Value
-        self.parameter14Name = options.parameter14Name
-        self.parameter14Value = options.parameter14Value
-        self.parameter15Name = options.parameter15Name
-        self.parameter15Value = options.parameter15Value
-        self.parameter16Name = options.parameter16Name
-        self.parameter16Value = options.parameter16Value
-        self.parameter17Name = options.parameter17Name
-        self.parameter17Value = options.parameter17Value
-        self.parameter18Name = options.parameter18Name
-        self.parameter18Value = options.parameter18Value
-        self.parameter19Name = options.parameter19Name
-        self.parameter19Value = options.parameter19Value
-        self.parameter20Name = options.parameter20Name
-        self.parameter20Value = options.parameter20Value
-        self.parameter21Name = options.parameter21Name
-        self.parameter21Value = options.parameter21Value
-        self.parameter22Name = options.parameter22Name
-        self.parameter22Value = options.parameter22Value
-        self.parameter23Name = options.parameter23Name
+        name = options.name
+        connectorName = options.connectorName
+        track = options.track
+        statusCallback = options.statusCallback
+        statusCallbackMethod = options.statusCallbackMethod
+        parameter1Name = options.parameter1Name
+        parameter1Value = options.parameter1Value
+        parameter2Name = options.parameter2Name
+        parameter2Value = options.parameter2Value
+        parameter3Name = options.parameter3Name
+        parameter3Value = options.parameter3Value
+        parameter4Name = options.parameter4Name
+        parameter4Value = options.parameter4Value
+        parameter5Name = options.parameter5Name
+        parameter5Value = options.parameter5Value
+        parameter6Name = options.parameter6Name
+        parameter6Value = options.parameter6Value
+        parameter7Name = options.parameter7Name
+        parameter7Value = options.parameter7Value
+        parameter8Name = options.parameter8Name
+        parameter8Value = options.parameter8Value
+        parameter9Name = options.parameter9Name
+        parameter9Value = options.parameter9Value
+        parameter10Name = options.parameter10Name
+        parameter10Value = options.parameter10Value
+        parameter11Name = options.parameter11Name
+        parameter11Value = options.parameter11Value
+        parameter12Name = options.parameter12Name
+        parameter12Value = options.parameter12Value
+        parameter13Name = options.parameter13Name
+        parameter13Value = options.parameter13Value
+        parameter14Name = options.parameter14Name
+        parameter14Value = options.parameter14Value
+        parameter15Name = options.parameter15Name
+        parameter15Value = options.parameter15Value
+        parameter16Name = options.parameter16Name
+        parameter16Value = options.parameter16Value
+        parameter17Name = options.parameter17Name
+        parameter17Value = options.parameter17Value
+        parameter18Name = options.parameter18Name
+        parameter18Value = options.parameter18Value
+        parameter19Name = options.parameter19Name
+        parameter19Value = options.parameter19Value
+        parameter20Name = options.parameter20Name
+        parameter20Value = options.parameter20Value
+        parameter21Name = options.parameter21Name
+        parameter21Value = options.parameter21Value
+        parameter22Name = options.parameter22Name
+        parameter22Value = options.parameter22Value
+        parameter23Name = options.parameter23Name
     }
 
     func encode(to keyedContainer: inout KeyedEncodingContainer<SdkCodingKey>) throws {
-        try keyedContainer.encodeIfPresent(self.name, forKey: SdkCodingKey("Name"))
-        try keyedContainer.encodeIfPresent(self.connectorName, forKey: SdkCodingKey("ConnectorName"))
-        try keyedContainer.encodeIfPresent(self.track, forKey: SdkCodingKey("Track"))
-        try keyedContainer.encodeIfPresent(self.statusCallback, forKey: SdkCodingKey("StatusCallback"))
-        try keyedContainer.encodeIfPresent(self.statusCallbackMethod, forKey: SdkCodingKey("StatusCallbackMethod"))
-        try keyedContainer.encodeIfPresent(self.parameter1Name, forKey: SdkCodingKey("Parameter1.Name"))
-        try keyedContainer.encodeIfPresent(self.parameter1Value, forKey: SdkCodingKey("Parameter1.Value"))
-        try keyedContainer.encodeIfPresent(self.parameter2Name, forKey: SdkCodingKey("Parameter2.Name"))
-        try keyedContainer.encodeIfPresent(self.parameter2Value, forKey: SdkCodingKey("Parameter2.Value"))
-        try keyedContainer.encodeIfPresent(self.parameter3Name, forKey: SdkCodingKey("Parameter3.Name"))
-        try keyedContainer.encodeIfPresent(self.parameter3Value, forKey: SdkCodingKey("Parameter3.Value"))
-        try keyedContainer.encodeIfPresent(self.parameter4Name, forKey: SdkCodingKey("Parameter4.Name"))
-        try keyedContainer.encodeIfPresent(self.parameter4Value, forKey: SdkCodingKey("Parameter4.Value"))
-        try keyedContainer.encodeIfPresent(self.parameter5Name, forKey: SdkCodingKey("Parameter5.Name"))
-        try keyedContainer.encodeIfPresent(self.parameter5Value, forKey: SdkCodingKey("Parameter5.Value"))
-        try keyedContainer.encodeIfPresent(self.parameter6Name, forKey: SdkCodingKey("Parameter6.Name"))
-        try keyedContainer.encodeIfPresent(self.parameter6Value, forKey: SdkCodingKey("Parameter6.Value"))
-        try keyedContainer.encodeIfPresent(self.parameter7Name, forKey: SdkCodingKey("Parameter7.Name"))
-        try keyedContainer.encodeIfPresent(self.parameter7Value, forKey: SdkCodingKey("Parameter7.Value"))
-        try keyedContainer.encodeIfPresent(self.parameter8Name, forKey: SdkCodingKey("Parameter8.Name"))
-        try keyedContainer.encodeIfPresent(self.parameter8Value, forKey: SdkCodingKey("Parameter8.Value"))
-        try keyedContainer.encodeIfPresent(self.parameter9Name, forKey: SdkCodingKey("Parameter9.Name"))
-        try keyedContainer.encodeIfPresent(self.parameter9Value, forKey: SdkCodingKey("Parameter9.Value"))
-        try keyedContainer.encodeIfPresent(self.parameter10Name, forKey: SdkCodingKey("Parameter10.Name"))
-        try keyedContainer.encodeIfPresent(self.parameter10Value, forKey: SdkCodingKey("Parameter10.Value"))
-        try keyedContainer.encodeIfPresent(self.parameter11Name, forKey: SdkCodingKey("Parameter11.Name"))
-        try keyedContainer.encodeIfPresent(self.parameter11Value, forKey: SdkCodingKey("Parameter11.Value"))
-        try keyedContainer.encodeIfPresent(self.parameter12Name, forKey: SdkCodingKey("Parameter12.Name"))
-        try keyedContainer.encodeIfPresent(self.parameter12Value, forKey: SdkCodingKey("Parameter12.Value"))
-        try keyedContainer.encodeIfPresent(self.parameter13Name, forKey: SdkCodingKey("Parameter13.Name"))
-        try keyedContainer.encodeIfPresent(self.parameter13Value, forKey: SdkCodingKey("Parameter13.Value"))
-        try keyedContainer.encodeIfPresent(self.parameter14Name, forKey: SdkCodingKey("Parameter14.Name"))
-        try keyedContainer.encodeIfPresent(self.parameter14Value, forKey: SdkCodingKey("Parameter14.Value"))
-        try keyedContainer.encodeIfPresent(self.parameter15Name, forKey: SdkCodingKey("Parameter15.Name"))
-        try keyedContainer.encodeIfPresent(self.parameter15Value, forKey: SdkCodingKey("Parameter15.Value"))
-        try keyedContainer.encodeIfPresent(self.parameter16Name, forKey: SdkCodingKey("Parameter16.Name"))
-        try keyedContainer.encodeIfPresent(self.parameter16Value, forKey: SdkCodingKey("Parameter16.Value"))
-        try keyedContainer.encodeIfPresent(self.parameter17Name, forKey: SdkCodingKey("Parameter17.Name"))
-        try keyedContainer.encodeIfPresent(self.parameter17Value, forKey: SdkCodingKey("Parameter17.Value"))
-        try keyedContainer.encodeIfPresent(self.parameter18Name, forKey: SdkCodingKey("Parameter18.Name"))
-        try keyedContainer.encodeIfPresent(self.parameter18Value, forKey: SdkCodingKey("Parameter18.Value"))
-        try keyedContainer.encodeIfPresent(self.parameter19Name, forKey: SdkCodingKey("Parameter19.Name"))
-        try keyedContainer.encodeIfPresent(self.parameter19Value, forKey: SdkCodingKey("Parameter19.Value"))
-        try keyedContainer.encodeIfPresent(self.parameter20Name, forKey: SdkCodingKey("Parameter20.Name"))
-        try keyedContainer.encodeIfPresent(self.parameter20Value, forKey: SdkCodingKey("Parameter20.Value"))
-        try keyedContainer.encodeIfPresent(self.parameter21Name, forKey: SdkCodingKey("Parameter21.Name"))
-        try keyedContainer.encodeIfPresent(self.parameter21Value, forKey: SdkCodingKey("Parameter21.Value"))
-        try keyedContainer.encodeIfPresent(self.parameter22Name, forKey: SdkCodingKey("Parameter22.Name"))
-        try keyedContainer.encodeIfPresent(self.parameter22Value, forKey: SdkCodingKey("Parameter22.Value"))
-        try keyedContainer.encodeIfPresent(self.parameter23Name, forKey: SdkCodingKey("Parameter23.Name"))
+        try keyedContainer.encodeIfPresent(name, forKey: SdkCodingKey("Name"))
+        try keyedContainer.encodeIfPresent(connectorName, forKey: SdkCodingKey("ConnectorName"))
+        try keyedContainer.encodeIfPresent(track, forKey: SdkCodingKey("Track"))
+        try keyedContainer.encodeIfPresent(statusCallback, forKey: SdkCodingKey("StatusCallback"))
+        try keyedContainer.encodeIfPresent(statusCallbackMethod, forKey: SdkCodingKey("StatusCallbackMethod"))
+        try keyedContainer.encodeIfPresent(parameter1Name, forKey: SdkCodingKey("Parameter1.Name"))
+        try keyedContainer.encodeIfPresent(parameter1Value, forKey: SdkCodingKey("Parameter1.Value"))
+        try keyedContainer.encodeIfPresent(parameter2Name, forKey: SdkCodingKey("Parameter2.Name"))
+        try keyedContainer.encodeIfPresent(parameter2Value, forKey: SdkCodingKey("Parameter2.Value"))
+        try keyedContainer.encodeIfPresent(parameter3Name, forKey: SdkCodingKey("Parameter3.Name"))
+        try keyedContainer.encodeIfPresent(parameter3Value, forKey: SdkCodingKey("Parameter3.Value"))
+        try keyedContainer.encodeIfPresent(parameter4Name, forKey: SdkCodingKey("Parameter4.Name"))
+        try keyedContainer.encodeIfPresent(parameter4Value, forKey: SdkCodingKey("Parameter4.Value"))
+        try keyedContainer.encodeIfPresent(parameter5Name, forKey: SdkCodingKey("Parameter5.Name"))
+        try keyedContainer.encodeIfPresent(parameter5Value, forKey: SdkCodingKey("Parameter5.Value"))
+        try keyedContainer.encodeIfPresent(parameter6Name, forKey: SdkCodingKey("Parameter6.Name"))
+        try keyedContainer.encodeIfPresent(parameter6Value, forKey: SdkCodingKey("Parameter6.Value"))
+        try keyedContainer.encodeIfPresent(parameter7Name, forKey: SdkCodingKey("Parameter7.Name"))
+        try keyedContainer.encodeIfPresent(parameter7Value, forKey: SdkCodingKey("Parameter7.Value"))
+        try keyedContainer.encodeIfPresent(parameter8Name, forKey: SdkCodingKey("Parameter8.Name"))
+        try keyedContainer.encodeIfPresent(parameter8Value, forKey: SdkCodingKey("Parameter8.Value"))
+        try keyedContainer.encodeIfPresent(parameter9Name, forKey: SdkCodingKey("Parameter9.Name"))
+        try keyedContainer.encodeIfPresent(parameter9Value, forKey: SdkCodingKey("Parameter9.Value"))
+        try keyedContainer.encodeIfPresent(parameter10Name, forKey: SdkCodingKey("Parameter10.Name"))
+        try keyedContainer.encodeIfPresent(parameter10Value, forKey: SdkCodingKey("Parameter10.Value"))
+        try keyedContainer.encodeIfPresent(parameter11Name, forKey: SdkCodingKey("Parameter11.Name"))
+        try keyedContainer.encodeIfPresent(parameter11Value, forKey: SdkCodingKey("Parameter11.Value"))
+        try keyedContainer.encodeIfPresent(parameter12Name, forKey: SdkCodingKey("Parameter12.Name"))
+        try keyedContainer.encodeIfPresent(parameter12Value, forKey: SdkCodingKey("Parameter12.Value"))
+        try keyedContainer.encodeIfPresent(parameter13Name, forKey: SdkCodingKey("Parameter13.Name"))
+        try keyedContainer.encodeIfPresent(parameter13Value, forKey: SdkCodingKey("Parameter13.Value"))
+        try keyedContainer.encodeIfPresent(parameter14Name, forKey: SdkCodingKey("Parameter14.Name"))
+        try keyedContainer.encodeIfPresent(parameter14Value, forKey: SdkCodingKey("Parameter14.Value"))
+        try keyedContainer.encodeIfPresent(parameter15Name, forKey: SdkCodingKey("Parameter15.Name"))
+        try keyedContainer.encodeIfPresent(parameter15Value, forKey: SdkCodingKey("Parameter15.Value"))
+        try keyedContainer.encodeIfPresent(parameter16Name, forKey: SdkCodingKey("Parameter16.Name"))
+        try keyedContainer.encodeIfPresent(parameter16Value, forKey: SdkCodingKey("Parameter16.Value"))
+        try keyedContainer.encodeIfPresent(parameter17Name, forKey: SdkCodingKey("Parameter17.Name"))
+        try keyedContainer.encodeIfPresent(parameter17Value, forKey: SdkCodingKey("Parameter17.Value"))
+        try keyedContainer.encodeIfPresent(parameter18Name, forKey: SdkCodingKey("Parameter18.Name"))
+        try keyedContainer.encodeIfPresent(parameter18Value, forKey: SdkCodingKey("Parameter18.Value"))
+        try keyedContainer.encodeIfPresent(parameter19Name, forKey: SdkCodingKey("Parameter19.Name"))
+        try keyedContainer.encodeIfPresent(parameter19Value, forKey: SdkCodingKey("Parameter19.Value"))
+        try keyedContainer.encodeIfPresent(parameter20Name, forKey: SdkCodingKey("Parameter20.Name"))
+        try keyedContainer.encodeIfPresent(parameter20Value, forKey: SdkCodingKey("Parameter20.Value"))
+        try keyedContainer.encodeIfPresent(parameter21Name, forKey: SdkCodingKey("Parameter21.Name"))
+        try keyedContainer.encodeIfPresent(parameter21Value, forKey: SdkCodingKey("Parameter21.Value"))
+        try keyedContainer.encodeIfPresent(parameter22Name, forKey: SdkCodingKey("Parameter22.Name"))
+        try keyedContainer.encodeIfPresent(parameter22Value, forKey: SdkCodingKey("Parameter22.Value"))
+        try keyedContainer.encodeIfPresent(parameter23Name, forKey: SdkCodingKey("Parameter23.Name"))
     }
 }

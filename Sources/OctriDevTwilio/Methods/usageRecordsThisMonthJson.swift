@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension UsageRecordsMethods {
-    public struct ListUsageRecordsThisMonthOptions: Codable {
+public extension UsageRecordsMethods {
+    struct ListUsageRecordsThisMonthOptions: Codable {
         public var accountSid: String
         public var category: String?
         public var startDate: String?
@@ -22,7 +22,9 @@ extension UsageRecordsMethods {
         }
     }
 
-    /// Lists usage records for the current month for the account identified by `AccountSid`. Use `Category`, `StartDate`, and `EndDate` to filter the records, and `IncludeSubaccounts` to control whether usage from subaccounts is included.
+    /// Lists usage records for the current month for the account identified by `AccountSid`. Use `Category`,
+    /// `StartDate`, and `EndDate` to filter the records, and `IncludeSubaccounts` to control whether usage from
+    /// subaccounts is included.
     ///
     /// - Parameters:
     /// - accountSid: The SID of the
@@ -48,7 +50,11 @@ extension UsageRecordsMethods {
     ///   50, and the maximum is 1000.
     /// - page: The page index. This value is simply for client state.
     /// - pageToken: The page token. This is provided by the API.
-    public static func listUsageRecordsThisMonth(config: ClientConfig, options: ListUsageRecordsThisMonthOptions, requestOptions: RequestOptions? = nil) async throws -> ListUsageRecordsThisMonthResponse {
+    static func listUsageRecordsThisMonth(
+        config: ClientConfig,
+        options: ListUsageRecordsThisMonthOptions,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ListUsageRecordsThisMonthResponse {
         try validateLength("AccountSid", options.accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", options.accountSid, sdkPatternc7cb941ab84b)
 
@@ -68,14 +74,26 @@ extension UsageRecordsMethods {
             try validateRange("Page", Double(page), min: 0)
         }
 
-        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(options.accountSid)), "/Usage/Records/ThisMonth.json"].joined(), config: config, query: [
-            SdkQueryParameter("Category", value: options.category),
-            SdkQueryParameter("StartDate", value: options.startDate),
-            SdkQueryParameter("EndDate", value: options.endDate),
-            SdkQueryParameter("IncludeSubaccounts", value: options.includeSubaccounts),
-            SdkQueryParameter("PageSize", value: options.pageSize),
-            SdkQueryParameter("Page", value: options.page),
-            SdkQueryParameter("PageToken", value: options.pageToken),
-        ], decoder: .json, operationId: "listUsageRecordsThisMonth", options: requestOptions)).data
+        return try await (sdkRequest(
+            "GET",
+            [
+                "/2010-04-01/Accounts/",
+                sdkEncodePathSegment(sdkWireString(options.accountSid)),
+                "/Usage/Records/ThisMonth.json",
+            ].joined(),
+            config: config,
+            query: [
+                SdkQueryParameter("Category", value: options.category),
+                SdkQueryParameter("StartDate", value: options.startDate),
+                SdkQueryParameter("EndDate", value: options.endDate),
+                SdkQueryParameter("IncludeSubaccounts", value: options.includeSubaccounts),
+                SdkQueryParameter("PageSize", value: options.pageSize),
+                SdkQueryParameter("Page", value: options.page),
+                SdkQueryParameter("PageToken", value: options.pageToken),
+            ],
+            decoder: .json,
+            operationId: "listUsageRecordsThisMonth",
+            options: requestOptions
+        )).data
     }
 }

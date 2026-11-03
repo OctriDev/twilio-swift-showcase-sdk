@@ -3,7 +3,7 @@
 
 import Foundation
 
-// Api20100401Mobile domain models
+/// Api20100401Mobile domain models
 /// The set of Boolean properties that indicate whether a phone number can receive calls or messages. Capabilities
 /// are: `Voice`, `SMS`, and `MMS` and each capability can be: `true` or `false`.
 public struct ApiV2010AccountAvailablePhoneNumberCountryAvailablePhoneNumbeX2fe4797ab9: Codable {
@@ -24,22 +24,22 @@ public struct ApiV2010AccountAvailablePhoneNumberCountryAvailablePhoneNumbeX2fe4
     }
 
     init() {
-        (self.mms, self.sms, self.voice, self.fax) = (nil, nil, nil, nil)
+        (mms, sms, voice, fax) = (nil, nil, nil, nil)
     }
 }
 
-extension ApiV2010AccountAvailablePhoneNumberCountryAvailablePhoneNumbeX2fe4797ab9 {
-    public init(from decoder: Decoder) throws {
+public extension ApiV2010AccountAvailablePhoneNumberCountryAvailablePhoneNumbeX2fe4797ab9 {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.mms = try container.sdkDecodeIfPresent(.mms)
-        self.sms = try container.sdkDecodeIfPresent(.sms)
-        self.voice = try container.sdkDecodeIfPresent(.voice)
-        self.fax = try container.sdkDecodeIfPresent(.fax)
+        mms = try container.sdkDecodeIfPresent(.mms)
+        sms = try container.sdkDecodeIfPresent(.sms)
+        voice = try container.sdkDecodeIfPresent(.voice)
+        fax = try container.sdkDecodeIfPresent(.fax)
     }
 }
 
-extension ApiV2010AccountAvailablePhoneNumberCountryAvailablePhoneNumbeX2fe4797ab9 {
-    public init(mms: Bool? = nil, sms: Bool? = nil, voice: Bool? = nil, fax: Bool? = nil) {
+public extension ApiV2010AccountAvailablePhoneNumberCountryAvailablePhoneNumbeX2fe4797ab9 {
+    init(mms: Bool? = nil, sms: Bool? = nil, voice: Bool? = nil, fax: Bool? = nil) {
         self.init()
         (self.mms, self.sms) = (mms, sms)
         (self.voice, self.fax) = (voice, fax)
@@ -98,33 +98,47 @@ public struct ApiV2010AccountAvailablePhoneNumberCountryAvailablePhoneNumberMobi
     }
 
     init() {
-        (self.friendlyName, self.phoneNumber, self.lata, self.locality, self.rateCenter) = (nil, nil, nil, nil, nil)
-        (self.latitude, self.longitude, self.region, self.postalCode, self.isoCountry) = (nil, nil, nil, nil, nil)
-        (self.addressRequirements, self.beta, self.capabilities) = (nil, nil, nil)
+        (friendlyName, phoneNumber, lata, locality, rateCenter) = (nil, nil, nil, nil, nil)
+        (latitude, longitude, region, postalCode, isoCountry) = (nil, nil, nil, nil, nil)
+        (addressRequirements, beta, capabilities) = (nil, nil, nil)
     }
 }
 
-extension ApiV2010AccountAvailablePhoneNumberCountryAvailablePhoneNumberMobile {
-    public init(from decoder: Decoder) throws {
+public extension ApiV2010AccountAvailablePhoneNumberCountryAvailablePhoneNumberMobile {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.friendlyName = try container.sdkDecodeIfPresent(.friendlyName)
-        self.phoneNumber = try container.sdkDecodeIfPresent(.phoneNumber)
-        self.lata = try container.sdkDecodeIfPresent(.lata)
-        self.locality = try container.sdkDecodeIfPresent(.locality)
-        self.rateCenter = try container.sdkDecodeIfPresent(.rateCenter)
-        self.latitude = try container.sdkDecodeIfPresent(.latitude)
-        self.longitude = try container.sdkDecodeIfPresent(.longitude)
-        self.region = try container.sdkDecodeIfPresent(.region)
-        self.postalCode = try container.sdkDecodeIfPresent(.postalCode)
-        self.isoCountry = try container.sdkDecodeIfPresent(.isoCountry)
-        self.addressRequirements = try container.sdkDecodeIfPresent(.addressRequirements)
-        self.beta = try container.sdkDecodeIfPresent(.beta)
-        self.capabilities = try container.sdkDecodeIfPresent(.capabilities)
+        friendlyName = try container.sdkDecodeIfPresent(.friendlyName)
+        phoneNumber = try container.sdkDecodeIfPresent(.phoneNumber)
+        lata = try container.sdkDecodeIfPresent(.lata)
+        locality = try container.sdkDecodeIfPresent(.locality)
+        rateCenter = try container.sdkDecodeIfPresent(.rateCenter)
+        latitude = try container.sdkDecodeIfPresent(.latitude)
+        longitude = try container.sdkDecodeIfPresent(.longitude)
+        region = try container.sdkDecodeIfPresent(.region)
+        postalCode = try container.sdkDecodeIfPresent(.postalCode)
+        isoCountry = try container.sdkDecodeIfPresent(.isoCountry)
+        addressRequirements = try container.sdkDecodeIfPresent(.addressRequirements)
+        beta = try container.sdkDecodeIfPresent(.beta)
+        capabilities = try container.sdkDecodeIfPresent(.capabilities)
     }
 }
 
-extension ApiV2010AccountAvailablePhoneNumberCountryAvailablePhoneNumberMobile {
-    public init(friendlyName: String? = nil, phoneNumber: String? = nil, lata: String? = nil, locality: String? = nil, rateCenter: String? = nil, latitude: Double? = nil, longitude: Double? = nil, region: String? = nil, postalCode: String? = nil, isoCountry: String? = nil, addressRequirements: String? = nil, beta: Bool? = nil, capabilities: ApiV2010AccountAvailablePhoneNumberCountryAvailablePhoneNumbeX2fe4797ab9? = nil) {
+public extension ApiV2010AccountAvailablePhoneNumberCountryAvailablePhoneNumberMobile {
+    init(
+        friendlyName: String? = nil,
+        phoneNumber: String? = nil,
+        lata: String? = nil,
+        locality: String? = nil,
+        rateCenter: String? = nil,
+        latitude: Double? = nil,
+        longitude: Double? = nil,
+        region: String? = nil,
+        postalCode: String? = nil,
+        isoCountry: String? = nil,
+        addressRequirements: String? = nil,
+        beta: Bool? = nil,
+        capabilities: ApiV2010AccountAvailablePhoneNumberCountryAvailablePhoneNumbeX2fe4797ab9? = nil
+    ) {
         self.init()
         (self.friendlyName, self.phoneNumber) = (friendlyName, phoneNumber)
         (self.lata, self.locality) = (lata, locality)

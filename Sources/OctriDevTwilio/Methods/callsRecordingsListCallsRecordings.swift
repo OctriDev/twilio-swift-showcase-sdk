@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension CallsRecordingsMethods {
-    public struct ListCallsRecordingsOptions: Codable {
+public extension CallsRecordingsMethods {
+    struct ListCallsRecordingsOptions: Codable {
         public var accountSid: String
         public var callSid: String
         public var dateCreated: String?
@@ -23,7 +23,8 @@ extension CallsRecordingsMethods {
         }
     }
 
-    /// Lists recordings associated with a specific call. Use the date filters to narrow the results to recordings created on or around a given date, and use the page parameters to navigate the list.
+    /// Lists recordings associated with a specific call. Use the date filters to narrow the results to recordings
+    /// created on or around a given date, and use the page parameters to navigate the list.
     ///
     /// Retrieve a list of recordings belonging to the call used to make the request
     ///
@@ -52,7 +53,11 @@ extension CallsRecordingsMethods {
     ///   50, and the maximum is 1000.
     /// - page: The page index. This value is simply for client state.
     /// - pageToken: The page token. This is provided by the API.
-    public static func listCallsRecordings(config: ClientConfig, options: ListCallsRecordingsOptions, requestOptions: RequestOptions? = nil) async throws -> ListCallsRecordingsResponse {
+    static func listCallsRecordings(
+        config: ClientConfig,
+        options: ListCallsRecordingsOptions,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ListCallsRecordingsResponse {
         try validateLength("AccountSid", options.accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", options.accountSid, sdkPatternc7cb941ab84b)
 
@@ -79,13 +84,27 @@ extension CallsRecordingsMethods {
             try validateRange("Page", Double(page), min: 0)
         }
 
-        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(options.accountSid)), "/Calls/", sdkEncodePathSegment(sdkWireString(options.callSid)), "/Recordings.json"].joined(), config: config, query: [
-            SdkQueryParameter("DateCreated", value: options.dateCreated),
-            SdkQueryParameter("DateCreated<", value: options.dateCreated2),
-            SdkQueryParameter("DateCreated>", value: options.dateCreated3),
-            SdkQueryParameter("PageSize", value: options.pageSize),
-            SdkQueryParameter("Page", value: options.page),
-            SdkQueryParameter("PageToken", value: options.pageToken),
-        ], decoder: .json, operationId: "listCallsRecordings", options: requestOptions)).data
+        return try await (sdkRequest(
+            "GET",
+            [
+                "/2010-04-01/Accounts/",
+                sdkEncodePathSegment(sdkWireString(options.accountSid)),
+                "/Calls/",
+                sdkEncodePathSegment(sdkWireString(options.callSid)),
+                "/Recordings.json",
+            ].joined(),
+            config: config,
+            query: [
+                SdkQueryParameter("DateCreated", value: options.dateCreated),
+                SdkQueryParameter("DateCreated<", value: options.dateCreated2),
+                SdkQueryParameter("DateCreated>", value: options.dateCreated3),
+                SdkQueryParameter("PageSize", value: options.pageSize),
+                SdkQueryParameter("Page", value: options.page),
+                SdkQueryParameter("PageToken", value: options.pageToken),
+            ],
+            decoder: .json,
+            operationId: "listCallsRecordings",
+            options: requestOptions
+        )).data
     }
 }

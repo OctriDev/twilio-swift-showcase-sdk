@@ -36,61 +36,61 @@ struct CreateMessagesRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(self.to, forKey: SdkCodingKey("To"))
-        try keyedContainer.encodeIfPresent(self.statusCallback, forKey: SdkCodingKey("StatusCallback"))
-        try keyedContainer.encodeIfPresent(self.applicationSid, forKey: SdkCodingKey("ApplicationSid"))
-        try keyedContainer.encodeIfPresent(self.maxPrice, forKey: SdkCodingKey("MaxPrice"))
-        try keyedContainer.encodeIfPresent(self.provideFeedback, forKey: SdkCodingKey("ProvideFeedback"))
-        try keyedContainer.encodeIfPresent(self.attempt, forKey: SdkCodingKey("Attempt"))
-        try keyedContainer.encodeIfPresent(self.validityPeriod, forKey: SdkCodingKey("ValidityPeriod"))
-        try keyedContainer.encodeIfPresent(self.forceDelivery, forKey: SdkCodingKey("ForceDelivery"))
-        try keyedContainer.encodeIfPresent(self.contentRetention, forKey: SdkCodingKey("ContentRetention"))
-        try keyedContainer.encodeIfPresent(self.addressRetention, forKey: SdkCodingKey("AddressRetention"))
-        try keyedContainer.encodeIfPresent(self.smartEncoded, forKey: SdkCodingKey("SmartEncoded"))
-        try keyedContainer.encodeIfPresent(self.persistentAction, forKey: SdkCodingKey("PersistentAction"))
-        try keyedContainer.encodeIfPresent(self.trafficType, forKey: SdkCodingKey("TrafficType"))
-        try keyedContainer.encodeIfPresent(self.shortenUrls, forKey: SdkCodingKey("ShortenUrls"))
-        try keyedContainer.encodeIfPresent(self.scheduleType, forKey: SdkCodingKey("ScheduleType"))
-        try keyedContainer.encodeIfPresent(self.sendAt, forKey: SdkCodingKey("SendAt"))
-        try keyedContainer.encodeIfPresent(self.sendAsMms, forKey: SdkCodingKey("SendAsMms"))
-        try keyedContainer.encodeIfPresent(self.contentVariables, forKey: SdkCodingKey("ContentVariables"))
-        try keyedContainer.encodeIfPresent(self.messageIntent, forKey: SdkCodingKey("MessageIntent"))
-        try keyedContainer.encodeIfPresent(self.riskCheck, forKey: SdkCodingKey("RiskCheck"))
-        try keyedContainer.encodeIfPresent(self.from, forKey: SdkCodingKey("From"))
-        try keyedContainer.encodeIfPresent(self.fallbackFrom, forKey: SdkCodingKey("FallbackFrom"))
-        try keyedContainer.encodeIfPresent(self.messagingServiceSid, forKey: SdkCodingKey("MessagingServiceSid"))
-        try keyedContainer.encodeIfPresent(self.body, forKey: SdkCodingKey("Body"))
-        try keyedContainer.encodeIfPresent(self.mediaUrl, forKey: SdkCodingKey("MediaUrl"))
-        try keyedContainer.encodeIfPresent(self.contentSid, forKey: SdkCodingKey("ContentSid"))
+        try keyedContainer.encode(to, forKey: SdkCodingKey("To"))
+        try keyedContainer.encodeIfPresent(statusCallback, forKey: SdkCodingKey("StatusCallback"))
+        try keyedContainer.encodeIfPresent(applicationSid, forKey: SdkCodingKey("ApplicationSid"))
+        try keyedContainer.encodeIfPresent(maxPrice, forKey: SdkCodingKey("MaxPrice"))
+        try keyedContainer.encodeIfPresent(provideFeedback, forKey: SdkCodingKey("ProvideFeedback"))
+        try keyedContainer.encodeIfPresent(attempt, forKey: SdkCodingKey("Attempt"))
+        try keyedContainer.encodeIfPresent(validityPeriod, forKey: SdkCodingKey("ValidityPeriod"))
+        try keyedContainer.encodeIfPresent(forceDelivery, forKey: SdkCodingKey("ForceDelivery"))
+        try keyedContainer.encodeIfPresent(contentRetention, forKey: SdkCodingKey("ContentRetention"))
+        try keyedContainer.encodeIfPresent(addressRetention, forKey: SdkCodingKey("AddressRetention"))
+        try keyedContainer.encodeIfPresent(smartEncoded, forKey: SdkCodingKey("SmartEncoded"))
+        try keyedContainer.encodeIfPresent(persistentAction, forKey: SdkCodingKey("PersistentAction"))
+        try keyedContainer.encodeIfPresent(trafficType, forKey: SdkCodingKey("TrafficType"))
+        try keyedContainer.encodeIfPresent(shortenUrls, forKey: SdkCodingKey("ShortenUrls"))
+        try keyedContainer.encodeIfPresent(scheduleType, forKey: SdkCodingKey("ScheduleType"))
+        try keyedContainer.encodeIfPresent(sendAt, forKey: SdkCodingKey("SendAt"))
+        try keyedContainer.encodeIfPresent(sendAsMms, forKey: SdkCodingKey("SendAsMms"))
+        try keyedContainer.encodeIfPresent(contentVariables, forKey: SdkCodingKey("ContentVariables"))
+        try keyedContainer.encodeIfPresent(messageIntent, forKey: SdkCodingKey("MessageIntent"))
+        try keyedContainer.encodeIfPresent(riskCheck, forKey: SdkCodingKey("RiskCheck"))
+        try keyedContainer.encodeIfPresent(from, forKey: SdkCodingKey("From"))
+        try keyedContainer.encodeIfPresent(fallbackFrom, forKey: SdkCodingKey("FallbackFrom"))
+        try keyedContainer.encodeIfPresent(messagingServiceSid, forKey: SdkCodingKey("MessagingServiceSid"))
+        try keyedContainer.encodeIfPresent(body, forKey: SdkCodingKey("Body"))
+        try keyedContainer.encodeIfPresent(mediaUrl, forKey: SdkCodingKey("MediaUrl"))
+        try keyedContainer.encodeIfPresent(contentSid, forKey: SdkCodingKey("ContentSid"))
     }
 
     init(options: MessagesMethods.CreateMessagesOptions) {
-        self.to = options.to
-        self.statusCallback = options.statusCallback
-        self.applicationSid = options.applicationSid
-        self.maxPrice = options.maxPrice
-        self.provideFeedback = options.provideFeedback
-        self.attempt = options.attempt
-        self.validityPeriod = options.validityPeriod
-        self.forceDelivery = options.forceDelivery
-        self.contentRetention = options.contentRetention
-        self.addressRetention = options.addressRetention
-        self.smartEncoded = options.smartEncoded
-        self.persistentAction = options.persistentAction
-        self.trafficType = options.trafficType
-        self.shortenUrls = options.shortenUrls
-        self.scheduleType = options.scheduleType
-        self.sendAt = options.sendAt
-        self.sendAsMms = options.sendAsMms
-        self.contentVariables = options.contentVariables
-        self.messageIntent = options.messageIntent
-        self.riskCheck = options.riskCheck
-        self.from = options.from
-        self.fallbackFrom = options.fallbackFrom
-        self.messagingServiceSid = options.messagingServiceSid
-        self.body = options.body
-        self.mediaUrl = options.mediaUrl
-        self.contentSid = options.contentSid
+        to = options.to
+        statusCallback = options.statusCallback
+        applicationSid = options.applicationSid
+        maxPrice = options.maxPrice
+        provideFeedback = options.provideFeedback
+        attempt = options.attempt
+        validityPeriod = options.validityPeriod
+        forceDelivery = options.forceDelivery
+        contentRetention = options.contentRetention
+        addressRetention = options.addressRetention
+        smartEncoded = options.smartEncoded
+        persistentAction = options.persistentAction
+        trafficType = options.trafficType
+        shortenUrls = options.shortenUrls
+        scheduleType = options.scheduleType
+        sendAt = options.sendAt
+        sendAsMms = options.sendAsMms
+        contentVariables = options.contentVariables
+        messageIntent = options.messageIntent
+        riskCheck = options.riskCheck
+        from = options.from
+        fallbackFrom = options.fallbackFrom
+        messagingServiceSid = options.messagingServiceSid
+        body = options.body
+        mediaUrl = options.mediaUrl
+        contentSid = options.contentSid
     }
 }
 
@@ -100,8 +100,8 @@ struct UpdateMessagesRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encodeIfPresent(self.body, forKey: SdkCodingKey("Body"))
-        try keyedContainer.encodeIfPresent(self.status, forKey: SdkCodingKey("Status"))
+        try keyedContainer.encodeIfPresent(body, forKey: SdkCodingKey("Body"))
+        try keyedContainer.encodeIfPresent(status, forKey: SdkCodingKey("Status"))
     }
 }
 
@@ -110,7 +110,7 @@ struct CreateMessagesFeedbackRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encodeIfPresent(self.outcome, forKey: SdkCodingKey("Outcome"))
+        try keyedContainer.encodeIfPresent(outcome, forKey: SdkCodingKey("Outcome"))
     }
 }
 
@@ -119,7 +119,7 @@ struct CreateSigningKeysRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encodeIfPresent(self.friendlyName, forKey: SdkCodingKey("FriendlyName"))
+        try keyedContainer.encodeIfPresent(friendlyName, forKey: SdkCodingKey("FriendlyName"))
     }
 }
 
@@ -128,7 +128,7 @@ struct UpdateSigningKeysRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encodeIfPresent(self.friendlyName, forKey: SdkCodingKey("FriendlyName"))
+        try keyedContainer.encodeIfPresent(friendlyName, forKey: SdkCodingKey("FriendlyName"))
     }
 }
 
@@ -137,7 +137,7 @@ struct UpdateOutgoingCallerIdsRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encodeIfPresent(self.friendlyName, forKey: SdkCodingKey("FriendlyName"))
+        try keyedContainer.encodeIfPresent(friendlyName, forKey: SdkCodingKey("FriendlyName"))
     }
 }
 
@@ -151,12 +151,12 @@ struct CreateValidationRequestsRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(self.phoneNumber, forKey: SdkCodingKey("PhoneNumber"))
-        try keyedContainer.encodeIfPresent(self.friendlyName, forKey: SdkCodingKey("FriendlyName"))
-        try keyedContainer.encodeIfPresent(self.callDelay, forKey: SdkCodingKey("CallDelay"))
-        try keyedContainer.encodeIfPresent(self.`extension`, forKey: SdkCodingKey("Extension"))
-        try keyedContainer.encodeIfPresent(self.statusCallback, forKey: SdkCodingKey("StatusCallback"))
-        try keyedContainer.encodeIfPresent(self.statusCallbackMethod, forKey: SdkCodingKey("StatusCallbackMethod"))
+        try keyedContainer.encode(phoneNumber, forKey: SdkCodingKey("PhoneNumber"))
+        try keyedContainer.encodeIfPresent(friendlyName, forKey: SdkCodingKey("FriendlyName"))
+        try keyedContainer.encodeIfPresent(callDelay, forKey: SdkCodingKey("CallDelay"))
+        try keyedContainer.encodeIfPresent(self.extension, forKey: SdkCodingKey("Extension"))
+        try keyedContainer.encodeIfPresent(statusCallback, forKey: SdkCodingKey("StatusCallback"))
+        try keyedContainer.encodeIfPresent(statusCallbackMethod, forKey: SdkCodingKey("StatusCallbackMethod"))
     }
 }
 
@@ -176,32 +176,32 @@ struct UpdateConferencesParticipantsRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encodeIfPresent(self.muted, forKey: SdkCodingKey("Muted"))
-        try keyedContainer.encodeIfPresent(self.hold, forKey: SdkCodingKey("Hold"))
-        try keyedContainer.encodeIfPresent(self.holdUrl, forKey: SdkCodingKey("HoldUrl"))
-        try keyedContainer.encodeIfPresent(self.holdMethod, forKey: SdkCodingKey("HoldMethod"))
-        try keyedContainer.encodeIfPresent(self.announceUrl, forKey: SdkCodingKey("AnnounceUrl"))
-        try keyedContainer.encodeIfPresent(self.announceMethod, forKey: SdkCodingKey("AnnounceMethod"))
-        try keyedContainer.encodeIfPresent(self.waitUrl, forKey: SdkCodingKey("WaitUrl"))
-        try keyedContainer.encodeIfPresent(self.waitMethod, forKey: SdkCodingKey("WaitMethod"))
-        try keyedContainer.encodeIfPresent(self.beepOnExit, forKey: SdkCodingKey("BeepOnExit"))
-        try keyedContainer.encodeIfPresent(self.endConferenceOnExit, forKey: SdkCodingKey("EndConferenceOnExit"))
-        try keyedContainer.encodeIfPresent(self.coaching, forKey: SdkCodingKey("Coaching"))
-        try keyedContainer.encodeIfPresent(self.callSidToCoach, forKey: SdkCodingKey("CallSidToCoach"))
+        try keyedContainer.encodeIfPresent(muted, forKey: SdkCodingKey("Muted"))
+        try keyedContainer.encodeIfPresent(hold, forKey: SdkCodingKey("Hold"))
+        try keyedContainer.encodeIfPresent(holdUrl, forKey: SdkCodingKey("HoldUrl"))
+        try keyedContainer.encodeIfPresent(holdMethod, forKey: SdkCodingKey("HoldMethod"))
+        try keyedContainer.encodeIfPresent(announceUrl, forKey: SdkCodingKey("AnnounceUrl"))
+        try keyedContainer.encodeIfPresent(announceMethod, forKey: SdkCodingKey("AnnounceMethod"))
+        try keyedContainer.encodeIfPresent(waitUrl, forKey: SdkCodingKey("WaitUrl"))
+        try keyedContainer.encodeIfPresent(waitMethod, forKey: SdkCodingKey("WaitMethod"))
+        try keyedContainer.encodeIfPresent(beepOnExit, forKey: SdkCodingKey("BeepOnExit"))
+        try keyedContainer.encodeIfPresent(endConferenceOnExit, forKey: SdkCodingKey("EndConferenceOnExit"))
+        try keyedContainer.encodeIfPresent(coaching, forKey: SdkCodingKey("Coaching"))
+        try keyedContainer.encodeIfPresent(callSidToCoach, forKey: SdkCodingKey("CallSidToCoach"))
     }
 
     init(options: ConferencesParticipantsMethods.UpdateConferencesParticipantsOptions) {
-        self.muted = options.muted
-        self.hold = options.hold
-        self.holdUrl = options.holdUrl
-        self.holdMethod = options.holdMethod
-        self.announceUrl = options.announceUrl
-        self.announceMethod = options.announceMethod
-        self.waitUrl = options.waitUrl
-        self.waitMethod = options.waitMethod
-        self.beepOnExit = options.beepOnExit
-        self.endConferenceOnExit = options.endConferenceOnExit
-        self.coaching = options.coaching
-        self.callSidToCoach = options.callSidToCoach
+        muted = options.muted
+        hold = options.hold
+        holdUrl = options.holdUrl
+        holdMethod = options.holdMethod
+        announceUrl = options.announceUrl
+        announceMethod = options.announceMethod
+        waitUrl = options.waitUrl
+        waitMethod = options.waitMethod
+        beepOnExit = options.beepOnExit
+        endConferenceOnExit = options.endConferenceOnExit
+        coaching = options.coaching
+        callSidToCoach = options.callSidToCoach
     }
 }

@@ -6,8 +6,9 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension IncomingPhoneNumbersAssignedAddOnsExtensionsMethods {
-    /// Lists Extensions for an assigned Add-on on an incoming phone number. Use the account, phone number, and assigned Add-on SIDs to scope the list, and the paging parameters to select a page of results.
+public extension IncomingPhoneNumbersAssignedAddOnsExtensionsMethods {
+    /// Lists Extensions for an assigned Add-on on an incoming phone number. Use the account, phone number, and assigned
+    /// Add-on SIDs to scope the list, and the paging parameters to select a page of results.
     ///
     /// Retrieve a list of Extensions for the Assigned Add-on.
     ///
@@ -22,7 +23,16 @@ extension IncomingPhoneNumbersAssignedAddOnsExtensionsMethods {
     ///   50, and the maximum is 1000.
     /// - page: The page index. This value is simply for client state.
     /// - pageToken: The page token. This is provided by the API.
-    public static func listIncomingPhoneNumbersAssignedAddOnsExtensions(config: ClientConfig, accountSid: String, resourceSid: String, assignedAddOnSid: String, pageSize: Int? = nil, page: Int? = nil, pageToken: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ListIncomingPhoneNumbersAssignedAddOnsExtensionsResponse {
+    static func listIncomingPhoneNumbersAssignedAddOnsExtensions(
+        config: ClientConfig,
+        accountSid: String,
+        resourceSid: String,
+        assignedAddOnSid: String,
+        pageSize: Int? = nil,
+        page: Int? = nil,
+        pageToken: String? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ListIncomingPhoneNumbersAssignedAddOnsExtensionsResponse {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
@@ -32,18 +42,27 @@ extension IncomingPhoneNumbersAssignedAddOnsExtensionsMethods {
         try validateLength("AssignedAddOnSid", assignedAddOnSid, min: 34, max: 34)
         try sdkValidatePattern("AssignedAddOnSid", assignedAddOnSid, sdkPatternbb2f9d1d1c1e)
 
-        if let pageSize = pageSize {
+        if let pageSize {
             try validateRange("PageSize", Double(pageSize), min: 1, max: 1000)
         }
 
-        if let page = page {
+        if let page {
             try validateRange("Page", Double(page), min: 0)
         }
 
-        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/IncomingPhoneNumbers/", sdkEncodePathSegment(sdkWireString(resourceSid)), "/AssignedAddOns/", sdkEncodePathSegment(sdkWireString(assignedAddOnSid)), "/Extensions.json"].joined(), config: config, query: [
+        return try await (sdkRequest("GET", [
+            "/2010-04-01/Accounts/",
+            sdkEncodePathSegment(sdkWireString(accountSid)),
+            "/IncomingPhoneNumbers/",
+            sdkEncodePathSegment(sdkWireString(resourceSid)),
+            "/AssignedAddOns/",
+            sdkEncodePathSegment(sdkWireString(assignedAddOnSid)),
+            "/Extensions.json",
+        ].joined(), config: config, query: [
             SdkQueryParameter("PageSize", value: pageSize),
             SdkQueryParameter("Page", value: page),
             SdkQueryParameter("PageToken", value: pageToken),
-        ], decoder: .json, operationId: "listIncomingPhoneNumbersAssignedAddOnsExtensions", options: requestOptions)).data
+        ], decoder: .json, operationId: "listIncomingPhoneNumbersAssignedAddOnsExtensions", options: requestOptions))
+            .data
     }
 }

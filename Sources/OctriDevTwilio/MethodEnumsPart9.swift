@@ -26,41 +26,44 @@ struct UpdateApplicationsRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encodeIfPresent(self.friendlyName, forKey: SdkCodingKey("FriendlyName"))
-        try keyedContainer.encodeIfPresent(self.apiVersion, forKey: SdkCodingKey("ApiVersion"))
-        try keyedContainer.encodeIfPresent(self.voiceUrl, forKey: SdkCodingKey("VoiceUrl"))
-        try keyedContainer.encodeIfPresent(self.voiceMethod, forKey: SdkCodingKey("VoiceMethod"))
-        try keyedContainer.encodeIfPresent(self.voiceFallbackUrl, forKey: SdkCodingKey("VoiceFallbackUrl"))
-        try keyedContainer.encodeIfPresent(self.voiceFallbackMethod, forKey: SdkCodingKey("VoiceFallbackMethod"))
-        try keyedContainer.encodeIfPresent(self.statusCallback, forKey: SdkCodingKey("StatusCallback"))
-        try keyedContainer.encodeIfPresent(self.statusCallbackMethod, forKey: SdkCodingKey("StatusCallbackMethod"))
-        try keyedContainer.encodeIfPresent(self.voiceCallerIdLookup, forKey: SdkCodingKey("VoiceCallerIdLookup"))
-        try keyedContainer.encodeIfPresent(self.smsUrl, forKey: SdkCodingKey("SmsUrl"))
-        try keyedContainer.encodeIfPresent(self.smsMethod, forKey: SdkCodingKey("SmsMethod"))
-        try keyedContainer.encodeIfPresent(self.smsFallbackUrl, forKey: SdkCodingKey("SmsFallbackUrl"))
-        try keyedContainer.encodeIfPresent(self.smsFallbackMethod, forKey: SdkCodingKey("SmsFallbackMethod"))
-        try keyedContainer.encodeIfPresent(self.smsStatusCallback, forKey: SdkCodingKey("SmsStatusCallback"))
-        try keyedContainer.encodeIfPresent(self.messageStatusCallback, forKey: SdkCodingKey("MessageStatusCallback"))
-        try keyedContainer.encodeIfPresent(self.publicApplicationConnectEnabled, forKey: SdkCodingKey("PublicApplicationConnectEnabled"))
+        try keyedContainer.encodeIfPresent(friendlyName, forKey: SdkCodingKey("FriendlyName"))
+        try keyedContainer.encodeIfPresent(apiVersion, forKey: SdkCodingKey("ApiVersion"))
+        try keyedContainer.encodeIfPresent(voiceUrl, forKey: SdkCodingKey("VoiceUrl"))
+        try keyedContainer.encodeIfPresent(voiceMethod, forKey: SdkCodingKey("VoiceMethod"))
+        try keyedContainer.encodeIfPresent(voiceFallbackUrl, forKey: SdkCodingKey("VoiceFallbackUrl"))
+        try keyedContainer.encodeIfPresent(voiceFallbackMethod, forKey: SdkCodingKey("VoiceFallbackMethod"))
+        try keyedContainer.encodeIfPresent(statusCallback, forKey: SdkCodingKey("StatusCallback"))
+        try keyedContainer.encodeIfPresent(statusCallbackMethod, forKey: SdkCodingKey("StatusCallbackMethod"))
+        try keyedContainer.encodeIfPresent(voiceCallerIdLookup, forKey: SdkCodingKey("VoiceCallerIdLookup"))
+        try keyedContainer.encodeIfPresent(smsUrl, forKey: SdkCodingKey("SmsUrl"))
+        try keyedContainer.encodeIfPresent(smsMethod, forKey: SdkCodingKey("SmsMethod"))
+        try keyedContainer.encodeIfPresent(smsFallbackUrl, forKey: SdkCodingKey("SmsFallbackUrl"))
+        try keyedContainer.encodeIfPresent(smsFallbackMethod, forKey: SdkCodingKey("SmsFallbackMethod"))
+        try keyedContainer.encodeIfPresent(smsStatusCallback, forKey: SdkCodingKey("SmsStatusCallback"))
+        try keyedContainer.encodeIfPresent(messageStatusCallback, forKey: SdkCodingKey("MessageStatusCallback"))
+        try keyedContainer.encodeIfPresent(
+            publicApplicationConnectEnabled,
+            forKey: SdkCodingKey("PublicApplicationConnectEnabled")
+        )
     }
 
     init(options: ApplicationsMethods.UpdateApplicationsOptions) {
-        self.friendlyName = options.friendlyName
-        self.apiVersion = options.apiVersion
-        self.voiceUrl = options.voiceUrl
-        self.voiceMethod = options.voiceMethod
-        self.voiceFallbackUrl = options.voiceFallbackUrl
-        self.voiceFallbackMethod = options.voiceFallbackMethod
-        self.statusCallback = options.statusCallback
-        self.statusCallbackMethod = options.statusCallbackMethod
-        self.voiceCallerIdLookup = options.voiceCallerIdLookup
-        self.smsUrl = options.smsUrl
-        self.smsMethod = options.smsMethod
-        self.smsFallbackUrl = options.smsFallbackUrl
-        self.smsFallbackMethod = options.smsFallbackMethod
-        self.smsStatusCallback = options.smsStatusCallback
-        self.messageStatusCallback = options.messageStatusCallback
-        self.publicApplicationConnectEnabled = options.publicApplicationConnectEnabled
+        friendlyName = options.friendlyName
+        apiVersion = options.apiVersion
+        voiceUrl = options.voiceUrl
+        voiceMethod = options.voiceMethod
+        voiceFallbackUrl = options.voiceFallbackUrl
+        voiceFallbackMethod = options.voiceFallbackMethod
+        statusCallback = options.statusCallback
+        statusCallbackMethod = options.statusCallbackMethod
+        voiceCallerIdLookup = options.voiceCallerIdLookup
+        smsUrl = options.smsUrl
+        smsMethod = options.smsMethod
+        smsFallbackUrl = options.smsFallbackUrl
+        smsFallbackMethod = options.smsFallbackMethod
+        smsStatusCallback = options.smsStatusCallback
+        messageStatusCallback = options.messageStatusCallback
+        publicApplicationConnectEnabled = options.publicApplicationConnectEnabled
     }
 }
 
@@ -106,85 +109,103 @@ struct CreateCallsRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(self.to, forKey: SdkCodingKey("To"))
-        try keyedContainer.encode(self.from, forKey: SdkCodingKey("From"))
-        try keyedContainer.encodeIfPresent(self.method, forKey: SdkCodingKey("Method"))
-        try keyedContainer.encodeIfPresent(self.fallbackUrl, forKey: SdkCodingKey("FallbackUrl"))
-        try keyedContainer.encodeIfPresent(self.fallbackMethod, forKey: SdkCodingKey("FallbackMethod"))
-        try keyedContainer.encodeIfPresent(self.statusCallback, forKey: SdkCodingKey("StatusCallback"))
-        try keyedContainer.encodeIfPresent(self.statusCallbackEvent, forKey: SdkCodingKey("StatusCallbackEvent"))
-        try keyedContainer.encodeIfPresent(self.statusCallbackMethod, forKey: SdkCodingKey("StatusCallbackMethod"))
-        try keyedContainer.encodeIfPresent(self.sendDigits, forKey: SdkCodingKey("SendDigits"))
-        try keyedContainer.encodeIfPresent(self.timeout, forKey: SdkCodingKey("Timeout"))
-        try keyedContainer.encodeIfPresent(self.record, forKey: SdkCodingKey("Record"))
-        try keyedContainer.encodeIfPresent(self.recordingChannels, forKey: SdkCodingKey("RecordingChannels"))
-        try keyedContainer.encodeIfPresent(self.recordingStatusCallback, forKey: SdkCodingKey("RecordingStatusCallback"))
-        try keyedContainer.encodeIfPresent(self.recordingStatusCallbackMethod, forKey: SdkCodingKey("RecordingStatusCallbackMethod"))
-        try keyedContainer.encodeIfPresent(self.recordingConfigurationId, forKey: SdkCodingKey("RecordingConfigurationId"))
-        try keyedContainer.encodeIfPresent(self.sipAuthUsername, forKey: SdkCodingKey("SipAuthUsername"))
-        try keyedContainer.encodeIfPresent(self.sipAuthPassword, forKey: SdkCodingKey("SipAuthPassword"))
-        try keyedContainer.encodeIfPresent(self.machineDetection, forKey: SdkCodingKey("MachineDetection"))
-        try keyedContainer.encodeIfPresent(self.machineDetectionTimeout, forKey: SdkCodingKey("MachineDetectionTimeout"))
-        try keyedContainer.encodeIfPresent(self.recordingStatusCallbackEvent, forKey: SdkCodingKey("RecordingStatusCallbackEvent"))
-        try keyedContainer.encodeIfPresent(self.trim, forKey: SdkCodingKey("Trim"))
-        try keyedContainer.encodeIfPresent(self.callerId, forKey: SdkCodingKey("CallerId"))
-        try keyedContainer.encodeIfPresent(self.machineDetectionSpeechThreshold, forKey: SdkCodingKey("MachineDetectionSpeechThreshold"))
-        try keyedContainer.encodeIfPresent(self.machineDetectionSpeechEndThreshold, forKey: SdkCodingKey("MachineDetectionSpeechEndThreshold"))
-        try keyedContainer.encodeIfPresent(self.machineDetectionSilenceTimeout, forKey: SdkCodingKey("MachineDetectionSilenceTimeout"))
-        try keyedContainer.encodeIfPresent(self.asyncAmd, forKey: SdkCodingKey("AsyncAmd"))
-        try keyedContainer.encodeIfPresent(self.asyncAmdStatusCallback, forKey: SdkCodingKey("AsyncAmdStatusCallback"))
-        try keyedContainer.encodeIfPresent(self.asyncAmdStatusCallbackMethod, forKey: SdkCodingKey("AsyncAmdStatusCallbackMethod"))
-        try keyedContainer.encodeIfPresent(self.passports, forKey: SdkCodingKey("Passports"))
-        try keyedContainer.encodeIfPresent(self.byoc, forKey: SdkCodingKey("Byoc"))
-        try keyedContainer.encodeIfPresent(self.callReason, forKey: SdkCodingKey("CallReason"))
-        try keyedContainer.encodeIfPresent(self.callToken, forKey: SdkCodingKey("CallToken"))
-        try keyedContainer.encodeIfPresent(self.recordingTrack, forKey: SdkCodingKey("RecordingTrack"))
-        try keyedContainer.encodeIfPresent(self.timeLimit, forKey: SdkCodingKey("TimeLimit"))
-        try keyedContainer.encodeIfPresent(self.clientNotificationUrl, forKey: SdkCodingKey("ClientNotificationUrl"))
-        try keyedContainer.encodeIfPresent(self.url, forKey: SdkCodingKey("Url"))
-        try keyedContainer.encodeIfPresent(self.twiml, forKey: SdkCodingKey("Twiml"))
-        try keyedContainer.encodeIfPresent(self.applicationSid, forKey: SdkCodingKey("ApplicationSid"))
+        try keyedContainer.encode(to, forKey: SdkCodingKey("To"))
+        try keyedContainer.encode(from, forKey: SdkCodingKey("From"))
+        try keyedContainer.encodeIfPresent(method, forKey: SdkCodingKey("Method"))
+        try keyedContainer.encodeIfPresent(fallbackUrl, forKey: SdkCodingKey("FallbackUrl"))
+        try keyedContainer.encodeIfPresent(fallbackMethod, forKey: SdkCodingKey("FallbackMethod"))
+        try keyedContainer.encodeIfPresent(statusCallback, forKey: SdkCodingKey("StatusCallback"))
+        try keyedContainer.encodeIfPresent(statusCallbackEvent, forKey: SdkCodingKey("StatusCallbackEvent"))
+        try keyedContainer.encodeIfPresent(statusCallbackMethod, forKey: SdkCodingKey("StatusCallbackMethod"))
+        try keyedContainer.encodeIfPresent(sendDigits, forKey: SdkCodingKey("SendDigits"))
+        try keyedContainer.encodeIfPresent(timeout, forKey: SdkCodingKey("Timeout"))
+        try keyedContainer.encodeIfPresent(record, forKey: SdkCodingKey("Record"))
+        try keyedContainer.encodeIfPresent(recordingChannels, forKey: SdkCodingKey("RecordingChannels"))
+        try keyedContainer.encodeIfPresent(recordingStatusCallback, forKey: SdkCodingKey("RecordingStatusCallback"))
+        try keyedContainer.encodeIfPresent(
+            recordingStatusCallbackMethod,
+            forKey: SdkCodingKey("RecordingStatusCallbackMethod")
+        )
+        try keyedContainer.encodeIfPresent(recordingConfigurationId, forKey: SdkCodingKey("RecordingConfigurationId"))
+        try keyedContainer.encodeIfPresent(sipAuthUsername, forKey: SdkCodingKey("SipAuthUsername"))
+        try keyedContainer.encodeIfPresent(sipAuthPassword, forKey: SdkCodingKey("SipAuthPassword"))
+        try keyedContainer.encodeIfPresent(machineDetection, forKey: SdkCodingKey("MachineDetection"))
+        try keyedContainer.encodeIfPresent(machineDetectionTimeout, forKey: SdkCodingKey("MachineDetectionTimeout"))
+        try keyedContainer.encodeIfPresent(
+            recordingStatusCallbackEvent,
+            forKey: SdkCodingKey("RecordingStatusCallbackEvent")
+        )
+        try keyedContainer.encodeIfPresent(trim, forKey: SdkCodingKey("Trim"))
+        try keyedContainer.encodeIfPresent(callerId, forKey: SdkCodingKey("CallerId"))
+        try keyedContainer.encodeIfPresent(
+            machineDetectionSpeechThreshold,
+            forKey: SdkCodingKey("MachineDetectionSpeechThreshold")
+        )
+        try keyedContainer.encodeIfPresent(
+            machineDetectionSpeechEndThreshold,
+            forKey: SdkCodingKey("MachineDetectionSpeechEndThreshold")
+        )
+        try keyedContainer.encodeIfPresent(
+            machineDetectionSilenceTimeout,
+            forKey: SdkCodingKey("MachineDetectionSilenceTimeout")
+        )
+        try keyedContainer.encodeIfPresent(asyncAmd, forKey: SdkCodingKey("AsyncAmd"))
+        try keyedContainer.encodeIfPresent(asyncAmdStatusCallback, forKey: SdkCodingKey("AsyncAmdStatusCallback"))
+        try keyedContainer.encodeIfPresent(
+            asyncAmdStatusCallbackMethod,
+            forKey: SdkCodingKey("AsyncAmdStatusCallbackMethod")
+        )
+        try keyedContainer.encodeIfPresent(passports, forKey: SdkCodingKey("Passports"))
+        try keyedContainer.encodeIfPresent(byoc, forKey: SdkCodingKey("Byoc"))
+        try keyedContainer.encodeIfPresent(callReason, forKey: SdkCodingKey("CallReason"))
+        try keyedContainer.encodeIfPresent(callToken, forKey: SdkCodingKey("CallToken"))
+        try keyedContainer.encodeIfPresent(recordingTrack, forKey: SdkCodingKey("RecordingTrack"))
+        try keyedContainer.encodeIfPresent(timeLimit, forKey: SdkCodingKey("TimeLimit"))
+        try keyedContainer.encodeIfPresent(clientNotificationUrl, forKey: SdkCodingKey("ClientNotificationUrl"))
+        try keyedContainer.encodeIfPresent(url, forKey: SdkCodingKey("Url"))
+        try keyedContainer.encodeIfPresent(twiml, forKey: SdkCodingKey("Twiml"))
+        try keyedContainer.encodeIfPresent(applicationSid, forKey: SdkCodingKey("ApplicationSid"))
     }
 
     init(options: CallsMethods.CreateCallsOptions) {
-        self.to = options.to
-        self.from = options.from
-        self.method = options.method
-        self.fallbackUrl = options.fallbackUrl
-        self.fallbackMethod = options.fallbackMethod
-        self.statusCallback = options.statusCallback
-        self.statusCallbackEvent = options.statusCallbackEvent
-        self.statusCallbackMethod = options.statusCallbackMethod
-        self.sendDigits = options.sendDigits
-        self.timeout = options.timeout
-        self.record = options.record
-        self.recordingChannels = options.recordingChannels
-        self.recordingStatusCallback = options.recordingStatusCallback
-        self.recordingStatusCallbackMethod = options.recordingStatusCallbackMethod
-        self.recordingConfigurationId = options.recordingConfigurationId
-        self.sipAuthUsername = options.sipAuthUsername
-        self.sipAuthPassword = options.sipAuthPassword
-        self.machineDetection = options.machineDetection
-        self.machineDetectionTimeout = options.machineDetectionTimeout
-        self.recordingStatusCallbackEvent = options.recordingStatusCallbackEvent
-        self.trim = options.trim
-        self.callerId = options.callerId
-        self.machineDetectionSpeechThreshold = options.machineDetectionSpeechThreshold
-        self.machineDetectionSpeechEndThreshold = options.machineDetectionSpeechEndThreshold
-        self.machineDetectionSilenceTimeout = options.machineDetectionSilenceTimeout
-        self.asyncAmd = options.asyncAmd
-        self.asyncAmdStatusCallback = options.asyncAmdStatusCallback
-        self.asyncAmdStatusCallbackMethod = options.asyncAmdStatusCallbackMethod
-        self.passports = options.passports
-        self.byoc = options.byoc
-        self.callReason = options.callReason
-        self.callToken = options.callToken
-        self.recordingTrack = options.recordingTrack
-        self.timeLimit = options.timeLimit
-        self.clientNotificationUrl = options.clientNotificationUrl
-        self.url = options.url
-        self.twiml = options.twiml
-        self.applicationSid = options.applicationSid
+        to = options.to
+        from = options.from
+        method = options.method
+        fallbackUrl = options.fallbackUrl
+        fallbackMethod = options.fallbackMethod
+        statusCallback = options.statusCallback
+        statusCallbackEvent = options.statusCallbackEvent
+        statusCallbackMethod = options.statusCallbackMethod
+        sendDigits = options.sendDigits
+        timeout = options.timeout
+        record = options.record
+        recordingChannels = options.recordingChannels
+        recordingStatusCallback = options.recordingStatusCallback
+        recordingStatusCallbackMethod = options.recordingStatusCallbackMethod
+        recordingConfigurationId = options.recordingConfigurationId
+        sipAuthUsername = options.sipAuthUsername
+        sipAuthPassword = options.sipAuthPassword
+        machineDetection = options.machineDetection
+        machineDetectionTimeout = options.machineDetectionTimeout
+        recordingStatusCallbackEvent = options.recordingStatusCallbackEvent
+        trim = options.trim
+        callerId = options.callerId
+        machineDetectionSpeechThreshold = options.machineDetectionSpeechThreshold
+        machineDetectionSpeechEndThreshold = options.machineDetectionSpeechEndThreshold
+        machineDetectionSilenceTimeout = options.machineDetectionSilenceTimeout
+        asyncAmd = options.asyncAmd
+        asyncAmdStatusCallback = options.asyncAmdStatusCallback
+        asyncAmdStatusCallbackMethod = options.asyncAmdStatusCallbackMethod
+        passports = options.passports
+        byoc = options.byoc
+        callReason = options.callReason
+        callToken = options.callToken
+        recordingTrack = options.recordingTrack
+        timeLimit = options.timeLimit
+        clientNotificationUrl = options.clientNotificationUrl
+        url = options.url
+        twiml = options.twiml
+        applicationSid = options.applicationSid
     }
 }
 
@@ -201,26 +222,26 @@ struct UpdateCallsRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encodeIfPresent(self.url, forKey: SdkCodingKey("Url"))
-        try keyedContainer.encodeIfPresent(self.method, forKey: SdkCodingKey("Method"))
-        try keyedContainer.encodeIfPresent(self.status, forKey: SdkCodingKey("Status"))
-        try keyedContainer.encodeIfPresent(self.fallbackUrl, forKey: SdkCodingKey("FallbackUrl"))
-        try keyedContainer.encodeIfPresent(self.fallbackMethod, forKey: SdkCodingKey("FallbackMethod"))
-        try keyedContainer.encodeIfPresent(self.statusCallback, forKey: SdkCodingKey("StatusCallback"))
-        try keyedContainer.encodeIfPresent(self.statusCallbackMethod, forKey: SdkCodingKey("StatusCallbackMethod"))
-        try keyedContainer.encodeIfPresent(self.twiml, forKey: SdkCodingKey("Twiml"))
-        try keyedContainer.encodeIfPresent(self.timeLimit, forKey: SdkCodingKey("TimeLimit"))
+        try keyedContainer.encodeIfPresent(url, forKey: SdkCodingKey("Url"))
+        try keyedContainer.encodeIfPresent(method, forKey: SdkCodingKey("Method"))
+        try keyedContainer.encodeIfPresent(status, forKey: SdkCodingKey("Status"))
+        try keyedContainer.encodeIfPresent(fallbackUrl, forKey: SdkCodingKey("FallbackUrl"))
+        try keyedContainer.encodeIfPresent(fallbackMethod, forKey: SdkCodingKey("FallbackMethod"))
+        try keyedContainer.encodeIfPresent(statusCallback, forKey: SdkCodingKey("StatusCallback"))
+        try keyedContainer.encodeIfPresent(statusCallbackMethod, forKey: SdkCodingKey("StatusCallbackMethod"))
+        try keyedContainer.encodeIfPresent(twiml, forKey: SdkCodingKey("Twiml"))
+        try keyedContainer.encodeIfPresent(timeLimit, forKey: SdkCodingKey("TimeLimit"))
     }
 
     init(options: CallsMethods.UpdateCallsOptions) {
-        self.url = options.url
-        self.method = options.method
-        self.status = options.status
-        self.fallbackUrl = options.fallbackUrl
-        self.fallbackMethod = options.fallbackMethod
-        self.statusCallback = options.statusCallback
-        self.statusCallbackMethod = options.statusCallbackMethod
-        self.twiml = options.twiml
-        self.timeLimit = options.timeLimit
+        url = options.url
+        method = options.method
+        status = options.status
+        fallbackUrl = options.fallbackUrl
+        fallbackMethod = options.fallbackMethod
+        statusCallback = options.statusCallback
+        statusCallbackMethod = options.statusCallbackMethod
+        twiml = options.twiml
+        timeLimit = options.timeLimit
     }
 }

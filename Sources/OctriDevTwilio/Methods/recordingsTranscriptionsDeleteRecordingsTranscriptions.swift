@@ -6,8 +6,9 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension RecordingsTranscriptionsMethods {
-    /// Deletes a transcription created from a recording. Identify the transcription using the account, recording, and transcription SIDs.
+public extension RecordingsTranscriptionsMethods {
+    /// Deletes a transcription created from a recording. Identify the transcription using the account, recording, and
+    /// transcription SIDs.
     ///
     /// - Parameters:
     /// - accountSid: The SID of the
@@ -18,7 +19,13 @@ extension RecordingsTranscriptionsMethods {
     ///   the transcription to delete.
     /// - sid: The Twilio-provided string that uniquely identifies the Transcription
     ///   resource to delete.
-    public static func deleteRecordingsTranscriptions(config: ClientConfig, accountSid: String, recordingSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
+    static func deleteRecordingsTranscriptions(
+        config: ClientConfig,
+        accountSid: String,
+        recordingSid: String,
+        sid: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
         try validateLength("AccountSid", accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", accountSid, sdkPatternc7cb941ab84b)
 
@@ -28,6 +35,21 @@ extension RecordingsTranscriptionsMethods {
         try validateLength("Sid", sid, min: 34, max: 34)
         try sdkValidatePattern("Sid", sid, sdkPatterndb618e54c931)
 
-        return try (await sdkRequest("DELETE", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(accountSid)), "/Recordings/", sdkEncodePathSegment(sdkWireString(recordingSid)), "/Transcriptions/", sdkEncodePathSegment(sdkWireString(sid)), ".json"].joined(), config: config, decoder: .empty, operationId: "deleteRecordingsTranscriptions", options: requestOptions)).data
+        return try await (sdkRequest(
+            "DELETE",
+            [
+                "/2010-04-01/Accounts/",
+                sdkEncodePathSegment(sdkWireString(accountSid)),
+                "/Recordings/",
+                sdkEncodePathSegment(sdkWireString(recordingSid)),
+                "/Transcriptions/",
+                sdkEncodePathSegment(sdkWireString(sid)),
+                ".json",
+            ].joined(),
+            config: config,
+            decoder: .empty,
+            operationId: "deleteRecordingsTranscriptions",
+            options: requestOptions
+        )).data
     }
 }

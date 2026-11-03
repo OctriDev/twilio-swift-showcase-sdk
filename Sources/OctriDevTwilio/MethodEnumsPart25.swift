@@ -17,23 +17,23 @@ struct CreateUsageTriggersRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(self.callbackUrl, forKey: SdkCodingKey("CallbackUrl"))
-        try keyedContainer.encode(self.triggerValue, forKey: SdkCodingKey("TriggerValue"))
-        try keyedContainer.encode(self.usageCategory, forKey: SdkCodingKey("UsageCategory"))
-        try keyedContainer.encodeIfPresent(self.callbackMethod, forKey: SdkCodingKey("CallbackMethod"))
-        try keyedContainer.encodeIfPresent(self.friendlyName, forKey: SdkCodingKey("FriendlyName"))
-        try keyedContainer.encodeIfPresent(self.recurring, forKey: SdkCodingKey("Recurring"))
-        try keyedContainer.encodeIfPresent(self.triggerBy, forKey: SdkCodingKey("TriggerBy"))
+        try keyedContainer.encode(callbackUrl, forKey: SdkCodingKey("CallbackUrl"))
+        try keyedContainer.encode(triggerValue, forKey: SdkCodingKey("TriggerValue"))
+        try keyedContainer.encode(usageCategory, forKey: SdkCodingKey("UsageCategory"))
+        try keyedContainer.encodeIfPresent(callbackMethod, forKey: SdkCodingKey("CallbackMethod"))
+        try keyedContainer.encodeIfPresent(friendlyName, forKey: SdkCodingKey("FriendlyName"))
+        try keyedContainer.encodeIfPresent(recurring, forKey: SdkCodingKey("Recurring"))
+        try keyedContainer.encodeIfPresent(triggerBy, forKey: SdkCodingKey("TriggerBy"))
     }
 
     init(options: UsageTriggersMethods.CreateUsageTriggersOptions) {
-        self.callbackUrl = options.callbackUrl
-        self.triggerValue = options.triggerValue
-        self.usageCategory = options.usageCategory
-        self.callbackMethod = options.callbackMethod
-        self.friendlyName = options.friendlyName
-        self.recurring = options.recurring
-        self.triggerBy = options.triggerBy
+        callbackUrl = options.callbackUrl
+        triggerValue = options.triggerValue
+        usageCategory = options.usageCategory
+        callbackMethod = options.callbackMethod
+        friendlyName = options.friendlyName
+        recurring = options.recurring
+        triggerBy = options.triggerBy
     }
 }
 
@@ -43,8 +43,8 @@ struct CreateCallsUserDefinedMessagesRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(self.content, forKey: SdkCodingKey("Content"))
-        try keyedContainer.encodeIfPresent(self.idempotencyKey, forKey: SdkCodingKey("IdempotencyKey"))
+        try keyedContainer.encode(content, forKey: SdkCodingKey("Content"))
+        try keyedContainer.encodeIfPresent(idempotencyKey, forKey: SdkCodingKey("IdempotencyKey"))
     }
 }
 
@@ -55,8 +55,8 @@ struct CreateCallUserDefinedMessageSubscriptionRequestBody: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var keyedContainer = encoder.container(keyedBy: SdkCodingKey.self)
-        try keyedContainer.encode(self.callback, forKey: SdkCodingKey("Callback"))
-        try keyedContainer.encodeIfPresent(self.idempotencyKey, forKey: SdkCodingKey("IdempotencyKey"))
-        try keyedContainer.encodeIfPresent(self.method, forKey: SdkCodingKey("Method"))
+        try keyedContainer.encode(callback, forKey: SdkCodingKey("Callback"))
+        try keyedContainer.encodeIfPresent(idempotencyKey, forKey: SdkCodingKey("IdempotencyKey"))
+        try keyedContainer.encodeIfPresent(method, forKey: SdkCodingKey("Method"))
     }
 }

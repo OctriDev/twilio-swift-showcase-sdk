@@ -3,12 +3,15 @@
 
 import Foundation
 
-// Sms domain models
+/// Sms domain models
 /// Typed representation of the `SmsFeedbackEnumOutcome` API schema.
 public struct SmsFeedbackEnumOutcome: RawRepresentable, Hashable, Codable, Sendable, SdkWireConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) { self.rawValue = rawValue }
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
     public static let confirmed = SmsFeedbackEnumOutcome(rawValue: "confirmed")
     public static let unconfirmed = SmsFeedbackEnumOutcome(rawValue: "unconfirmed")
     public static let received = SmsFeedbackEnumOutcome(rawValue: "received")
@@ -17,7 +20,7 @@ public struct SmsFeedbackEnumOutcome: RawRepresentable, Hashable, Codable, Senda
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        try self.init(rawValue: container.decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

@@ -6,8 +6,8 @@ import Foundation
 #if canImport(FoundationNetworking)
     import FoundationNetworking
 #endif
-extension MessagesMethods {
-    public struct ListMessagesOptions: Codable {
+public extension MessagesMethods {
+    struct ListMessagesOptions: Codable {
         public var accountSid: String
         public var to: String?
         public var from: String?
@@ -23,7 +23,8 @@ extension MessagesMethods {
         }
     }
 
-    /// Lists message resources associated with an account. Filter the results by recipient, sender, or sent date, and use the page parameters to navigate the list.
+    /// Lists message resources associated with an account. Filter the results by recipient, sender, or sent date, and
+    /// use the page parameters to navigate the list.
     ///
     /// Retrieve a list of Message resources associated with a Twilio Account
     ///
@@ -54,7 +55,11 @@ extension MessagesMethods {
     ///   50, and the maximum is 1000.
     /// - page: The page index. This value is simply for client state.
     /// - pageToken: The page token. This is provided by the API.
-    public static func listMessages(config: ClientConfig, options: ListMessagesOptions, requestOptions: RequestOptions? = nil) async throws -> ListMessagesResponse {
+    static func listMessages(
+        config: ClientConfig,
+        options: ListMessagesOptions,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ListMessagesResponse {
         try validateLength("AccountSid", options.accountSid, min: 34, max: 34)
         try sdkValidatePattern("AccountSid", options.accountSid, sdkPatternc7cb941ab84b)
 
@@ -78,15 +83,24 @@ extension MessagesMethods {
             try validateRange("Page", Double(page), min: 0)
         }
 
-        return try (await sdkRequest("GET", ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(options.accountSid)), "/Messages.json"].joined(), config: config, query: [
-            SdkQueryParameter("To", value: options.to),
-            SdkQueryParameter("From", value: options.from),
-            SdkQueryParameter("DateSent", value: options.dateSent),
-            SdkQueryParameter("DateSent<", value: options.dateSent2),
-            SdkQueryParameter("DateSent>", value: options.dateSent3),
-            SdkQueryParameter("PageSize", value: options.pageSize),
-            SdkQueryParameter("Page", value: options.page),
-            SdkQueryParameter("PageToken", value: options.pageToken),
-        ], decoder: .json, operationId: "listMessages", options: requestOptions)).data
+        return try await (sdkRequest(
+            "GET",
+            ["/2010-04-01/Accounts/", sdkEncodePathSegment(sdkWireString(options.accountSid)), "/Messages.json"]
+                .joined(),
+            config: config,
+            query: [
+                SdkQueryParameter("To", value: options.to),
+                SdkQueryParameter("From", value: options.from),
+                SdkQueryParameter("DateSent", value: options.dateSent),
+                SdkQueryParameter("DateSent<", value: options.dateSent2),
+                SdkQueryParameter("DateSent>", value: options.dateSent3),
+                SdkQueryParameter("PageSize", value: options.pageSize),
+                SdkQueryParameter("Page", value: options.page),
+                SdkQueryParameter("PageToken", value: options.pageToken),
+            ],
+            decoder: .json,
+            operationId: "listMessages",
+            options: requestOptions
+        )).data
     }
 }

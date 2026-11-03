@@ -9,11 +9,27 @@ public class CallsEventsNamespace {
         self.config = config
     }
 
-/// Lists the events recorded for a specific call. Use `AccountSid` and `CallSid` to identify the account and call, and use the page parameters to navigate the results.
+    /// Lists the events recorded for a specific call. Use `AccountSid` and `CallSid` to identify the account and call,
+    /// and use the page parameters to navigate the results.
     ///
     /// Retrieve a list of all events for a call.
-    public func list(accountSid: String, callSid: String, pageSize: Int? = nil, page: Int? = nil, pageToken: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ListCallsEventsResponse {
-        return try await CallsEventsMethods.listCallsEvents(config: config, accountSid: accountSid, callSid: callSid, pageSize: pageSize, page: page, pageToken: pageToken, requestOptions: requestOptions)
+    public func list(
+        accountSid: String,
+        callSid: String,
+        pageSize: Int? = nil,
+        page: Int? = nil,
+        pageToken: String? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ListCallsEventsResponse {
+        try await CallsEventsMethods.listCallsEvents(
+            config: config,
+            accountSid: accountSid,
+            callSid: callSid,
+            pageSize: pageSize,
+            page: page,
+            pageToken: pageToken,
+            requestOptions: requestOptions
+        )
     }
 }
 
@@ -23,14 +39,34 @@ public class CallsNotificationsNamespace {
         self.config = config
     }
 
-/// Retrieves a notification associated with a specific call. Use the account, call, and notification SIDs to identify the resource and inspect its error details, request, and response information.
-    public func fetch(accountSid: String, callSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountCallCallNotificationInstance {
-        return try await CallsNotificationsMethods.fetchCallsNotifications(config: config, accountSid: accountSid, callSid: callSid, sid: sid, requestOptions: requestOptions)
+    /// Retrieves a notification associated with a specific call. Use the account, call, and notification SIDs to
+    /// identify the resource and inspect its error details, request, and response information.
+    public func fetch(
+        accountSid: String,
+        callSid: String,
+        sid: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountCallCallNotificationInstance {
+        try await CallsNotificationsMethods.fetchCallsNotifications(
+            config: config,
+            accountSid: accountSid,
+            callSid: callSid,
+            sid: sid,
+            requestOptions: requestOptions
+        )
     }
 
-/// Lists notifications associated with a specific call. Filter by log level or message date, and use the page parameters to navigate the results.
-    public func list(options: CallsNotificationsMethods.ListCallsNotificationsOptions, requestOptions: RequestOptions? = nil) async throws -> ListCallsNotificationsResponse {
-        return try await CallsNotificationsMethods.listCallsNotifications(config: config, options: options, requestOptions: requestOptions)
+    /// Lists notifications associated with a specific call. Filter by log level or message date, and use the page
+    /// parameters to navigate the results.
+    public func list(
+        options: CallsNotificationsMethods.ListCallsNotificationsOptions,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ListCallsNotificationsResponse {
+        try await CallsNotificationsMethods.listCallsNotifications(
+            config: config,
+            options: options,
+            requestOptions: requestOptions
+        )
     }
 }
 
@@ -40,39 +76,98 @@ public class CallsRecordingsNamespace {
         self.config = config
     }
 
-/// Creates a recording for a specific call. Configure callback events, recording channels, and audio tracks with the form fields; omitted options use their documented defaults. A successful response includes the recording resource and its current status.
+    /// Creates a recording for a specific call. Configure callback events, recording channels, and audio tracks with
+    /// the form fields; omitted options use their documented defaults. A successful response includes the recording
+    /// resource and its current status.
     ///
     /// Create a recording for the call
-    public func create(options: CallsRecordingsMethods.CreateCallsRecordingsOptions, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountCallCallRecording {
-        return try await CallsRecordingsMethods.createCallsRecordings(config: config, options: options, requestOptions: requestOptions)
+    public func create(
+        options: CallsRecordingsMethods.CreateCallsRecordingsOptions,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountCallCallRecording {
+        try await CallsRecordingsMethods.createCallsRecordings(
+            config: config,
+            options: options,
+            requestOptions: requestOptions
+        )
     }
 
-/// Lists recordings associated with a specific call. Use the date filters to narrow the results to recordings created on or around a given date, and use the page parameters to navigate the list.
+    /// Lists recordings associated with a specific call. Use the date filters to narrow the results to recordings
+    /// created on or around a given date, and use the page parameters to navigate the list.
     ///
     /// Retrieve a list of recordings belonging to the call used to make the request
-    public func list(options: CallsRecordingsMethods.ListCallsRecordingsOptions, requestOptions: RequestOptions? = nil) async throws -> ListCallsRecordingsResponse {
-        return try await CallsRecordingsMethods.listCallsRecordings(config: config, options: options, requestOptions: requestOptions)
+    public func list(
+        options: CallsRecordingsMethods.ListCallsRecordingsOptions,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ListCallsRecordingsResponse {
+        try await CallsRecordingsMethods.listCallsRecordings(
+            config: config,
+            options: options,
+            requestOptions: requestOptions
+        )
     }
 
-/// Updates the status or pause behavior of a recording associated with a call. Supply the required `Status` field to pause, stop, or resume the recording, and use `Twilio.CURRENT` as the recording identifier to target the current active recording.
+    /// Updates the status or pause behavior of a recording associated with a call. Supply the required `Status` field
+    /// to pause, stop, or resume the recording, and use `Twilio.CURRENT` as the recording identifier to target the
+    /// current active recording.
     ///
-    /// Changes the status of the recording to paused, stopped, or in-progress. Note: Pass `Twilio.CURRENT` instead of recording sid to reference current active recording.
-    public func update(accountSid: String, callSid: String, sid: String, status: CallRecordingEnumStatus, pauseBehavior: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountCallCallRecording {
-        return try await CallsRecordingsMethods.updateCallsRecordings(config: config, accountSid: accountSid, callSid: callSid, sid: sid, status: status, pauseBehavior: pauseBehavior, requestOptions: requestOptions)
+    /// Changes the status of the recording to paused, stopped, or in-progress. Note: Pass `Twilio.CURRENT` instead of
+    /// recording sid to reference current active recording.
+    public func update(
+        accountSid: String,
+        callSid: String,
+        sid: String,
+        status: CallRecordingEnumStatus,
+        pauseBehavior: String? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountCallCallRecording {
+        try await CallsRecordingsMethods.updateCallsRecordings(
+            config: config,
+            accountSid: accountSid,
+            callSid: callSid,
+            sid: sid,
+            status: status,
+            pauseBehavior: pauseBehavior,
+            requestOptions: requestOptions
+        )
     }
 
-/// Retrieves a specific recording associated with a call. Use the account, call, and recording SIDs to identify the recording and inspect its status, timing, and recording details.
+    /// Retrieves a specific recording associated with a call. Use the account, call, and recording SIDs to identify the
+    /// recording and inspect its status, timing, and recording details.
     ///
     /// Fetch an instance of a recording for a call
-    public func fetch(accountSid: String, callSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountCallCallRecording {
-        return try await CallsRecordingsMethods.fetchCallsRecordings(config: config, accountSid: accountSid, callSid: callSid, sid: sid, requestOptions: requestOptions)
+    public func fetch(
+        accountSid: String,
+        callSid: String,
+        sid: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountCallCallRecording {
+        try await CallsRecordingsMethods.fetchCallsRecordings(
+            config: config,
+            accountSid: accountSid,
+            callSid: callSid,
+            sid: sid,
+            requestOptions: requestOptions
+        )
     }
 
-/// Deletes a recording associated with a specific call from the account. Supply the account, call, and recording SIDs to identify the recording to remove.
+    /// Deletes a recording associated with a specific call from the account. Supply the account, call, and recording
+    /// SIDs to identify the recording to remove.
     ///
     /// Delete a recording from your account
-    public func delete(accountSid: String, callSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try await CallsRecordingsMethods.deleteCallsRecordings(config: config, accountSid: accountSid, callSid: callSid, sid: sid, requestOptions: requestOptions)
+    public func delete(
+        accountSid: String,
+        callSid: String,
+        sid: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await CallsRecordingsMethods.deleteCallsRecordings(
+            config: config,
+            accountSid: accountSid,
+            callSid: callSid,
+            sid: sid,
+            requestOptions: requestOptions
+        )
     }
 }
 
@@ -82,14 +177,40 @@ public class CallsPaymentsNamespace {
         self.config = config
     }
 
-/// create an instance of payments. This will start a new payments session
-    public func create(options: CallsPaymentsMethods.CreateCallsPaymentsOptions, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountCallPayments {
-        return try await CallsPaymentsMethods.createCallsPayments(config: config, options: options, requestOptions: requestOptions)
+    /// create an instance of payments. This will start a new payments session
+    public func create(
+        options: CallsPaymentsMethods.CreateCallsPaymentsOptions,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountCallPayments {
+        try await CallsPaymentsMethods.createCallsPayments(
+            config: config,
+            options: options,
+            requestOptions: requestOptions
+        )
     }
 
-/// update an instance of payments with different phases of payment flows.
-    public func update(accountSid: String, callSid: String, sid: String, idempotencyKey: String, statusCallback: String, capture: PaymentsEnumCapture? = nil, status: PaymentsEnumStatus? = nil, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountCallPayments {
-        return try await CallsPaymentsMethods.updateCallsPayments(config: config, accountSid: accountSid, callSid: callSid, sid: sid, idempotencyKey: idempotencyKey, statusCallback: statusCallback, capture: capture, status: status, requestOptions: requestOptions)
+    /// update an instance of payments with different phases of payment flows.
+    public func update(
+        accountSid: String,
+        callSid: String,
+        sid: String,
+        idempotencyKey: String,
+        statusCallback: String,
+        capture: PaymentsEnumCapture? = nil,
+        status: PaymentsEnumStatus? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountCallPayments {
+        try await CallsPaymentsMethods.updateCallsPayments(
+            config: config,
+            accountSid: accountSid,
+            callSid: callSid,
+            sid: sid,
+            idempotencyKey: idempotencyKey,
+            statusCallback: statusCallback,
+            capture: capture,
+            status: status,
+            requestOptions: requestOptions
+        )
     }
 }
 
@@ -99,18 +220,43 @@ public class CallsTranscriptionsNamespace {
         self.config = config
     }
 
-/// Creates a realtime transcription for a call. Use `Track` to select which audio tracks to transcribe, and configure callback, language, or transcription options as needed. The response includes the transcription SID, associated call and account SIDs, and status.
+    /// Creates a realtime transcription for a call. Use `Track` to select which audio tracks to transcribe, and
+    /// configure callback, language, or transcription options as needed. The response includes the transcription SID,
+    /// associated call and account SIDs, and status.
     ///
     /// Create a Transcription
-    public func create(options: CallsTranscriptionsMethods.CreateCallsTranscriptionsOptions, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountCallRealtimeTranscription {
-        return try await CallsTranscriptionsMethods.createCallsTranscriptions(config: config, options: options, requestOptions: requestOptions)
+    public func create(
+        options: CallsTranscriptionsMethods.CreateCallsTranscriptionsOptions,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountCallRealtimeTranscription {
+        try await CallsTranscriptionsMethods.createCallsTranscriptions(
+            config: config,
+            options: options,
+            requestOptions: requestOptions
+        )
     }
 
-/// Stops a realtime transcription associated with a call. Identify it by its transcription SID or by the `name` supplied when it was created, and set `Status` to `stopped`. The response contains the transcription object with its updated status.
+    /// Stops a realtime transcription associated with a call. Identify it by its transcription SID or by the `name`
+    /// supplied when it was created, and set `Status` to `stopped`. The response contains the transcription object with
+    /// its updated status.
     ///
-    /// Stop a Transcription using either the SID of the Transcription resource or the `name` used when creating the resource
-    public func update(accountSid: String, callSid: String, sid: String, status: RealtimeTranscriptionEnumUpdateStatus, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountCallRealtimeTranscription {
-        return try await CallsTranscriptionsMethods.updateCallsTranscriptions(config: config, accountSid: accountSid, callSid: callSid, sid: sid, status: status, requestOptions: requestOptions)
+    /// Stop a Transcription using either the SID of the Transcription resource or the `name` used when creating the
+    /// resource
+    public func update(
+        accountSid: String,
+        callSid: String,
+        sid: String,
+        status: RealtimeTranscriptionEnumUpdateStatus,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountCallRealtimeTranscription {
+        try await CallsTranscriptionsMethods.updateCallsTranscriptions(
+            config: config,
+            accountSid: accountSid,
+            callSid: callSid,
+            sid: sid,
+            status: status,
+            requestOptions: requestOptions
+        )
     }
 }
 
@@ -120,18 +266,36 @@ public class CallsSiprecNamespace {
         self.config = config
     }
 
-/// Creates a SIPREC resource associated with a call. Use `Track` to choose which audio tracks to record, and optionally provide a connector name and status callback settings.
+    /// Creates a SIPREC resource associated with a call. Use `Track` to choose which audio tracks to record, and
+    /// optionally provide a connector name and status callback settings.
     ///
     /// Create a Siprec
-    public func create(options: CallsSiprecMethods.CreateCallsSiprecOptions, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountCallSiprec {
-        return try await CallsSiprecMethods.createCallsSiprec(config: config, options: options, requestOptions: requestOptions)
+    public func create(
+        options: CallsSiprecMethods.CreateCallsSiprecOptions,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountCallSiprec {
+        try await CallsSiprecMethods.createCallsSiprec(config: config, options: options, requestOptions: requestOptions)
     }
 
-/// Stops a SIPREC resource associated with a call. Set `Status` to `stopped`, and identify the resource by its SID or the name used when it was created.
+    /// Stops a SIPREC resource associated with a call. Set `Status` to `stopped`, and identify the resource by its SID
+    /// or the name used when it was created.
     ///
     /// Stop a Siprec using either the SID of the Siprec resource or the `name` used when creating the resource
-    public func update(accountSid: String, callSid: String, sid: String, status: SiprecEnumUpdateStatus, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountCallSiprec {
-        return try await CallsSiprecMethods.updateCallsSiprec(config: config, accountSid: accountSid, callSid: callSid, sid: sid, status: status, requestOptions: requestOptions)
+    public func update(
+        accountSid: String,
+        callSid: String,
+        sid: String,
+        status: SiprecEnumUpdateStatus,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountCallSiprec {
+        try await CallsSiprecMethods.updateCallsSiprec(
+            config: config,
+            accountSid: accountSid,
+            callSid: callSid,
+            sid: sid,
+            status: status,
+            requestOptions: requestOptions
+        )
     }
 }
 
@@ -141,18 +305,40 @@ public class CallsStreamsNamespace {
         self.config = config
     }
 
-/// Creates a media Stream associated with a call. Provide the required `Url` for the WebSocket connection and optionally configure audio tracks, a status callback, and callback parameters.
+    /// Creates a media Stream associated with a call. Provide the required `Url` for the WebSocket connection and
+    /// optionally configure audio tracks, a status callback, and callback parameters.
     ///
     /// Create a Stream
-    public func create(options: CallsStreamsMethods.CreateCallsStreamsOptions, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountCallStream {
-        return try await CallsStreamsMethods.createCallsStreams(config: config, options: options, requestOptions: requestOptions)
+    public func create(
+        options: CallsStreamsMethods.CreateCallsStreamsOptions,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountCallStream {
+        try await CallsStreamsMethods.createCallsStreams(
+            config: config,
+            options: options,
+            requestOptions: requestOptions
+        )
     }
 
-/// Stops a Stream associated with a call. Set `Status` to `stopped`, and identify the Stream by its SID or the name used when it was created.
+    /// Stops a Stream associated with a call. Set `Status` to `stopped`, and identify the Stream by its SID or the name
+    /// used when it was created.
     ///
     /// Stop a Stream using either the SID of the Stream resource or the `name` used when creating the resource
-    public func update(accountSid: String, callSid: String, sid: String, status: StreamEnumUpdateStatus, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountCallStream {
-        return try await CallsStreamsMethods.updateCallsStreams(config: config, accountSid: accountSid, callSid: callSid, sid: sid, status: status, requestOptions: requestOptions)
+    public func update(
+        accountSid: String,
+        callSid: String,
+        sid: String,
+        status: StreamEnumUpdateStatus,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountCallStream {
+        try await CallsStreamsMethods.updateCallsStreams(
+            config: config,
+            accountSid: accountSid,
+            callSid: callSid,
+            sid: sid,
+            status: status,
+            requestOptions: requestOptions
+        )
     }
 }
 
@@ -162,9 +348,22 @@ public class CallsUserDefinedMessagesNamespace {
         self.config = config
     }
 
-/// Create a new User Defined Message for the given Call SID.
-    public func create(accountSid: String, callSid: String, content: String, idempotencyKey: String? = nil, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountCallUserDefinedMessage {
-        return try await CallsUserDefinedMessagesMethods.createCallsUserDefinedMessages(config: config, accountSid: accountSid, callSid: callSid, content: content, idempotencyKey: idempotencyKey, requestOptions: requestOptions)
+    /// Create a new User Defined Message for the given Call SID.
+    public func create(
+        accountSid: String,
+        callSid: String,
+        content: String,
+        idempotencyKey: String? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountCallUserDefinedMessage {
+        try await CallsUserDefinedMessagesMethods.createCallsUserDefinedMessages(
+            config: config,
+            accountSid: accountSid,
+            callSid: callSid,
+            content: content,
+            idempotencyKey: idempotencyKey,
+            requestOptions: requestOptions
+        )
     }
 }
 
@@ -174,13 +373,39 @@ public class CallsUserDefinedMessageSubscriptionsNamespace {
         self.config = config
     }
 
-/// Subscribe to User Defined Messages for a given Call SID.
-    public func create(accountSid: String, callSid: String, callback: String, idempotencyKey: String? = nil, method: CreateCallUserDefinedMessageSubscriptionRequestBodyMethod? = nil, requestOptions: RequestOptions? = nil) async throws -> ApiV2010AccountCallUserDefinedMessageSubscription {
-        return try await CallsUserDefinedMessageSubscriptionsMethods.createCallUserDefinedMessageSubscription(config: config, accountSid: accountSid, callSid: callSid, callback: callback, idempotencyKey: idempotencyKey, method: method, requestOptions: requestOptions)
+    /// Subscribe to User Defined Messages for a given Call SID.
+    public func create(
+        accountSid: String,
+        callSid: String,
+        callback: String,
+        idempotencyKey: String? = nil,
+        method: CreateCallUserDefinedMessageSubscriptionRequestBodyMethod? = nil,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> ApiV2010AccountCallUserDefinedMessageSubscription {
+        try await CallsUserDefinedMessageSubscriptionsMethods.createCallUserDefinedMessageSubscription(
+            config: config,
+            accountSid: accountSid,
+            callSid: callSid,
+            callback: callback,
+            idempotencyKey: idempotencyKey,
+            method: method,
+            requestOptions: requestOptions
+        )
     }
 
-/// Delete a specific User Defined Message Subscription.
-    public func delete(accountSid: String, callSid: String, sid: String, requestOptions: RequestOptions? = nil) async throws -> SdkEmptyResponse {
-        return try await CallsUserDefinedMessageSubscriptionsMethods.deleteCallsUserDefinedMessageSubscriptions(config: config, accountSid: accountSid, callSid: callSid, sid: sid, requestOptions: requestOptions)
+    /// Delete a specific User Defined Message Subscription.
+    public func delete(
+        accountSid: String,
+        callSid: String,
+        sid: String,
+        requestOptions: RequestOptions? = nil
+    ) async throws -> SdkEmptyResponse {
+        try await CallsUserDefinedMessageSubscriptionsMethods.deleteCallsUserDefinedMessageSubscriptions(
+            config: config,
+            accountSid: accountSid,
+            callSid: callSid,
+            sid: sid,
+            requestOptions: requestOptions
+        )
     }
 }
